@@ -1,0 +1,637 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0080)http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation -->
+<HTML lang=en-us xml:lang="en-us" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>TrainerImplementation < Sphinx4 < TWiki</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-15"><LINK 
+href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" type=image/x-icon 
+rel=icon><LINK href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" 
+type=image/x-icon rel="shortcut icon"><LINK title="RSS Feed" 
+href="/sphinx/twiki/bin/view/Sphinx4/WebRss" type=application/rss+xml 
+rel=alternate><!--/closing tag 'solves' IE selection bug-->
+<SCRIPT src="TrainerImplementation  Sphinx4  TWiki_files/twiki.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="TrainerImplementation  Sphinx4  TWiki_files/pattern.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+//<![CDATA[
+	function launchWindow(inWeb, inTopic) {
+		return launchTheWindow("/sphinx/twiki/bin/view/", inWeb, inTopic, "", "viewplain" );
+	}
+//]]>
+</SCRIPT>
+
+<SCRIPT src="TrainerImplementation  Sphinx4  TWiki_files/twist.js" 
+type=text/javascript></SCRIPT>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/TwistyContrib/twist.css );
+</STYLE>
+
+<STYLE type=text/css media=all>#patternTopBar {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderCenter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderLeft {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderRight {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternTopBarContentsOuter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternOuter {
+	MARGIN-LEFT: 12em
+}
+#patternLeftBar {
+	MARGIN-LEFT: -12em; WIDTH: 12em
+}
+</STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/layout.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/style.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/colors.css );
+</STYLE>
+<!--[if IE]>
+<STYLE type=text/css>PRE {
+	OVERFLOW-Y: hidden; OVERFLOW-X: auto; ; PADDING-BOTTOM: expression(this.scrollWidth > this.offsetWidth ? 16 : 0)
+}
+#patternLeftBarContents LI {
+	TEXT-OVERFLOW: ellipsis
+}
+</STYLE>
+<![endif]--><!--[if lte IE 6]>
+<STYLE type=text/css>#patternLeftBar {
+	POSITION: relative
+}
+</STYLE>
+<![endif]-->
+<STYLE type=text/css media=all>.twikiInputField {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_input.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiInputFieldDisabled {
+	BACKGROUND-IMAGE: none; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiButton {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_button.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternToolBarButtons .patternButton A {
+	
+}
+.twikiSubmit {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_submit.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiSubmitDisabled {
+	BACKGROUND-IMAGE: none
+}
+.twikiToc LI {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-down.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternLeftBar .patternWebIndicator {
+	BACKGROUND-COLOR: #99ff99
+}
+.patternBookView .twikiTopRow {
+	BACKGROUND-COLOR: #99ff99
+}
+#patternTopBar {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/TWiki_header.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternTopBar {
+	BACKGROUND-COLOR: #ffffff
+}
+.patternBookView {
+	BORDER-LEFT-COLOR: #99ff99; BORDER-BOTTOM-COLOR: #99ff99; BORDER-TOP-COLOR: #99ff99; BORDER-RIGHT-COLOR: #99ff99
+}
+#twikiLogin {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .tipsOfTheDayContents {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternOuter {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_yellow.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternPrintPage #patternOuter {
+	BACKGROUND: #fff
+}
+.twikiPageForm TABLE {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/form_gradient.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .patternLeftBarPersonal LI {
+	BACKGROUND-POSITION: 0px 0.5em; BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-blue.gif); BACKGROUND-REPEAT: no-repeat
+}
+.patternPreviewPage #patternMain {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PreviewBackground/preview2bg.gif)
+}
+</STYLE>
+
+<STYLE type=text/css media=all></STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/print.css );
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY class=patternViewPage><A name=PageTop></A>
+<DIV id=patternScreen>
+<DIV id=patternPageShadow>
+<DIV id=patternPage>
+<DIV id=patternWrapper>
+<DIV id=patternOuter>
+<DIV id=patternFloatWrap>
+<DIV id=patternMain>
+<DIV id=patternClearHeaderCenter></DIV>
+<DIV id=patternMainContents>
+<DIV class=patternTop>
+<DIV class=patternToolBar>
+<DIV class=patternToolBarButtons><SPAN class=patternButton><A 
+title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/TrainerImplementation?t=1152847884" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=patternButton><A title="Attach an image or document to this topic" 
+accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerImplementation" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A></SPAN><SPAN 
+class=patternButton><A title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A></SPAN> </DIV></DIV><!-- /patternToolBar-->
+<DIV class=patternToolBarBottom></DIV></DIV><!-- /patternTop-->
+<DIV class=patternHomePath><SPAN class=twikiRight><SPAN class=patternRevInfo>r8 
+- 04 Dec 2003 - 09:35:00 - <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A></SPAN></SPAN><SPAN 
+class=patternHomePathTitle>You are here: </SPAN><A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome">TWiki</A><SPAN 
+class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+style="BACKGROUND-COLOR: #99ff99" height=13 alt="" 
+src="TrainerImplementation  Sphinx4  TWiki_files/web-bg-small.gif" width=13 
+border=0> Sphinx4 Web</A> <SPAN class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN> <A 
+class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/Sphinx4Trainer">Sphinx4Trainer</A><SPAN 
+class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><SPAN 
+title=Sphinx4.TrainerImplementation>TrainerImplementation</SPAN><BR 
+class=twikiClear></DIV><!-- /patternHomePath-->
+<DIV class=twikiBeforeText></DIV>
+<DIV class=patternContent>
+<DIV class=patternTopic>
+<DIV class=twikiToc>
+<UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation#User_s_Guide">User's 
+  Guide</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation#Implementation_Details">Implementation 
+  Details</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation#Roadmap_to_CD_training">Roadmap 
+  to CD training</A> </LI></UL></DIV>
+<P>
+<H2><A name=User_s_Guide></A>User's Guide </H2>
+<P>The trainer can be used as a monolythic block, where the user provides data, 
+and the system fully trains models from scratch. It can also be fine tuned by an 
+expert user, where steps are performed according to the user's design. 
+<P>A typical training sessions goes through several steps, some of them in fact 
+iteratively. In summary, the steps would be as follows. 
+<P>
+<UL>
+  <LI>Context independent (CI) Training 
+  <UL>
+    <LI>Initialization, flat (all models are the same) or segment based (from 
+    data segmented by an existing recognizer) 
+    <LI>Baum Welch (BW) accumulation 
+    <LI>Normalization (norm) 
+    <LI>Iterate BW/norm until log likelihood plateaus or number of iterations 
+    reached </LI></UL>
+  <LI>Untied context dependent (CD) Training 
+  <UL>
+    <LI>Initialization, copy the base phone to each of the CD phones 
+    <LI>BW accumulation 
+    <LI>norm 
+    <LI>Iterate BW/norm until log likelihood plateaus or number of iterations 
+    reached </LI></UL>
+  <LI>Tied CD Training 
+  <UL>
+    <LI>Initialization, build tree to find similarities between senones, and tie 
+    them 
+    <LI>BW accumulation 
+    <LI>norm 
+    <LI>Iterate BW/norm until log likelihood plateaus or number of iterations 
+    reached </LI></UL>
+  <LI>Expand number of Gaussian 
+  <UL>
+    <LI>Initialization, copying the mixture densities with a small disturbance 
+    (say, means +/- 10%), so that number of mixture components doubles at each 
+    step. 
+    <LI>BW accumulation 
+    <LI>norm 
+    <LI>Iterate BW/norm until log likelihood plateaus or number of iterations 
+    reached </LI></UL></LI></UL>
+<P>As one can see, the Baum-Welch/normalization steps are the same procedure for 
+each of the stages. 
+<P>The Sphinx-4 Trainer goes through all the necessary steps to build the 
+models. A user can indicate the initial and final stages. Therefore, one does 
+not have to go through everything every time. For example, one could train CI 
+models directly from another set of models, without having to go through the 
+initialization step. The stages defined in the code are as follows (please check 
+the <A 
+href="http://cmusphinx.sourceforge.net/sphinx4/edu/cmu/sphinx/trainer/Stage.html" 
+target=_top>API</A> for a current list). 
+<P>
+<UL>
+  <LI><CODE>_00_INITIALIZATION</CODE> Flat initialization 
+  <LI><CODE>_10_CI_TRAIN</CODE> CI training, running BW/norm for a number of 
+  iterations 
+  <LI><CODE>_20_UNTIED_CD_TRAIN</CODE> Untied CD training 
+  <LI><CODE>_30_STATE_PRUNING</CODE> Tree building and pruning 
+  <LI><CODE>_40_TIED_CD_TRAIN</CODE> Tied CD training 
+  <LI><CODE>_90_CP_MODEL</CODE> Copies models, possibly changing format, but 
+  does no processing </LI></UL>
+<P>The code runs in a similar fashion to the Sphinx-4 decoder: a main method 
+assembles all the necessary classes taking into account a properties files given 
+at command line. A typical command line is: 
+<P><PRE>        $(JAVA_CMD) edu.cmu.sphinx.trainer.Trainer trainer.props
+</PRE>
+<P>A typical trainer.props file is: 
+<P><PRE>
+############################################################
+#
+# Trainer properties
+#
+############################################################
+
+# File containing list of audio files
+edu.cmu.sphinx.trainer.ControlFile.audioFile = train.ctl
+
+# File containing list of transcriptions, parallel to the audio file list
+edu.cmu.sphinx.trainer.ControlFile.transcriptFile = train.trans
+
+# Initial stage to be done, defaults to _00_INITIALIZATION
+edu.cmu.sphinx.trainer.Trainer.initialStage = _00_INITIALIZATION
+
+# Final stage to be done, defaults to _40_TIED_CD_TRAIN
+edu.cmu.sphinx.trainer.Trainer.finalStage = _10_CI_TRAIN
+
+# Controls the maximum number of BW iterations
+edu.cmu.sphinx.trainer.Trainer.maximumIteration = 10
+
+# Controls the minimum relative change in log likelihood to be considered as "stable"
+edu.cmu.sphinx.trainer.Trainer.minimumImprovement = 0.2
+
+############################################################
+#
+# Acoustic model properties
+#
+############################################################
+
+# These are the same as the decoder
+
+edu.cmu.sphinx.knowledge.acoustic.FeatureVectorLength = 39
+edu.cmu.sphinx.knowledge.acoustic.format = sphinx3.ascii
+edu.cmu.sphinx.knowledge.acoustic.location = file:///lab/speech/sphinx4/data/rm1_8gau_13dCep_16k_40mel_130Hz_6800Hz.ascii.zip
+edu.cmu.sphinx.knowledge.acoustic.definition_file = etc/RM1_clean_13dCep_16k_40mel_130Hz_6800Hz.1800.mdef
+edu.cmu.sphinx.knowledge.acoustic.data_location = cd_continuous_8gau
+edu.cmu.sphinx.knowledge.acoustic.properties_file = am.props
+
+# But these are pertinent only to the trainer. They refer to where the models will be saved
+
+edu.cmu.sphinx.knowledge.acoustic.format.save = sphinx3.ascii
+edu.cmu.sphinx.knowledge.acoustic.location.save = /lab/speech/sphinx4/data/save/
+
+############################################################
+# 
+# FrontEnd properties, same as in the decoder
+#
+############################################################
+
+############################################################
+# 
+# Dictionary properties, same as in the decoder
+#
+############################################################
+
+</PRE>
+<P>
+<H2><A name=Implementation_Details></A>Implementation Details </H2>
+<P>This section outlines the main classes implementing the trainer. Please refer 
+to <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign">TrainerDesign</A> 
+and <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion">DesignDiscussion</A> 
+for the pertinent discussions. In particular, refer to the <A 
+class=twikiAnchorLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#TrainerBlueprint">Sphinx-4 
+blueprint</A> for the connections between the classes and data structure. Please 
+also refer to the <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerIssues">Trainer 
+Issues</A> page for information on pending issues. 
+<P>
+<P>
+<DL>
+  <DT>Trainer&nbsp;(edu.cmu.sphinx.trainer.Trainer)
+  <DD>The Trainer is the main class in the Trainer package. It is responsible 
+  for reading the user-defined parameters that control how the system behaves, 
+  and for calling the appropriate methods in the correct order, via the 
+  TrainerManager. </DD></DL>
+<P>
+<DL>
+  <DT>TrainerManager&nbsp;(edu.cmu.sphinx.trainer.TrainerManager)
+  <DD>It is also responsible for controlling the flow of information between the 
+  other classes. It parses (or calls a class that parses) the control file, 
+  passes the input feature file name to the Learner and the transcription and 
+  dictionary information to the UtteranceHMMBuilder. It then gets the list of 
+  states from the UtteranceHMMBUilder, gets the posterior probability back from 
+  the Learner, and passes the information to the UnitHMM for accumulation. 
+</DD></DL>
+<P>
+<DL>
+  <DT>Learner&nbsp;(edu.cmu.sphinx.trainer.Learner)
+  <DD>It is responsible for the collection of statistics. Given a sentence HMM, 
+  it reads the incoming features (or rather, pulls the next frame(s) from the 
+  Frontend), computes the forward and/or backward probabilities, and returns the 
+  posterior probabilities that will be accumulated. In doing so, it creates and 
+  manages the forward (or alpha) variable, the backward (or beta) variable, and 
+  the normalization factors. Notice that since computation of statistics is 
+  isolated from utterance HMM creation and from the normalization, one could 
+  easily implement Baum-Welch or any other training procedure, such as Viterbi 
+  training, online training etc. It is defined as an interface, with possible 
+  implementations being Baum-Welch (requiring a forward and a backward pass), 
+  Viterbi (forward pass only) etc. This class interacts with the frontend. Some 
+  changes to the frontend will make implementation easier. This changes are: 
+  </DD></DL>
+<UL>
+  <LI>Define a "file extension" property, which defaults to "none" for 
+  compatibility with current setup. 
+  <LI>Define a "root" so that the paths in the transcript file (or "batch" file 
+  in the decoder) can be relative to a common branch. 
+  <LI>The ability to dump cepstra to a file <STRONG>and</STRONG> at the same 
+  time send the cepstra to the trainer. This may be better accoplished by a 
+  method in the Learner that duplicates what 
+  sphinx4/tests/frontend/CepstrumFileDumper does. </LI></UL>
+<P>
+<DL>
+  <DT>FlatInitializerLearner&nbsp;(edu.cmu.sphinx.trainer.FlatInitializerLearner)
+  <DD>This class is an implementation of the Learner interface. It initializes 
+  the models with a flat distribution. It simply reads the training data, and 
+  passes the information, together with probability of 1, to the model buffers, 
+  for accumulation. Therefore, the initialization uses essentially the same 
+  methods as a normal normalization (which follows Baum-Welch). </DD></DL>
+<P>
+<DL>
+  <DT>BaumWelchLearner&nbsp;(edu.cmu.sphinx.trainer.BaumWelchLearner)
+  <DD>This class is an implementation of the Learner interface. It computes the 
+  forward and backward variables, and returns them to the TrainerManager. The 
+  accumulation of the appropriate amounts and the normalization actually are 
+  performed by the e.c.s.knowledge.acoustic.HMMPoolManager class, since the 
+  Trainer, in principle, has no knowledge of what kind of distribution the 
+  system uses. </DD></DL>
+<P>
+<DL>
+  <DT>UtteranceHMMBuilder&nbsp;(edu.cmu.sphinx.trainer.UtteranceHMMBuilder)
+  <DD>The class handles maintenance of the Utterance HMM. In the Sphinx-4 
+  context, an "utterance" can have many "transcripts" associated with it, for 
+  example, as results of forced-aligning an input using several different 
+  streams with different models. A "transcript" contains a sequence of words for 
+  a unique stream. The UtteranceHMMBuilder contains the method that builds the 
+  HMM, and therefore handles the dictionaries, transcripts, etc. It provides the 
+  list of active states to the TrainManager. </DD></DL>
+<P>
+<DL>
+  <DT>ControlFile&nbsp;(edu.cmu.sphinx.trainer.ControlFile)
+  <DD>This interface reads the control file, parses it, and returns the 
+  appropriate information -- Utterance objects -- to the TrainManager. It 
+  maintains the information about a default dictionary (possibly defined by the 
+  user as a Sphinx-4 property, or from the control file header), the 
+  utterance-specific dictionaries, the input feature directory, and other 
+  pertinent information. It reads entries, find the dictionary used, the file 
+  name of the input feature, the transcript, the flag indicating that the file 
+  was force-aligned, and possibly a "word separation character" (for cases where 
+  the dictionary includes "words" like <EM>get ready</EM>). It then builds the 
+  full file name, sets the non-specified variables (like dictionary etc) to the 
+  default, and returns the parsed data. Possible implementations of it read the 
+  control file as described in <A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion">DesignDiscussion</A> 
+  or read separate control file and transcription in Sphinx-3's format. The 
+  choice of implementation is made at run time through <A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/Sphinx4Properties">Sphinx4Properties</A>. 
+  This class, as well as the Utterance, make use of a Dictionary class. This is 
+  currently an extension of the one in e.c.s.knowledge.dictionary. </DD></DL>
+<P>
+<DL>
+  <DT>Utterance&nbsp;(edu.cmu.sphinx.trainer.Utterance)
+  <DD>It contains an utterance and all pertinent information, that is, a list of 
+  the possible transcriptions for this utterance, coming from possibly different 
+  dictionaries. </DD></DL>
+<P>
+<DL>
+  <DT>Transcript&nbsp;(edu.cmu.sphinx.trainer.Transcript)
+  <DD>It contains a single transcript for a single utterance, with information 
+  about the dictionary used, whether it is exact (i.e. if it was forced aligned 
+  or not), and the word separators. </DD></DL>
+<P>
+<H2><A name=Roadmap_to_CD_training></A>Roadmap to CD training </H2>
+<P>From a CI trainer, the necessary steps to implement the CD trainer. 
+<P>
+<UL>
+  <LI>Initialization of models 
+  <UL>
+    <LI>Build the model definition for the CD models. The model definition 
+    associates each model with a set of state IDs. The current trainer builds 
+    this association for each CI model, when the models are initialized. This 
+    method needs to be expanded/generalized to handle CD phones. It also has to 
+    take into account that not all possible contexts appear in the training set. 
+
+    <LI>Initialization of means, variances etc. The CI models are initialized 
+    (with the current implementation) by assigning flat distributions to 
+    transitions and the overall mean and variance to each mean and variance. In 
+    the current implementation we focus on Gaussian distributions, but this is 
+    not required. We initialize with one Gaussian per state, so mixture weight 
+    is not an issue. The initialization of CD models can take advantage of the 
+    trained CI models, copying the transition matrices and means and variances 
+    from the base phone to all its derivatives. </LI></UL>
+  <LI>Increase in number of distribution components per state. This is done by 
+  splitting each component in two. The mixture weight is split equally, and the 
+  distribution parameters are perturbed. In the case of a Gaussian, this means a 
+  variation in the mean of each Gaussian, say to plus/minus one percent. This 
+  entails changing the means and variances pools. 
+  <LI>Tree building/pruning. In the <A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign">TrainerDesign</A>, 
+  an idea is proposed about keeping the tree as part of the acoustic model, so 
+  that one can pick the convenient number of senones at will. In Sphinx-3, the 
+  tree is grown (from the untied CD models) and pruned to a specific number of 
+  senones. A direct translation from C to Java could be an initial step. 
+  <LI>Creation of model definition based on the tree. Since some contexts will 
+  be collapsed together based on the tree, the model definition needs to be 
+  rebuilt. </LI></UL></DIV><!-- /patternTopic-->
+<DIV class=twikiAfterText></DIV></DIV><!-- /patternContent--><A 
+name=topic-actions></A>
+<DIV class=patternTopicActions>
+<DIV class=patternTopicAction><SPAN class=patternActionButtons><SPAN 
+class=patternButton><A title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/TrainerImplementation?t=1152847884" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Attach an image or document to this topic" accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerImplementation" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="View raw text without formatting" accessKey=r 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation?raw=on" 
+rel=nofollow><SPAN class=twikiAccessKey>R</SPAN>aw View</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN>Backlinks: <A 
+title="Search the Sphinx4 Web for topics that link to here" accessKey=b 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerImplementation?template=backlinksweb">We<SPAN 
+class=twikiAccessKey>b</SPAN></A>, <A 
+title="Search all webs for topics that link to here" accessKey=L 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerImplementation?template=backlinksallwebs">A<SPAN 
+class=twikiAccessKey>l</SPAN>l Webs</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><SPAN class=patternRevision><A 
+title="View total topic history" accessKey=H 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerImplementation?type=history" 
+rel=nofollow><SPAN class=twikiAccessKey>H</SPAN>istory</A>: r8&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerImplementation?rev1=8;rev2=7" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation?rev=7" 
+rel=nofollow>r7</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerImplementation?rev1=7;rev2=6" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation?rev=6" 
+rel=nofollow>r6</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerImplementation?rev1=6;rev2=5" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation?rev=5" 
+rel=nofollow>r5</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerImplementation?rev1=5;rev2=4" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation?rev=4" 
+rel=nofollow>r4</A></SPAN><SPAN class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Delete or rename this topic; set parent topic; view and compare revisions" 
+accessKey=M 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerImplementation?template=oopsmore&amp;param1=8&amp;param2=8" 
+rel=nofollow><SPAN class=twikiAccessKey>M</SPAN>ore topic 
+actions</A></SPAN></DIV></DIV><!--/patternTopicActions-->
+<DIV class=patternMoved></DIV><!-- /patternMoved--></DIV><!-- /patternMainContents--></DIV><!-- /patternMain-->
+<DIV id=patternLeftBar>
+<DIV id=patternClearHeaderLeft></DIV>
+<DIV id=patternLeftBarContents>
+<DIV class=patternWebIndicator><B><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome">Sphinx4</A></B></DIV>
+<DIV class=patternLeftBarPersonal><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/logon/Sphinx4/TrainerImplementation"><IMG 
+height=16 alt=key src="TrainerImplementation  Sphinx4  TWiki_files/key.gif" 
+width=16 align=top border=0> Log In</A> or <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/TWikiRegistration">Register</A> 
+
+<DIV class=patternLeftBarPersonalContent></DIV></DIV>
+<P>
+<UL>
+  <LI><B><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  height=16 alt=home src="TrainerImplementation  Sphinx4  TWiki_files/home.gif" 
+  width=16 align=top border=0> Sphinx4 Web</A></B> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicCreator?parent=TrainerImplementation" 
+  target=_top><IMG height=16 alt=newtopic 
+  src="TrainerImplementation  Sphinx4  TWiki_files/newtopic.gif" width=16 
+  align=top border=0> Create New Topic</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicList"><IMG 
+  height=16 alt=index 
+  src="TrainerImplementation  Sphinx4  TWiki_files/index.gif" width=16 align=top 
+  border=0> Index</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebSearch"><IMG 
+  height=16 alt=searchtopic 
+  src="TrainerImplementation  Sphinx4  TWiki_files/searchtopic.gif" width=16 
+  align=top border=0> Search</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebChanges"><IMG 
+  height=16 alt=changes 
+  src="TrainerImplementation  Sphinx4  TWiki_files/changes.gif" width=16 
+  align=top border=0> Changes</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebNotify"><IMG 
+  height=16 alt=notify 
+  src="TrainerImplementation  Sphinx4  TWiki_files/notify.gif" width=16 
+  align=top border=0> Notifications</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebStatistics"><IMG 
+  height=16 alt=statistics 
+  src="TrainerImplementation  Sphinx4  TWiki_files/statistics.gif" width=16 
+  align=top border=0> Statistics</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebPreferences"><IMG 
+  height=16 alt=wrench 
+  src="TrainerImplementation  Sphinx4  TWiki_files/wrench.gif" width=16 
+  align=top border=0> Preferences</A> </LI></UL>
+<P>
+<HR>
+
+<UL>
+  <LI><STRONG>Webs</STRONG> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffefa6" height=16 alt="" 
+  src="TrainerImplementation  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Main</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sandbox/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #b9daff" height=16 alt="" 
+  src="TrainerImplementation  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sandbox</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffcc99" height=16 alt="" 
+  src="TrainerImplementation  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #99ff99" height=16 alt="" 
+  src="TrainerImplementation  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx4</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffd8aa" height=16 alt="" 
+  src="TrainerImplementation  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;TWiki</A> </LI></UL></DIV><!-- /patternLeftBarContents--></DIV><!-- /patternLeftBar--></DIV><!-- /patternFloatWrap-->
+<DIV class=clear>&nbsp;</DIV></DIV><!-- /patternOuter--></DIV><!-- /patternWrapper-->
+<DIV id=patternTopBar>
+<DIV id=patternTopBarContents>
+<TABLE style="MARGIN-TOP: 11px; WIDTH: 100%" cellSpacing=0 cellPadding=0 
+border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=center><A href="http://twiki.org/"><IMG alt="Powered by TWiki" 
+      src="TrainerImplementation  Sphinx4  TWiki_files/T-logo-140x40-t.gif" 
+      border=0></A></TD>
+    <TD class=patternMetaMenu vAlign=top align=right>
+      <UL>
+        <LI>
+        <FORM name=jumpForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/TrainerImplementation><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" id=jumpFormField 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Jump name=topic></FORM>
+        <LI>
+        <FORM name=quickSearchForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/WebSearch><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Search name=search></FORM>
+        <LI></LI></UL></TD></TR></TBODY></TABLE></DIV></DIV><!-- /patternTopBar-->
+<DIV id=patternBottomBar>
+<DIV id=patternBottomBarContents><SPAN class=twikiRight><A 
+href="http://twiki.org/"><IMG 
+title="This site is powered by the TWiki collaboration platform" height=15 
+alt="This site is powered by the TWiki collaboration platform" 
+src="TrainerImplementation  Sphinx4  TWiki_files/T-logo-80x15.gif" width=80 
+border=0></A></SPAN>Copyright © by the contributing authors. All material on 
+this collaboration platform is the property of the contributing authors. 
+<BR>Ideas, requests, problems regarding TWiki? <A 
+href="mailto:egouvea@cs.cmu.edu?subject=TWiki Feedback on Sphinx4.TrainerImplementation">Send 
+feedback</A> </DIV><!-- /patternBottomBarContents--></DIV><!-- /patternBottomBar--></DIV><!-- /patternPage--></DIV><!-- /patternPageShadow--></DIV><!-- /patternScreen--></BODY></HTML>

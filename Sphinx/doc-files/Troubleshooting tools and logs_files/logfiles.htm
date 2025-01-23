@@ -1,0 +1,2568 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0052)http://www.speech.cs.cmu.edu/sphinxman/logfiles.html -->
+<HTML><HEAD><TITLE>Troubleshooting</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<STYLE type=text/css>PRE {
+	PADDING-RIGHT: 2mm; PADDING-LEFT: 2mm; FONT-SIZE: medium; BACKGROUND: #f0f8ff; PADDING-BOTTOM: 2mm; COLOR: teal; BORDER-TOP-STYLE: ridge; PADDING-TOP: 2mm; BORDER-RIGHT-STYLE: ridge; BORDER-LEFT-STYLE: ridge; BORDER-BOTTOM-STYLE: ridge
+}
+CODE {
+	FONT-SIZE: medium; COLOR: teal
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY><A name=top>INDEX</A>
+<P>(This is under construction..) 
+<OL>
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#0"><FONT 
+  color=red>Tools for troubleshooting</FONT></A> 
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#1"><FONT 
+  color=red>Is my training ok?</FONT></A> 
+  <OL>
+    <LI><B>Semi-continuous models</B> <BR>I've just run the executable.......... 
+
+    <UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#098">agg_seg</A> 
+
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#099">kmeans</A> 
+
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#099a">mk_mdef_gen</A> 
+
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#099b">mk_flat</A> 
+
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#100">bw</A> 
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#101">norm</A> 
+      <UL><A 
+        href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#102">checking 
+        the model parameters</A></UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#103">quick_count</A> 
+
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#104">param_cnt</A> 
+
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#104a">make_quests</A> 
+
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#105">bldtree</A> 
+
+      <UL>
+        <LI><A 
+        href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#105a">The 
+        structure of a tree file</A> </LI></UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#106">prunetree</A> 
+
+      <UL>
+        <LI><A 
+        href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#106a">The 
+        structure of a pruned tree file</A> </LI></UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#107">tiestate</A> 
+      </LI></UL>
+    <LI><B>Continuous models</B> <BR>I've just run the executable.......... 
+    <UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#108">mk_flat</A> 
+      </LI></UL></LI></OL>
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#2"><FONT 
+  color=red>Is my decoding setup ok?</FONT></A> 
+  <UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#201">Decoding 
+    problems</A> </LI></UL></LI></OL>
+<HR>
+
+<P><A name=0></A><A name=00></A>
+<CENTER>
+<H4><FONT color=red>TOOLS FOR TROUBLESHOOTING</FONT></H4></CENTER>
+<P>The two most useful executables used for troubleshooting are 
+<OL>
+  <LI><B><FONT color=green>cepview</FONT></B>: 
+  <P>This can be use to view the binary feature file you have generated using 
+  the feature computation modules provided with SPHINX. You can display up to N 
+  dimensions of the feature vectors by using the flag value <PRE>-d       N
+</PRE>The output is in ascii as stdout, and can be piped into any file or 
+  program which accepts it. 
+  <P>In the case of MFCCs, depending on the type of DCT implementation, the 
+  values that you will see for the first dimension of each vector might range 
+  from 0 to a few hundred. Values in the rest of the dimensions are usually 
+  smaller. If the numbers in the file are much bigger, or if you see the 
+  sequence "NaN" in the ascii output, it indicates that there is some problem 
+  with your audio data. The data could be byte swapped, or you may have computed 
+  features for the headers as well, or you may have had digital zeros in the 
+  recordings and may have forgotten to add a one-bit dither (or so) while 
+  computing the features etc. 
+  <P></P>
+  <LI><B><FONT color=green>printp</FONT></B>: 
+  <P>This executable can be used for printing out the binary model paramter 
+  files in ascii format. Depending on which file you are want to look at, one or 
+  more of the following flags must be set appropriately: <PRE>[Switch]     [Default] [Description] 
+-tmatfn                The transition matrix parameter file name
+-mixwfn                The mixture weight parameter file name
+-mixws                 Start id of mixing weight subinterval
+-mixwe                 End id of mixing weight subinterval
+-gaufn                 A Gaussian parameter file name (either for means or vars)
+-gaucntfn              A Gaussian parameter weighted vector file
+-regmatcntfn           MLLR regression matrix count file
+-moddeffn              The model definition file
+-lambdafn              The interpolation weight file
+-lambdamin   0         Print int. wt. &gt;= this
+-lambdamax   1         Print int. wt. &lt;= this
+-norm        yes       Print normalized parameters
+-sigfig      4         Number of significant digits in 'e' notation 
+</PRE></LI></OL>
+<P>
+<HR>
+
+<P><A name=1></A>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>If you are training models, even though the training seems to be going 
+through smoothly, keep checking the logfiles being generated for possible 
+problems, and also keep checking the various model architecture and model 
+parameter files being generated. The sections that follow discuss how you can 
+track down problems through these checks before you have wasted a lot of CPU and 
+your own time on the training. 
+<P>The first thing that you must ensure is that the feature files are being 
+correctly computed. If you are about to train models, then make sure that 
+<UL>
+  <LI>The flag settings for the front-end executable you are using are indeed 
+  the ones that you need. If you have telephone bandwidth speech that has been 
+  recorded with a sampling rate of 11KHz, then make sure that the sampling rate 
+  is set to 11khz, and make sure that the rest of the flags have values that 
+  comply with this sampling rate. Take a moment also to check your potential 
+  recording setup during recognition with these models. If at that time you are 
+  likely to be recording telephone bandwidth speech at 8khz, then DO NOT set the 
+  upper frequency of the Mel filter bank to any value greater than 4000 Hz for 
+  computing the training features. The feature computation parameters for 
+  training should match the feature computation parameters for decoding 
+  frequency-to-frequency, filter-to- filter. 
+  <LI>the feature files are in the correct byte order for the machines on which 
+  you train. Although byte-order is checked by the trainer and the correct byte 
+  order is used, there may be unforeseen problems. </LI></UL>
+<P><!==================================================================><!                                                                  ><!                           agg_seg                                ><!                                                                  ><!==================================================================><A 
+name=098></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable agg_seg</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/agg_seg \
+ -segdmpdirs /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1 \
+ -segdmpfn /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/tongues3.dmp \
+ -segtype all \
+ -ctlfn /net/alf33/usr2/rsingh/tongues3//etc/tongues.fileids \
+ -cepdir /net/alf33/usr2/rsingh/tongues3//feat \
+ -cepext feat \
+ -ceplen 13 \
+ -agc none \
+ -cmn current \
+ -feat c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/ \
+ -stride 1
+
+[Switch]    [Default] [Value]
+-segdmpdirs           /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1
+-segdmpfn             /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/tongues3.dmp
+-segidxfn                    
+-segtype    st        all    
+-cntfn                       
+-ddcodeext  xcode     xcode  
+-lsnfn                       
+-sentdir                     
+-sentext                     
+-ctlfn                /net/alf33/usr2/rsingh/tongues3//etc/tongues.fileids
+-mllrctlfn                   
+-mllrdir                     
+-nskip      0         0      
+-runlen     -1        -1     
+-moddeffn                    
+-ts2cbfn                     
+-cb2mllrfn                   
+-dictfn                      
+-fdictfn                     
+-segdir                      
+-segext     v8_seg    v8_seg 
+-ccodedir                    
+-ccodeext   ccode     ccode  
+-dcodedir                    
+-dcodeext   d2code    d2code 
+-pcodedir                    
+-pcodeext   p3code    p3code 
+-ddcodedir                   
+-ddcodeext  xcode     xcode  
+-cepdir               /net/alf33/usr2/rsingh/tongues3//feat
+-cepext     mfc       feat   
+-ceplen     13        13     
+-agc        max       none   
+-cmn        current   current
+-varnorm    no        no     
+-silcomp    none      none   
+-feat                 c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/
+-cachesz    200       200    
+-stride     1         1      
+INFO: ../main.c(141): No lexical transcripts provided
+INFO: ../corpus.c(1270): Will process all remaining utts starting at 0
+INFO: ../main.c(245): Will produce FEAT dump
+INFO: ../main.c(401): Writing frames to one file
+INFO: ../agg_all_seg.c(124): [0]
+INFO: ../agg_all_seg.c(124): [1000]
+INFO: ../agg_all_seg.c(165): Wrote 1229629 frames to /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/tongues3.dmp
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>areadfloat: path_to_cep/utt.mfc: can't alloc data
+ERROR: "../corpus.c", line 1460: MFCC read failed. Retrying after sleep...
+</PRE>
+  <P><U>Explanation</U> 
+  <P>This happens when data are byte-swapped or there are very few frames in 
+  utterance. It also happens when your feature file is physically not present or 
+  is inaccessible/unreadable due to some reason. 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!==================================================================><!                                                                  ><!                          kmeans                                  ><!                                                                  ><!==================================================================>
+<P><A name=099></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable kmeans</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/kmeans_init \
+ -gthobj single \
+ -stride 1 \
+ -ntrial 1 \
+ -minratio 0.001 \
+ -ndensity 256 \
+ -meanfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/means \
+ -varfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/variances \
+ -reest no \
+ -segdmpdirs /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1 \
+ -segdmpfn /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/tongues3.dmp \
+ -ceplen 13 \
+ -feat c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/ \
+ -agc none \
+ -cmn current
+
+[Switch]    [Default]          [Value]
+-segdir                               
+-segext     v8_seg             v8_seg 
+-omoddeffn                            
+-dmoddeffn                            
+-ts2cbfn                              
+-lsnfn                                
+-dictfn                               
+-fdictfn                              
+-cbcntfn                              
+-maxcbobs                             
+-maxtotobs                            
+-featsel                              
+-ctlfn                                
+-cepext     mfc                mfc    
+-cepdir                               
+-ceplen     13                 13     
+-agc        max                none   
+-cmn        current            current
+-varnorm    no                 no     
+-silcomp    none               none   
+-feat       1s_12c_12d_3p_12dd c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/
+-segdmpdirs                    /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1
+-segdmpfn                      /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/tongues3.dmp
+-segidxfn                             
+-fpcachesz  3000               3000   
+-obscachesz 92                 92     
+-ndensity                      256    
+-ntrial     5                  1      
+-minratio   0.01               1.000000e-03
+-maxiter    100                100    
+-mixwfn                               
+-meanfn                        /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/means
+-varfn                         /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/variances
+-method     rkm                rkm    
+-reest      yes                no     
+-niter      20                 20     
+-gthobj     state              single 
+-stride     32                 1      
+-runlen                               
+-tsoff      0                  0      
+-tscnt                                
+-tsrngfn                              
+-vartiethr  0                  0      
+INFO: ../main.c(458): No mdef files.  Assuming 1-class init
+INFO: ../main.c(1230): 1-class dump file
+INFO: ../main.c(1268): Corpus 0: sz==1229629 frames
+INFO: ../main.c(1277): Convergence ratios are abs(cur - prior) / abs(prior)
+INFO: ../main.c(211): alloc'ing 56Mb obs buf
+INFO: ../main.c(516): Initializing means using random k-means
+INFO: ../main.c(519): Trial 0: 256 means
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 2.085017e-01 ...
+INFO: ../kmeans.c(130): km iter [2] 3.839041e-02 ...
+INFO: ../kmeans.c(130): km iter [3] 1.496473e-02 ...
+INFO: ../kmeans.c(130): km iter [4] 8.121040e-03 ...
+INFO: ../kmeans.c(130): km iter [5] 5.256977e-03 ...
+INFO: ../kmeans.c(130): km iter [6] 3.857913e-03 ...
+INFO: ../kmeans.c(130): km iter [7] 2.907482e-03 ...
+INFO: ../kmeans.c(130): km iter [8] 2.227546e-03 ...
+INFO: ../kmeans.c(130): km iter [9] 1.753199e-03 ...
+INFO: ../kmeans.c(130): km iter [10] 1.408711e-03 ...
+INFO: ../kmeans.c(130): km iter [11] 1.177712e-03 ...
+INFO: ../kmeans.c(130): km iter [12] 1.001406e-03 ...
+INFO: ../kmeans.c(143): kmtrineq n_iter 13 sqerr 3.289491e+05 conv_ratio 8.766461e-04
+INFO: ../main.c(561): 	best-so-far sqerr = 3.289491e+05
+INFO: ../main.c(211): alloc'ing 112Mb obs buf
+INFO: ../main.c(516): Initializing means using random k-means
+INFO: ../main.c(519): Trial 0: 256 means
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 2.146148e-01 ...
+INFO: ../kmeans.c(130): km iter [2] 3.472337e-02 ...
+INFO: ../kmeans.c(130): km iter [3] 1.313343e-02 ...
+INFO: ../kmeans.c(130): km iter [4] 7.271150e-03 ...
+INFO: ../kmeans.c(130): km iter [5] 4.842221e-03 ...
+INFO: ../kmeans.c(130): km iter [6] 3.540583e-03 ...
+INFO: ../kmeans.c(130): km iter [7] 2.704598e-03 ...
+INFO: ../kmeans.c(130): km iter [8] 2.159868e-03 ...
+INFO: ../kmeans.c(130): km iter [9] 1.765137e-03 ...
+INFO: ../kmeans.c(130): km iter [10] 1.490874e-03 ...
+INFO: ../kmeans.c(130): km iter [11] 1.267887e-03 ...
+INFO: ../kmeans.c(130): km iter [12] 1.080588e-03 ...
+INFO: ../kmeans.c(143): kmtrineq n_iter 13 sqerr 1.172793e+06 conv_ratio 9.439682e-04
+INFO: ../main.c(561): 	best-so-far sqerr = 1.172793e+06
+INFO: ../main.c(211): alloc'ing 14Mb obs buf
+INFO: ../main.c(516): Initializing means using random k-means
+INFO: ../main.c(519): Trial 0: 256 means
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 1.958686e-01 ...
+INFO: ../kmeans.c(130): km iter [2] 7.782481e-02 ...
+INFO: ../kmeans.c(130): km iter [3] 4.728356e-02 ...
+INFO: ../kmeans.c(130): km iter [4] 3.346227e-02 ...
+INFO: ../kmeans.c(130): km iter [5] 2.553782e-02 ...
+INFO: ../kmeans.c(130): km iter [6] 1.942101e-02 ...
+INFO: ../kmeans.c(130): km iter [7] 1.523729e-02 ...
+INFO: ../kmeans.c(130): km iter [8] 1.252560e-02 ...
+INFO: ../kmeans.c(130): km iter [9] 1.063390e-02 ...
+INFO: ../kmeans.c(130): km iter [10] 9.017836e-03 ...
+INFO: ../kmeans.c(130): km iter [11] 7.604756e-03 ...
+INFO: ../kmeans.c(130): km iter [12] 6.461693e-03 ...
+INFO: ../kmeans.c(130): km iter [13] 5.621540e-03 ...
+INFO: ../kmeans.c(130): km iter [14] 4.818882e-03 ...
+INFO: ../kmeans.c(130): km iter [15] 4.225533e-03 ...
+INFO: ../kmeans.c(130): km iter [16] 3.757179e-03 ...
+INFO: ../kmeans.c(130): km iter [17] 3.428229e-03 ...
+INFO: ../kmeans.c(130): km iter [18] 3.172649e-03 ...
+INFO: ../kmeans.c(130): km iter [19] 2.947088e-03 ...
+INFO: ../kmeans.c(130): km iter [20] 2.603584e-03 ...
+INFO: ../kmeans.c(130): km iter [21] 2.363332e-03 ...
+INFO: ../kmeans.c(130): km iter [22] 2.202385e-03 ...
+INFO: ../kmeans.c(130): km iter [23] 1.996926e-03 ...
+INFO: ../kmeans.c(130): km iter [24] 1.828798e-03 ...
+INFO: ../kmeans.c(130): km iter [25] 1.665084e-03 ...
+INFO: ../kmeans.c(130): km iter [26] 1.508150e-03 ...
+INFO: ../kmeans.c(130): km iter [27] 1.367824e-03 ...
+INFO: ../kmeans.c(130): km iter [28] 1.258108e-03 ...
+INFO: ../kmeans.c(130): km iter [29] 1.151303e-03 ...
+INFO: ../kmeans.c(130): km iter [30] 1.046084e-03 ...
+INFO: ../kmeans.c(143): kmtrineq n_iter 31 sqerr 6.340286e+05 conv_ratio 9.343168e-04
+INFO: ../main.c(561): 	best-so-far sqerr = 6.340286e+05
+INFO: ../main.c(211): alloc'ing 56Mb obs buf
+INFO: ../main.c(516): Initializing means using random k-means
+INFO: ../main.c(519): Trial 0: 256 means
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 1.379302e-01 ...
+INFO: ../kmeans.c(130): km iter [2] 3.473147e-02 ...
+INFO: ../kmeans.c(130): km iter [3] 1.589796e-02 ...
+INFO: ../kmeans.c(130): km iter [4] 9.246683e-03 ...
+INFO: ../kmeans.c(130): km iter [5] 6.071259e-03 ...
+INFO: ../kmeans.c(130): km iter [6] 4.333799e-03 ...
+INFO: ../kmeans.c(130): km iter [7] 3.330068e-03 ...
+INFO: ../kmeans.c(130): km iter [8] 2.629796e-03 ...
+INFO: ../kmeans.c(130): km iter [9] 2.166465e-03 ...
+INFO: ../kmeans.c(130): km iter [10] 1.799240e-03 ...
+INFO: ../kmeans.c(130): km iter [11] 1.517641e-03 ...
+INFO: ../kmeans.c(130): km iter [12] 1.314749e-03 ...
+INFO: ../kmeans.c(130): km iter [13] 1.144948e-03 ...
+INFO: ../kmeans.c(143): kmtrineq n_iter 14 sqerr 4.383058e+05 conv_ratio 9.815118e-04
+INFO: ../main.c(561): 	best-so-far sqerr = 4.383058e+05
+INFO: ../main.c(843): Initializing variances
+INFO: ../main.c(211): alloc'ing 56Mb obs buf
+INFO: ../main.c(211): alloc'ing 112Mb obs buf
+INFO: ../main.c(211): alloc'ing 14Mb obs buf
+INFO: ../main.c(211): alloc'ing 56Mb obs buf
+INFO: ../main.c(1323): sqerr [0] == 2.574076e+06
+INFO: ../main.c(1327): sqerr = 2.574076e+06 tot 1.604393e+03 rms
+INFO: ../s3gau_io.c(188): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/means [1x4x256 array]
+INFO: ../s3gau_io.c(188): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/variances [1x4x256 array]
+INFO: ../main.c(1371): No mixing weight file given; none written
+INFO: ../main.c(1525): TOTALS: km 0.026x 1.043e+00 var 0.000x 3.315e+00 em 0.000x 0.000e+00 all 0.026x 1.077e+00
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>INFO: ../main.c(214): alloc'ing 241Mb obs buf
+INFO: ../main.c(518): Initializing means using random k-means
+INFO: ../main.c(521): Trial 0: 256 means
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 2.012837e-02 ...
+WARNING: "../kmeans.c", line 409: Empty cluster 90
+INFO: ../main.c(554):   -&gt; Aborting k-means, bad initialization
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 7.065624e-02 ...
+INFO: ../kmeans.c(130): km iter [2] 8.197116e-01 ...
+INFO: ../kmeans.c(143): kmtrineq n_iter 3 sqerr 9.556706e+07 conv_ratio
+4.972178e-05
+INFO: ../main.c(563):   best-so-far sqerr = 9.556706e+07
+INFO: ../main.c(214): alloc'ing 30Mb obs buf
+INFO: ../main.c(518): Initializing means using random k-means
+INFO: ../main.c(521): Trial 0: 256 means
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 5.450990e-03 ...
+WARNING: "../kmeans.c", line 409: Empty cluster 20
+WARNING: "../kmeans.c", line 409: Empty cluster 42
+WARNING: "../kmeans.c", line 409: Empty cluster 155
+INFO: ../main.c(554):   -&gt; Aborting k-means, bad initialization
+INFO: ../kmeans.c(130): km iter [0] 1.000000e+00 ...
+INFO: ../kmeans.c(130): km iter [1] 5.045656e-03 ...
+WARNING: "../kmeans.c", line 409: Empty cluster 32
+WARNING: "../kmeans.c", line 409: Empty cluster 241
+INFO: ../main.c(554):   -&gt; Aborting k-means, bad initialization
+</PRE>
+  <P><U>Explanation</U> 
+  <P>This may happen if the features are byte-swapped, or if your feature file 
+  is very small (only a couple of frames or so), or if your features are bad for 
+  some other reason. You may have computed cepstra for the header of the audio 
+  files in your corpus too, so you may have garbage vectors in your feature 
+  files. Garbage vectors can bias the codebooks badly. Make sure that you do not 
+  compute feature vectors corresponding to file-headers. To see the cepstral 
+  values use the executable "seecep" provided with the SPHINX package. You can 
+  use "cepview" too, but it does not check for byte order and sometimes prints 
+  garbage even if the cepstral files are OK. Byte swap can be handled through 
+  the flag "-mach_endian" in the SPHINX front-end executable. 
+  <P>The presence of digital zeros in your waveform files can also cause this 
+  problem. If a bunch of sample values are zero, and if any of the terms come 
+  out to zero in the computation of the melcep, they get set to a large negative 
+  number (the log is skipped in the front-end code). In this case the features 
+  corresponding to the frames will look like garbage. When there are many zeros 
+  in your samples, the garbage number repeats, and this is a good indication 
+  that the problem is due to the presence of digital zeros. To avoid this, it is 
+  a good idea to add a one-bit dither to your waveform before computing the 
+  features. The SPHINX front-end does this for you through a flag called 
+  "-dither". The dither is added to the entire signal (and not just to the 
+  regions in which it is zero). However, this should not be a cause for concern 
+  because adding dither to the whole signal is known to affect recognition 
+  performance *positively* in the SPHINX. 
+  <P></P>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!==================================================================><!                                                                  ><!                           mk_mdef_gen                            ><!                                                                  ><!==================================================================><!==================================================================><A 
+name=099a></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable mk_mdef_gen</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/usr0/egouvea/SourceForge/tmp/sanity/bin/mk_mdef_gen \
+ -phnlstfn /usr0/egouvea/SourceForge/tmp/sanity/model_architecture/sanity.phonelist \
+ -ocimdef /usr0/egouvea/SourceForge/tmp/sanity/model_architecture/sanity.ci.mdef \
+ -n_state_pm 5
+
+[Switch]      [Default] [Value]
+-phnlstfn               /usr0/egouvea/SourceForge/tmp/sanity/model_architecture/sanity.phonelist
+-inCImdef                      
+-triphnlstfn                   
+-inCDmdef                      
+-dictfn                        
+-fdictfn                       
+-lsnfn                         
+-n_state_pm   3         5      
+-ocountfn                      
+-ocimdef                /usr0/egouvea/SourceForge/tmp/sanity/model_architecture/sanity.ci.mdef
+-oalltphnmdef                  
+-ountiedmdef                   
+-minocc       1         1      
+-maxtriphones 100000    100000 
+INFO: main.c(95): Will write CI mdef file /usr0/egouvea/SourceForge/tmp/sanity/model_architecture/sanity.ci.mdef
+INFO: mk_mdef_gen.c(189): 0 single word triphones in input phone list
+INFO: mk_mdef_gen.c(190): 0 word beginning triphones in input phone list
+INFO: mk_mdef_gen.c(191): 0 word internal triphones in input phone list
+INFO: mk_mdef_gen.c(192): 0 word ending triphones in input phone list
+INFO: mk_mdef_gen.c(832): 45 n_base, 0 n_tri
+INFO: mk_mdef_gen.c(904): Wrote mdef file /usr0/egouvea/SourceForge/tmp/sanity/model_architecture/sanity.ci.mdef
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!==================================================================><!                                                                  ><!                           mk_flat                                ><!                                                                  ><!==================================================================><A 
+name=099b></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable mk_flat</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/mk_flat \
+ -moddeffn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.ci.mdef \
+ -topo /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.topology \
+ -mixwfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/mixture_weights \
+ -tmatfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/transition_matrices \
+ -nstream 4 \
+ -ndensity 256
+
+[Switch]  [Default] [Value]
+-moddeffn           /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.ci.mdef
+-mixwfn             /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/mixture_weights
+-topo               /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.topology
+-tmatfn             /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/transition_matrices
+-nstream  4         4      
+-ndensity 256       256    
+../main.c(46): Reading model definition file /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.ci.mdef
+INFO: ../model_def_io.c(562): Model definition info:
+INFO: ../model_def_io.c(563): 47 total models defined (47 base, 0 tri)
+INFO: ../model_def_io.c(564): 282 total states
+INFO: ../model_def_io.c(565): 235 total tied states
+INFO: ../model_def_io.c(566): 235 total tied CI states
+INFO: ../model_def_io.c(567): 47 total tied transition matrices
+INFO: ../model_def_io.c(568): 6 max state/model
+INFO: ../model_def_io.c(569): 20 min state/model
+../main.c(53): 47 models defined
+INFO: ../s3tmat_io.c(152): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/transition_matrices [47x5x6 array]
+INFO: ../s3mixw_io.c(212): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi_flatinitial/mixture_weights [235x4x256 array]
+
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>INFO: ../model_def_io.c(568): 6 max state/model
+INFO: ../model_def_io.c(569): 20 min state/model
+../main.c(53): 47 models defined
+ERROR: "../topo_read.c", line 102: EOF encounted while reading version number in /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.topology!?
+</PRE>
+  <P><U>Explanation</U> 
+  <P>The topology file has not been made. Check to see if the script that makes 
+  the topology is in its right place, that it is executable, and that it is able 
+  to write the topology file in the appropriate place. 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!==================================================================><!==================================================================><!                                                                  ><!                           bw                                     ><!                                                                  ><!==================================================================><A 
+name=100></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable bw</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>INFO: main.c(176): Compiled on Nov 23 2000 at 12:11:34
+/path/bin/bw \
+ -moddeffn /path/model_architecture/training.ci.mdef \
+ -ts2cbfn .semi. \
+ -mixwfn /path/model_parameters/training.ci_semi_flatinitial/mixture
+_weights \
+ -mwfloor 1e-08 \
+ -tmatfn /path/model_parameters/training.ci_semi_flatinitial/transition_matrices \
+ -meanfn /path/model_parameters/training.ci_semi_flatinitial/means \
+ -varfn /path/model_parameters/training.ci_semi_flatinitial/variances \
+ -dictfn /path/etc/training.dic \
+ -fdictfn /path/etc/training.filler \
+ -ctlfn /path/etc/training.fileids \
+ -part 1 \
+ -npart 1 \
+ -cepdir /path/feat \
+ -cepext feat \
+ -lsnfn /path/etc/training.transcription \
+ -accumdir /path/bwaccumdir/training_buff_1 \
+ -varfloor 0.0001 \
+ -topn 4 \                                    
+ -abeam 1e-90 \
+ -bbeam 1e-40 \
+ -agc none \
+ -cmn current \
+ -meanreest yes \
+ -varreest yes -2passvar no \
+ -tmatreest yes \
+ -feat c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/ \
+ -ceplen 13
+
+[Switch]   [Default] [Value]
+-moddeffn            /path/model_architecture/training.ci.mdef
+-tmatfn              /path/model_parameters/training.ci_semi_flatinitial/transition_matrices
+-mixwfn              /path/model_parameters/training.ci_semi_flatinitial/mixture_weights
+-meanfn              /path/model_parameters/training.ci_semi_flatinitial/means
+-varfn               /path/model_parameters/training.ci_semi_flatinitial/variances
+-mwfloor   0.00001   1.000000e-08
+-tpfloor   0.0001    1.000000e-04
+-varfloor  0.00001   1.000000e-04              
+-topn      4         4
+-dictfn              /path/etc/training.dic
+-fdictfn             /path/etc/training.filler
+-ctlfn               /path/etc/training.fileids
+-nskip
+-runlen    -1        -1
+-part                1
+-npart               1
+-cepext    mfc       feat
+-cepdir              /path/feat
+-segext    v8_seg    v8_seg
+-segdir
+-sentdir
+-sentext   sent      sent
+-lsnfn               /path/etc/training.transcription
+-accumdir            /path/bwaccumdir/training_buff_1
+-ceplen    13        13
+-agc       max       none
+-cmn       current   current
+-varnorm   no        no
+-silcomp   none      none
+-abeam     1e-100    1.000000e-90
+-bbeam     1e-100    1.000000e-40         
+-varreest  yes       yes
+-meanreest yes       yes
+-mixwreest yes       yes
+-tmatreest yes       yes
+-spkrxfrm
+-mllrmult  no        no
+-mllradd   no        no
+-ts2cbfn             .semi.
+-feat                c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/
+-timing    yes       yes
+-viterbi   no        no
+-2passvar  no        no
+-sildelfn
+-cb2mllrfn
+-spthresh  0.0       0.000000e+00
+-maxuttlen 0         0
+-ckptintv
+INFO: main.c(193): Reading /path/model_architecture/training.ci.mdef
+INFO: model_def_io.c(598): Model definition info:
+INFO: model_def_io.c(599): 47 total models defined (47 base, 0 tri)
+INFO: model_def_io.c(600): 282 total states
+INFO: model_def_io.c(601): 235 total tied states
+INFO: model_def_io.c(602): 235 total tied CI states
+INFO: model_def_io.c(603): 47 total tied transition matrices
+INFO: model_def_io.c(604): 6 max state/model
+INFO: model_def_io.c(605): 20 min state/model
+INFO: s3mixw_io.c(127): Read /path/model_parameters/training.ci_semi
+_flatinitial/mixture_weights [235x4x256 array]
+WARNING: "mod_inv.c", line 363: Model inventory n_density not set; setting to 
+value in mixw file, 256.
+INFO: s3tmat_io.c(126): Read /path/model_parameters/training.ci_semi
+_flatinitial/transition_matrices [47x5x6 array]
+INFO: mod_inv.c(291): inserting tprob floor 1.000000e-04 and renormalizing
+INFO: s3gau_io.c(163): Read /path/model_parameters/training.ci_semi_
+flatinitial/means [1x4x256 array]
+INFO: s3gau_io.c(163): Read /path/model_parameters/training.ci_semi_
+flatinitial/variances [1x4x256 array]
+INFO: gauden.c(178): 1 total mgau
+INFO: gauden.c(150): 4 feature streams (|0|=12 |1|=24 |2|=3 |3|=12 )
+INFO: gauden.c(189): 256 total densities
+INFO: gauden.c(97): min_var=1.000000e-04
+INFO: gauden.c(167): compute 4 densities/frame
+INFO: main.c(289): Will reestimate mixing weights
+INFO: main.c(291): Will reestimate means
+INFO: main.c(293): Will reestimate variances
+INFO: main.c(295): Will NOT reestimate MLLR multiplicative term
+INFO: main.c(297): Will NOT reestimate MLLR additive term
+INFO: main.c(305): Will reestimate transition matrices
+INFO: main.c(320): Reading main lexicon: /path/etc/training.dic
+INFO: lexicon.c(242): 2697 entries added from /path/etc/training.dic
+INFO: main.c(331): Reading filler lexicon: /path/etc/training.filler
+INFO: lexicon.c(242): 12 entries added from /path/etc/training.filler
+INFO: corpus.c(1304): Will process all remaining utts starting at 0
+INFO: main.c(534): Reestimation: Baum-Welch
+column defns
+        &lt;seq&gt;
+        &lt;id&gt;
+        &lt;n_frame_in&gt;
+        &lt;n_frame_del&gt;
+        &lt;n_state_shmm&gt;
+        &lt;avg_states_alpha&gt;
+        &lt;avg_states_beta&gt;
+        &lt;avg_states_reest&gt;
+        &lt;avg_posterior_prune&gt;
+        &lt;frame_log_lik&gt;
+        &lt;utt_log_lik&gt;
+        ... timing info ...                                           
+</PRE>
+<P>utt&gt; 0 st001a000 1415 0INFO: cvt2triphone.c(210): no multiphones defined, 
+no conversion done <BR>498 295 187 477 2.235357e-41 -1.090004e+01 -1.542355e+04 
+utt 0.801x 1.026e upd 0.801x 1.025e fwd 0.130x 1.007e bwd 0.669x 1.030e gau 
+64.676x 0.998e rsts 0.302x 1.041e rstf 0.004x 1.067e rstu 0.001x 0.765e 
+<P>utt&gt; 1 st001a001 1548 0 468 274 176 450 1.952369e-41 -9.813935e+00 
+-1.519197e+04 utt 0.764x 1.000e upd 0.763x 1.000e fwd 0.125x 0.998e bwd 0.636x 
+1.001e gau 57.130x 1.004e rsts 0.300x 1.010e rstf 0.005x 0.638e rstu 0.001x 
+0.760e 
+<P>utt&gt; 2 st001a002 2025 0 780 372 199 505 2.557036e-41 -1.047046e+01 
+-2.120267e+04 utt 0.878x 1.000e upd 0.878x 1.000e fwd 0.156x 1.002e bwd 0.720x 
+1.000e gau 72.144x 0.998e rsts 0.337x 1.005e rstf 0.004x 0.882e rstu 0.001x 
+0.769e 
+<P>utt&gt; 3 st001a003 757 0 234 198 141 362 1.814709e-41 -7.576153e+00 
+-5.735148e+03 utt 0.583x 0.999e upd 0.581x 1.001e fwd 0.091x 1.000e bwd 0.489x 
+1.000e gau 36.585x 1.016e rsts 0.210x 1.107e rstf 0.003x 1.208e rstu 0.001x 
+1.060e 
+<P>utt&gt; 4 st001a004 615 0 132 122 93 240 8.520910e-42 -1.349750e+01 
+-8.300961e+03 utt 0.398x 1.000e upd 0.398x 0.999e fwd 0.072x 0.986e bwd 0.325x 
+1.002e gau 17.075x 0.979e rsts 0.154x 0.997e rstf -0.000x 0.000e rstu 0.002x 
+0.647e 
+<P><PRE>***********and so on till the last utt&gt;erance***********
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>WARNING: "gauden.c", line 1387: (mgau= 0, feat= 0, density= 202) never observed
+WARNING: "gauden.c", line 1387: (mgau= 0, feat= 0, density= 255) never observed
+WARNING: "gauden.c", line 1387: (mgau= 0, feat= 1, density= 9) never observed
+WARNING: "gauden.c", line 1387: (mgau= 0, feat= 2, density= 23) never observed
+WARNING: "gauden.c", line 1387: (mgau= 0, feat= 2, density= 31) never observed
+</PRE>
+  <P><U>Explanation</U> 
+  <P>The first line above means that in the codebook for feature stream 0, the 
+  codeword 202 was never observed all through the training. Since you've done a 
+  VQ with those very feature vectors, the codeword *should* have been observed 
+  at least once! This problem arises due to the fact that all vectors in the 
+  training set are not used for vector quantization. The agg-seg executable 
+  selects every n_th vector from the feature files for vector quantization. This 
+  is not a problem when the feature set size is large. However, if this is done 
+  for small amounts of training data, some codewords seemingly become 
+  unrepresentative of any sample in the training set. This sounds anomalous, but 
+  remember that during training, vectors are not considered in isolation. 
+  Instead, the baum-welch executable identifies *groups* of vectors to associate 
+  with any codeword. That is how not seeing a particular codeword even once 
+  becomes possible. 
+  <P>If you get such warnings too many times, you should reduce the value given 
+  to the -stride flag in agg-seg, and redo the vector quantization. The stride 
+  variable decides the degree of sampling of the vector space. Every stride_th 
+  vector is selected for the VQ. When the value given is 1, every vector is 
+  used. 
+  <P>Smaller amounts of training data result in increased number of warnings. 
+  There warnings may appear even if the stride variable is set to 1, but the 
+  number will be greatly reduced. The number will further reduce with more and 
+  more baum-welch iterations, as segmentations become more and more accurate. 
+  <P></P>
+  <LI><U>Message</U> <PRE>WARNING: "../accum.c", line 556: The following seno never occur in the input data
+        230 231 232 233 234
+</PRE><U>Explanation</U> 
+  <P>If you have run the training in parts, the training data in some parts may 
+  not have examples of the phone or triphone to which these senone-ids 
+  correspond. That is not a problem. A check on the norm logfile at the end of 
+  the current bw iteration can tell you if these (or any of these) senones were 
+  seen at all in any other part of the training or not. If the norm logfile also 
+  reports them as unseen, then it means that your training data did not have any 
+  example of the phone or triphone. Check the model-definition file to find out 
+  which models these senones correspond to. It may be that you did have examples 
+  of the phone or triphone in your training data, but those utterances either 
+  got dropped because they couldn't get force-aligned, or they got dropped 
+  during the bw iteration itself because of the failure of the backward pass. 
+  Check the bw log files for error messages for failure of backward pass or the 
+  force-align log files to see why they didn't get force aligned. Very often the 
+  problem is just that you didn't have pronunciations for one or more words 
+  (they were not present in the dictionary) in those utterances. 
+  <P>In any case, if the norm file reports these senones as unseen, and 
+  continues to do so for many iterations (ie, if the utterance is not recovered 
+  as the models get better), then you will end up with zero model parameters for 
+  the particular phone/triphone at the end of your training. That can harm 
+  recognition performance. If the phone is a filler, then you continue to train 
+  and just not use the filler during decoding by dropping it out from the filler 
+  dictionary used during decoding. However, if it is a phone/triphone that 
+  cannot be removed from the decode dictionaries, or more realistically, 
+  *should* have been trained as a separate acoustic entity, then you must 
+  retrain with a training dictionary that does not have that phone. If, for 
+  example, the phone is "ZH", you can just call it "SH" in the training 
+  dictionary and retrain with ZH dropped out from your phonelist. You will of 
+  course have to drop it from the decode dictionary too. 
+  <P></P>
+  <LI><U>Message</U> <PRE>utt&gt; 27 utterancename  306    0WARNING: "../corpus.c", line 1826: LSN utt id, 
+pathname/utterancename, does not match ctl utt id, utterancename
+</PRE>
+  <P><U>Explanation</U> 
+  <P>The warnings can be ignored. The warning above means that for the 27th 
+  utterance called "utterancename", your control file contains the entry 
+  "pathname/utterancename", while the corresponding transcript has only been 
+  labeled by "utterancename". So long as the "utterancename" is the same over 
+  this warning, there is no problem. If it isn't, then your control and 
+  transcript files are misaligned. That needs to be corrected before you train. 
+  <P></P>
+  <LI><U>Message</U> <PRE>WARNING: "../mod_inv.c", line 308: # of tied states in mdef file, 755 != # of mixing weight sets, 2965, in ../hmms/09.cd_chmm/1d/mixw
+WARNING: "../mod_inv.c", line 328: Model inventory n_density not set; setting to value in mixw file, 1.
+</PRE>
+  <P><U>Explanation</U> You are either using the wrong model definition file for 
+  this part of the training, or the wrong model parameter files. check these 
+  out. </P>
+  <LI><U>Message</U> 
+  <P><U>Explanation</U> </P></LI></OL>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>INFO: ../model_def_io.c(562): Model definition info:
+INFO: ../model_def_io.c(563): 47 total models defined (47 base, 0 tri)
+INFO: ../model_def_io.c(564): 282 total states
+INFO: ../model_def_io.c(565): 235 total tied states
+INFO: ../model_def_io.c(566): 235 total tied CI states
+INFO: ../model_def_io.c(567): 47 total tied transition matrices
+INFO: ../model_def_io.c(568): 6 max state/model
+INFO: ../model_def_io.c(569): 20 min state/model
+WARN: "../s3io.c", line 225: Unable to open /net/alf33/usr2/rsingh/tongues3//mod
+el_parameters/tongues3.ci_semi_flatinitial/mixture_weights for reading; No such
+file or directory
+FATAL_ERROR: "../main.c", line 930: initialization failed
+Fri Dec  1 18:36:45 EST 2000                                        
+</PRE>
+  <P><U>Explanation</U> 
+  <P>This can happen when the flat initialization fails. Flat initialization can 
+  fail for many reasons. Look into the logfile for "makeflat" to find the reason 
+  why it failed. 
+  <P></P>
+  <LI><U>Message</U> <PRE>ERROR: "../backward.c", line 706: alpha(1.882464e-10)
+sum of alphas * betas (7.930106e-24) in frame 751
+ERROR: "../baum_welch.c", line 225: 028c020f ignored
+
+or 
+
+utt&gt; 3 0004N004 447 0 84ERROR: "../backward.c", line 380: final state not
+reached ERROR: "../baum_welch.c", line 245: 00/0004N004 ignored
+ utt 0.021x 1.088e upd 0.021x 1.000e fwd 0.021x 1.000e bwd 0.000x 0.000e gau 0.008x 1.257e rsts 0.000x 0.000e rstf 0.000x 0.000e rstu 0.000x 0.000e
+
+</PRE>
+  <P><U>Explanation</U> 
+  <P>These errors usually occur due to bad initialization and will disappear 
+  after a few iterations. More occassionally some transcripts may be bad. They 
+  can be ignored if there aren't too many of them. 
+  <P></P>
+  <LI><U>Message</U> <PRE>s960207001 3090
+WARNING: "../mk_phone_list.c", line 149: Unable to lookup I(2) in the lexicon
+WARNING: "../next_utt_states.c", line 58: Unable to produce CI phones for utt
+ERROR: "../main.c", line 697: Unable to create utterance HMM; skipping...
+<BR>utt 0.001x 1.333e upd 0.000x 0.000e fwd 0.000x
+0.000e bwd 0.000x 0.000e gau 0.000x 0.000e rsts 0.000x 0.000e rstf 0.000x
+0.000e rstu 0.000x 0.000e
+</PRE>
+  <P><U>Explanation</U> 
+  <P>This means that the word I(2) is not present in the training dictionary. 
+  Check whether your training dict has the same pronunciation markers as the 
+  dictionary you used for force-alignment. If this is not so, your training is 
+  wrong. 
+  <P></P>
+  <LI><U>Message</U> <PRE>INFO: ../main.c(757): Normalizing var
+ ERROR: "../gauden.c", line 1389: var (mgau=0, feat=2, density=176,
+component=1) &lt; 0
+</PRE>
+  <P><U>Explanation</U> <BR>This happens because we use the following formula to 
+  estimate variances: <BR>variance = avg(x2) - [avg(x)]2 <BR>There are a few 
+  weighting terms included (the baum-welch "gamma" weights), but they are 
+  immaterial to this discussion. The *correct* way to estimate variances is 
+  <BR>variance = avg[(x - avg(x)]2) <BR>The two formulae are equivalent, of 
+  course, but the first one is far more sensitive to arithmetic precision errors 
+  in the computer and can result in negative variances. The second formula is 
+  too expensive to compute (we need one pass through the data to compute avg(x), 
+  and another to compute the variance). So we use the first one in the sphinx 
+  and we therefore get the errors of the kind we see above, sometimes. <BR>The 
+  error is not critical (things will continue to work), but may be indicative of 
+  other problems, such as bad initialization, or isolated clumps of data with 
+  almost identical values (i.e. bad data). <BR>Another thing that usually points 
+  to bad initialization is that you may have mixture-weight counts that are 
+  exactly zero (in the case of semi-continuous models) or the gaussians may have 
+  zero means and variances (in the case of continuous models) after the first 
+  iteration. <BR>If you are computing semi-continuous models, check to make sure 
+  the initial means and variances are OK. Also check to see if all the cepstra 
+  files are being read properly. 
+  <P></P>
+  <LI><U>Message</U> <PRE>While training untied models, Baum-Wlech exits with the following message:
+FATAL_ERROR: "../ckd_alloc.c", line 149: ckd_calloc_3d failed for caller
+at ../mod_inv.c(278) at .. /ckd_alloc.c(150).
+</PRE>
+  <P><U>Explanation</U> 
+  <P>Check the untied model-definition file. This can happen if you are training 
+  semi-continuous models and trying to train more triphones than your machine's 
+  memory can handle. Reduce the number of triphones by setting the flag 
+  "maxdesired" to a lower value (number of triphones) when you generate the 
+  untied mdef file. Memory shortage is much less likely to happen for continuous 
+  models. 
+  <P>
+  <P></P>
+  <LI><U>Message</U> <PRE>
+</PRE>
+  <P><U>Explanation</U> 
+  <P></P>
+  <LI><B><U>Unexpected stops</U></B> 
+  <P><U>Message</U> <PRE>INFO: ../corpus.c(1206): Will process 1 utts starting at 0
+length 471990272  size 1887961088   /* I added printf to trace feature
+length in areadfloat.c  */
+areadfloat: /tmp/sls-20000131-000-002.mfc: can't alloc data
+column defns
+        &lt;seq&gt;
+        &lt;id&gt;
+        &lt;n_frame_in&gt;
+        &lt;n_frame_del&gt;
+        &lt;n_state_shmm&gt;
+        &lt;avg_states_alpha&gt;
+        &lt;avg_states_beta&gt;
+        &lt;avg_states_reest&gt;
+        &lt;avg_posterior_prune&gt;
+        &lt;frame_log_lik&gt;
+        &lt;utt_log_lik&gt;
+        ... timing info ...
+utt&gt;     0      sls-20000131-000-002ERROR: "../corpus.c", line 1477:
+MFCC read failed.  Retrying after sleep...
+</PRE>
+  <P><U>Explanation</U> The feature files are byte-swapped. 
+  <P><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/logfiles.html#top">Back to 
+index</A> 
+<HR>
+<!==================================================================><!                                                                  ><!                           norm                                   ><!                                                                  ><!==================================================================><A 
+name=101></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable norm</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/norm \
+ -accumdir /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_2 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_3 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_4 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_5 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_6 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_7 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_8 \
+ -mixwfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/mixture_weights \
+ -tmatfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/transition_matrices \
+ -meanfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/means \
+ -varfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/variances \
+ -feat c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/ \
+ -ceplen 13
+
+[Switch]   [Default] [Value]
+-accumdir            /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_2 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_3 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_4 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_5 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_6 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_7 /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_8
+-oaccumdir                  
+-tmatfn              /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/transition_matrices
+-mixwfn              /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/mixture_weights
+-meanfn              /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/means
+-varfn               /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/variances
+-regmatfn                   
+-dcountfn                   
+-inmixwfn                   
+-inmeanfn                   
+-invarfn                    
+-feat                c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/
+-ceplen              13     
+INFO: ../feat.c(191): Using features c/1..L-1/,d2/1..L-1/d4/1..L-1/,c/0/d2/0/d1(d2/0/),d1(d2/1..L-1/)
+INFO: ../main.c(499): Reading and accumulating counts from /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1
+INFO: ../s3mixw_io.c(92): Read /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/mixw_counts [235x4x256 array]
+INFO: ../s3tmat_io.c(92): Read /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/tmat_counts [47x5x6 array]
+INFO: ../s3gau_io.c(343): Read /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_1/gauden_counts with means with vars (2pass) [1x4x256 vector arrays]
+
+INFO: ../main.c(499): Reading and accumulating counts from /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_2
+INFO: ../s3mixw_io.c(92): Read /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_2/mixw_counts [235x4x256 array]
+INFO: ../s3tmat_io.c(92): Read /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_2/tmat_counts [47x5x6 array]
+INFO: ../s3gau_io.c(343): Read /net/alf33/usr2/rsingh/tongues3//bwaccumdir/tongues3_buff_2/gauden_counts with means with vars (2pass) [1x4x256 vector arrays]
+
+*************and so on till all buffers are read**********************
+
+INFO: ../main.c(743): Normalizing mean for n_mgau= 1, n_stream= 4, n_density= 256
+INFO: ../main.c(757): Normalizing var
+INFO: ../s3mixw_io.c(212): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/mixture_weights [235x4x256 array]
+INFO: ../s3tmat_io.c(152): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/transition_matrices [47x5x6 array]
+INFO: ../s3gau_io.c(188): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/means [1x4x256 array]
+INFO: ../s3gau_io.c(188): Wrote /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.ci_semi/variances [1x4x256 array]
+Sat Dec  2 11:06:57 EST 2000
+Current Overall Likelihood Per Frame = 2.76028
+Convergence Ratio = 0.047867
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>WARNING: "../gauden.c", line 1347: (mgau= 0, feat= 2, density= 210) never observ
+ed
+WARNING: "../gauden.c", line 1347: (mgau= 0, feat= 2, density= 226) never observ
+ed
+WARNING: "../gauden.c", line 1347: (mgau= 0, feat= 2, density= 245) never observ
+ed
+WARNING: "../gauden.c", line 1347: (mgau= 0, feat= 2, density= 250) never observ
+ed                                                                             
+</PRE>
+  <P><U>Explanation</U> </P>
+  <LI><U>Message</U> <PRE>The norm log files show a lot senones that haev no observations during
+   training.
+</PRE>
+  <P><U>Explanation</U> 
+  <P>This can only occur if all the utterances covering these senones die during 
+  the training. Alternately, you may have used decision trees that were not 
+  built using your training data. It is absolutely necessary to build trees 
+  using your training data, or if you have to take short cuts, to make sure that 
+  all the senones that you are training for are well represented in your 
+  training data. Otherwise you will have senones with zero counts and the 
+  decoder begins to do strange things. Even if you remove these senones from the 
+  mdef file for decoding, it does not ensure that the rest of the models have 
+  been trained properly. 
+  <P></P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>
+</PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><A name=102></A>
+<P><B><U>Checking the model parameters</U></B> 
+<P>The norm executable generates four files which constitute the complete set of 
+model parameters. These files contain the 
+<UL>
+  <LI>means 
+  <LI>variances 
+  <LI>mixture weights 
+  <LI>transition matrices </LI></UL>All of these are binary files. After the norm 
+has successfully run through, check each of these files using the printp tool 
+provided with the SPHINX package. This tool prints each of these files in ascii 
+format. In order to know what to look for, it is first necessary to understand 
+the arrangement of model parameters in each of these files. Semi-continuous 
+model parameter files have the following arrangements: 
+<P>
+<UL>
+  <LI><U>The means file</U> <PRE>param 1 4 256
+mgau 0
+
+feat 0
+density    0 3.665e-01 5.883e-01 -2.468e-01 -4.009e-01 -2.772e-01 1.286e-01 1.585e-01 4.898e-02 1.305e-01 -6.487e-02 -1.042e-02 7.590e-02 
+density    1 -2.136e-01 -5.143e-01 -1.631e-01 -1.065e-01 -1.368e-01 1.280e-01 -3.576e-02 1.621e-02 3.649e-01 1.720e-01 1.875e-02 2.729e-02 
+density    2 8.845e-01 4.004e-01 -8.941e-02 -3.106e-01 1.632e-01 1.111e-01 2.790e-02 -2.128e-01 -4.793e-01 1.360e-02 -2.355e-02 -7.621e-02 
+****** and so on for a total of 256 densities *****
+density  255 xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+
+feat 1
+density    0 4.548e-02 2.336e-01 -2.857e-01 1.505e-01 5.369e-02 2.953e-02 6.848e-02 -2.486e-02 1.385e-01 -3.114e-02 -1.122e-02 2.208e-02 -3.938e-02 4.046e-01 -4.718e-01 2.395e-01 1.216e-01 6.328e-02 1.208e-01 -3.775e-02 2.209e-01 -2.249e-02 -2.978e-03 3.881e-02 
+density    1 1.214e-01 7.105e-01 -5.926e-01 1.564e-01 3.015e-01 1.629e-01 3.426e-01 -2.040e-01 -1.863e-02 9.808e-02 2.730e-02 2.098e-02 1.319e-02 8.715e-01 -7.048e-01 2.102e-01 3.879e-01 2.184e-01 4.067e-01 -2.025e-01 3.225e-02 9.427e-02 1.034e-02 2.921e-02 
+density    2 1.613e-01 3.494e-01 -1.289e-01 -3.374e-01 -1.500e-01 2.029e-01 2.430e-01 3.058e-02 -1.165e-01 -1.969e-01 -4.882e-03 1.961e-01 3.239e-01 5.451e-01 -2.965e-01 -5.820e-01 -1.885e-01 3.430e-01 3.294e-01 -2.434e-02 -1.551e-01 -1.836e-01 5.344e-02 2.274e-01 
+****** and so on for a total of 256 densities *****
+density  255 xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+
+feat 2
+density    0 2.011e+00 -5.327e-01 -6.661e-01 
+density    1 -4.310e+00 2.771e+00 1.587e+00 
+density    2 -3.500e+00 4.008e+00 -1.638e+00 
+****** and so on for a total of 256 densities *****
+density  255 xxxx xxxx xxxx
+
+
+feat 3
+density    0 6.127e-03 1.237e-01 -1.569e-01 1.889e-01 -9.106e-02 1.080e-01 1.368e-02 -5.229e-02 1.263e-01 -9.441e-02 8.184e-02 -6.643e-02 
+density    1 -2.861e-01 1.060e-01 2.960e-01 -3.348e-01 2.597e-01 -5.320e-02 -1.093e-01 1.400e-01 -1.668e-01 1.822e-02 -1.038e-02 -7.058e-02 
+****** and so on for a total of 256 densities *****
+density  255 xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+</PRE>
+  <LI><U>The variances file</U> <PRE>param 1 4 256
+mgau 0
+
+feat 0
+density    0 1.355e-01 8.161e-02 5.690e-02 5.573e-02 2.592e-02 3.934e-02 2.803e-02 2.884e-02 1.713e-02 2.093e-02 1.713e-02 1.578e-02 
+density    1 1.198e-01 5.670e-02 4.181e-02 4.432e-02 4.013e-02 3.324e-02 3.077e-02 4.382e-02 1.538e-02 2.657e-02 1.620e-02 2.039e-02 
+****** and so on for a total of 256 densities *****  
+density    255 xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+feat 1
+density    0 4.892e-02 4.647e-02 3.011e-02 2.438e-02 2.457e-02 1.899e-02 2.112e-02 1.874e-02 1.431e-02 1.603e-02 1.523e-02 1.330e-02 1.213e-01 8.404e-02 6.766e-02 4.783e-02 4.598e-02 3.584e-02 3.801e-02 3.201e-02 2.419e-02 2.803e-02 2.572e-02 2.125e-02 
+density    1 9.277e-02 6.897e-02 5.856e-02 5.362e-02 4.452e-02 3.316e-02 3.433e-02 2.694e-02 4.071e-02 2.749e-02 3.412e-02 2.044e-02 2.051e-01 1.096e-01 8.159e-02 6.326e-02 5.989e-02 3.739e-02 4.139e-02 3.275e-02 5.301e-02 2.885e-02 4.143e-02 2.326e-02 
+density    2 3.203e-02 3.793e-02 2.414e-02 3.094e-02 2.821e-02 2.441e-02 2.072e-02 2.183e-02 2.354e-02 1.915e-02 2.094e-02 1.421e-02 6.785e-02 9.783e-02 6.106e-02 7.811e-02 6.054e-02 4.435e-02 3.821e-02 4.250e-02 3.965e-02 3.777e-02 2.727e-02 2.659e-02 
+****** and so on for a total of 256 densities *****  
+density  255 xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+             xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+
+feat 2
+density    0 6.125e-01 2.797e-01 7.279e-02 
+density    1 4.187e-01 6.168e-01 4.182e-01 
+density    2 1.186e+00 4.669e-01 4.614e-01 
+****** and so on for a total of 256 densities *****  
+density  255 xxxx xxxx xxxx
+
+
+feat 3
+density    0 3.373e-02 1.853e-02 1.440e-02 1.305e-02 1.433e-02 1.636e-02 1.678e-02 1.475e-02 1.136e-02 1.357e-02 1.144e-02 1.241e-02 
+density    1 4.061e-02 4.860e-02 3.320e-02 5.135e-02 4.073e-02 5.696e-02 4.792e-02 4.114e-02 3.843e-02 4.125e-02 4.341e-02 3.555e-02 
+density    2 2.207e-01 1.365e-01 9.568e-02 9.802e-02 6.438e-02 7.147e-02 5.580e-02 4.517e-02 4.889e-02 4.042e-02 4.530e-02 3.118e-02 
+****** and so on for a total of 256 densities *****  
+density  255 xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+</PRE>
+  <LI><U>The mixture-weights file</U> <PRE>mixw 4235 4 256
+mixw [0 0] 3.490329e+04
+
+	8.353e-03 1.395e-02 4.452e-04 1.352e-02 3.683e-03 3.287e-09 4.023e-04 2.049e-05 
+	1.243e-02 3.054e-09 3.785e-08 1.339e-02 2.075e-04 1.238e-09 6.402e-03 4.112e-02 
+	5.056e-03 2.964e-04 1.495e-03 1.533e-03 5.757e-03 1.341e-06 1.721e-04 8.452e-03 
+	1.545e-03 2.106e-03 2.902e-04 4.991e-04 4.510e-03 5.838e-03 1.761e-04 4.848e-04 
+	2.146e-02 4.679e-04 5.206e-03 5.266e-09 8.333e-05 3.140e-03 2.991e-04 1.995e-03 
+	5.500e-04 8.054e-04 7.951e-04 6.750e-04 9.179e-05 2.284e-02 1.090e-04 4.110e-03 
+	6.461e-03 3.327e-03 2.266e-09 3.132e-03 3.014e-02 2.440e-03 7.399e-05 5.204e-04 
+	2.090e-04 1.030e-09 3.908e-03 1.286e-02 3.354e-04 2.186e-06 3.921e-04 2.263e-03 
+	8.207e-05 2.514e-04 1.768e-03 3.543e-08 1.866e-04 1.616e-02 1.735e-05 2.662e-03 
+	1.453e-02 1.449e-02 3.299e-03 9.123e-10 1.559e-02 3.050e-03 1.240e-04 7.154e-03 
+	2.926e-04 2.743e-03 4.240e-04 4.289e-05 1.380e-06 3.921e-06 5.176e-03 4.525e-03 
+	2.472e-04 1.193e-05 8.274e-05 1.886e-03 1.015e-07 2.844e-04 1.332e-02 2.074e-05 
+	5.245e-05 2.201e-04 1.633e-06 6.348e-05 8.581e-04 1.708e-04 2.653e-04 2.061e-02 
+	4.437e-03 5.039e-04 4.593e-03 1.525e-04 4.800e-05 7.129e-04 1.489e-04 4.051e-05 
+	1.876e-02 9.426e-10 5.814e-04 3.113e-04 4.486e-04 3.145e-03 5.629e-06 5.122e-04 
+	1.870e-05 2.777e-08 1.120e-03 8.087e-05 2.787e-04 2.134e-05 1.068e-03 5.072e-04 
+	7.216e-05 1.674e-04 1.003e-04 8.277e-04 2.305e-04 2.831e-03 1.271e-02 5.687e-03 
+	4.457e-05 7.433e-04 1.534e-05 1.260e-09 8.575e-04 7.617e-07 2.113e-03 3.230e-02 
+	5.217e-03 2.227e-04 2.866e-03 2.095e-02 6.898e-04 2.238e-02 1.051e-04 1.256e-03 
+	1.890e-02 6.125e-03 3.831e-03 2.602e-03 6.490e-04 7.716e-03 2.531e-03 1.161e-03 
+	3.729e-06 4.645e-04 7.641e-03 1.614e-03 1.085e-03 3.854e-07 2.374e-09 1.167e-02 
+	2.709e-03 1.424e-03 1.615e-10 1.371e-03 2.674e-04 9.337e-07 1.405e-03 5.321e-05 
+	1.026e-04 5.359e-05 1.171e-02 6.520e-03 4.416e-04 7.225e-05 1.241e-07 2.401e-04 
+	6.014e-03 1.485e-02 2.360e-04 1.116e-05 1.976e-03 8.769e-08 9.330e-03 2.251e-03 
+	3.145e-04 1.843e-02 6.358e-03 1.329e-04 6.689e-09 2.926e-03 9.703e-03 4.622e-04 
+	2.465e-02 1.863e-02 1.695e-04 6.823e-03 4.333e-09 7.549e-03 4.700e-05 1.639e-04 
+	2.046e-02 1.313e-02 1.221e-02 7.754e-05 3.183e-03 3.797e-04 1.120e-02 6.427e-03 
+	3.091e-04 3.529e-09 1.489e-02 2.639e-03 3.924e-04 1.182e-03 4.028e-05 4.992e-06 
+	1.682e-02 2.473e-02 2.175e-04 3.838e-09 2.614e-04 3.380e-04 3.685e-03 4.676e-04 
+	6.155e-03 3.614e-05 1.461e-03 2.748e-04 1.286e-03 2.140e-03 6.528e-03 2.516e-08 
+	9.332e-03 2.329e-04 7.965e-06 2.091e-02 1.554e-07 3.369e-04 5.297e-05 9.321e-05 
+	1.028e-02 1.524e-03 7.324e-03 2.441e-03 1.182e-03 1.983e-04 1.036e-02 2.787e-09 
+mixw [0 1] 3.490329e+04
+
+	2.913e-02 9.501e-04 8.303e-04 1.121e-03 2.557e-03 6.591e-04 1.833e-02 2.399e-03 
+	3.291e-03 3.107e-02 4.904e-03 2.294e-03 1.497e-04 8.443e-03 8.739e-05 7.160e-03 
+	2.599e-03 2.686e-03 2.244e-03 5.158e-04 1.132e-03 4.642e-03 6.002e-03 2.542e-04 
+	1.298e-03 2.052e-03 2.669e-02 1.722e-02 2.171e-02 8.278e-04 6.057e-03 1.705e-03 
+	1.161e-02 2.255e-03 3.881e-03 2.634e-04 2.480e-03 5.432e-04 1.915e-04 1.587e-02 
+	5.990e-03 4.289e-04 6.077e-03 1.955e-02 4.432e-03 1.173e-03 5.471e-03 1.147e-05 
+	7.606e-04 6.585e-04 6.508e-05 4.201e-03 4.701e-05 2.455e-04 1.832e-03 1.402e-02 
+	1.003e-03 2.323e-03 5.822e-04 4.613e-03 2.360e-05 2.689e-04 1.921e-03 1.151e-03 
+	1.269e-03 8.960e-04 1.646e-02 9.672e-05 2.221e-03 1.799e-03 4.361e-03 9.680e-03 
+	1.120e-04 1.953e-02 3.361e-03 6.749e-04 5.234e-05 4.100e-03 1.694e-03 1.117e-02 
+	2.954e-04 2.450e-03 9.925e-04 2.430e-04 1.789e-02 6.348e-03 1.649e-03 1.246e-03 
+	1.726e-03 1.321e-04 5.190e-03 5.511e-04 3.538e-04 1.016e-04 1.089e-03 3.720e-07 
+	4.203e-03 1.008e-02 1.591e-04 9.684e-04 2.001e-09 4.180e-03 1.346e-03 2.391e-04 
+	1.972e-08 2.603e-03 1.766e-07 7.541e-03 7.685e-03 1.395e-03 1.552e-02 6.078e-05 
+	9.500e-05 4.034e-08 1.494e-02 7.422e-05 5.390e-04 4.504e-05 8.781e-03 1.292e-03 
+	2.589e-02 7.878e-04 6.886e-04 2.761e-04 1.903e-04 3.003e-03 5.550e-04 1.868e-02 
+	2.288e-03 1.720e-02 2.965e-04 1.506e-03 4.867e-04 2.028e-03 2.650e-02 8.363e-09 
+	5.361e-04 2.606e-03 1.386e-03 1.993e-04 2.344e-03 8.067e-04 8.417e-03 3.060e-02 
+	2.323e-04 8.670e-05 7.495e-05 5.568e-03 8.755e-08 3.770e-03 1.349e-02 3.615e-03 
+	8.456e-04 4.495e-04 2.715e-04 1.193e-04 2.844e-04 1.831e-03 6.089e-03 4.103e-03 
+	3.893e-04 1.722e-03 1.169e-03 8.639e-04 2.789e-03 1.122e-02 3.868e-04 3.364e-05 
+	5.654e-03 5.146e-03 1.767e-03 6.411e-04 2.580e-03 2.783e-03 1.782e-03 9.287e-03 
+	9.080e-03 1.547e-03 2.920e-03 2.775e-10 6.942e-03 5.399e-04 4.358e-03 6.430e-03 
+	1.610e-04 1.841e-03 5.303e-04 3.944e-09 5.911e-03 4.576e-04 2.438e-04 1.353e-03 
+	1.459e-03 1.006e-03 2.026e-04 5.637e-03 1.511e-03 7.403e-04 4.043e-04 3.043e-03 
+	2.980e-03 9.021e-03 2.057e-04 3.875e-03 9.644e-05 2.309e-04 1.199e-03 5.255e-03 
+	2.044e-04 1.818e-02 2.232e-03 6.737e-05 9.284e-05 1.002e-03 1.134e-03 8.320e-03 
+	1.231e-03 8.740e-04 5.060e-04 1.404e-02 2.866e-03 2.439e-04 1.274e-02 4.665e-04 
+	7.224e-04 2.206e-02 6.600e-03 2.697e-03 9.452e-04 4.682e-04 2.386e-03 2.661e-03 
+	3.031e-04 5.696e-03 2.023e-03 2.386e-03 1.431e-04 1.596e-03 2.973e-03 3.640e-06 
+	1.913e-04 1.633e-03 8.203e-04 1.125e-03 2.454e-02 8.038e-05 1.013e-03 1.903e-04 
+	2.471e-03 2.220e-04 5.156e-07 1.239e-09 7.945e-03 4.182e-04 4.088e-04 1.147e-03 
+mixw [0 2] 3.490329e+04
+
+	2.938e-03 9.782e-04 6.439e-04 6.048e-05 2.790e-19 1.388e-04 1.200e-04 7.688e-03 
+	1.216e-19 7.032e-03 1.625e-10 1.554e-09 2.253e-04 1.302e-04 7.388e-03 3.156e-04 
+	1.219e-03 2.996e-04 4.266e-03 3.901e-04 1.442e-09 1.418e-04 5.610e-09 2.658e-03 
+	5.331e-07 4.568e-03 4.329e-04 9.726e-02 2.419e-05 9.470e-06 3.475e-06 1.272e-03 
+	1.121e-05 4.461e-04 5.823e-05 1.049e-03 6.574e-05 5.646e-04 1.389e-03 1.158e-01 
+	2.241e-02 2.170e-03 6.080e-03 5.212e-03 8.373e-41 3.866e-04 1.394e-04 7.297e-03 
+	4.189e-10 4.402e-04 6.424e-02 4.113e-04 1.845e-08 2.815e-04 9.200e-03 1.254e-03 
+	1.270e-02 9.554e-05 1.655e-04 6.473e-04 2.560e-05 9.029e-05 1.277e-06 2.360e-03 
+	6.936e-03 2.820e-02 2.537e-03 1.006e-02 5.794e-02 1.127e-04 3.634e-03 2.699e-08 
+	6.988e-05 5.706e-05 7.536e-03 2.073e-03 1.564e-04 2.515e-07 2.101e-02 6.175e-03 
+	7.236e-05 5.147e-31 3.708e-06 1.079e-02 4.621e-03 5.014e-07 3.288e-04 2.430e-03 
+	6.490e-05 1.255e-05 1.042e-02 2.051e-03 7.170e-05 2.542e-05 6.543e-04 7.933e-05 
+	1.735e-09 2.701e-04 3.111e-03 1.846e-08 6.245e-05 6.188e-05 8.941e-05 1.615e-04 
+	5.473e-03 1.689e-06 8.616e-04 1.150e-04 1.309e-06 1.652e-05 6.928e-04 6.551e-04 
+	5.803e-05 4.287e-08 2.829e-09 6.505e-04 3.906e-04 2.744e-10 1.993e-04 3.999e-05 
+	1.299e-04 1.942e-06 0.000e+00 9.629e-05 2.877e-05 1.463e-09 6.784e-04 2.246e-03 
+	2.619e-05 4.377e-05 1.183e-04 4.292e-04 4.293e-04 3.406e-08 9.609e-06 2.164e-04 
+	1.154e-04 1.991e-04 8.842e-10 1.315e-06 8.907e-04 4.288e-04 6.374e-03 6.256e-05 
+	8.203e-09 5.942e-03 3.192e-29 3.161e-07 1.288e-07 6.837e-03 1.673e-04 3.578e-04 
+	1.131e-03 2.032e-03 3.773e-07 1.742e-04 1.867e-03 4.407e-05 1.089e-02 5.152e-05 
+	9.431e-04 6.537e-32 2.699e-03 3.192e-29 5.619e-10 5.012e-05 1.483e-07 2.245e-05 
+	4.055e-02 4.328e-04 9.684e-04 1.243e-05 2.871e-04 4.625e-04 7.034e-05 1.352e-03 
+	2.868e-05 4.003e-02 3.192e-29 7.129e-04 3.728e-09 3.455e-05 4.626e-05 1.485e-02 
+	5.229e-04 3.121e-05 2.137e-05 2.445e-03 2.148e-05 2.686e-02 3.195e-09 7.503e-06 
+	3.102e-05 4.390e-05 7.217e-04 1.324e-02 1.066e-03 7.889e-04 1.311e-02 7.185e-04 
+	5.041e-18 4.412e-05 9.886e-04 4.465e-04 6.102e-04 2.059e-04 4.182e-09 1.647e-04 
+	2.808e-03 1.718e-08 3.192e-29 1.594e-03 0.000e+00 3.861e-04 5.164e-09 1.270e-02 
+	3.463e-04 2.323e-05 5.467e-04 3.112e-05 2.698e-04 3.491e-04 4.848e-04 8.635e-03 
+	4.708e-03 4.674e-02 1.016e-11 7.646e-03 1.303e-03 1.074e-03 7.719e-05 9.949e-05 
+	6.116e-05 6.127e-04 2.371e-09 3.316e-03 1.276e-04 3.328e-03 1.408e-03 1.403e-09 
+	2.951e-05 1.310e-03 4.624e-02 2.446e-03 4.879e-04 1.016e-11 1.159e-02 1.189e-04 
+	0.000e+00 4.281e-06 1.016e-11 5.775e-05 8.453e-04 4.157e-02 2.775e-03 5.672e-08 
+mixw [0 3] 3.490329e+04
+
+	3.081e-03 3.750e-03 3.327e-04 5.626e-04 7.757e-04 4.223e-04 7.785e-04 9.327e-03 
+	7.323e-03 1.128e-02 6.704e-05 3.723e-03 4.124e-03 7.069e-03 1.793e-03 7.717e-03 
+	1.712e-03 1.572e-03 2.144e-03 1.863e-03 7.219e-03 1.342e-03 9.913e-03 8.240e-03 
+	1.002e-03 5.667e-03 6.868e-03 2.127e-03 1.693e-03 2.294e-04 4.325e-03 6.359e-04 
+	3.799e-04 8.000e-03 1.076e-02 3.914e-03 8.392e-03 4.450e-03 1.155e-03 3.151e-03 
+	5.683e-03 1.313e-06 3.776e-04 9.467e-03 1.574e-03 8.225e-03 3.391e-03 1.243e-04 
+	3.070e-04 7.554e-03 1.009e-02 7.555e-03 6.169e-04 2.211e-03 3.818e-03 5.492e-03 
+	6.675e-03 2.686e-03 1.041e-03 6.327e-03 1.197e-03 2.975e-03 7.291e-03 8.679e-03 
+	7.500e-03 5.890e-03 1.662e-03 6.381e-03 8.608e-03 2.057e-03 4.426e-03 5.917e-03 
+	5.048e-04 7.370e-03 2.589e-03 1.301e-03 3.290e-03 4.437e-03 8.221e-03 2.080e-03 
+	2.908e-04 4.068e-04 4.445e-04 4.637e-03 9.741e-04 6.400e-03 3.051e-03 2.300e-03 
+	2.209e-04 1.398e-03 2.642e-03 2.142e-03 8.359e-04 7.761e-03 1.990e-03 2.108e-03 
+	2.753e-04 2.176e-03 9.198e-04 6.015e-04 7.255e-03 3.243e-03 3.481e-03 5.022e-03 
+	1.319e-04 2.784e-03 9.539e-03 3.233e-03 6.469e-03 1.552e-03 2.710e-03 4.674e-03 
+	4.589e-03 5.908e-03 4.286e-03 4.013e-03 4.895e-04 3.140e-03 3.363e-03 5.635e-03 
+	5.399e-03 4.330e-03 1.940e-03 9.116e-04 2.733e-03 6.379e-03 8.563e-04 3.973e-03 
+	4.735e-04 6.503e-03 3.123e-04 2.023e-03 5.230e-03 6.002e-03 7.229e-03 5.998e-03 
+	5.288e-03 5.561e-03 5.213e-03 1.456e-03 3.356e-03 2.325e-03 3.309e-03 6.992e-03 
+	2.515e-04 4.313e-03 1.401e-03 6.059e-03 1.149e-03 3.393e-03 7.018e-03 2.224e-03 
+	5.254e-03 5.052e-03 5.887e-03 1.740e-03 4.334e-03 8.641e-03 5.823e-03 4.737e-03 
+	1.035e-04 5.866e-03 5.480e-04 6.355e-03 3.353e-03 4.758e-03 1.599e-03 5.691e-03 
+	3.550e-03 1.071e-02 2.810e-04 7.206e-05 2.818e-03 4.183e-03 1.763e-03 1.170e-03 
+	3.274e-03 3.791e-03 4.010e-03 3.760e-03 6.753e-03 8.070e-03 8.031e-04 4.378e-03 
+	3.772e-03 2.187e-04 1.557e-03 4.606e-03 1.349e-04 1.218e-02 2.491e-03 5.929e-03 
+	2.828e-03 8.284e-03 6.198e-03 5.062e-03 1.162e-02 4.377e-03 9.112e-03 4.405e-03 
+	1.563e-03 2.751e-03 2.595e-03 1.802e-03 1.477e-03 3.755e-03 1.161e-03 2.738e-03 
+	2.723e-03 1.168e-02 7.213e-03 8.784e-04 1.549e-04 4.987e-03 1.218e-03 8.835e-03 
+	3.132e-03 6.003e-03 3.807e-03 6.604e-03 2.218e-04 9.844e-04 1.635e-03 5.353e-03 
+	3.509e-03 6.194e-03 2.233e-03 4.000e-03 3.153e-03 7.263e-03 4.298e-03 4.307e-03 
+	9.418e-04 8.432e-03 1.534e-04 2.396e-03 4.098e-03 6.757e-03 4.299e-03 1.034e-03 
+	1.032e-04 3.370e-05 6.378e-03 4.202e-03 4.832e-03 6.034e-04 5.440e-03 4.434e-03 
+	6.636e-03 3.585e-03 3.312e-03 5.278e-03 1.317e-03 5.240e-03 4.800e-03 8.404e-03 
+
+
+mixw [1 0] 2.902319e+04
+
+	2.111e-05 2.515e-04 3.569e-10 5.715e-03 3.734e-09 9.809e-09 3.890e-13 1.075e-14 
+	2.197e-02 9.236e-20 1.438e-13 1.191e-02 3.402e-10 1.546e-18 1.888e-05 5.811e-02 
+	4.462e-04 8.766e-10 7.178e-06 5.268e-07 8.864e-03 8.796e-16 2.386e-09 1.062e-02 
+	6.907e-08 1.321e-06 4.921e-15 2.242e-08 1.045e-06 4.486e-05 7.992e-09 5.288e-12 
+	1.335e-02 1.246e-03 1.399e-03 3.840e-14 6.794e-11 6.329e-04 2.556e-07 2.490e-10 
+	1.541e-12 1.173e-17 4.688e-10 1.460e-10 2.016e-10 2.672e-06 9.940e-13 7.288e-09 
+	1.551e-02 4.221e-10 7.233e-12 3.437e-03 6.359e-02 3.795e-10 2.820e-14 6.928e-12 
+	1.670e-10 5.071e-13 2.081e-04 1.257e-04 9.472e-15 2.792e-18 1.086e-10 1.943e-09 
+	1.417e-15 3.308e-15 4.230e-07 2.046e-20 1.365e-14 1.851e-04 3.350e-10 3.735e-02 
+	3.053e-02 2.409e-03 6.090e-09 1.034e-14 1.737e-03 7.253e-08 8.055e-11 9.454e-03 
+	4.686e-14 1.782e-05 6.733e-10 1.677e-12 9.141e-14 1.583e-11 1.440e-05 2.164e-03 
+	3.056e-11 4.284e-10 7.532e-15 3.009e-10 2.689e-17 7.326e-11 3.359e-03 4.838e-11 
+	6.285e-11 3.992e-07 8.616e-15 6.872e-10 1.098e-09 2.221e-09 3.303e-09 1.348e-01 
+	1.869e-03 2.593e-10 3.495e-06 1.049e-10 8.162e-12 3.108e-11 1.953e-14 2.977e-10 
+	3.441e-02 8.108e-18 2.599e-13 2.536e-13 1.452e-04 8.228e-05 2.480e-12 2.176e-11 
+	1.980e-13 4.754e-14 9.879e-04 1.215e-15 5.649e-11 5.164e-12 2.627e-10 3.518e-04 
+	2.415e-13 8.091e-14 4.742e-15 9.033e-10 7.870e-06 4.419e-07 1.983e-04 5.531e-07 
+	9.415e-11 1.591e-10 3.181e-12 4.860e-15 1.805e-07 2.232e-22 9.730e-11 1.365e-02 
+	1.156e-07 8.757e-11 2.483e-03 1.082e-02 7.708e-10 1.192e-03 4.871e-14 7.783e-10 
+	2.289e-02 5.026e-03 7.579e-04 9.011e-04 5.521e-16 4.470e-07 1.415e-09 5.254e-11 
+	1.227e-16 3.188e-11 1.392e-03 3.164e-05 1.038e-09 2.433e-16 1.312e-14 1.277e-02 
+	1.701e-10 4.214e-11 5.738e-15 7.093e-05 8.701e-14 2.398e-11 1.461e-11 4.102e-11 
+	1.004e-08 4.842e-10 1.874e-03 1.274e-02 5.921e-04 3.720e-14 7.084e-12 1.883e-13 
+	3.424e-03 3.051e-02 3.882e-17 1.072e-13 1.792e-05 6.771e-12 3.314e-02 2.684e-06 
+	1.448e-10 3.140e-02 2.141e-06 1.042e-11 7.228e-19 4.496e-04 3.123e-02 1.480e-09 
+	3.528e-03 1.411e-04 1.097e-11 6.226e-02 2.739e-14 4.312e-03 7.742e-13 3.769e-06 
+	1.162e-03 8.767e-02 1.653e-02 9.110e-13 6.911e-04 2.252e-09 2.386e-03 2.099e-03 
+	2.541e-12 1.549e-18 1.634e-02 3.811e-06 2.759e-07 1.643e-10 1.090e-14 2.998e-16 
+	3.245e-02 3.895e-03 1.041e-09 7.684e-13 2.204e-11 3.495e-10 2.130e-03 1.530e-11 
+	1.305e-06 7.658e-11 9.986e-11 2.752e-16 1.260e-09 4.358e-05 9.188e-03 8.489e-15 
+	5.832e-09 4.706e-17 5.050e-12 6.038e-03 1.116e-11 2.296e-09 2.281e-08 3.835e-12 
+	1.880e-02 9.013e-10 1.976e-02 1.100e-04 3.514e-04 9.284e-19 1.513e-02 9.766e-13 
+mixw [1 1] 2.902319e+04
+
+	9.317e-03 7.666e-10 6.249e-07 4.539e-08 1.749e-06 4.636e-08 1.067e-01 5.679e-04 
+	1.801e-02 4.832e-03 1.442e-02 3.591e-12 8.540e-09 2.058e-09 2.805e-18 4.671e-03 
+	4.165e-10 8.931e-04 1.114e-09 1.924e-09 4.270e-05 2.379e-03 1.840e-04 2.779e-09 
+	3.688e-10 1.069e-03 2.608e-02 8.076e-02 2.694e-02 3.617e-04 8.764e-03 2.037e-06 
+	1.914e-02 2.003e-03 9.042e-11 3.721e-13 2.442e-06 1.683e-06 2.096e-06 1.626e-07 
+	2.932e-02 3.661e-06 1.760e-02 2.055e-05 1.104e-03 2.759e-09 2.948e-03 3.786e-16 
+	1.690e-07 2.620e-04 3.408e-10 1.379e-02 2.000e-05 7.365e-11 2.142e-07 2.702e-03 
+	8.155e-07 1.516e-03 7.121e-09 3.327e-04 9.738e-13 1.797e-08 3.227e-04 1.404e-04 
+	2.925e-12 4.507e-08 6.555e-02 2.691e-12 2.311e-04 1.999e-07 8.799e-04 3.341e-02 
+	6.202e-10 4.208e-02 1.161e-03 1.819e-10 1.725e-10 2.125e-04 1.405e-05 1.920e-07 
+	3.264e-09 5.793e-04 2.781e-05 1.059e-06 6.704e-02 4.054e-04 1.218e-04 1.421e-07 
+	2.012e-04 7.484e-09 1.324e-03 1.169e-08 3.503e-09 1.695e-14 3.786e-10 7.561e-14 
+	8.170e-03 2.147e-02 5.804e-10 7.267e-05 2.385e-12 1.689e-11 8.066e-11 9.102e-18 
+	1.071e-24 1.319e-03 2.819e-12 7.013e-03 2.068e-03 1.255e-05 2.261e-07 1.710e-13 
+	3.971e-14 9.096e-10 3.806e-02 6.153e-11 4.440e-05 1.058e-10 4.192e-04 2.154e-09 
+	1.030e-03 1.162e-09 1.088e-10 8.377e-13 2.812e-12 1.166e-03 2.110e-08 2.700e-02 
+	5.937e-05 4.474e-02 2.042e-09 4.471e-04 9.958e-05 4.571e-04 4.678e-03 2.575e-18 
+	3.259e-06 1.235e-05 1.475e-03 1.592e-13 2.066e-04 8.130e-10 3.402e-04 1.955e-02 
+	4.428e-05 6.840e-08 3.644e-11 7.264e-03 4.666e-17 1.151e-08 5.012e-02 1.072e-03 
+	5.601e-06 3.123e-10 1.210e-05 9.562e-11 2.261e-11 1.220e-04 1.994e-03 4.192e-04 
+	3.995e-15 1.236e-08 1.012e-06 5.132e-09 8.561e-05 7.532e-04 1.623e-08 4.056e-13 
+	1.919e-03 2.534e-06 1.312e-05 2.306e-07 5.808e-06 1.931e-03 4.499e-04 7.664e-04 
+	2.519e-02 6.752e-07 1.532e-09 2.890e-12 3.489e-04 7.878e-08 1.704e-03 1.899e-03 
+	1.905e-19 2.857e-08 1.763e-10 2.745e-14 2.258e-04 3.247e-06 3.813e-10 8.823e-05 
+	2.345e-07 1.879e-11 2.630e-07 2.022e-04 1.729e-04 1.096e-09 1.167e-10 4.802e-04 
+	1.083e-03 1.263e-06 1.737e-11 6.534e-10 3.521e-10 8.698e-12 1.680e-07 6.429e-03 
+	2.477e-13 9.916e-04 2.014e-10 1.127e-14 3.751e-07 8.532e-05 4.281e-06 1.046e-02 
+	5.855e-10 2.008e-04 1.017e-09 5.005e-02 9.489e-10 2.143e-05 8.647e-06 3.498e-08 
+	3.036e-05 5.978e-04 6.047e-05 3.179e-05 3.171e-11 1.684e-07 1.386e-03 1.158e-05 
+	1.903e-10 6.189e-03 8.246e-08 2.235e-03 1.048e-10 6.579e-04 5.282e-04 4.706e-12 
+	8.284e-12 1.097e-06 2.896e-09 2.245e-08 2.143e-02 2.007e-10 1.541e-07 3.365e-15 
+	4.668e-04 5.794e-06 4.406e-17 8.109e-13 9.390e-03 4.046e-10 1.644e-07 8.683e-11 
+mixw [1 2] 2.902319e+04
+
+	8.093e-12 3.525e-04 1.956e-05 7.518e-16 3.445e-05 3.685e-11 1.395e-12 6.147e-05 
+	0.000e+00 1.412e-09 1.204e-13 3.695e-16 1.286e-16 4.496e-14 4.026e-05 1.589e-12 
+	7.039e-04 4.226e-09 1.391e-10 2.592e-07 1.279e-09 5.957e-16 1.741e-36 2.742e-08 
+	5.917e-17 8.975e-05 3.559e-11 2.951e-01 6.761e-15 2.411e-11 5.307e-12 1.823e-10 
+	3.816e-14 8.212e-08 8.405e-13 1.992e-05 1.023e-16 6.130e-15 2.080e-05 3.797e-02 
+	4.175e-03 2.179e-06 5.484e-05 2.522e-05 0.000e+00 8.249e-12 9.203e-12 9.129e-11 
+	1.573e-25 7.698e-12 4.896e-05 5.421e-12 1.673e-13 1.847e-12 5.385e-08 1.967e-07 
+	1.510e-03 1.371e-16 6.866e-13 1.426e-09 1.076e-11 1.526e-11 1.894e-20 3.767e-11 
+	9.075e-05 7.578e-05 9.561e-13 1.191e-02 3.194e-07 1.296e-07 1.109e-06 2.309e-18 
+	1.487e-13 2.364e-23 6.959e-07 1.608e-09 2.502e-13 1.088e-23 4.354e-09 3.413e-05 
+	4.988e-12 4.678e-35 1.010e-10 1.119e-04 7.463e-04 2.289e-11 3.161e-08 3.823e-10 
+	3.830e-12 3.034e-13 2.972e-03 2.081e-05 2.680e-25 9.761e-16 1.449e-09 1.381e-05 
+	6.092e-16 8.698e-06 9.802e-11 3.880e-17 8.705e-15 9.819e-12 3.091e-14 5.993e-10 
+	7.662e-11 4.562e-13 8.663e-06 9.600e-15 9.867e-33 1.366e-38 5.493e-10 1.452e-09 
+	9.385e-08 4.862e-33 2.833e-14 1.443e-09 4.208e-11 1.224e-30 4.123e-13 1.232e-16 
+	9.886e-11 1.508e-11 0.000e+00 6.506e-12 4.620e-17 1.726e-18 7.576e-09 1.635e-04 
+	1.899e-16 3.204e-13 4.059e-12 4.183e-11 4.184e-11 2.736e-18 1.691e-14 2.064e-11 
+	8.549e-12 1.139e-09 1.399e-25 6.662e-26 8.818e-10 4.184e-11 8.241e-07 5.810e-15 
+	5.001e-18 2.370e-02 1.244e-35 1.434e-17 3.624e-17 2.353e-05 1.853e-12 4.043e-06 
+	3.198e-10 4.101e-08 6.652e-16 1.125e-11 1.160e-08 1.337e-22 3.147e-09 2.928e-15 
+	5.325e-08 0.000e+00 7.248e-09 1.244e-35 1.558e-24 3.820e-15 1.305e-17 1.131e-17 
+	1.926e-01 2.536e-10 2.153e-06 1.276e-11 2.623e-10 4.718e-12 5.000e-16 1.815e-11 
+	2.386e-16 2.749e-04 1.244e-35 7.765e-11 2.654e-16 1.842e-26 7.038e-15 1.978e-01 
+	1.326e-12 1.326e-10 7.010e-11 6.661e-03 2.847e-23 4.244e-03 1.625e-11 1.210e-10 
+	1.424e-38 3.933e-12 1.582e-10 1.597e-01 5.424e-04 3.867e-11 3.283e-09 1.266e-04 
+	1.500e-36 1.620e-16 1.351e-12 4.016e-12 7.772e-11 4.753e-11 1.156e-13 3.246e-11 
+	3.701e-03 1.131e-17 1.244e-35 3.337e-10 0.000e+00 2.804e-10 8.830e-21 8.161e-10 
+	3.171e-11 1.885e-11 4.094e-04 3.219e-11 6.749e-11 3.454e-13 2.693e-11 5.277e-10 
+	5.538e-08 5.044e-04 3.377e-20 1.885e-07 1.485e-07 2.062e-12 5.125e-13 3.615e-10 
+	1.169e-12 8.013e-10 4.332e-10 6.500e-04 2.672e-22 2.427e-11 8.085e-11 4.287e-11 
+	4.741e-13 4.760e-12 7.546e-03 1.264e-08 5.488e-12 3.377e-20 4.482e-02 9.520e-12 
+	0.000e+00 1.005e-15 3.377e-20 5.222e-13 4.484e-12 2.187e-04 1.470e-04 1.949e-15 
+mixw [1 3] 2.902319e+04
+
+	5.165e-04 6.134e-04 6.497e-10 3.603e-10 5.270e-10 9.256e-12 1.534e-04 2.815e-04 
+	1.065e-02 2.266e-03 3.737e-10 2.620e-04 8.265e-03 1.194e-02 3.216e-04 1.327e-02 
+	3.188e-05 2.750e-05 5.850e-04 3.377e-04 2.944e-03 2.315e-08 3.313e-03 1.602e-02 
+	8.102e-09 1.234e-02 2.590e-03 4.104e-03 7.827e-04 2.532e-06 7.943e-03 6.713e-08 
+	8.394e-05 1.260e-02 1.743e-02 7.893e-04 1.870e-02 6.853e-03 6.661e-10 8.457e-03 
+	1.677e-02 7.716e-13 2.320e-09 1.701e-03 1.997e-10 5.361e-04 1.041e-04 6.785e-10 
+	6.629e-06 2.513e-02 2.612e-03 1.621e-02 1.251e-08 3.602e-05 5.261e-03 1.907e-03 
+	3.726e-03 4.711e-04 2.887e-06 4.223e-03 3.778e-07 5.728e-04 2.038e-02 2.354e-02 
+	9.730e-03 2.558e-02 8.133e-04 1.949e-02 9.168e-03 2.879e-04 4.969e-06 3.967e-03 
+	6.582e-09 5.269e-03 3.004e-03 4.746e-06 5.856e-04 1.707e-03 1.525e-02 2.580e-05 
+	8.901e-09 5.491e-10 2.407e-11 6.596e-07 1.175e-03 9.748e-04 8.720e-04 8.708e-04 
+	5.091e-12 8.683e-04 5.672e-03 1.223e-03 2.806e-06 7.651e-03 2.016e-06 1.779e-04 
+	1.026e-11 6.939e-04 1.867e-08 4.263e-06 8.319e-03 6.965e-04 8.607e-04 1.625e-02 
+	5.766e-10 1.331e-03 1.215e-02 8.717e-03 8.679e-03 2.365e-04 3.004e-05 5.664e-06 
+	2.816e-03 4.066e-05 2.755e-03 3.678e-04 4.838e-10 4.347e-04 7.917e-03 5.617e-04 
+	1.549e-02 1.108e-02 6.900e-05 3.561e-04 3.633e-05 1.058e-02 6.848e-10 1.011e-03 
+	1.985e-09 1.299e-02 3.631e-10 5.750e-05 7.827e-05 7.136e-03 4.982e-07 2.121e-03 
+	2.568e-03 4.092e-04 3.261e-03 5.462e-04 3.826e-04 1.251e-07 3.537e-04 1.728e-02 
+	8.929e-11 8.798e-03 9.001e-08 3.172e-03 4.968e-08 3.561e-03 1.942e-02 5.046e-10 
+	1.942e-02 9.535e-03 7.007e-04 2.037e-04 3.447e-04 2.082e-02 8.157e-04 1.954e-02 
+	4.617e-11 3.096e-04 9.166e-07 1.227e-03 3.616e-03 1.547e-03 6.490e-07 1.225e-03 
+	4.722e-03 1.872e-02 3.045e-06 9.002e-12 9.852e-04 8.734e-03 6.259e-11 3.154e-08 
+	9.212e-03 1.987e-03 3.297e-07 1.289e-05 6.197e-04 7.955e-03 1.224e-08 7.756e-03 
+	1.135e-02 1.640e-08 5.509e-07 6.236e-03 1.356e-10 1.167e-02 3.451e-03 1.896e-02 
+	5.369e-04 3.184e-03 1.569e-02 1.297e-02 1.007e-02 1.017e-02 7.734e-03 1.567e-03 
+	3.258e-07 5.513e-05 3.552e-04 5.423e-06 5.043e-10 5.102e-03 2.291e-05 3.715e-03 
+	8.355e-05 7.650e-03 2.015e-03 5.934e-07 5.132e-12 1.187e-03 1.392e-04 5.673e-03 
+	6.157e-05 1.539e-02 3.368e-04 3.283e-03 6.605e-10 2.361e-06 2.205e-04 3.980e-03 
+	2.230e-05 1.599e-02 4.093e-05 3.290e-04 6.078e-04 1.771e-02 5.218e-03 7.076e-03 
+	5.995e-04 4.251e-03 9.725e-11 2.685e-03 2.315e-08 1.363e-02 1.736e-03 1.188e-08 
+	2.288e-10 1.956e-10 3.563e-03 6.827e-07 1.144e-02 6.113e-09 1.156e-03 6.335e-04 
+	4.653e-04 7.128e-04 1.016e-03 5.539e-04 1.137e-04 2.136e-03 2.513e-03 7.224e-03 
+
+mixw [2 0] 1.913800e+04
+******** 256 mixture weights **********
+
+mixw [2 1] 1.913800e+04
+******** 256 mixture weights **********
+
+mixw [2 2] 1.913799e+04
+******** 256 mixture weights **********
+
+mixw [2 3] 1.913800e+04
+******** 256 mixture weights **********
+
+*************and so on for a total of 4235 mixture weights (in this case)*****
+
+mixw [4234 0] 7.386351e+02
+******** 256 mixture weights **********
+
+mixw [4234 1] 7.386351e+02
+******** 256 mixture weights **********
+
+mixw [4234 2] 7.386351e+02
+******** 256 mixture weights **********
+
+mixw [4234 3] 7.386351e+02
+******** 256 mixture weights **********
+
+</PRE>
+  <LI><U>The transition matrices file</U> <PRE>tmat 47 6
+tmat [0]
+ 7.374e-01 1.023e-01 1.604e-01                           
+          8.770e-01 9.296e-02 3.001e-02                  
+                   5.666e-01 1.849e-01 2.485e-01         
+                            9.076e-01 4.064e-02 5.175e-02
+                                     8.770e-01 1.230e-01
+tmat [1]
+ 6.155e-01 9.124e-02 2.932e-01                           
+          9.245e-01 4.566e-02 2.979e-02                  
+                   6.967e-01 2.438e-01 5.944e-02         
+                            7.941e-01 5.376e-02 1.522e-01
+                                     9.764e-01 2.364e-02
+tmat [2]
+ 7.696e-01 2.104e-01 2.002e-02                           
+          7.720e-01 1.873e-01 4.066e-02                  
+                   9.317e-01 4.804e-02 2.025e-02         
+                            8.531e-01 9.402e-03 1.375e-01
+                                     9.567e-01 4.330e-02
+
+********* and so on for a total of 47 base (CI) phones *******
+
+tmat [46]
+ 8.189e-01 1.660e-01 1.509e-02                           
+          8.006e-01 1.453e-01 5.417e-02                  
+                   8.246e-01 1.754e-01 6.577e-15         
+                            7.378e-01 4.370e-02 2.185e-01
+                                     9.841e-01 1.593e-02
+
+</PRE></LI></UL>Assuming that you are working with the standard 4-stream feature 
+set where each stream is represented by 256 codewords, here is a list of what 
+you must look for when checking these files: 
+<P>
+<UL>
+  <LI><U>The means file</U> 
+  <UL>
+    <LI>In the first few iterations of the CI training, starting from the 
+    flat-initialized model parameters, it is okay for a few (10-20) codewords in 
+    this file to be zero. Since each codeword here is a vector, a zero codeword 
+    means that all components of this codeword are zero. Use the printp tool and 
+    search for the string "0.000e+0". As the iterations progress, the number of 
+    these zero codewords should decrease till finally there are no zero 
+    codewords. There should not be any zero codeword at any stage in the 
+    CD-untied training. The presence of a zero codeword implies that the 
+    quantization of the feature vector space is bad. In rare cases, it may also 
+    imply that your data are too sparse to be represented by 256 codewords, as 
+    may happen when you are training with a very small data set and have set the 
+    stride variable to have a high value. Look at the log file for agg_seg to 
+    see how many vectors you have intially used for vector quantization. If you 
+    have N codewords, you need at least N*40*(dimensionality of vector) vectors. 
+    This is only a thumb rule, and the more you have the better, of course. Use 
+    as many as your machine can handle. ### </LI></UL>
+  <LI><U>The variances file</U> 
+  <P>No variance should be zero. No variance should be less than 0. </P>
+  <LI><U>The mixture-weights file</U> 
+  <LI><U>The transition matrices file</U> </LI></UL>
+<HR>
+<!=====================================================================><!==================================================================><!                                                                  ><!                           quick_count                            ><!                                                                  ><!==================================================================><A 
+name=103></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable quick_count</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>Total no. of words = 3423
+Num_Phones = 47, Num_Words = 3423
+Sil_Index = 0
+#. of cxt-indep phones = 47
+within-word triphone finished in 0.0166667 secs.
+43 phones can begin a word
+46 phones can end a word
+83 single-phone words
+*(*,*)s finished in 0.3 secs
+b/e triphones finished in 0.183333 secs
+used       2.90 sec
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!=====================================================================><!==================================================================><!                                                                  ><!                           param_cnt                              ><!                                                                  ><!==================================================================><A 
+name=104></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable param_cnt</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/param_cnt \
+ -moddeffn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef \
+ -ts2cbfn .semi. \
+ -ctlfn /net/alf33/usr2/rsingh/tongues3//falignout/tongues.1.ctl \
+ -lsnfn /net/alf33/usr2/rsingh/tongues3//falignout/tongues.1.newtranscripts \
+ -dictfn /net/alf33/usr2/rsingh/tongues3//etc/tongues.dic.falign \
+ -fdictfn /net/alf33/usr2/rsingh/tongues3//etc/tongues.filler.falign \
+ -segdir dummy \
+ -paramtype phone
+
+[Switch]   [Default] [Value]
+-moddeffn            /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef
+-ts2cbfn             .semi. 
+-ctlfn               /net/alf33/usr2/rsingh/tongues3//falignout/tongues.1.ctl
+-part                       
+-npart                      
+-nskip                      
+-runlen                     
+-lsnfn               /net/alf33/usr2/rsingh/tongues3//falignout/tongues.1.newtranscripts
+-dictfn              /net/alf33/usr2/rsingh/tongues3//etc/tongues.dic.falign
+-fdictfn             /net/alf33/usr2/rsingh/tongues3//etc/tongues.filler.falign
+-segdir              dummy  
+-segext    v8_seg    v8_seg 
+-paramtype state     phone  
+INFO: ../corpus.c(1270): Will process all remaining utts starting at 0
+INFO: ../main.c(87): Reading: /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef
+INFO: ../model_def_io.c(562): Model definition info:
+INFO: ../model_def_io.c(563): 97344 total models defined (47 base, 97297 tri)
+INFO: ../model_def_io.c(564): 584064 total states
+INFO: ../model_def_io.c(565): 486720 total tied states
+INFO: ../model_def_io.c(566): 235 total tied CI states
+INFO: ../model_def_io.c(567): 47 total tied transition matrices
+INFO: ../model_def_io.c(568): 6 max state/model
+INFO: ../model_def_io.c(569): 20 min state/model
+INFO: ../main.c(98): Reading .semi.
+INFO: ../main.c(132): Reading: /net/alf33/usr2/rsingh/tongues3//etc/tongues.dic.falign
+INFO: ../lexicon.c(207): 3422 entries added from /net/alf33/usr2/rsingh/tongues3//etc/tongues.dic.falign
+INFO: ../main.c(143): Reading: /net/alf33/usr2/rsingh/tongues3//etc/tongues.filler.falign
+INFO: ../lexicon.c(207): 3 entries added from /net/alf33/usr2/rsingh/tongues3//etc/tongues.filler.falign
+INFO: ../param_cnt.c(65): Scanning corpus
+[1000] 
+</PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!=====================================================================><!==================================================================><!                                                                  ><!                           make_quests                            ><!                                                                  ><!==================================================================><A 
+name=104a></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable make_quests</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE>-varfn
+{path]/model_parameters/new_fe.ci_continuous/variances \
+ -mixwfn
+[path]/model_parameters/new_fe.ci_continuous/mixture_weights \
+ -npermute 168 \
+ -niter 0 \
+ -qstperstt 20 \
+.....
+.....
+.....
+INFO: ../s3gau_io.c(128): Read
+/sphx_train/hub97/training/model_parameters/new_fe.ci_continuous/means
+[153x1x1 array]
+INFO: ../s3gau_io.c(128): Read
+/sphx_train/hub97/training/model_parameters/new_fe.ci_continuous/variances
+[153x1x1 array]
+FATAL_ERROR: "../ckd_alloc.c", line 109: ckd_calloc_2d failed for caller at
+../main.c(186) at ../ckd_alloc.c(110)
+</PRE>
+  <P><U>Explanation</U> make_quests searches 2^npermute combinations several 
+  times for the optimal clustering of states. For this, it has to store 
+  2^npermute values (for the comparison). So, setting -npermute to anything 
+  greater than 8 or 10 makes the program very slow, and anything over 28 will 
+  make the program fail. We usually use a value of 8. 
+  <P></P>
+  <LI><U>Message</U> <PRE>segmentation fault (or very bad linguistic questions after make_quests
+has run through)
+</PRE>
+  <P><U>Explanation</U> 
+  <P>Use the printp tool and check to see if any of your CI model parameters are 
+  zero. If they are, then probably the phone(s) for which you tried to train an 
+  HMM was not seen in the training data. You can't train what you don't have 
+  examples for, so remove the phone(s) from your phonelist and retrain the 
+  models. 
+  <P>
+  <P></P>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!=====================================================================><!==================================================================><!                                                                  ><!                           bldtree                                ><!                                                                  ><!==================================================================><A 
+name=105></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable bldtree</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/bldtree \
+ -treefn /net/alf33/usr2/rsingh/tongues3//trees/tongues3.unpruned/JH-0.dtree \
+ -moddeffn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.untied.mdef \
+ -mixwfn /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.cd_semi_untied/mixture_weights \
+ -ts2cbfn .semi. \
+ -mwfloor 1e-30 \
+ -psetfn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions \
+ -phone JH \
+ -state 0 \
+ -stwt 1.0 0.3 0.1 0.01 0.001 \
+ -ssplitmin 1 \
+ -ssplitmax 5 \
+ -ssplitthr 0 \
+ -csplitmin 1 \
+ -csplitmax 500 \
+ -csplitthr 0
+
+[Switch]   [Default] [Value]
+-treefn              /net/alf33/usr2/rsingh/tongues3//trees/tongues3.unpruned/JH-0.dtree
+-moddeffn            /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.untied.mdef
+-ts2cbfn   .semi.    .semi. 
+-meanfn                     
+-varfn                      
+-varfloor  0.00001   1.000000e-05
+-cntthresh 0.00001   1.000000e-05
+-mixwfn              /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.cd_semi_untied/mixture_weights
+-psetfn              /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions
+-phone               JH     
+-state               0      
+-mwfloor   1e-4      1.000000e-30
+-stwt                1.0 0.3 0.1 0.01 0.001
+-ssplitthr 8e-4      0.000000e+00
+-ssplitmin 1         1      
+-ssplitmax 5         5      
+-csplitthr 8e-4      0.000000e+00
+-csplitmin 1         1      
+-csplitmax 100       500    
+INFO: ../main.c(150): Reading: /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.untied.mdef
+INFO: ../model_def_io.c(562): Model definition info:
+INFO: ../model_def_io.c(563): 6859 total models defined (47 base, 6812 tri)
+INFO: ../model_def_io.c(564): 41154 total states
+INFO: ../model_def_io.c(565): 34295 total tied states
+INFO: ../model_def_io.c(566): 235 total tied CI states
+INFO: ../model_def_io.c(567): 47 total tied transition matrices
+INFO: ../model_def_io.c(568): 6 max state/model
+INFO: ../model_def_io.c(569): 20 min state/model
+INFO: ../main.c(188): Building trees for [JH AE AX i] through [JH UW IY i]
+INFO: ../main.c(216): Covering states |[16500 16694]| == 195
+INFO: ../main.c(223): Reading: /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.cd_semi_untied/mixture_weights
+INFO: ../s3mixw_io.c(151): Read /net/alf33/usr2/rsingh/tongues3//model_parameters/tongues3.cd_semi_untied/mixture_weights [195x4x256 array]
+INFO: ../main.c(261): 39 of 39 models have observation count greater than 0.000010
+INFO: ../main.c(65): nrm stwt: 0.709 0.213 0.071 0.007 0.001 
+INFO: ../main.c(370): 39-class entropy: 9.277157e+03
+INFO: ../main.c(493): Reading: /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions
+INFO: ../main.c(530): 256 total simple questions (248 phone; 8 word bndry)
+<P><FONT color=red size=-1>This means that you have 248/4 phone groupings
+in your linguistic questions file. Every grouping serves as 4 questions, since
+it can be applied to the left context, the right context, and negated and
+applied to either contexts. You also have 8/2 word boundary questions in
+your linguistic questions file, each of which can be applied to either context,
+effectively giving you 8 word boundary questions.</FONT>
+INFO: ../main.c(532): 82 Left Only questions, and 82 Right Only questions
+<P><FONT color=red size=-1>Of the 248/4 phone groupings, since you
+already have context-specific questions in your linguistic questions file
+(in this case), you have 82 questions that can be applied to the left context,
+and 82 that can be applied to the right context. They can also of course be
+negated and applied.</FONT>
+INFO: ../dtree.c(1492): Final simple tree
+<P><FONT color=red size=-1>The root node is first split down to
+ssplitmax number of leaves using the questions (and their simple negations)
+The leaves are then exhaustively partitioned into two groups. The
+question corresponding to the best partition is composed of questions
+corresponding to these two leaves. It is called a complex question. Thus,
+a simple tree is first built, and that yields a complex question corresponding
+to the root node of that tree. The procedure is then applied recursively to
+the leaves resulting from the branching of the node till there are no
+more leaves to split (each leaf has only one context). The complex questions
+are written into the tree file.</FONT>
+
+|( QUESTION0 -1 1.514e+04 1.025e+03 7.812e+02
+<P><FONT color=red size=-1>The "|" indicates that a simple tree
+is being built. The first string after ( is the name of the simple question
+that resulted inthe best split of the root node. Following that is
+the context, with -1 standing for the left context, 1 for the right context
+and 0 for a wordbounday. Here the context is -1. Following that is the
+likelihood associated with the root node. The next number is the *increase*
+in likelihood after the root node was split (using that question), and the
+final number is the count associated with the node (see the technical section
+of this manual for further explanantions)</FONT>
+|    ( QUESTION0 1 7.261e+03 4.583e+02 4.191e+02
+|        ( QUESTION3_11_L -1 5.189e+03 4.012e+02 3.158e+02
+|            ( - 2.574e+03 9 0 QUESTION4_1_L -1 2.751e+02 1.714e+02)
+|            ( - 2.214e+03 9 0 QUESTION1 -1 2.001e+02 1.444e+02))
+|        ( - 1.613e+03 4 0 QUESTION3_8_L -1 1.565e+02 1.033e+02))
+|    ( QUESTION12 -1 6.853e+03 7.827e+02 3.621e+02
+|        ( QUESTION3_0_L -1 3.380e+03 2.908e+02 2.175e+02
+|            ( - 2.526e+03 1 0)
+|            ( - 5.633e+02 7 0 QUESTION0_11_R 1 9.871e+01 3.687e+01))
+|        ( - 2.691e+03 9 0 QUESTION0_8_R 1 2.637e+02 1.447e+02)))
+<P><FONT color=red size=-1>The simple tree is now made. The following
+lines beginning with s&gt; are simply a repetition of the above information</FONT>
+s&gt;    ( QUESTION0 -1 1.514e+04 1.025e+03 7.812e+02
+s&gt;        ( QUESTION0 1 7.261e+03 4.583e+02 4.191e+02
+s&gt;            ( QUESTION3_11_L -1 5.189e+03 4.012e+02 3.158e+02
+s&gt;                ( - 2.574e+03 9 0 QUESTION4_1_L -1 2.751e+02 1.714e+02)
+s&gt;                ( - 2.214e+03 9 0 QUESTION1 -1 2.001e+02 1.444e+02))
+s&gt;            ( - 1.613e+03 4 0 QUESTION3_8_L -1 1.565e+02 1.033e+02))
+s&gt;        ( QUESTION12 -1 6.853e+03 7.827e+02 3.621e+02
+s&gt;            ( QUESTION3_0_L -1 3.380e+03 2.908e+02 2.175e+02
+s&gt;                ( - 2.526e+03 1 0)
+s&gt;                ( - 5.633e+02 7 0 QUESTION0_11_R 1 9.871e+01 3.687e+01))
+s&gt;            ( - 2.691e+03 9 0 QUESTION0_8_R 1 2.637e+02 1.447e+02)))INFO: ../dtree.c(1319): Comp split 0
+<P><FONT color=red size=-1>Compound split 0 is completed, the root node
+will now be split and in the following, one simple tree will be built for
+each resulting leaf. The string ": Final simple tree" is written before
+each simple tree is built. After the two simple trees are built,
+the one that resulted in the higer likelihood increase will be chosen
+for a further split, and two simple trees will be built for that. The
+one that is split will contribute to the second compound question and
+will be the second compund split. </FONT>
+INFO: ../dtree.c(1492): Final simple tree
+|( QUESTION12 -1 6.853e+03 7.827e+02 3.621e+02
+|    ( QUESTION3_0_L -1 3.380e+03 2.908e+02 2.175e+02
+|        ( - 2.526e+03 1 0)
+|        ( - 5.633e+02 7 0 QUESTION0_11_R 1 9.871e+01 3.687e+01))
+|    ( QUESTION0_8_R 1 2.691e+03 2.637e+02 1.447e+02
+|        ( QUESTION0_11_R 1 1.471e+03 1.362e+02 8.469e+01
+|            ( - 1.084e+03 2 0 SILENCE -1 6.989e+01 6.443e+01)
+|            ( - 2.512e+02 3 0 QUESTION0_9_R 1 6.235e+01 2.025e+01))
+|        ( QUESTION0_18_R 1 9.555e+02 1.208e+02 5.998e+01
+|            ( - 1.947e+02 2 0 SILENCE -1 5.473e+01 1.800e+01)
+|            ( - 6.400e+02 2 0 SILENCE -1 4.076e+01 4.198e+01))))
+s&gt;    ( QUESTION12 -1 6.853e+03 7.827e+02 3.621e+02
+s&gt;        ( QUESTION3_0_L -1 3.380e+03 2.908e+02 2.175e+02
+s&gt;            ( - 2.526e+03 1 0)
+s&gt;            ( - 5.633e+02 7 0 QUESTION0_11_R 1 9.871e+01 3.687e+01))
+s&gt;        ( QUESTION0_8_R 1 2.691e+03 2.637e+02 1.447e+02
+s&gt;            ( QUESTION0_11_R 1 1.471e+03 1.362e+02 8.469e+01
+s&gt;                ( - 1.084e+03 2 0 SILENCE -1 6.989e+01 6.443e+01)
+s&gt;                ( - 2.512e+02 3 0 QUESTION0_9_R 1 6.235e+01 2.025e+01))
+s&gt;            ( QUESTION0_18_R 1 9.555e+02 1.208e+02 5.998e+01
+s&gt;                ( - 1.947e+02 2 0 SILENCE -1 5.473e+01 1.800e+01)
+s&gt;                ( - 6.400e+02 2 0 SILENCE -1 4.076e+01 4.198e+01))))INFO: ../dtree.c(1492): Final simple tree
+|( QUESTION0 1 7.261e+03 4.583e+02 4.191e+02
+|    ( QUESTION3_11_L -1 5.189e+03 4.012e+02 3.158e+02
+|        ( QUESTION4_1_L -1 2.574e+03 2.751e+02 1.714e+02
+|            ( - 8.883e+02 6 0 QUESTION2 -1 1.307e+02 6.173e+01)
+|            ( - 1.410e+03 3 0 QUESTION0_8_R 1 1.033e+02 1.097e+02))
+|        ( QUESTION1 -1 2.214e+03 2.001e+02 1.444e+02
+|            ( - 7.658e+02 4 0 QUESTION1_8_R 1 9.251e+01 5.624e+01)
+|            ( - 1.248e+03 5 0 QUESTION0_8_R 1 1.364e+02 8.813e+01)))
+|    ( QUESTION3_8_L -1 1.613e+03 1.565e+02 1.033e+02
+|        ( - 5.607e+02 2 0 QUESTION3_9_L -1 6.001e+01 4.016e+01)
+|        ( - 8.963e+02 2 0 SILENCE 1 7.711e+01 6.314e+01)))
+s&gt;    ( QUESTION0 1 7.261e+03 4.583e+02 4.191e+02
+s&gt;        ( QUESTION3_11_L -1 5.189e+03 4.012e+02 3.158e+02
+s&gt;            ( QUESTION4_1_L -1 2.574e+03 2.751e+02 1.714e+02
+s&gt;                ( - 8.883e+02 6 0 QUESTION2 -1 1.307e+02 6.173e+01)
+s&gt;                ( - 1.410e+03 3 0 QUESTION0_8_R 1 1.033e+02 1.097e+02))
+s&gt;            ( QUESTION1 -1 2.214e+03 2.001e+02 1.444e+02
+s&gt;                ( - 7.658e+02 4 0 QUESTION1_8_R 1 9.251e+01 5.624e+01)
+s&gt;                ( - 1.248e+03 5 0 QUESTION0_8_R 1 1.364e+02 8.813e+01)))
+s&gt;        ( QUESTION3_8_L -1 1.613e+03 1.565e+02 1.033e+02
+s&gt;            ( - 5.607e+02 2 0 QUESTION3_9_L -1 6.001e+01 4.016e+01)
+s&gt;            ( - 8.963e+02 2 0 SILENCE 1 7.711e+01 6.314e+01)))INFO: ../dtree.c(1319): Comp split 1
+<P><FONT color=red size=-1>The second compound split is completed</FONT>
+INFO: ../dtree.c(1492): Final simple tree
+|( QUESTION0_8_R 1 2.691e+03 2.637e+02 1.447e+02
+|    ( QUESTION0_11_R 1 1.471e+03 1.362e+02 8.469e+01
+|        ( SILENCE -1 1.084e+03 6.989e+01 6.443e+01
+|            ( - 9.718e+02 1 0)
+|            ( - 4.220e+01 1 0))
+|        ( QUESTION0_9_R 1 2.512e+02 6.235e+01 2.025e+01
+|            ( - 8.426e+01 2 0)
+|            ( - 1.046e+02 1 0)))
+|    ( QUESTION0_18_R 1 9.555e+02 1.208e+02 5.998e+01
+|        ( - 1.947e+02 2 0 SILENCE -1 5.473e+01 1.800e+01)
+|        ( - 6.400e+02 2 0 SILENCE -1 4.076e+01 4.198e+01)))
+s&gt;    ( QUESTION0_8_R 1 2.691e+03 2.637e+02 1.447e+02
+s&gt;        ( QUESTION0_11_R 1 1.471e+03 1.362e+02 8.469e+01
+s&gt;            ( SILENCE -1 1.084e+03 6.989e+01 6.443e+01
+s&gt;                ( - 9.718e+02 1 0)
+s&gt;                ( - 4.220e+01 1 0))
+s&gt;            ( QUESTION0_9_R 1 2.512e+02 6.235e+01 2.025e+01
+s&gt;                ( - 8.426e+01 2 0)
+s&gt;                ( - 1.046e+02 1 0)))
+s&gt;        ( QUESTION0_18_R 1 9.555e+02 1.208e+02 5.998e+01
+s&gt;            ( - 1.947e+02 2 0 SILENCE -1 5.473e+01 1.800e+01)
+s&gt;            ( - 6.400e+02 2 0 SILENCE -1 4.076e+01 4.198e+01)))INFO: ../dtree.c(1492): Final simple tree
+|( QUESTION3_0_L -1 3.380e+03 2.908e+02 2.175e+02
+|    ( - 2.526e+03 1 0)
+|    ( QUESTION0_11_R 1 5.633e+02 9.871e+01 3.687e+01
+|        ( QUESTION4_0_L -1 2.358e+02 5.519e+01 1.902e+01
+|            ( - 4.532e+01 2 0 WDBNDRY_B 0 1.694e+01 6.000e+00)
+|            ( - 1.353e+02 1 0))
+|        ( QUESTION1 1 2.288e+02 4.944e+01 1.786e+01
+|            ( - 9.277e+01 2 0 WDBNDRY_B 0 2.191e+01 8.992e+00)
+|            ( WDBNDRY_E 0 8.660e+01 2.737e+01 8.863e+00
+|                ( - 3.073e+01 1 0)
+|                ( - 2.850e+01 1 0)))))
+s&gt;    ( QUESTION3_0_L -1 3.380e+03 2.908e+02 2.175e+02
+s&gt;        ( - 2.526e+03 1 0)
+s&gt;        ( QUESTION0_11_R 1 5.633e+02 9.871e+01 3.687e+01
+s&gt;            ( QUESTION4_0_L -1 2.358e+02 5.519e+01 1.902e+01
+s&gt;                ( - 4.532e+01 2 0 WDBNDRY_B 0 1.694e+01 6.000e+00)
+s&gt;                ( - 1.353e+02 1 0))
+s&gt;            ( QUESTION1 1 2.288e+02 4.944e+01 1.786e+01
+s&gt;                ( - 9.277e+01 2 0 WDBNDRY_B 0 2.191e+01 8.992e+00)
+s&gt;                ( WDBNDRY_E 0 8.660e+01 2.737e+01 8.863e+00
+s&gt;                    ( - 3.073e+01 1 0)
+s&gt;                    ( - 2.850e+01 1 0)))))
+INFO: ../dtree.c(1319): Comp split 2
+<P><FONT color=red size=-1>The third compound split is completed.
+For an explanation of this algorithm, click <A href="http://www.speech.cs.cmu.edu/sphinxman/tech2.html#2">here</A></FONT>
+
+INFO: ../dtree.c(1492): Final simple tree
+
+************* and so on till cssplitmax compound splits are done*******
+*********usually cssplitmax is set to a very high number, so the******
+**** compound splits stop when there is nothing more to split*********
+
+INFO: ../dtree.c(1492): Final simple tree
+|( WDBNDRY_B 0 9.277e+01 2.191e+01 8.992e+00
+|    ( - 5.843e+01 1 0)
+|    ( - 1.244e+01 1 0))
+s&gt;    ( WDBNDRY_B 0 9.277e+01 2.191e+01 8.992e+00
+s&gt;        ( - 5.843e+01 1 0)
+s&gt;        ( - 1.244e+01 1 0))INFO: ../dtree.c(1319): Comp split 27
+INFO: ../dtree.c(1319): Comp split 28
+INFO: ../dtree.c(1451): stop. leaf nodes are specific
+INFO: ../dtree.c(1492): Final simple tree
+|( WDBNDRY_B 0 1.452e+02 3.611e+01 1.582e+01
+|    ( - 5.028e+01 1 0)
+|    ( - 5.877e+01 1 0))
+s&gt;    ( WDBNDRY_B 0 1.452e+02 3.611e+01 1.582e+01
+s&gt;        ( - 5.028e+01 1 0)
+s&gt;        ( - 5.877e+01 1 0))INFO: ../dtree.c(1319): Comp split 29
+INFO: ../dtree.c(1319): Comp split 30
+INFO: ../dtree.c(1319): Comp split 31
+INFO: ../dtree.c(1319): Comp split 32
+INFO: ../dtree.c(1319): Comp split 33
+INFO: ../dtree.c(1319): Comp split 34
+INFO: ../dtree.c(1319): Comp split 35
+INFO: ../dtree.c(1319): Comp split 36
+INFO: ../dtree.c(1319): Comp split 37
+INFO: ../dtree.c(1322): stop. leaf nodes are specific
+</P></PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <BR>In the file 
+  (experimentname).buidtree.(phone).(state).log: <PRE>FATAL_ERROR: "../ckd_alloc.c", line 55: Calloc failed from ../two_class.c(95)
+</PRE>
+  <P><U>Explanation</U> <BR>The cd-untied models are probably untrained or very 
+  badly trained. Check the cd-untied training logfiles. 
+  <P></P>
+  <LI><U>Message</U> <BR><PRE>'WARNING: "../main.c", line 183: No triphones involving +SMACK+
+FATAL_ERROR: "../ckd_alloc.c", line 55: Calloc failed from ../main.c(668)'.
+</PRE>
+  <P><U>Explanation</U> <BR>No triphones were trained for the phone +SMACK+. In 
+  this case, the phone (+SMACK+) is a filler phone, for which we do not train 
+  triphones anyway. We do not build trees for filler phones. So if bldtree 
+  generates this error message and does notoutput any tree for a filler phone, 
+  it's okay - just ignore this. 
+  <P></P>
+  <LI><U>Message</U> <BR><PRE>FATAL_ERROR: "../main.c", line 276: Fewer state weights than states'.
+</PRE>
+  <P><U>Explanation</U> <BR>If you are building N-state HMMs, then you must 
+  supply one weight per state to the flag -stwt for bldtree. For example, the 
+  setting for 5-state HMMs could be <PRE>-stwt     1.0 0.3 0.1 0.01 0.001
+</PRE>Make sure that the number of weights are equal to the number of states. 
+  <P></P>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE>INFO: main.c(103): nrm stwt: 0.709 0.213 0.071 0.007 0.001
+INFO: main.c(408): 104-class entropy: 4.708714e+04
+INFO: main.c(531): Reading: /path/model_architecture/tongues.tree_questions
+INFO: main.c(568): 196 total simple questions (188 phone; 8 word bndry)
+INFO: main.c(570): 0 Left Only questions, and 0 Right Only questions
+INFO: dtree.c(1353): Comp split 0
+INFO: dtree.c(1362): stop. b_n-&gt;wt_ent_dec (0.000e+00) &lt;= 0   
+</PRE>
+  <P><U>Explanation</U> 
+  <P><A name=105a></A></P>
+  <LI><B><U>The structure of a tree file</U></B> 
+  <P><PRE>n_node 75
+0 1 2 1.024970e+03 7.812383e+02 ((!QUESTION0 -1))
+1 3 4 7.827493e+02 3.621280e+02 ((!QUESTION12 -1))
+3 13 14 2.715968e+02 1.446638e+02 ((QUESTION0_8_R 1 !QUESTION0_11_R 1 !QUESTION0_9_R 1)(!QUESTION0_8_R 1))
+13 19 20 1.588734e+02 7.022660e+01 ((QUESTION0_19_R 1 SILENCE -1)(!QUESTION0_19_R 1 !QUESTION0_8_R 1 !SILENCE -1))
+19 43 44 6.583110e+01 4.498003e+01 ((!SILENCE -1))
+43 - - 3.678522e+01 6.000000e+00
+44 - - 5.835646e+02 3.898003e+01
+20 41 42 7.375260e+01 2.524657e+01 ((!QUESTION0_18_R 1))
+41 67 68 3.048508e+01 1.324949e+01 ((!SILENCE -1))
+67 - - 1.570110e+01 3.000000e+00
+68 - - 1.045684e+02 1.024949e+01
+42 - - 1.031438e+02 1.199708e+01
+14 31 32 9.854553e+01 7.443717e+01 ((!QUESTION0_9_R 1 SILENCE -1))
+31 - - 9.718422e+02 5.943530e+01
+32 55 56 4.939473e+01 1.500187e+01 ((!SILENCE -1))
+55 - - 4.219557e+01 4.999490e+00
+56 - - 8.426309e+01 1.000238e+01
+4 9 10 2.908346e+02 2.174642e+02 ((!QUESTION3_0_L -1))
+9 29 30 9.870528e+01 3.687373e+01 ((!QUESTION0_11_R 1))
+29 53 54 4.943643e+01 1.785568e+01 ((!QUESTION1 1))
+53 69 70 2.736811e+01 8.863489e+00 ((!WDBNDRY_E 0))
+69 - - 2.849812e+01 4.000000e+00
+70 - - 3.072878e+01 4.863489e+00
+54 71 72 2.190642e+01 8.992188e+00 ((!WDBNDRY_B 0))
+71 - - 1.244149e+01 2.000000e+00
+72 - - 5.842520e+01 6.992188e+00
+30 49 50 5.518961e+01 1.901805e+01 ((QUESTION4_0_L -1))
+49 73 74 1.694358e+01 5.999987e+00 ((!WDBNDRY_B 0))
+73 - - 1.270456e+01 3.000002e+00
+74 - - 1.567007e+01 2.999985e+00
+50 - - 1.352641e+02 1.301806e+01
+10 - - 2.525817e+03 1.805905e+02
+2 5 6 4.985232e+02 4.191103e+02 ((QUESTION0 1 QUESTION3_11_L -1))
+5 11 12 2.751202e+02 1.714405e+02 ((QUESTION4_1_L -1))
+11 21 22 1.381941e+02 6.173034e+01 ((QUESTION2 -1 !QUESTION0_8_R 1)(!QUESTION1 -1))
+21 57 58 4.674642e+01 2.281793e+01 ((QUESTION0_8_R 1))
+57 63 64 3.611139e+01 1.581815e+01 ((!WDBNDRY_B 0))
+63 - - 5.877301e+01 8.818151e+00
+64 - - 5.028220e+01 6.999999e+00
+58 - - 3.269149e+01 6.999775e+00
+22 37 38 8.078258e+01 3.891241e+01 ((!QUESTION2 -1))
+37 65 66 3.547732e+01 1.299995e+01 ((!WDBNDRY_B 0))
+65 - - 4.989049e+01 6.000001e+00
+66 - - 5.591455e+01 6.999952e+00
+38 - - 3.034155e+02 2.591245e+01
+12 27 28 1.032965e+02 1.097102e+02 ((!QUESTION0_8_R 1))
+27 51 52 5.351306e+01 2.600765e+01 ((!WDBNDRY_E 0))
+51 - - 1.894188e+02 1.800761e+01
+52 - - 6.225969e+01 8.000047e+00
+28 - - 1.001935e+03 8.370250e+01
+6 7 8 3.608895e+02 2.476698e+02 ((!WDBNDRY_E 0))
+7 15 16 2.078070e+02 1.443672e+02 ((!QUESTION1 -1 QUESTION0_8_R 1)(!QUESTION1 -1 !QUESTION0_8_R 1 !QUESTION6 1))
+15 23 24 1.370261e+02 7.212400e+01 ((QUESTION0_8_R 1 !QUESTION5 -1 WDBNDRY_B 0)(!QUESTION0_8_R 1))
+23 45 46 6.179547e+01 2.710147e+01 ((!QUESTION0_8_R 1))
+45 - - 2.103741e+02 1.905201e+01
+46 - - 5.734571e+01 8.049463e+00
+24 39 40 8.045180e+01 4.502253e+01 ((!WDBNDRY_B 0))
+39 - - 1.483478e+02 1.800076e+01
+40 - - 3.054461e+02 2.702177e+01
+16 25 26 1.264272e+02 7.224318e+01 ((QUESTION0_11_R 1 !QUESTION1_8_R 1 !WDBNDRY_B 0)(!QUESTION0_11_R 1))
+25 33 34 8.898907e+01 4.871862e+01 ((!QUESTION0_11_R 1))
+33 59 60 4.497908e+01 2.671408e+01 ((!WDBNDRY_B 0))
+59 - - 1.028076e+02 1.071100e+01
+60 - - 1.498041e+02 1.600309e+01
+34 - - 2.196730e+02 2.200454e+01
+26 47 48 5.541730e+01 2.352456e+01 ((!WDBNDRY_B 0))
+47 - - 1.090463e+02 1.200061e+01
+48 - - 1.080980e+02 1.152395e+01
+8 17 18 1.678853e+02 1.033026e+02 ((!QUESTION3_8_L -1 SILENCE 1))
+17 - - 7.428963e+02 5.414283e+01
+18 35 36 8.536245e+01 4.915981e+01 ((!QUESTION3_10_L -1))
+35 61 62 4.037777e+01 1.399997e+01 ((!SILENCE 1))
+61 - - 7.629050e+01 8.999999e+00
+62 - - 3.061310e+01 4.999975e+00
+36 - - 4.700490e+02 3.515984e+01
+
+</PRE></LI></OL>
+<HR>
+<!==================================================================><!                                                                  ><!                           prunetree                               ><!                                                                  ><!==================================================================><A 
+name=106></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable prunetree</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/prunetree \
+ -itreedir /net/alf33/usr2/rsingh/tongues3//trees/tongues3.unpruned \
+ -nseno 4000 \
+ -otreedir /net/alf33/usr2/rsingh/tongues3//trees/tongues3.4000 \
+ -moddeffn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef \
+ -psetfn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions \
+ -minocc 0
+
+[Switch]  [Default] [Value]
+-moddeffn           /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef
+-psetfn             /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions
+-itreedir           /net/alf33/usr2/rsingh/tongues3//trees/tongues3.unpruned
+-otreedir           /net/alf33/usr2/rsingh/tongues3//trees/tongues3.4000
+-nseno              4000   
+-minocc   0.0       0.000000e+00
+INFO: ../main.c(52): Reading: /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef
+INFO: ../model_def_io.c(562): Model definition info:
+INFO: ../model_def_io.c(563): 97344 total models defined (47 base, 97297 tri)
+INFO: ../model_def_io.c(564): 584064 total states
+INFO: ../model_def_io.c(565): 486720 total tied states
+INFO: ../model_def_io.c(566): 235 total tied CI states
+INFO: ../model_def_io.c(567): 47 total tied transition matrices
+INFO: ../model_def_io.c(568): 6 max state/model
+INFO: ../model_def_io.c(569): 20 min state/model
+INFO: ../main.c(58): Reading: /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions
+INFO: ../main.c(188): AA-0	65 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): AA-1	65 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): AA-2	65 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): AA-3	65 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): AA-4	65 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): AE-0	102 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): AE-1	102 [0 &lt; 0.000000e+00]
+<P><FONT color=red size=-1>Starting from the right of the first line 
+above, the number 0.000000e+00 is the value you have given to the flag
+-minocc in the prunetree executable. This flag allows you to specify the
+minimum number of counts that must be associated with each leaf of a tree.
+The count associated with any node or leaf is the estimated number of observations
+ in that node or leaf. In first stage of pruning, the trees are pruned 
+entirely with regard to these counts. The number 0.000000e+00 indicates
+that the count was set to zero in this particular case. The experession
+[0 &lt; 0.000000e+00] means that there were zero leaves which had counts less
+than zero. The number 65 means that the tree, after zero nodes were
+pruned out, was left with 65 leaves. The string AA-0 indicates that
+this information  is about the decision tree for the 1st state of the
+phone AA</FONT>
+INFO: ../main.c(188): AE-2	102 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): AE-3	102 [0 &lt; 0.000000e+00]
+********** and so on till the last tree for the last phone ******
+INFO: ../main.c(188): ZH-3	2 [0 &lt; 0.000000e+00]
+INFO: ../main.c(188): ZH-4	2 [0 &lt; 0.000000e+00]
+INFO: ../main.c(205): Prior to pruning n_seno= 25725
+INFO: ../main.c(213): n_twig= 9529
+INFO: ../main.c(242): Pruning 21725 nodes
+<P><FONT color=red size=-1>The next stage of pruning begins here. In this
+stage, trees which have been first pruned with regard to the minimum
+occurance threshold given, are pruned with regard to entropy</FONT>
+INFO: ../main.c(274): Root node extracted (ZH 4) from heap
+INFO: ../main.c(274): Root node extracted (ZH 3) from heap
+<P><FONT color=red size=-1>The first line means that all leaves of the tree
+for the 5th state of the phone ZH got pruned out and you now have a tree
+with a single or "root" node. This implies that there will be a single
+tied state (or senone) representing the 5th state of all triphones for the 
+phone ZH. You can confirm this by looking at the state-ids in the tied state
+model definition file which you will make using these pruned trees for CD-tied
+training  </FONT> 
+INFO: ../main.c(274): Root node extracted (ZH 0) from heap
+INFO: ../main.c(274): Root node extracted (ZH 2) from heap
+INFO: ../main.c(274): Root node extracted (ZH 1) from heap
+INFO: ../main.c(274): Root node extracted (OY 3) from heap
+INFO: ../main.c(274): Root node extracted (OY 2) from heap
+INFO: ../main.c(274): Root node extracted (OY 4) from heap
+INFO: ../main.c(274): Root node extracted (OY 1) from heap
+INFO: ../main.c(312): AA-0	33
+INFO: ../main.c(312): AA-1	31
+<P><FONT color=red size=-1>The first line means that after the 
+entropy-based pruning, the tree for the 1st state of the phone AA was left 
+with 33 leaves. The first state of all triphones for the phone AA, therefore, 
+will be represented by 33 different senone ids</FONT>
+************* and so on till the last state of the last phone *********
+INFO: ../main.c(312): ZH-0	1
+INFO: ../main.c(312): ZH-1	1
+INFO: ../main.c(312): ZH-2	1
+INFO: ../main.c(312): ZH-3	1
+INFO: ../main.c(312): ZH-4	1
+</P></PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops and obscure indications of a problem</U></B> 
+<OL>
+  <LI><U>Stop at</U> Here are some entries from a logfile that has been written 
+  during a seemingly smooth run of prunetree. There are no warnings or error 
+  messages, but something is very wrong.. <PRE>
+-otreedir           /path/trees/tongues.6000
+-nseno              6000   
+-minocc   0.0       0.000000e+00
+INFO: main.c(87): Reading: /path/model_architecture/tongues.alltriphones.mdef
+INFO: model_def_io.c(598): Model definition info:
+INFO: model_def_io.c(599): 74796 total models defined (47 base, 74749 tri)
+INFO: model_def_io.c(600): 448776 total states
+INFO: model_def_io.c(601): 373980 total tied states
+INFO: model_def_io.c(602): 235 total tied CI states
+INFO: model_def_io.c(603): 47 total tied transition matrices
+INFO: model_def_io.c(604): 6 max state/model
+INFO: model_def_io.c(605): 20 min state/model
+INFO: main.c(93): Reading: /path/model_architecture/tongues.tree_questions
+INFO: main.c(223): AA-0	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AA-1	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AA-2	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AA-3	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AA-4	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AE-0	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AE-1	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AE-2	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AE-3	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): AE-4	1 [0 &lt; 0.000000e+00]
+******** and so on till *******************************
+
+INFO: main.c(223): Z-3	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): Z-4	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): ZH-0	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): ZH-1	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): ZH-2	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): ZH-3	1 [0 &lt; 0.000000e+00]
+INFO: main.c(223): ZH-4	1 [0 &lt; 0.000000e+00]
+INFO: main.c(240): Prior to pruning n_seno= 200
+WARNING: "main.c", line 244: n_seno_wanted= 6000, but only 200 defined by trees
+INFO: main.c(248): n_twig= 0
+INFO: main.c(347): AA-0	1
+INFO: main.c(347): AA-1	1
+INFO: main.c(347): AA-2	1
+INFO: main.c(347): AA-3	1
+INFO: main.c(347): AA-4	1
+INFO: main.c(347): AE-0	1
+INFO: main.c(347): AE-1	1
+INFO: main.c(347): AE-2	1
+INFO: main.c(347): AE-3	1
+******** and so on till *******************************
+
+INFO: main.c(347): Z-2	1
+INFO: main.c(347): Z-3	1
+INFO: main.c(347): Z-4	1
+INFO: main.c(347): ZH-0	1
+INFO: main.c(347): ZH-1	1
+INFO: main.c(347): ZH-2	1
+INFO: main.c(347): ZH-3	1
+INFO: main.c(347): ZH-4	1
+
+</PRE>
+  <P><U>Explanation</U> 
+  <P>In the logfile above, you see that in the first stage of pruning, every 
+  single tree had only one leaf (the root node). Obviously then, after the 
+  second stage of pruning, there was again only one leaf in every tree. The 
+  first set of ones indicates that none of the trees ever branched - and that 
+  could be due to many reasons. A tree will not branch if the linguistic 
+  questions simply repeat with different names in your linguistic questions 
+  file, or are bad in some other bizarre manner. First check your linguistic 
+  questions file... If that checks out ok, then look at the mixture weights. Are 
+  they all zero? Are they all equal? Does the last norm logfile report any 
+  errors or warnings? If it does, see if you can trace back the problem from 
+  there. If the linguistic questions are back, the trace can begin from the 
+  logfile for make_quests. </P></LI></OL><A name=106a></A>
+<LI><B><U>The structure of a pruned tree file</U></B> 
+<P><PRE>n_node 9
+0 1 4 1.024970e+03 7.812383e+02 ((!QUESTION0 -1))
+1 2 3 7.827493e+02 3.621280e+02 ((!QUESTION12 -1))
+2 - - 0.000000e+00 1.446638e+02
+3 - - 0.000000e+00 2.174642e+02
+4 5 6 4.985232e+02 4.191103e+02 ((QUESTION0 1 QUESTION3_11_L -1))
+5 - - 0.000000e+00 1.714405e+02
+6 7 8 3.608895e+02 2.476698e+02 ((!WDBNDRY_E 0))
+7 - - 0.000000e+00 1.443672e+02
+8 - - 0.000000e+00 1.033026e+02
+</PRE>
+<OL></OL>
+<P>
+<HR>
+<!=====================================================================><!==================================================================><!                                                                  ><!                           tiestate                               ><!                                                                  ><!==================================================================><A 
+name=107></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+<P>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>I've just run the executable tiestate</TD></TR></TBODY></TABLE>
+<P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+explanations) 
+<P><PRE>/net/alf24/usr2/rsingh/09..sphinx3code/trainer/bin.alpha/tiestate \
+ -imoddeffn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef \
+ -omoddeffn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.4000.mdef \
+ -treedir /net/alf33/usr2/rsingh/tongues3//trees/tongues3.4000 \
+ -psetfn /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions
+
+[Switch]   [Default] [Value]
+-imoddeffn           /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.alltriphones.mdef
+-omoddeffn           /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.4000.mdef
+-treedir             /net/alf33/usr2/rsingh/tongues3//trees/tongues3.4000
+-psetfn              /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions
+INFO: ../model_def_io.c(562): Model definition info:
+INFO: ../model_def_io.c(563): 78204 total models defined (47 base, 78157 tri)
+INFO: ../model_def_io.c(564): 469224 total states
+INFO: ../model_def_io.c(565): 391020 total tied states
+INFO: ../model_def_io.c(566): 235 total tied CI states
+INFO: ../model_def_io.c(567): 47 total tied transition matrices
+INFO: ../model_def_io.c(568): 6 max state/model
+INFO: ../model_def_io.c(569): 20 min state/model
+INFO: ../main.c(68): Reading: /net/alf33/usr2/rsingh/tongues3//model_architecture/tongues3.tree_questions
+INFO: ../main.c(86): AA-0: offset 235
+INFO: ../main.c(86): AA-1: offset 252
+<P><FONT color=red size=-1>
+The first line says that with respect to the first state of the first CI phone,
+the first tied state of the first state of the phone AA (which happens to be
+the first phone here) is 235. For the second state of AA, the offset is 252.
+This means that ALL the triphones of AA have their first states assigned
+numerical ids which lie between 235 and 252.</FONT>
+INFO: ../main.c(86): AA-2: offset 268
+INFO: ../main.c(86): AA-3: offset 283
+INFO: ../main.c(86): AA-4: offset 300
+INFO: ../main.c(86): AE-0: offset 317
+*********** and so on till the last state of the last phone ********
+
+INFO: ../main.c(86): ZH-3: offset 4233
+INFO: ../main.c(86): ZH-4: offset 4234
+INFO: ../main.c(108): n_seno= 4235
+
+</P></PRE>
+<P><B><U>Warnings</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> </P></LI></OL>
+<P>
+<P><B><U>Error messages</U></B> 
+<OL>
+  <LI><U>Message</U> <PRE></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P><B><U>Unexpected stops and obscure indications of a problem</U></B> 
+<OL>
+  <LI><U>Stop at</U> <PRE>/path/bin/tiestate \
+ -imoddeffn /path/model_architecture/tongues.alltriphones.mdef \
+ -omoddeffn /path/model_architecture/tongues.6000.mdef \
+ -treedir /path/trees/tongues.6000 \
+ -psetfn /path/model_architecture/tongues.tree_questions
+
+[Switch]   [Default] [Value]
+-imoddeffn           /path/model_architecture/tongues.alltriphones.mdef
+-omoddeffn           /path/model_architecture/tongues.6000.mdef
+-treedir             /path/trees/tongues.6000
+-psetfn              /path/model_architecture/tongues.tree_questions
+INFO: model_def_io.c(598): Model definition info:
+INFO: model_def_io.c(599): 74796 total models defined (47 base, 74749 tri)
+INFO: model_def_io.c(600): 448776 total states
+INFO: model_def_io.c(601): 373980 total tied states
+INFO: model_def_io.c(602): 235 total tied CI states
+INFO: model_def_io.c(603): 47 total tied transition matrices
+INFO: model_def_io.c(604): 6 max state/model
+INFO: model_def_io.c(605): 20 min state/model
+INFO: main.c(102): Reading: /path/model_architecture/tongues.tree_questions
+INFO: main.c(120): AA-0: offset 235
+INFO: main.c(120): AA-1: offset 236
+
+<P><FONT color=red size=-1>
+The first line says that with respect to the first state of the first CI phone,
+the first tied state of the first state of the phone AA (which happens to be 
+the first phone here) is 235. For the second state of AA, the offset is 236. 
+This means that ALL the triphones of AA have their first states mapped to 235. 
+This can happen when the tree for the first state of AA has only one node. For
+a phone like AA which is very common in the language, this is obviously
+an error. The tree should have been deeper than one node. You have to
+search the logfiles of bldtree to get to the source of this error)</FONT>
+INFO: main.c(120): AA-2: offset 237
+INFO: main.c(120): AA-3: offset 238
+INFO: main.c(120): AA-4: offset 239
+INFO: main.c(120): AE-0: offset 240
+****** and so on till the last state of the last phone **********
+
+INFO: main.c(120): ZH-3: offset 433
+INFO: main.c(120): ZH-4: offset 434
+INFO: main.c(142): n_seno= 435
+AA AA AA s 0 	-&gt; 235
+
+AA AA AA s 1 	-&gt; 236
+
+AA AA AA s 2 	-&gt; 237
+<P><FONT color=red size=-1>
+The mode of compilation turns on some compiler directives which cause
+the program to print out extended log files. These lines may
+have been printed either due to that or just due to some explicit
+print in the program. In any case they are of zero use. 
+These lines are simply indicating
+the state-ids assigned to each triphone. The print has to be disabled in the
+opensource version. )</FONT>
+**** and thousands of lines of garbage till ******
+ZH UW AX i 4 	-&gt; 434
+</P></PRE>
+  <P><U>Explanation</U> 
+  <P></P></LI></OL>
+<P>
+<HR>
+<!=====================================================================><!XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX><A 
+name=2></A>
+<P>
+<CENTER>
+<H4><FONT color=red>IS MY DECODING SETUP OK?</FONT></H4></CENTER>
+<P>The first thing that you must ensure is that the feature files are being 
+correctly computed. If you are about to decode with existing models, then make 
+sure that 
+<UL>
+  <LI>the speech that you are going to decode is recorded correctly. Check for 
+  possible clipping, noises and other visible distortions of the signal. If they 
+  are present and if possible, try to correct them. 
+  <LI>you know the exact specifications for feature computation. Your feature 
+  computation flag settings should exactly match the ones used for training the 
+  models as far as possible. 
+  <LI>your feature files are being read correctly by your machine. Make sure 
+  that there are no byte-order problems </LI></UL>Here's the next quick checklist: 
+
+<UL>
+  <LI>get to know the files that constitute the complete set of models 
+  thoroughly. 
+  <LI>Make sure that you are using both: the recognition dictionary and the 
+  filler dictionary (if provided). 
+  <LI>Make sure that you are using only the phones and triphones for which you 
+  have models, and if that is not the case, then <A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#1ax">see what you 
+  can do to generate models for them before you decode</A>. If you are using the 
+  SPHINX-II decoder, then you'll find the phones listed in a file called "phone" 
+  which is one of the SPHINX-II format model files. If you are using the 
+  SPHINX-III decoder, check against the decoding model definition file to make 
+  sure that you have the correct phones in the dictionary/fillerdict. The phones 
+  in the dictionary/fillerdict must all be listed in the mdef file. If any phone 
+  is not listed in the mdef file, then you either don't have an acoustic model 
+  for the phone, or if you have it, then you are not allowing the decoder to use 
+  it. This phone and the words in which it occurs will never be hypothesized. 
+  <LI>Make sure that the words you want to recognize are present in BOTH: your 
+  language model and in one of the recognition dictionaries 
+  <LI>Make sure that the pronunciations in your recognition dictionary are 
+  suitable for your task. If you are trying to recognize the speech of a 
+  non-native using a dictionary that has only native pronunications, the models 
+  will perform poorly. When you do introduce new words into the recognition 
+  dictionary, though, you will need to check again if you have models for the 
+  new triphones you have introduced, and to generate the corresponding models if 
+  you don't have them. 
+  <OL></OL>Other checks that might help you track down problems that don't seem 
+  to be due to any of the above factors are discussed below. 
+  <OL>
+    <LI>WARNING: If you have fillers in the fillerdict for which you don't have 
+    models, the decoder DOES NOT check to make sure that it's ok. You just get a 
+    core dump. </LI></OL>
+  <P><A name=108></A>
+  <HR>
+
+  <P>
+  <CENTER>
+  <H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+  <P>
+  <TABLE width="100%" bgColor=#ffffff>
+    <TBODY>
+    <TR>
+      <TD>I've just run the executable mk_flat</TD></TR></TBODY></TABLE>
+  <P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+  explanations) 
+  <P>
+  <P><B><U>Error Messages</U></B> 
+  <OL>
+    <LI><U>Message</U> <PRE>Segmentation fault.
+</PRE>
+    <P><U>Explanation</U> <BR>If you are sure that your feature computation was 
+    ok, and all feature files exist, and if you are using a control file format 
+    wherein utterances are referred to in terms of begining and end frame 
+    numbers (and not utterance names for each utterance in a large recording), 
+    then check to see if 
+    <UL>
+      <LI>any utterance has a beginning frame that is greater than the end frame 
+
+      <LI>any utterance has an end frame that is greater than the last frame of 
+      the feature file of the full recording 
+      <LI>utterances are of reasonable length. They should not be so short as to 
+      be meaningless or to disallow the computation of higher order features 
+      like deltas or double deltas. </LI></UL>It is important that you filter out 
+    very short utterances from your training control file. This constraint is 
+    related to the number of states in the HMMs (N) that you intend to train, 
+    and to the basic nature of sounds. A very short utterance could be one with 
+    less than 3*N feature frames. In the least, the trainer will have to 
+    associate one feature vector per state, so you need at least N frames in the 
+    feature file for the utterance. Besides, during training, an utterance is 
+    typically flanked by begining and end-utterance silences. Thus another 2*N 
+    frames are needed to account for the HMMs for these silence phones. If N is 
+    3 (say) and there are 10 frames/second of speech, we can also say that no 
+    reasonable sound unit can begin and end in N frames. Even a plosive is 
+    longer than that, typically, when you include both the burst and the 
+    preceeding closure. If these utterances are included in the training, the 
+    quality of some of the models may be affected. 
+    <P><A name=201></A>
+    <HR>
+
+    <P>
+    <CENTER>
+    <H4><FONT color=red>DECODING PROBLEMS</FONT></H4></CENTER>
+    <P>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>I've just run the executable fastdecode</TD></TR></TBODY></TABLE>
+    <P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+    explanations) 
+    <P>
+    <P><B><U>Error Messages</U></B> 
+    <OL>
+      <LI><U>Message</U> <PRE>INFO: ../main.c(774): UTTERANCE_ID: 1119 frames
+ERROR: "../main.c", line 842: ***ERROR*** Fr 206, best HMM score &gt; 0(1985154354); int32 wraparound?
+ERROR: "../main.c", line 842: ***ERROR*** Fr 207, best HMM score &gt; 0(1985117843); int32 wraparound?
+ERROR: "../main.c", line 842: ***ERROR*** Fr 208, best HMM score &gt; 0(1985082960); int32 wraparound?
+</PRE>
+      <P><U>Explanation</U> <BR>The most probable reason for an error message 
+      that resembles this is that some of your model parameters are zero. It is 
+      possible that one or more filler phones were not present at all in your 
+      training data, but you trained them nevertheless (this is a common 
+      mistake). Check this out. You can also look at the model parameters to see 
+      if any set of parameters are zero, or just at the transition matrices to 
+      see if all matrices look ok. If there is a phone for which data were 
+      absent, the transition matrix will be null. <BR>If you do find that the 
+      culprit is a filler phone, remove it from the decode fillerdict and the 
+      decode should go through. </P></LI></OL>
+    <P>
+    <P><!XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
+    <P>
+    <HR>
+    <EM>last modified: 04 Dec. 2000 </EM><!==================================================================><!                                                                  ><!                           template                               ><!                                                                  ><!==================================================================><A 
+    name=XXXXX></A>
+    <P>
+    <CENTER>
+    <H4><FONT color=red>IS MY TRAINING OK?</FONT></H4></CENTER>
+    <P>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>I've just run the executable XXXXX</TD></TR></TBODY></TABLE>
+    <P><B><U>Structure of the correct log file</U></B> (the lines in red are 
+    explanations) 
+    <P>
+    <P><B><U>Warnings</U></B> 
+    <OL>
+      <LI><U>Message</U> <PRE></PRE>
+      <P><U>Explanation</U> </P></LI></OL>
+    <P>
+    <P><B><U>Error messages</U></B> 
+    <OL>
+      <LI><U>Message</U> <PRE></PRE>
+      <P><U>Explanation</U> 
+      <P></P></LI></OL>
+    <P><B><U>Unexpected stops</U></B> 
+    <OL>
+      <LI><U>Stop at</U> <PRE></PRE>
+      <P><U>Explanation</U> 
+      <P></P></LI></OL>
+    <P>
+    <HR>
+<!=====================================================================></LI></OL></LI></UL></LI></BODY></HTML>

@@ -1,0 +1,75 @@
+HTML {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 100%; BORDER-RIGHT-WIDTH: 0px
+}
+BODY {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 100%; BORDER-RIGHT-WIDTH: 0px
+}
+BODY {
+	BACKGROUND: #fff; TEXT-ALIGN: center; min-width: 100%
+}
+.clear {
+	CLEAR: both; FONT-SIZE: 0px; OVERFLOW: hidden; LINE-HEIGHT: 1%; HEIGHT: 0px
+}
+#patternWrapper {
+	HEIGHT: 100%
+}
+#patternWrapper {
+	HEIGHT: auto
+}
+ HTML #patternWrapper {
+	HEIGHT: 100%
+}
+#patternPage {
+	MARGIN-LEFT: auto; WIDTH: 100%; MARGIN-RIGHT: auto; POSITION: relative; TEXT-ALIGN: left
+}
+#patternOuter {
+	Z-INDEX: 1; POSITION: relative; HEIGHT: 100%
+}
+#patternFloatWrap {
+	DISPLAY: inline; FLOAT: left; WIDTH: 100%
+}
+#patternLeftBar {
+	DISPLAY: inline; FLOAT: left; OVERFLOW: hidden
+}
+#patternLeftBarContents {
+	LEFT: -1px; POSITION: relative
+}
+#patternMain {
+	DISPLAY: inline; FLOAT: right; WIDTH: 100%
+}
+#patternTopBar {
+	Z-INDEX: 1; WIDTH: 100%; POSITION: absolute; TOP: 0px
+}
+#patternTopBarContents {
+	HEIGHT: 1%
+}
+#patternBottomBar {
+	CLEAR: both; Z-INDEX: 1; WIDTH: 100%
+}
+.patternNoViewPage #patternOuter {
+	MARGIN-LEFT: 4%; MARGIN-RIGHT: 4%
+}
+.patternEditPage #patternOuter {
+	MARGIN-LEFT: 0px; MARGIN-RIGHT: 0px
+}
+.patternPreviewPage #patternOuter {
+	MARGIN-LEFT: 0px; MARGIN-RIGHT: 0px
+}
+.twikiLeft {
+	FLOAT: left; POSITION: relative
+}
+.twikiRight {
+	DISPLAY: inline; FLOAT: right; MARGIN: 0px; POSITION: relative
+}
+.twikiClear {
+	CLEAR: both; PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 0px; PADDING-TOP: 0px; HEIGHT: 0px
+}
+.twikiHidden {
+	DISPLAY: none
+}
+.twikiLast {
+	BORDER-BOTTOM-WIDTH: 0px
+}
+.patternTopic .twikiLast {
+	BORDER-BOTTOM-WIDTH: 0px
+}

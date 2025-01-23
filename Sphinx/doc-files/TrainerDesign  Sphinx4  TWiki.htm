@@ -1,0 +1,1312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0072)http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign -->
+<HTML lang=en-us xml:lang="en-us" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>TrainerDesign < Sphinx4 < TWiki</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-15"><LINK 
+href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" type=image/x-icon 
+rel=icon><LINK href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" 
+type=image/x-icon rel="shortcut icon"><LINK title="RSS Feed" 
+href="/sphinx/twiki/bin/view/Sphinx4/WebRss" type=application/rss+xml 
+rel=alternate><!--/closing tag 'solves' IE selection bug-->
+<SCRIPT src="TrainerDesign  Sphinx4  TWiki_files/twiki.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="TrainerDesign  Sphinx4  TWiki_files/pattern.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+//<![CDATA[
+	function launchWindow(inWeb, inTopic) {
+		return launchTheWindow("/sphinx/twiki/bin/view/", inWeb, inTopic, "", "viewplain" );
+	}
+//]]>
+</SCRIPT>
+
+<SCRIPT src="TrainerDesign  Sphinx4  TWiki_files/twist.js" 
+type=text/javascript></SCRIPT>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/TwistyContrib/twist.css );
+</STYLE>
+
+<STYLE type=text/css media=all>#patternTopBar {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderCenter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderLeft {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderRight {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternTopBarContentsOuter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternOuter {
+	MARGIN-LEFT: 12em
+}
+#patternLeftBar {
+	MARGIN-LEFT: -12em; WIDTH: 12em
+}
+</STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/layout.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/style.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/colors.css );
+</STYLE>
+<!--[if IE]>
+<STYLE type=text/css>PRE {
+	OVERFLOW-Y: hidden; OVERFLOW-X: auto; ; PADDING-BOTTOM: expression(this.scrollWidth > this.offsetWidth ? 16 : 0)
+}
+#patternLeftBarContents LI {
+	TEXT-OVERFLOW: ellipsis
+}
+</STYLE>
+<![endif]--><!--[if lte IE 6]>
+<STYLE type=text/css>#patternLeftBar {
+	POSITION: relative
+}
+</STYLE>
+<![endif]-->
+<STYLE type=text/css media=all>.twikiInputField {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_input.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiInputFieldDisabled {
+	BACKGROUND-IMAGE: none; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiButton {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_button.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternToolBarButtons .patternButton A {
+	
+}
+.twikiSubmit {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_submit.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiSubmitDisabled {
+	BACKGROUND-IMAGE: none
+}
+.twikiToc LI {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-down.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternLeftBar .patternWebIndicator {
+	BACKGROUND-COLOR: #99ff99
+}
+.patternBookView .twikiTopRow {
+	BACKGROUND-COLOR: #99ff99
+}
+#patternTopBar {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/TWiki_header.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternTopBar {
+	BACKGROUND-COLOR: #ffffff
+}
+.patternBookView {
+	BORDER-LEFT-COLOR: #99ff99; BORDER-BOTTOM-COLOR: #99ff99; BORDER-TOP-COLOR: #99ff99; BORDER-RIGHT-COLOR: #99ff99
+}
+#twikiLogin {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .tipsOfTheDayContents {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternOuter {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_yellow.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternPrintPage #patternOuter {
+	BACKGROUND: #fff
+}
+.twikiPageForm TABLE {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/form_gradient.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .patternLeftBarPersonal LI {
+	BACKGROUND-POSITION: 0px 0.5em; BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-blue.gif); BACKGROUND-REPEAT: no-repeat
+}
+.patternPreviewPage #patternMain {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PreviewBackground/preview2bg.gif)
+}
+</STYLE>
+
+<STYLE type=text/css media=all></STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/print.css );
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY class=patternViewPage><A name=PageTop></A>
+<DIV id=patternScreen>
+<DIV id=patternPageShadow>
+<DIV id=patternPage>
+<DIV id=patternWrapper>
+<DIV id=patternOuter>
+<DIV id=patternFloatWrap>
+<DIV id=patternMain>
+<DIV id=patternClearHeaderCenter></DIV>
+<DIV id=patternMainContents>
+<DIV class=patternTop>
+<DIV class=patternToolBar>
+<DIV class=patternToolBarButtons><SPAN class=patternButton><A 
+title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/TrainerDesign?t=1152847774" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=patternButton><A title="Attach an image or document to this topic" 
+accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A></SPAN><SPAN 
+class=patternButton><A title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A></SPAN> </DIV></DIV><!-- /patternToolBar-->
+<DIV class=patternToolBarBottom></DIV></DIV><!-- /patternTop-->
+<DIV class=patternHomePath><SPAN class=twikiRight><SPAN class=patternRevInfo>r6 
+- 02 Mar 2003 - 20:12:36 - <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A></SPAN></SPAN><SPAN 
+class=patternHomePathTitle>You are here: </SPAN><A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome">TWiki</A><SPAN 
+class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+style="BACKGROUND-COLOR: #99ff99" height=13 alt="" 
+src="TrainerDesign  Sphinx4  TWiki_files/web-bg-small.gif" width=13 border=0> 
+Sphinx4 Web</A> <SPAN class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><SPAN 
+title=Sphinx4.TrainerDesign>TrainerDesign</SPAN><BR class=twikiClear></DIV><!-- /patternHomePath-->
+<DIV class=twikiBeforeText></DIV>
+<DIV class=patternContent>
+<DIV class=patternTopic>
+<DIV class=twikiToc>
+<UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Design_meeting_notes">Design 
+  meeting notes</A> 
+  <UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Definition_of_UnitHMM">Definition 
+    of UnitHMM</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Definition_of_Pool">Definition 
+    of Pool</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Transformations">Transformations</A> 
+
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Definition_of_Expanded_Pool">Definition 
+    of Expanded Pool</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Accumulators_must_be_linked_to_p">Accumulators 
+    must be linked to parameters</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Objects_must_be_extended_for_acc">Objects 
+    must be extended for accumulation</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Storing_pools_and_accumulators">Storing 
+    pools and accumulators</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Building_Unit_HMMs">Building 
+    Unit HMMs</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#SentenceHMMBuilder">SentenceHMMBuilder</A> 
+
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#SentenceHMM_is_used_by_a_Learner">SentenceHMM 
+    is used by a "Learner"</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Interaction_between_SentenceHMM">Interaction 
+    between SentenceHMM and "Learner"</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Learner_Diagram">"Learner" 
+    Diagram</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Garbage_Models">Garbage 
+    Models</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Training_Multiple_Unit_Types">Training 
+    Multiple Unit Types</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Training_Multiple_Units">Training 
+    Multiple Units</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Training_state_densities_for_mul">Training 
+    state densities for multiple nodes in a decision tree</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Training_all_nodes_in_a_decision">Training 
+    all nodes in a decision tree</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Generalizing">Generalizing</A> 
+
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#The_problem_of_parameter_sharing">The 
+    problem of parameter sharing</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#The_problem_of_pruning_for_multi">The 
+    problem of pruning for multi-stream training</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Pruning_problem_Pictorial_explan">Pruning 
+    problem, Pictorial explanation</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Things_to_do_in_no_order">Things 
+    to do (in no order)</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Timelines">Timelines</A> 
+    </LI></UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#Trainer_blueprint">Trainer 
+  blueprint</A> </LI></UL></DIV>
+<P>
+<H3><A name=Design_meeting_notes></A>Design meeting notes </H3>
+<P>The figures in this page are available as GIF for easy viewing and also as 
+Powerpoint so that it's easy to modify them (although we aren't particularly 
+fond of proprietary formats :-)). 
+<P>
+<H4><A name=Definition_of_UnitHMM></A>Definition of UnitHMM </H4>
+<P><PRE>  UnitHMM
+  |
+  +-ID
+  |
+  +-NAME (including context info?)
+  |
+  +-State[]
+  |  |
+  |  +-Density (interface)
+  |      |
+  |   MixtureDensity (implements density)
+  |      |
+  |      +-MixtureWeight mixw;
+  |      |
+  |      +-Density (interface)
+  |          |
+  |       Gaussian (e.g., implements density)
+  |          |
+  |          +-Mean mean;
+  |          |
+  |          +-Variance var;
+  |
+  +-TransitionMatrix tmat;
+</PRE>
+<P>
+<H4><A name=Definition_of_Pool></A>Definition of Pool </H4>
+<P><PRE>  Pool
+  |
+  +-TransitionMatrix[] tmat;
+  |
+  +-Means[] means;
+  |
+  +-Variance[] vars;
+  |
+  +-MixtureWeight[] mixw;
+</PRE>
+<P>
+<UL>
+  <LI>Pointing into pool done by (e.g) </LI></UL>
+<P><PRE>  Pool pool; 
+  mixw = pool.mixw[3];
+</PRE>
+<P>
+<H4><A name=Transformations></A>Transformations </H4>
+<P>
+<UL>
+  <LI>Transformations are largely volatile 
+  <LI>We do not want them to be part of the basic pool 
+  <LI>Transformations will be part of an "expanded pool" object 
+  <LI>The expanded pool will have storing and printing methods similar to the 
+  basic pool </LI></UL>
+<P>
+<CENTER>
+<TABLE cellSpacing=6 cellPadding=3 border=2>
+  <TBODY>
+  <TR>
+    <TH>Expanded Pool</TH></TR>
+  <TR bgColor=#bbddff>
+    <TD align=middle><FONT color=red>Static Objects</FONT> <BR><B>Pool</B> 
+      <BR>Means <BR>Variances <BR>MixtureWeights <BR></TD></TR>
+  <TR bgColor=#bbbbff>
+    <TD align=middle><FONT color=red>Changing Objects</FONT> <BR>Mean 
+      transform <BR>Var transform <BR></TD></TR></TBODY></TABLE></CENTER>
+<P>
+<H4><A name=Definition_of_Expanded_Pool></A>Definition of Expanded Pool </H4>
+<P>
+<UL>
+  <LI>Expanded pool object contains basic Pool and Transformations </LI></UL>
+<P><PRE>class ExpandedPool{
+  Pool pool;
+  MeanTransform[] mtxfm ;
+  VarianceTransform[] vtxfm ;
+}
+</PRE>
+<P>
+<UL>
+  <LI>Must define "with transform" objects to use ExpandedPool </LI></UL>
+<P><PRE>class  GaussianWithTransform extends  Gaussian{
+  MeanTransform mtxfm;
+  VarianceTransform vtxfm;
+}
+</PRE>
+<P>
+<UL>
+  <LI>Similar objects must be defined to use transforms for mixture weights 
+  (MixtureGaussianWithTransform) or transition matrices (UnitHMMWithTransform). 
+  The latter two are HIGHLY unlikely to be needed ever </LI></UL>
+<P>
+<H4><A name=Accumulators_must_be_linked_to_p></A>Accumulators must be linked to 
+parameters </H4>
+<P>
+<UL>
+  <LI>Each parameter type object has its own accumulator object 
+  <UL>
+    <LI>Extended parameter includes the accumulator </LI></UL></LI></UL>
+<P><FONT color=red><PRE>Class  MeanAccumulator{
+  double[] numerator;
+  double denominator;
+}
+
+Class MeanWithAccumulator extends Mean {
+  MeanAccumulator  meanaccum;
+  public  boolean normalize()
+} 
+</PRE></FONT>
+<P><FONT color=green><PRE>Class VarianceAccumulator{
+  double[] numerator;
+  double denominator;
+}
+
+Class VarianceWithAccumulator extends Variance {
+VarianceAccumulator  varaccum;
+public boolean normalize()
+}
+</PRE></FONT>
+<P>
+<UL>
+  <LI>Similar extension for mixture weights, transition matrices, transforms 
+  <LI>normalize() processes accumulator to compute parameter 
+  <UL>
+    <LI>Should this be in Density? E.g. variance estimation may need means. How 
+    to crosslink params for normalization? </LI></UL></LI></UL>
+<P>
+<H4><A name=Objects_must_be_extended_for_acc></A>Objects must be extended for 
+accumulation </H4>
+<P>
+<UL>
+  <LI>HMM and density objects in trainer are extended versions of corresponding 
+  decoder objects 
+  <UL>
+    <LI>They will contain additional methods for accumulation </LI></UL>
+  <LI>Trainer UnitHMMs will be extended version of decoder UnitHMM 
+  <UL>
+    <LI>Additional methods for accumulation of transition matrices 
+    <LI>Additional methods to pass accumulation info on to states </LI></UL>
+  <LI>Trainer state object will be an extension of decoder state object 
+  <UL>
+    <LI>Additional methods to pass accumulation information on to densities 
+  </LI></UL>
+  <LI>Trainer State Output Density object will extend density object 
+  <UL>
+    <LI>Additional methods to accumulate mixture weights 
+    <LI>Additional methods to pass information on to component densities 
+</LI></UL>
+  <LI>Trainer component density object will extend basic component density 
+  object 
+  <UL>
+    <LI>Additional methods to accumulate density params </LI></UL>
+  <LI>What is the best way to do this to minimize the amount of new code one 
+  must write to replace Gaussians with Laplacians? </LI></UL>
+<P>
+<H4><A name=Storing_pools_and_accumulators></A>Storing pools and accumulators 
+</H4>
+<P>
+<UL>
+  <LI>Pools may be stored along with accumulators even regularly 
+  <UL>
+    <LI>Useful for on-line learning, adaptation, etc. </LI></UL>
+  <LI>For training, accumulators must be stored with pools 
+  <UL>
+    <LI>Simplifies code structures-Doubles accumulator data to be transferred 
+    for final normalization of models </LI></UL>
+  <LI>Storing many copies of accumulators along with pools may cause clash in 
+  ids (pools are stored with randomized ids) 
+  <LI>Need id structure resolution for this </LI></UL>
+<P>
+<H4><A name=Building_Unit_HMMs></A>Building Unit HMMs </H4>
+<P>
+<UL>
+  <LI>The UnitHMMBuilder builds HMMs for a required unit based on parameter 
+  sharing information 
+  <UL>
+    <LI>Parameter sharing information must be provided externally (by the user) 
+    </LI></UL></LI></UL>
+<P>
+<CENTER>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD><PRE>                 +--------------------+
+                 |   UnitHmmBuilder   |
+  Parameter      |                    |&lt;---- Unit information
+  sharing   ----&gt;|  (Decision trees)  |
+  info           |  (Means sharing)   |----&gt; Unit HMM
+                 | (Variance sharing) |
+                 +--------------------+
+</PRE></TD></TR></TBODY></TABLE></CENTER>
+<P>
+<UL>
+  <LI>UnitHMMBuilder must also build the pool 
+  <UL>
+    <LI>May be read in from a user specified file </LI></UL>
+  <LI>Initial simple implementations 
+  <UL>
+    <LI>Decision tree based state tying, all means and variances unique (for 
+    continuous density HMMs) 
+    <LI>Decision tree based state tying, common set of means and variances (for 
+    semicontinuous HMMs) 
+    <LI>Decision tree based state tying, means variances common to central phone 
+    (for phone dependent codebooks in semicontinuous HMMs) </LI></UL></LI></UL>
+<P>
+<H4><A name=SentenceHMMBuilder></A><A 
+name=_SentenceHMMBuilder></A>SentenceHMMBuilder </H4>
+<P>
+<UL>
+  <LI>Shares code with decoder 
+  <LI>Takes in transcript and dictionaries 
+  <UL>
+    <LI>Shouldn't dictionaries be linked with UnitHMMBuilder also? </LI></UL>
+  <LI>Gets all required unit HMMs for a given transcript from all 
+  UnitHMMBuilders 
+  <UL>
+    <LI>Multiple UnitHMMBuilders represent multiple features or multiple models 
+    </LI></UL>
+  <LI>Combines all unit HMMs into a sentence HMM 
+  <LI>Each unitHMM refers to a single pool 
+  <LI>SentenceHMM refers to all pools </LI></UL>
+<P>
+<CENTER><BR><IMG height=540 alt=SentenceHMMBuilder.gif 
+src="TrainerDesign  Sphinx4  TWiki_files/SentenceHMMBuilder.gif" width=720> 
+</CENTER>
+<P>
+<UL>
+  <LI>Every unit HMM points into a pool 
+  <LI>Consequently sentence HMM points into all pools </LI></UL>
+<P>
+<H4><A name=SentenceHMM_is_used_by_a_Learner></A><A 
+name=_SentenceHMM_is_used_by_a_Learne></A>SentenceHMM is used by a "Learner" 
+</H4>
+<P>
+<UL>
+  <LI>Learner uses sentenceHMM and data to compute <EM>a posteriori</EM> 
+  probabilities (or equivalent terms) for all the states in the sentence HMM for 
+  each input data vector 
+  <UL>
+    <LI>These are needed to update models. Simplest implementation will use 
+    Baum-Welch </LI></UL>
+  <LI>Some discussion about whether to have the accumulator update code in the 
+  learner, or in the unitHMMs and states. 
+  <UL>
+    <LI>The former is more logical in many ways 
+    <UL>
+      <LI>converting from Baum-Welch training to on-line training is much 
+      simpler 
+      <LI>Will require change of both density object and learner to change 
+      densities (e.g Gaussian by Laplacian) </LI></UL>
+    <LI>The latter has its own pluses and minuses 
+    <UL>
+      <LI>requires a lot more information to be passed back to the sentence HMM 
+      <LI>Converting Baum-Welch to on-line training will require modification of 
+      existing density objects 
+      <LI>Simplifies replacing densities, e.g. Gaussian by Laplacian 
+      <LI>A point not explicitly discussed in the meeting, but that comes up: 
+      the latter also makes it simpler to train multiple models simultaneously 
+      using the struct ures we propose later in this document </LI></UL>
+    <LI>Currently have agreed to put accumulator update on unitHMMs , states and 
+    densities. </LI></UL>
+  <LI>But this is still open for discussion </LI></UL>
+<P>
+<H4><A name=Interaction_between_SentenceHMM></A><A 
+name=Interaction_between_SentenceHMM_></A>Interaction between SentenceHMM and 
+"Learner" </H4>
+<P>
+<UL>
+  <LI>The learner passes the a posteriori probabilities (or equivalents) back to 
+  the sentence HMM which passes it back to unit HMMs 
+  <LI>Unit HMMs update transition matrix accumulators and pass <EM>a 
+  posteriori</EM> probabilities (and data) to the states. 
+  <LI>States pass <EM>a posterioris</EM> and data to the State Output Densities, 
+  which 
+  <UL>
+    <LI>update mixture weight accumulators and 
+    <LI>pass <EM>a posterioris</EM> and data to Gaussians (or whatever density 
+    is used). </LI></UL>
+  <LI>Gaussian densities update mean and variance accumulators 
+  <LI>To replace Gaussians with Laplacians, one must only replace the Gaussian 
+  object with a Laplacian object that has all associated methods 
+  <LI>To use on-line learning algorithms both the learner and the densities must 
+  be modified (to conform to the corresponding <EM>formulae</EM>) </LI></UL>
+<P>
+<H4><A name=Learner_Diagram></A><A name=_Learner_Diagram></A>"Learner" Diagram 
+</H4>
+<P>
+<CENTER><BR><IMG height=540 alt=LearnerDiagram.gif 
+src="TrainerDesign  Sphinx4  TWiki_files/LearnerDiagram.gif" width=720> 
+</CENTER>
+<P>
+<H4><A name=Garbage_Models></A>Garbage Models </H4>
+<P>
+<UL>
+  <LI>We must have the option of generating Garbage models 
+  <LI>There are three options for generating Garbage models: 
+  <UL>
+    <LI>Suggestion by Dave Goddeau: Create a graph with all CI models in 
+    parallel, with a loop back from a common terminal node to a common initial 
+    node 
+    <UL>
+      <LI>Basically a uniform unigram LM structure for CI models </LI></UL>
+    <LI>Suggestion by Rita Singh: Merge all CI models into a single "composite" 
+    CI model. Introduce a loopback from the terminating state to the initial 
+    state 
+    <LI>Train an explicit garbage model 
+    <UL>
+      <LI>Some kind of Bakis topology with loopback from the end to the 
+      beginning </LI></UL>
+    <LI>All three ideas are excellent. Only the last one needs explicit training 
+    </LI></UL>
+  <LI>Training garbage models: Introduce them in parallel with the sentence HMM 
+  during training 
+  <UL>
+    <LI>Alternately they may be placed in parallel with every word 
+</LI></UL></LI></UL>
+<P>
+<CENTER><BR><IMG height=216 alt=GarbageModel.gif 
+src="TrainerDesign  Sphinx4  TWiki_files/GarbageModel.gif" width=504> </CENTER>
+<P>
+<H4><A name=Training_Multiple_Unit_Types></A>Training Multiple Unit Types </H4>
+<P>
+<UL>
+  <LI>Goal: To build HMMs for multiple context dependencies simultaneously 
+  <UL>
+    <LI>e.g pentaphone, triphone , left diphone and CI models simultaneously 
+    </LI></UL>
+  <LI>Context dependency diamond: </LI></UL>
+<P>
+<CENTER><BR><IMG height=360 alt=CDDiamond.gif 
+src="TrainerDesign  Sphinx4  TWiki_files/CDDiamond.gif" width=576> </CENTER>
+<P>
+<UL>
+  <LI>The figure can be extended for heptaphones or hexaphones of every kind etc 
+  </LI></UL>
+<P>
+<UL>
+  <LI>Multiple context dependent models may be trained by performing multiple 
+  passes over the data 
+  <UL>
+    <LI>One for each type of model 
+    <LI>Is this better or worse? Pedro thinks this is the theoretically better 
+    option. I think perhaps not (for theoretical reasons I can explain at length 
+    ) </LI></UL>
+  <LI>Alternately, they may be trained in a single pass by training the most 
+  detailed units (with the largest contexts) and training units with smaller 
+  contexts by integrating out the contexts 
+  <LI>A single pass of training may be used to train all units between the 
+  bottom and the top of the diamond 
+  <UL>
+    <LI>You can train all the units in the figure while training pentaphones 
+    <LI>You can train left and right diphones along with CI phones while 
+    training triphones </LI></UL>
+  <LI>Side note from Bent Schmidt-Nielsen. Sometimes it is useful to train 
+  "biphones" which go from the centre of one phone to the centre of the next. 
+  This is not a phoneme, but spans two phonemes. 
+  <UL>
+    <LI>More accurate than left or right diphones , though not as good as 
+    triphones 
+    <LI>Much smaller than triphones, good for space/accuracy trade off 
+  </LI></UL></LI></UL>
+<P>
+<H4><A name=Training_Multiple_Units></A>Training Multiple Units </H4>
+<P>
+<UL>
+  <LI>This ties with the structure of allowing densities to update accumulators 
+  </LI></UL>
+<P>
+<UL>
+  <LI>Define basic unit HMM for the most detailed unit required (which 
+  represents the bottom of the hierarchy). Also construct unit HMMs for all the 
+  coarser units to be trained. </LI></UL>
+<P>
+<UL>
+  <LI>The most detailed Unit will have pointers to the HMMs for its less 
+  detailed parents in the diamond. 
+  <UL>
+    <LI>Here is an example for a triphone, left diphone and CI phone 
+    <LI>Since the context dependency diagram is a DAG and not a tree, definition 
+    of this hieriarchy of units must be clearly specified </LI></UL></LI></UL>
+<P><PRE>  UnitHMM (Triphone)
+     |
+     +-State[]
+     |
+     +-TransitionMatrix
+     |
+     +------------UnitHMM (Left  Diphone)
+     |               |
+     |               +-State[]
+     |               |
+     |               +-TransitionMatrix
+     |               |
+     |               +------------UnitHMM (CI Phone)
+     |               |               |
+     |               |               +-State[]
+     |               |               |
+     |               |               +-TransitionMatrix
+     |               |               |
+</PRE>
+<P>
+<P>
+<UL>
+  <LI>The UnitHMMBuilder must build the entire chain of unit HMMs for each 
+  context dependent unit. 
+  <LI>During the "Learning" phase of running the learner, the first UnitHMM in 
+  the chain provides state output density values and other scores 
+  <LI>During accumulation the first UnitHMM in the chain obtains <EM>a 
+  posteriori</EM> probabilities and data from the learner and updates all of its 
+  own accumulators first 
+  <LI>It then conveys the posterior probabilities and data on to the next 
+  UnitHMM on the chain 
+  <LI>Constraint: all UnitHMMs must have identical number of states 
+  <LI>If HMM topology is also identical they can all share transition matrices 
+  <LI>Gaussian density parameters may not be shareable 
+  <UL>
+    <LI>The simplest implementation does not share density or HMM parameters 
+    across different levels of the context dependency graph (diamond). 
+    <LI>It remains to be worked out whether parameter sharing across levels is 
+    actually possible or safe </LI></UL></LI></UL>
+<P>
+<H4><A name=Training_state_densities_for_mul></A>Training state densities for 
+multiple nodes in a decision tree </H4>
+<P>
+<CENTER><BR><IMG height=288 alt=DecisionTree.gif 
+src="TrainerDesign  Sphinx4  TWiki_files/DecisionTree.gif" width=576> </CENTER>
+<P>
+<UL>
+  <LI>Decision trees are used to tie state output densities 
+  <UL>
+    <LI>Does not preclude sharing of parameters at finer levels too </LI></UL>
+  <LI>We may want to train state output densities for multiple levels of nodes 
+  in the decision tree in a single pass 
+  <UL>
+    <LI>Use appropriate level of tree for decoding according to data, memory and 
+    other requirements </LI></UL></LI></UL>
+<P>
+<H4><A name=Training_all_nodes_in_a_decision></A>Training all nodes in a 
+decision tree </H4>
+<P>
+<UL>
+  <LI>Can be done with a hierachical structure similar to what we had for 
+  multiple units 
+  <UL>
+    <LI>The entire chain of states must be built by the UnitHMMBuilder 
+    <LI>Since these represent nodes in a tree the hierarchy of state objects is 
+    very clear! </LI></UL></LI></UL>
+<P><PRE>  State for Leaf
+        |
+        +-StateOutputDensity
+        |
+        +----------State for Node
+        |                |
+        |                +-StateOutputDensity
+                         |
+                         +-State for Root
+                         |       |
+                         |       +-StateOutputDensity
+</PRE>
+<P>
+<UL>
+  <LI>The state for the leaf provides state density values to the learner 
+  <LI>During accumulation the leaf state computes its accumulators and then 
+  passes the <EM>a posteriori</EM> probabilities and data to the next node in 
+  the chain 
+  <UL>
+    <LI>The next state in the chain refers to the state for a parent (or 
+    superparent) node in the tree </LI></UL></LI></UL>
+<P>
+<H4><A name=Generalizing></A>Generalizing </H4>
+<P>
+<UL>
+  <LI>For any hierarchical set of units a similar structure can be used to train 
+  all of them simultaneously 
+  <UL>
+    <LI>Context dependent models through various lower contexts-Leafs through 
+    various nodes of decision tree-Trees of Gaussians or Gaussian parameters? 
+    </LI></UL>
+  <LI>How does this interact with parameter sharing across different levels of 
+  the hierarchy? </LI></UL>
+<P>
+<H4><A name=The_problem_of_parameter_sharing></A>The problem of parameter 
+sharing </H4>
+<P>
+<UL>
+  <LI>Sharing parameters across a hierarchy presents problems 
+  <UL>
+    <LI>e.g sharing Gaussians across different contexts (triphone and CI phone) 
+    <LI>Sharing Gaussians across leaves and nodes of tree </LI></UL>
+  <LI>During the update, each unit in a chain will update the shared parameters 
+  <UL>
+    <LI>This will result in bogus updates. 
+    <UL>
+      <LI>e.g. A triphone and its left diphone may both update a Gaussian mean 
+      for a given vector, resulting in over representation of the vector 
+    </LI></UL></LI></UL>
+  <LI>Not clear how to resolve this 
+  <LI>Simple solution : Do not share parameters across levels of the hierarchy 
+  <UL>
+    <LI>Triphones and diphones will never share mean/variances/mixture weights 
+    <LI>Root, nodes and leaves in a decision tree will not access a common 
+    parameter 
+    <LI>etc. </LI></UL>
+  <LI>There may be a more rigorous way of sharing parameters across levels 
+  <UL>
+    <LI>e.g we know we can share transition matrices across triphones and CI 
+    phones 
+    <LI>We can share means and variances across the tree in a semicontinuous HMM 
+    </LI></UL>
+  <LI>Rita, Pedro and Bhiksha will look at how to formalize the logic for 
+  sharing, based on the math </LI></UL>
+<P>
+<H4><A name=The_problem_of_pruning_for_multi></A>The problem of pruning for 
+multi-stream training </H4>
+<P>
+<UL>
+  <LI>Like the decoder, the trainer also performs pruning to reduce computation 
+  <LI>In multi-stream systems, the logic behind pruning is unclear 
+  <UL>
+    <LI>Paths that are not comparable will compete for the beam </LI></UL>
+  <LI>This is a serious problem for multi-stream decoding too, and must be 
+  resolved in order for Phil to implement multistream decoding effectively 
+  <LI>Beth will look up some earlier work on this to figure out a solution 
+</LI></UL>
+<P>
+<H4><A name=Pruning_problem_Pictorial_explan></A>Pruning problem, Pictorial 
+explanation </H4>
+<P>
+<CENTER><BR><IMG height=540 alt=PruningProblem.gif 
+src="TrainerDesign  Sphinx4  TWiki_files/PruningProblem.gif" width=720> 
+</CENTER>
+<P>
+<H4><A name=Things_to_do_in_no_order></A><A 
+name=Things_to_do_in_no_order_></A>Things to do (in no order) </H4>
+<P>
+<UL>
+  <LI>Complete architecture diagram 
+  <LI>Define modules explicitly 
+  <LI>Define interfaces 
+  <LI>Code 
+  <UL>
+    <LI>Pedro points out that the best time to begin coding will be after Paul's 
+    code walkthrough </LI></UL>
+  <LI>The manner in which information will be input to the various modules must 
+  be defined 
+  <UL>
+    <LI>The definition of these formats is crucial </LI></UL>
+  <LI>The information to be passed between modules must be more clearly defined 
+  <UL>
+    <LI>Some mathematical analysis may be needed before defining this completely 
+    </LI></UL>
+  <LI>A preliminary outline of the complete training procedure, end to end, must 
+  be defined 
+  <UL>
+    <LI>This may change with the evolving trainer, but it is essential to decide 
+    a preliminary procedural flow chart 
+    <LI>This is different from the system architecture, but linked to it 
+  </LI></UL></LI></UL>
+<P>
+<H4><A name=Timelines></A>Timelines </H4>
+<P>
+<UL>
+  <LI>These were not discussed in the meeting. Here is a proposal. Please modify 
+  / add as desired 
+  <LI>Design timelines (Now = 20 Jan 2003, Monday) 
+  <UL>
+    <LI>Define all blocks and architecture diagram: two weeks from now 
+    <LI>Define all interfaces: concurrent with architecture diagram 
+    <LI>Definition of interfaces will drive architecture diagram and vice versa 
+    <LI>Define some input formats for information to be fed to trainer: three 
+    weeks from now 
+    <LI>Begin coding by mid February latest </LI></UL>
+  <LI>Task timelines 
+  <UL>
+    <LI>Preliminary trainer that can replicate sphinx3 continuous, and sphinx3 
+    semicontinuous using multiple feature streams, using conventional decision 
+    trees: 4 months from start of coding [Mid June] 
+    <UL>
+      <LI>The system must perform as well as current sphinx 3 trainer. </LI></UL>
+    <LI>Actual multi-model, and multiple feature (audio-visual, for example) in 
+    3 months from then (7 months from start of coding [Mid September]) 
+    <LI>Fully flexible trainer in 10 months from start of coding [End of year] 
+    </LI></UL></LI></UL>
+<P><A name=TrainerBlueprint></A>
+<H3><A name=Trainer_blueprint></A>Trainer blueprint </H3>
+<P>
+<UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/pub/Sphinx4/TrainerDesign/s4trainer_blueprint.ppt" 
+  target=_top>s4trainer_blueprint.ppt</A>: S4 trainer blue print </LI></UL>
+<P>
+<UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/pub/Sphinx4/TrainerDesign/s4trainer_blueprint.pdf" 
+  target=_top>s4trainer_blueprint.pdf</A>: S4 trainer blue print in pdf format 
+  </LI></UL>
+<P>-- <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+- 22 Jan 2003</P></DIV><!-- /patternTopic-->
+<DIV class=twikiAfterText></DIV>
+<DIV class=twikiAttachments><SPAN class=twistyMakeOpaque id=attachmentsshow><A 
+class=twistyTrigger 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#"><IMG 
+height=16 alt=toggleopen 
+src="TrainerDesign  Sphinx4  TWiki_files/toggleopen.gif" width=16 align=top 
+border=0><SPAN class=twikiLinkLabel id=attachmentsshowlink>Show 
+attachments</SPAN></A></SPAN><SPAN class="twistyHidden twistyMakeOpaque" 
+id=attachmentshide><A class=twistyTrigger 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign#"><IMG 
+height=16 alt=toggleclose 
+src="TrainerDesign  Sphinx4  TWiki_files/toggleclose.gif" width=16 align=top 
+border=0><SPAN class=twikiLinkLabel id=attachmentshidelink>Hide 
+attachments</SPAN></A></SPAN> 
+<DIV class="twistyMakeHidden twistyRememberSetting" id=attachmentstoggle>
+<TABLE class=twikiTable id=twikiAttachmentsTable cellSpacing=0 cellPadding=0 
+summary="Topic attachments" border=0>
+  <CAPTION>Topic attachments</CAPTION>
+  <TBODY>
+  <TR>
+    <TH class=twikiFirstCol bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?sortcol=0;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>I</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?sortcol=1;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Attachment</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?sortcol=2;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Action</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?sortcol=3;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Size</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?sortcol=4;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Date</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?sortcol=5;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Who</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?sortcol=6;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Comment</FONT></A> </TH></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=ppt 
+      src="TrainerDesign  Sphinx4  TWiki_files/ppt.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>ppt</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=s4trainer_blueprint.ppt">s4trainer_blueprint.ppt</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=s4trainer_blueprint.ppt&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>58.0&nbsp;K </TD>
+    <TD bgColor=#ffffff>22 Jan 2003 - 17:09 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>S4 trainer blue print </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=pdf 
+      src="TrainerDesign  Sphinx4  TWiki_files/pdf.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>pdf</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=s4trainer_blueprint.pdf">s4trainer_blueprint.pdf</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=s4trainer_blueprint.pdf&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>41.8&nbsp;K </TD>
+    <TD bgColor=#ffffff>22 Jan 2003 - 17:16 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>S4 trainer blue print in pdf format </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="TrainerDesign  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=DecisionTree.gif">DecisionTree.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=DecisionTree.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>2.9&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:25 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Decidion tree </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=ppt 
+      src="TrainerDesign  Sphinx4  TWiki_files/ppt.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>ppt</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=DecisionTree.ppt">DecisionTree.ppt</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=DecisionTree.ppt&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>14.5&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:29 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Decidion tree in ppt format </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="TrainerDesign  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=GarbageModel.gif">GarbageModel.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=GarbageModel.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>2.4&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:29 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Parallel garbage model </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=ppt 
+      src="TrainerDesign  Sphinx4  TWiki_files/ppt.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>ppt</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=GarbageModel.ppt">GarbageModel.ppt</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=GarbageModel.ppt&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>14.5&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:30 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Parallel garbage model in ppt format </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="TrainerDesign  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=LearnerDiagram.gif">LearnerDiagram.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=LearnerDiagram.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>5.2&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:30 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Learner diagram </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=ppt 
+      src="TrainerDesign  Sphinx4  TWiki_files/ppt.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>ppt</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=LearnerDiagram.ppt">LearnerDiagram.ppt</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=LearnerDiagram.ppt&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>14.0&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:31 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Learner diagram in ppt format </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="TrainerDesign  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=PruningProblem.gif">PruningProblem.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=PruningProblem.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>11.1&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:31 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Pruning problem explained </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=ppt 
+      src="TrainerDesign  Sphinx4  TWiki_files/ppt.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>ppt</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=PruningProblem.ppt">PruningProblem.ppt</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=PruningProblem.ppt&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>32.0&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:31 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Pruning problem explained in ppt format </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="TrainerDesign  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=SentenceHMMBuilder.gif">SentenceHMMBuilder.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=SentenceHMMBuilder.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>9.1&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:32 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Sentence HMM builder </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=ppt 
+      src="TrainerDesign  Sphinx4  TWiki_files/ppt.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>ppt</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.1;filename=SentenceHMMBuilder.ppt">SentenceHMMBuilder.ppt</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=SentenceHMMBuilder.ppt&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>17.5&nbsp;K </TD>
+    <TD bgColor=#ffffff>23 Jan 2003 - 17:32 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A> 
+    </TD>
+    <TD bgColor=#ffffff>Sentence HMM builder in ppt format </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=ppt 
+      src="TrainerDesign  Sphinx4  TWiki_files/ppt.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>ppt</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.2;filename=CDDiamond.ppt">CDDiamond.ppt</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=CDDiamond.ppt&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>16.5&nbsp;K </TD>
+    <TD bgColor=#ffffff>26 Jan 2003 - 03:53 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/BhikshaRaj">BhikshaRaj</A> 
+    </TD>
+    <TD bgColor=#ffffff>Context dependency diamond in ppt format </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="TrainerDesign  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/TrainerDesign?rev=1.2;filename=CDDiamond.gif">CDDiamond.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign?filename=CDDiamond.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>4.4&nbsp;K </TD>
+    <TD bgColor=#ffffff>26 Jan 2003 - 03:55 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/BhikshaRaj">BhikshaRaj</A> 
+    </TD>
+    <TD bgColor=#ffffff>Context dependency diamond 
+</TD></TR></TBODY></TABLE></DIV></DIV>
+<SCRIPT type=text/javascript>
+//<![CDATA[
+	var table = document.getElementById("twikiAttachmentsTable");
+	if (table) {
+		var count = table.getElementsByTagName("tr").length - 1;
+		var countStr = "(" + count + ")";
+		var showlink = document.getElementById('attachmentsshowlink');
+		if (showlink != undefined) showlink.firstChild.data += " " + countStr;
+		var hidelink = document.getElementById('attachmentshidelink');
+		if (hidelink != undefined) hidelink.firstChild.data += " " + countStr;
+	}
+//]]>
+</SCRIPT>
+</DIV><!-- /patternContent--><A name=topic-actions></A>
+<DIV class=patternTopicActions>
+<DIV class=patternTopicAction><SPAN class=patternActionButtons><SPAN 
+class=patternButton><A title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/TrainerDesign?t=1152847775" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Attach an image or document to this topic" accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerDesign" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="View raw text without formatting" accessKey=r 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?raw=on" 
+rel=nofollow><SPAN class=twikiAccessKey>R</SPAN>aw View</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN>Backlinks: <A 
+title="Search the Sphinx4 Web for topics that link to here" accessKey=b 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerDesign?template=backlinksweb">We<SPAN 
+class=twikiAccessKey>b</SPAN></A>, <A 
+title="Search all webs for topics that link to here" accessKey=L 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerDesign?template=backlinksallwebs">A<SPAN 
+class=twikiAccessKey>l</SPAN>l Webs</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><SPAN class=patternRevision><A 
+title="View total topic history" accessKey=H 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerDesign?type=history" 
+rel=nofollow><SPAN class=twikiAccessKey>H</SPAN>istory</A>: r6&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerDesign?rev1=6;rev2=5" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?rev=5" 
+rel=nofollow>r5</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerDesign?rev1=5;rev2=4" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?rev=4" 
+rel=nofollow>r4</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerDesign?rev1=4;rev2=3" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?rev=3" 
+rel=nofollow>r3</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerDesign?rev1=3;rev2=2" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerDesign?rev=2" 
+rel=nofollow>r2</A></SPAN><SPAN class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Delete or rename this topic; set parent topic; view and compare revisions" 
+accessKey=M 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerDesign?template=oopsmore&amp;param1=6&amp;param2=6" 
+rel=nofollow><SPAN class=twikiAccessKey>M</SPAN>ore topic 
+actions</A></SPAN></DIV></DIV><!--/patternTopicActions-->
+<DIV class=patternMoved></DIV><!-- /patternMoved--></DIV><!-- /patternMainContents--></DIV><!-- /patternMain-->
+<DIV id=patternLeftBar>
+<DIV id=patternClearHeaderLeft></DIV>
+<DIV id=patternLeftBarContents>
+<DIV class=patternWebIndicator><B><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome">Sphinx4</A></B></DIV>
+<DIV class=patternLeftBarPersonal><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/logon/Sphinx4/TrainerDesign"><IMG 
+height=16 alt=key src="TrainerDesign  Sphinx4  TWiki_files/key.gif" width=16 
+align=top border=0> Log In</A> or <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/TWikiRegistration">Register</A> 
+
+<DIV class=patternLeftBarPersonalContent></DIV></DIV>
+<P>
+<UL>
+  <LI><B><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  height=16 alt=home src="TrainerDesign  Sphinx4  TWiki_files/home.gif" width=16 
+  align=top border=0> Sphinx4 Web</A></B> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicCreator?parent=TrainerDesign" 
+  target=_top><IMG height=16 alt=newtopic 
+  src="TrainerDesign  Sphinx4  TWiki_files/newtopic.gif" width=16 align=top 
+  border=0> Create New Topic</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicList"><IMG 
+  height=16 alt=index src="TrainerDesign  Sphinx4  TWiki_files/index.gif" 
+  width=16 align=top border=0> Index</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebSearch"><IMG 
+  height=16 alt=searchtopic 
+  src="TrainerDesign  Sphinx4  TWiki_files/searchtopic.gif" width=16 align=top 
+  border=0> Search</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebChanges"><IMG 
+  height=16 alt=changes src="TrainerDesign  Sphinx4  TWiki_files/changes.gif" 
+  width=16 align=top border=0> Changes</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebNotify"><IMG 
+  height=16 alt=notify src="TrainerDesign  Sphinx4  TWiki_files/notify.gif" 
+  width=16 align=top border=0> Notifications</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebStatistics"><IMG 
+  height=16 alt=statistics 
+  src="TrainerDesign  Sphinx4  TWiki_files/statistics.gif" width=16 align=top 
+  border=0> Statistics</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebPreferences"><IMG 
+  height=16 alt=wrench src="TrainerDesign  Sphinx4  TWiki_files/wrench.gif" 
+  width=16 align=top border=0> Preferences</A> </LI></UL>
+<P>
+<HR>
+
+<UL>
+  <LI><STRONG>Webs</STRONG> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffefa6" height=16 alt="" 
+  src="TrainerDesign  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Main</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sandbox/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #b9daff" height=16 alt="" 
+  src="TrainerDesign  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sandbox</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffcc99" height=16 alt="" 
+  src="TrainerDesign  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #99ff99" height=16 alt="" 
+  src="TrainerDesign  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx4</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffd8aa" height=16 alt="" 
+  src="TrainerDesign  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;TWiki</A> </LI></UL></DIV><!-- /patternLeftBarContents--></DIV><!-- /patternLeftBar--></DIV><!-- /patternFloatWrap-->
+<DIV class=clear>&nbsp;</DIV></DIV><!-- /patternOuter--></DIV><!-- /patternWrapper-->
+<DIV id=patternTopBar>
+<DIV id=patternTopBarContents>
+<TABLE style="MARGIN-TOP: 11px; WIDTH: 100%" cellSpacing=0 cellPadding=0 
+border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=center><A href="http://twiki.org/"><IMG alt="Powered by TWiki" 
+      src="TrainerDesign  Sphinx4  TWiki_files/T-logo-140x40-t.gif" 
+    border=0></A></TD>
+    <TD class=patternMetaMenu vAlign=top align=right>
+      <UL>
+        <LI>
+        <FORM name=jumpForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/TrainerDesign><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" id=jumpFormField 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Jump name=topic></FORM>
+        <LI>
+        <FORM name=quickSearchForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/WebSearch><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Search name=search></FORM>
+        <LI></LI></UL></TD></TR></TBODY></TABLE></DIV></DIV><!-- /patternTopBar-->
+<DIV id=patternBottomBar>
+<DIV id=patternBottomBarContents><SPAN class=twikiRight><A 
+href="http://twiki.org/"><IMG 
+title="This site is powered by the TWiki collaboration platform" height=15 
+alt="This site is powered by the TWiki collaboration platform" 
+src="TrainerDesign  Sphinx4  TWiki_files/T-logo-80x15.gif" width=80 
+border=0></A></SPAN>Copyright © by the contributing authors. All material on 
+this collaboration platform is the property of the contributing authors. 
+<BR>Ideas, requests, problems regarding TWiki? <A 
+href="mailto:egouvea@cs.cmu.edu?subject=TWiki Feedback on Sphinx4.TrainerDesign">Send 
+feedback</A> </DIV><!-- /patternBottomBarContents--></DIV><!-- /patternBottomBar--></DIV><!-- /patternPage--></DIV><!-- /patternPageShadow--></DIV><!-- /patternScreen--></BODY></HTML>

@@ -1,0 +1,497 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0078)http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements -->
+<HTML lang=en-us xml:lang="en-us" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>TrainerRequirements < Sphinx4 < TWiki</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-15"><LINK 
+href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" type=image/x-icon 
+rel=icon><LINK href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" 
+type=image/x-icon rel="shortcut icon"><LINK title="RSS Feed" 
+href="/sphinx/twiki/bin/view/Sphinx4/WebRss" type=application/rss+xml 
+rel=alternate><!--/closing tag 'solves' IE selection bug-->
+<SCRIPT src="TrainerRequirements  Sphinx4  TWiki_files/twiki.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="TrainerRequirements  Sphinx4  TWiki_files/pattern.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+//<![CDATA[
+	function launchWindow(inWeb, inTopic) {
+		return launchTheWindow("/sphinx/twiki/bin/view/", inWeb, inTopic, "", "viewplain" );
+	}
+//]]>
+</SCRIPT>
+
+<SCRIPT src="TrainerRequirements  Sphinx4  TWiki_files/twist.js" 
+type=text/javascript></SCRIPT>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/TwistyContrib/twist.css );
+</STYLE>
+
+<STYLE type=text/css media=all>#patternTopBar {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderCenter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderLeft {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderRight {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternTopBarContentsOuter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternOuter {
+	MARGIN-LEFT: 12em
+}
+#patternLeftBar {
+	MARGIN-LEFT: -12em; WIDTH: 12em
+}
+</STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/layout.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/style.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/colors.css );
+</STYLE>
+<!--[if IE]>
+<STYLE type=text/css>PRE {
+	OVERFLOW-Y: hidden; OVERFLOW-X: auto; ; PADDING-BOTTOM: expression(this.scrollWidth > this.offsetWidth ? 16 : 0)
+}
+#patternLeftBarContents LI {
+	TEXT-OVERFLOW: ellipsis
+}
+</STYLE>
+<![endif]--><!--[if lte IE 6]>
+<STYLE type=text/css>#patternLeftBar {
+	POSITION: relative
+}
+</STYLE>
+<![endif]-->
+<STYLE type=text/css media=all>.twikiInputField {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_input.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiInputFieldDisabled {
+	BACKGROUND-IMAGE: none; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiButton {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_button.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternToolBarButtons .patternButton A {
+	
+}
+.twikiSubmit {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_submit.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiSubmitDisabled {
+	BACKGROUND-IMAGE: none
+}
+.twikiToc LI {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-down.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternLeftBar .patternWebIndicator {
+	BACKGROUND-COLOR: #99ff99
+}
+.patternBookView .twikiTopRow {
+	BACKGROUND-COLOR: #99ff99
+}
+#patternTopBar {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/TWiki_header.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternTopBar {
+	BACKGROUND-COLOR: #ffffff
+}
+.patternBookView {
+	BORDER-LEFT-COLOR: #99ff99; BORDER-BOTTOM-COLOR: #99ff99; BORDER-TOP-COLOR: #99ff99; BORDER-RIGHT-COLOR: #99ff99
+}
+#twikiLogin {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .tipsOfTheDayContents {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternOuter {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_yellow.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternPrintPage #patternOuter {
+	BACKGROUND: #fff
+}
+.twikiPageForm TABLE {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/form_gradient.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .patternLeftBarPersonal LI {
+	BACKGROUND-POSITION: 0px 0.5em; BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-blue.gif); BACKGROUND-REPEAT: no-repeat
+}
+.patternPreviewPage #patternMain {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PreviewBackground/preview2bg.gif)
+}
+</STYLE>
+
+<STYLE type=text/css media=all></STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/print.css );
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY class=patternViewPage><A name=PageTop></A>
+<DIV id=patternScreen>
+<DIV id=patternPageShadow>
+<DIV id=patternPage>
+<DIV id=patternWrapper>
+<DIV id=patternOuter>
+<DIV id=patternFloatWrap>
+<DIV id=patternMain>
+<DIV id=patternClearHeaderCenter></DIV>
+<DIV id=patternMainContents>
+<DIV class=patternTop>
+<DIV class=patternToolBar>
+<DIV class=patternToolBarButtons><SPAN class=patternButton><A 
+title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/TrainerRequirements?t=1152847951" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=patternButton><A title="Attach an image or document to this topic" 
+accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerRequirements" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A></SPAN><SPAN 
+class=patternButton><A title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A></SPAN> </DIV></DIV><!-- /patternToolBar-->
+<DIV class=patternToolBarBottom></DIV></DIV><!-- /patternTop-->
+<DIV class=patternHomePath><SPAN class=twikiRight><SPAN class=patternRevInfo>r6 
+- 12 Mar 2004 - 17:01:37 - <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/BhikshaRaj">BhikshaRaj</A></SPAN></SPAN><SPAN 
+class=patternHomePathTitle>You are here: </SPAN><A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome">TWiki</A><SPAN 
+class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+style="BACKGROUND-COLOR: #99ff99" height=13 alt="" 
+src="TrainerRequirements  Sphinx4  TWiki_files/web-bg-small.gif" width=13 
+border=0> Sphinx4 Web</A> <SPAN 
+class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><SPAN 
+title=Sphinx4.TrainerRequirements>TrainerRequirements</SPAN><BR 
+class=twikiClear></DIV><!-- /patternHomePath-->
+<DIV class=twikiBeforeText></DIV>
+<DIV class=patternContent>
+<DIV class=patternTopic>
+<DIV class=twikiToc>
+<UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements#Trainer_Requirements">Trainer 
+  Requirements</A> 
+  <UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements#General_requirements">General 
+    requirements</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements#Model_structure">Model 
+    structure</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements#Output_format">Output 
+    format</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements#Core_engine">Core 
+    engine</A> </LI></UL></LI></UL></DIV>
+<H2><A name=Trainer_Requirements></A>Trainer Requirements </H2>This is a set of 
+requirements for the Sphinx 4 trainer. This set of requirements is currently 
+being constructed and has not been finalized. It's a compilation/reorganization 
+of Bhiksha's presentation during the face-to-face meeting and Paul's 
+recollection's from said meeting. 
+<P>
+<H3><A name=General_requirements></A>General requirements </H3>
+<UL>
+  <LI>Creates acoustic models usuable by S4 
+  <LI>Allows for distributed training of models over many computers 
+  <LI>Tools shall be created that will generate an external form of the acoustic 
+  model that can be used for visualization of the model. This format should be 
+  an easily parseable format such as XML. 
+  <LI>Acoustic Model must optionally support GARBAGE models 
+  <LI>Trainer should be capable of starting from any intermediate step: 
+  initialization, from previous models etc. </LI></UL>
+<H3><A name=Model_structure></A>Model structure </H3>
+<UL>
+  <LI>Any topology of model 
+  <UL>
+    <LI>Variable number of states per model 
+    <LI>Different units must be allowed to have different topologies </LI></UL>
+  <LI>Any kind of context: 
+  <UL>
+    <LI>Context independent phonemes 
+    <LI>Diphones 
+    <UL>
+      <LI>Left context diphones 
+      <LI>Right context diphones </LI></UL>
+    <LI>Triphones 
+    <UL>
+      <LI>Symmetric 
+      <LI>Asymmetric </LI></UL>
+    <LI>Tetraphones 
+    <LI>Pentaphones 
+    <LI>... </LI></UL>
+  <LI>Any given length of left and right contexts 
+  <LI>Cross-word models 
+  <LI>Acoustic model should allow arbitrary mixes of unit sizes (pentaphones and 
+  diphones can co-exist). </LI></UL>
+<H3><A name=Output_format></A>Output format </H3>
+<UL>
+  <LI>Models are self-describing. Models must retain information internally that 
+  describe all stages of processing that went into training the model. 
+  <LI>Models may maintain enough information to allow the models to be 
+  continually updated/retrained. For example, models may not only retain the 
+  values such as means and variances, but may retain the accumulators for these 
+  values, that will allow these values to be updated in the future. 
+  <LI>The acoustic model will retain enough information to ensure that only 
+  compatibile models are combined. 
+  <LI>An Acoustic Model shall be stored in a single (optionally compressed) jar 
+  file 
+  <LI>The acoustic model jar file may contain java class code that will provide 
+  the interface to the acoustic model. This interface includes: 
+  <UL>
+    <LI>Loading 
+    <LI>Saving 
+    <LI>Exporting to XML format 
+    <LI>Looking up/retrieving hmms 
+    <LI>Scoring hmms </LI></UL>
+  <LI>A tool shall be created that will take the external format (XML) of an S4 
+  acoustic model and generate an acoustic model that can be read by sphinx 2 and 
+  sphinx 3. 
+  <UL>
+    <LI>Keep in mind that sphinx 2 models have strict restrictions to the 
+    structure of models (5 state HMMs, 4 parallel input streams, semi-continuous 
+    HMMs). </LI></UL></LI></UL>
+<H3><A name=Core_engine></A>Core engine </H3>
+<UL>
+  <LI>Must train any kind of HMM: 
+  <UL>
+    <LI>Discrete 
+    <LI>Continuous with any kind of parameter sharing 
+    <UL>
+      <LI>Fully continuous, with state-level tying of entire densities 
+      <LI>Sharing of means across states 
+      <LI>Sharing of variances across states 
+      <LI>Sharing of mixture weights across states 
+      <UL>
+        <LI>Semi-continuous and phone-dependent codebook based semicontinuous 
+        HMMs will be a special case of continuous density HMMs with tied means 
+        and variances </LI></UL></LI></UL></LI></UL>
+  <LI>Variable state densities (Gaussians or otherwise) 
+  <UL>
+    <LI>Mixtures with different numbers of mixture components 
+    <LI>Different kinds of densities at different states </LI></UL>
+  <LI>Multiple models simultaneously: 
+  <UL>
+    <LI>Context independent 
+    <LI>Diphone (L/R) 
+    <LI>Triphone 
+    <LI>... </LI></UL>
+  <LI>Simultaneous training: 
+  <UL>
+    <LI>Train multiple pronunciations simultaneously via phone nets 
+    <UL>
+      <LI>Forced-alignment needs multiple passes of training 
+      <LI>Simplifies other procedures such as automatic sub-word unit 
+      identification 
+      <LI>Multiple feature streams 
+      <UL>
+        <LI>Tied at any level - state, phone boundary, or word boundary </LI></UL>
+      <LI>Multiple model types 
+      <UL>
+        <LI>e.g. phoneme and syllable models, tied at word boundary 
+    </LI></UL></LI></UL></LI></UL>
+  <LI>Parallel training 
+  <UL>
+    <LI>Use probabilities computed from one stream to train models for a 
+    parallelly fed stream (say, use mfc-computed models / <EM>a posterioris</EM> 
+    to train plp models) </LI></UL>
+  <LI>Passing additional info (e.g. masks, confidence in estimated feature) to 
+  trainer 
+  <LI>Support different modalities of training 
+  <UL>
+    <LI>Maximum Likelihood Training 
+    <UL>
+      <LI>Baum-Welch 
+      <LI>Viterbi </LI></UL>
+    <LI>Maximum A Posteriori (MAP) training 
+    <LI>Speaker adaptive training 
+    <UL>
+      <LI>Maximum Likelihood Linear Regression </LI></UL>
+    <LI>Discriminative training 
+    <LI>On-line training 
+    <UL>
+      <LI>On-line MLLR </LI></UL></LI></UL></LI></UL>
+<P>
+<P>
+<P>
+<P>-- <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/PaulLamere">PaulLamere</A> 
+- 19 Jan 2003</P></DIV><!-- /patternTopic-->
+<DIV class=twikiAfterText></DIV></DIV><!-- /patternContent--><A 
+name=topic-actions></A>
+<DIV class=patternTopicActions>
+<DIV class=patternTopicAction><SPAN class=patternActionButtons><SPAN 
+class=patternButton><A title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/TrainerRequirements?t=1152847951" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Attach an image or document to this topic" accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/TrainerRequirements" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="View raw text without formatting" accessKey=r 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements?raw=on" 
+rel=nofollow><SPAN class=twikiAccessKey>R</SPAN>aw View</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN>Backlinks: <A 
+title="Search the Sphinx4 Web for topics that link to here" accessKey=b 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerRequirements?template=backlinksweb">We<SPAN 
+class=twikiAccessKey>b</SPAN></A>, <A 
+title="Search all webs for topics that link to here" accessKey=L 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerRequirements?template=backlinksallwebs">A<SPAN 
+class=twikiAccessKey>l</SPAN>l Webs</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><SPAN class=patternRevision><A 
+title="View total topic history" accessKey=H 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerRequirements?type=history" 
+rel=nofollow><SPAN class=twikiAccessKey>H</SPAN>istory</A>: r6&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerRequirements?rev1=6;rev2=5" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements?rev=5" 
+rel=nofollow>r5</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerRequirements?rev1=5;rev2=4" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements?rev=4" 
+rel=nofollow>r4</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerRequirements?rev1=4;rev2=3" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements?rev=3" 
+rel=nofollow>r3</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/TrainerRequirements?rev1=3;rev2=2" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements?rev=2" 
+rel=nofollow>r2</A></SPAN><SPAN class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Delete or rename this topic; set parent topic; view and compare revisions" 
+accessKey=M 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/TrainerRequirements?template=oopsmore&amp;param1=6&amp;param2=6" 
+rel=nofollow><SPAN class=twikiAccessKey>M</SPAN>ore topic 
+actions</A></SPAN></DIV></DIV><!--/patternTopicActions-->
+<DIV class=patternMoved></DIV><!-- /patternMoved--></DIV><!-- /patternMainContents--></DIV><!-- /patternMain-->
+<DIV id=patternLeftBar>
+<DIV id=patternClearHeaderLeft></DIV>
+<DIV id=patternLeftBarContents>
+<DIV class=patternWebIndicator><B><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome">Sphinx4</A></B></DIV>
+<DIV class=patternLeftBarPersonal><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/logon/Sphinx4/TrainerRequirements"><IMG 
+height=16 alt=key src="TrainerRequirements  Sphinx4  TWiki_files/key.gif" 
+width=16 align=top border=0> Log In</A> or <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/TWikiRegistration">Register</A> 
+
+<DIV class=patternLeftBarPersonalContent></DIV></DIV>
+<P>
+<UL>
+  <LI><B><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  height=16 alt=home src="TrainerRequirements  Sphinx4  TWiki_files/home.gif" 
+  width=16 align=top border=0> Sphinx4 Web</A></B> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicCreator?parent=TrainerRequirements" 
+  target=_top><IMG height=16 alt=newtopic 
+  src="TrainerRequirements  Sphinx4  TWiki_files/newtopic.gif" width=16 
+  align=top border=0> Create New Topic</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicList"><IMG 
+  height=16 alt=index src="TrainerRequirements  Sphinx4  TWiki_files/index.gif" 
+  width=16 align=top border=0> Index</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebSearch"><IMG 
+  height=16 alt=searchtopic 
+  src="TrainerRequirements  Sphinx4  TWiki_files/searchtopic.gif" width=16 
+  align=top border=0> Search</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebChanges"><IMG 
+  height=16 alt=changes 
+  src="TrainerRequirements  Sphinx4  TWiki_files/changes.gif" width=16 align=top 
+  border=0> Changes</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebNotify"><IMG 
+  height=16 alt=notify 
+  src="TrainerRequirements  Sphinx4  TWiki_files/notify.gif" width=16 align=top 
+  border=0> Notifications</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebStatistics"><IMG 
+  height=16 alt=statistics 
+  src="TrainerRequirements  Sphinx4  TWiki_files/statistics.gif" width=16 
+  align=top border=0> Statistics</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebPreferences"><IMG 
+  height=16 alt=wrench 
+  src="TrainerRequirements  Sphinx4  TWiki_files/wrench.gif" width=16 align=top 
+  border=0> Preferences</A> </LI></UL>
+<P>
+<HR>
+
+<UL>
+  <LI><STRONG>Webs</STRONG> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffefa6" height=16 alt="" 
+  src="TrainerRequirements  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Main</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sandbox/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #b9daff" height=16 alt="" 
+  src="TrainerRequirements  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sandbox</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffcc99" height=16 alt="" 
+  src="TrainerRequirements  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #99ff99" height=16 alt="" 
+  src="TrainerRequirements  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx4</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffd8aa" height=16 alt="" 
+  src="TrainerRequirements  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;TWiki</A> </LI></UL></DIV><!-- /patternLeftBarContents--></DIV><!-- /patternLeftBar--></DIV><!-- /patternFloatWrap-->
+<DIV class=clear>&nbsp;</DIV></DIV><!-- /patternOuter--></DIV><!-- /patternWrapper-->
+<DIV id=patternTopBar>
+<DIV id=patternTopBarContents>
+<TABLE style="MARGIN-TOP: 11px; WIDTH: 100%" cellSpacing=0 cellPadding=0 
+border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=center><A href="http://twiki.org/"><IMG alt="Powered by TWiki" 
+      src="TrainerRequirements  Sphinx4  TWiki_files/T-logo-140x40-t.gif" 
+      border=0></A></TD>
+    <TD class=patternMetaMenu vAlign=top align=right>
+      <UL>
+        <LI>
+        <FORM name=jumpForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/TrainerRequirements><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" id=jumpFormField 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Jump name=topic></FORM>
+        <LI>
+        <FORM name=quickSearchForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/WebSearch><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Search name=search></FORM>
+        <LI></LI></UL></TD></TR></TBODY></TABLE></DIV></DIV><!-- /patternTopBar-->
+<DIV id=patternBottomBar>
+<DIV id=patternBottomBarContents><SPAN class=twikiRight><A 
+href="http://twiki.org/"><IMG 
+title="This site is powered by the TWiki collaboration platform" height=15 
+alt="This site is powered by the TWiki collaboration platform" 
+src="TrainerRequirements  Sphinx4  TWiki_files/T-logo-80x15.gif" width=80 
+border=0></A></SPAN>Copyright © by the contributing authors. All material on 
+this collaboration platform is the property of the contributing authors. 
+<BR>Ideas, requests, problems regarding TWiki? <A 
+href="mailto:egouvea@cs.cmu.edu?subject=TWiki Feedback on Sphinx4.TrainerRequirements">Send 
+feedback</A> </DIV><!-- /patternBottomBarContents--></DIV><!-- /patternBottomBar--></DIV><!-- /patternPage--></DIV><!-- /patternPageShadow--></DIV><!-- /patternScreen--></BODY></HTML>

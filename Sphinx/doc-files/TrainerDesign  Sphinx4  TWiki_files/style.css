@@ -1,0 +1,864 @@
+HTML BODY {
+	FONT-SIZE: small; voice-family: inherit
+}
+UNKNOWN {
+	FONT-SIZE: small
+}
+P {
+	MARGIN: 1em 0px 0px
+}
+TABLE {
+	BORDER-COLLAPSE: separate
+}
+TH {
+	LINE-HEIGHT: 1.15em
+}
+STRONG {
+	FONT-WEIGHT: bold
+}
+B {
+	FONT-WEIGHT: bold
+}
+HR {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; HEIGHT: 1px; BORDER-BOTTOM-STYLE: none
+}
+PRE {
+	MARGIN: 1em 0px; WIDTH: 100%
+}
+UNKNOWN {
+	OVERFLOW: scroll; WIDTH: auto
+}
+OL {
+	MARGIN-TOP: 0px
+}
+UL {
+	MARGIN-TOP: 0px
+}
+OL LI {
+	LINE-HEIGHT: 1.4em
+}
+UL LI {
+	LINE-HEIGHT: 1.4em
+}
+H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 1em 0px 0.1em; LINE-HEIGHT: 104%; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 1em 0px 0.1em; LINE-HEIGHT: 104%; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 1em 0px 0.1em; LINE-HEIGHT: 104%; PADDING-TOP: 0px
+}
+H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 1em 0px 0.1em; LINE-HEIGHT: 104%; PADDING-TOP: 0px
+}
+H5 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 1em 0px 0.1em; LINE-HEIGHT: 104%; PADDING-TOP: 0px
+}
+H6 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 1em 0px 0.1em; LINE-HEIGHT: 104%; PADDING-TOP: 0px
+}
+H1 {
+	MARGIN: 0px 0px 0.5em
+}
+H1 {
+	FONT-SIZE: 210%
+}
+H2 {
+	FONT-SIZE: 160%
+}
+H3 {
+	FONT-SIZE: 135%
+}
+H4 {
+	FONT-SIZE: 122%
+}
+H5 {
+	FONT-SIZE: 110%
+}
+H6 {
+	FONT-SIZE: 95%
+}
+H2 {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 5px; BORDER-TOP: 0px solid; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 0.1em; MARGIN: 1em -5px 0.35em; BORDER-LEFT: 0px solid; PADDING-TOP: 0.1em; BORDER-BOTTOM: 1px solid; HEIGHT: auto
+}
+H3 {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 5px; BORDER-TOP: 0px solid; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 0.1em; MARGIN: 1em -5px 0.35em; BORDER-LEFT: 0px solid; PADDING-TOP: 0.1em; BORDER-BOTTOM: 1px solid; HEIGHT: auto
+}
+H4 {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 5px; BORDER-TOP: 0px solid; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 0.1em; MARGIN: 1em -5px 0.35em; BORDER-LEFT: 0px solid; PADDING-TOP: 0.1em; BORDER-BOTTOM: 1px solid; HEIGHT: auto
+}
+H5 {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 5px; BORDER-TOP: 0px solid; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 0.1em; MARGIN: 1em -5px 0.35em; BORDER-LEFT: 0px solid; PADDING-TOP: 0.1em; BORDER-BOTTOM: 1px solid; HEIGHT: auto
+}
+H6 {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 5px; BORDER-TOP: 0px solid; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 0.1em; MARGIN: 1em -5px 0.35em; BORDER-LEFT: 0px solid; PADDING-TOP: 0.1em; BORDER-BOTTOM: 1px solid; HEIGHT: auto
+}
+H1.patternTemplateTitle {
+	FONT-SIZE: 175%; TEXT-ALIGN: center
+}
+H2.patternTemplateTitle {
+	TEXT-ALIGN: center
+}
+.twikiNewLink {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+.twikiNewLink A {
+	MARGIN-LEFT: 1px; TEXT-DECORATION: none
+}
+.twikiNewLink A SUP {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-SIZE: 100%; PADDING-BOTTOM: 0px; VERTICAL-ALIGN: baseline; PADDING-TOP: 0px; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.twikiNewLink A:link SUP {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid; TEXT-DECORATION: none
+}
+.twikiNewLink A:visited SUP {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid; TEXT-DECORATION: none
+}
+.twikiNewLink A:hover SUP {
+	TEXT-DECORATION: none
+}
+:link:unknown {
+	TEXT-DECORATION: underline
+}
+:visited:unknown {
+	TEXT-DECORATION: underline
+}
+:link {
+	TEXT-DECORATION: underline
+}
+:visited {
+	TEXT-DECORATION: underline
+}
+:active {
+	TEXT-DECORATION: underline
+}
+:active {
+	TEXT-DECORATION: underline
+}
+:hover {
+	TEXT-DECORATION: none
+}
+:hover {
+	TEXT-DECORATION: none
+}
+IMG {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; VERTICAL-ALIGN: text-bottom; BORDER-RIGHT-WIDTH: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; DISPLAY: inline; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+TEXTAREA {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; VERTICAL-ALIGN: middle; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+INPUT {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; VERTICAL-ALIGN: middle; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+SELECT {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; VERTICAL-ALIGN: middle; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+TEXTAREA {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; PADDING-TOP: 1px
+}
+INPUT {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; PADDING-TOP: 1px
+}
+SELECT OPTION {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; PADDING-TOP: 1px
+}
+.twikiSubmit {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.25em; BORDER-TOP: 1px solid; PADDING-LEFT: 0.25em; FONT-WEIGHT: bold; FONT-SIZE: 94%; PADDING-BOTTOM: 0.15em; VERTICAL-ALIGN: middle; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.twikiButton {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.25em; BORDER-TOP: 1px solid; PADDING-LEFT: 0.25em; FONT-WEIGHT: bold; FONT-SIZE: 94%; PADDING-BOTTOM: 0.15em; VERTICAL-ALIGN: middle; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.twikiCheckbox {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.25em; BORDER-TOP: 1px solid; PADDING-LEFT: 0.25em; FONT-WEIGHT: bold; FONT-SIZE: 94%; PADDING-BOTTOM: 0.15em; VERTICAL-ALIGN: middle; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.twikiCheckbox {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; MARGIN: 0px 0.3em 0px 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.twikiRadioButton {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; MARGIN: 0px 0.3em 0px 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.twikiInputField {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.25em; BORDER-TOP: 1px solid; PADDING-LEFT: 0.25em; FONT-SIZE: 94%; PADDING-BOTTOM: 0.15em; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.patternFormButton {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; MARGIN: 0px 0px 0px 2px; BORDER-RIGHT-WIDTH: 0px
+}
+TEXTAREA {
+	FONT-SIZE: 100%
+}
+#patternPage {
+	FONT-SIZE: 105%; LINE-HEIGHT: 1.4em; FONT-FAMILY: arial, "Lucida Grande", verdana, sans-serif
+}
+#patternTopBar {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; OVERFLOW: hidden; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+#patternTopBarContents {
+	PADDING-RIGHT: 1.5em; PADDING-LEFT: 1em; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#patternBottomBar {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid
+}
+#patternBottomBarContents {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; FONT-SIZE: 86%; PADDING-BOTTOM: 1em; LINE-HEIGHT: 110%; PADDING-TOP: 1em; TEXT-ALIGN: center
+}
+#patternMainContents {
+	PADDING-RIGHT: 1.5em; PADDING-LEFT: 3em; PADDING-BOTTOM: 3em; PADDING-TOP: 0px
+}
+#patternLeftBarContents {
+	MARGIN: 0px 1em 1em
+}
+.tagMePlugin SELECT {
+	FONT-SIZE: 0.86em; MARGIN: 0px 0.25em 0px 0px
+}
+.tagMePlugin INPUT {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.editTable .twikiTable {
+	MARGIN: 0px 0px 2px
+}
+.editTableInput {
+	FONT-FAMILY: monospace
+}
+.editTableTextarea {
+	FONT-FAMILY: monospace
+}
+.editTableEditImageButton {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiTable {
+	
+}
+.twikiTable TD {
+	
+}
+.twikiTable TH {
+	
+}
+.twikiTable TH {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.twikiTable TD {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+.twikiTable TH A:link {
+	TEXT-DECORATION: none
+}
+.twikiTable TH A:visited {
+	TEXT-DECORATION: none
+}
+.twikiTable TH A FONT {
+	TEXT-DECORATION: none
+}
+.twikiTable TH A:hover {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; TEXT-DECORATION: none
+}
+.twikiTable TH A:hover FONT {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; TEXT-DECORATION: none
+}
+TH.twikiSortedAscendingCol A:link {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid
+}
+TH.twikiSortedAscendingCol A:link FONT {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid
+}
+TH.twikiSortedAscendingCol A:visited {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid
+}
+TH.twikiSortedAscendingCol A:visited FONT {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid
+}
+TH.twikiSortedDescendingCol A:link {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+TH.twikiSortedDescendingCol A:link FONT {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+TH.twikiSortedDescendingCol A:visited {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+TH.twikiSortedDescendingCol A:visited FONT {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+TH.twikiSortedAscendingCol A:hover {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; TEXT-DECORATION: none
+}
+TH.twikiSortedAscendingCol A:hover FONT {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; TEXT-DECORATION: none
+}
+TH.twikiSortedDescendingCol A:hover {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid; TEXT-DECORATION: none
+}
+TH.twikiSortedDescendingCol A:hover FONT {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid; TEXT-DECORATION: none
+}
+.twikiEditForm {
+	MARGIN: 0px 0px 0.5em
+}
+.twikiEditForm .twikiFormTable {
+	TEXT-ALIGN: center
+}
+.tipsOfTheDayContents .tipsOfTheDayTitle {
+	FONT-WEIGHT: bold
+}
+.patternTopic .tipsOfTheDayHeader {
+	PADDING-RIGHT: 5px; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px
+}
+.patternTopic .tipsOfTheDayText {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; PADDING-TOP: 0px
+}
+.patternTopic .tipsOfTheDayText A:link {
+	TEXT-DECORATION: none
+}
+.patternTopic .tipsOfTheDayText A:visited {
+	TEXT-DECORATION: none
+}
+#patternLeftBar .tipsOfTheDayHeader IMG {
+	DISPLAY: none
+}
+#patternLeftBar .tipsOfTheDayContents {
+	PADDING-RIGHT: 0.25em; PADDING-LEFT: 0.25em; PADDING-BOTTOM: 0.5em; OVERFLOW: hidden; PADDING-TOP: 0.25em; HEIGHT: 1%
+}
+#patternLeftBar .tipsOfTheDayHeader {
+	DISPLAY: block; FONT-WEIGHT: normal
+}
+A.twistyTrigger:link {
+	TEXT-DECORATION: none
+}
+A.twistyTrigger:visited {
+	TEXT-DECORATION: none
+}
+A:link .twistyLinkLabel {
+	TEXT-DECORATION: underline
+}
+A:visited .twistyLinkLabel {
+	TEXT-DECORATION: underline
+}
+#twikiLogin {
+	MARGIN: 0px auto; WIDTH: 40em; TEXT-ALIGN: center
+}
+#twikiLogin .twikiFormSteps {
+	BORDER-TOP-WIDTH: 5px; BORDER-LEFT-WIDTH: 5px; BORDER-BOTTOM-WIDTH: 5px; BORDER-RIGHT-WIDTH: 5px
+}
+.twikiAttachments {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; MARGIN: 1em 0px; PADDING-TOP: 1px
+}
+.twikiForm {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; MARGIN: 1em 0px; PADDING-TOP: 1px
+}
+.twikiForm H1 {
+	MARGIN-TOP: 0px
+}
+.twikiForm H2 {
+	MARGIN-TOP: 0px
+}
+.twikiForm H3 {
+	MARGIN-TOP: 0px
+}
+.twikiForm H4 {
+	MARGIN-TOP: 0px
+}
+.twikiForm H5 {
+	MARGIN-TOP: 0px
+}
+.twikiForm H6 {
+	MARGIN-TOP: 0px
+}
+.patternContent .twikiAttachments {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 20px; BORDER-TOP: 1px solid; PADDING-LEFT: 20px; FONT-SIZE: 94%; PADDING-BOTTOM: 0.5em; MARGIN: 0px; BORDER-LEFT: 0px solid; PADDING-TOP: 0.5em; BORDER-BOTTOM: 0px solid
+}
+.patternContent .twikiForm {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 20px; BORDER-TOP: 1px solid; PADDING-LEFT: 20px; FONT-SIZE: 94%; PADDING-BOTTOM: 0.5em; MARGIN: 0px; BORDER-LEFT: 0px solid; PADDING-TOP: 0.5em; BORDER-BOTTOM: 0px solid
+}
+.twikiAttachments TABLE {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 5px 0px; BORDER-LEFT: 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: 1px solid; BORDER-COLLAPSE: collapse; border-spacing: 0px; empty-cells: show
+}
+TABLE.twikiFormTable {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 5px 0px; BORDER-LEFT: 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: 1px solid; BORDER-COLLAPSE: collapse; border-spacing: 0px; empty-cells: show
+}
+.twikiAttachments TABLE {
+	WIDTH: 100%; LINE-HEIGHT: 1.4em; voice-family: inherit
+}
+.twikiAttachments TD {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+.twikiAttachments TH {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+.twikiAttachments TH {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 3px; VERTICAL-ALIGN: middle; PADDING-TOP: 3px; HEIGHT: 2.5em
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 3px; VERTICAL-ALIGN: middle; PADDING-TOP: 3px; HEIGHT: 2.5em
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow {
+	TEXT-ALIGN: center
+}
+.twikiEditForm .twikiFormTable TH {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 0.5em; BORDER-TOP: 0px solid; PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0.25em; VERTICAL-ALIGN: middle; BORDER-LEFT: 0px solid; PADDING-TOP: 0.25em; BORDER-BOTTOM: 1px solid
+}
+.twikiEditForm .twikiFormTable TD {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 0.5em; BORDER-TOP: 0px solid; PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0.25em; VERTICAL-ALIGN: middle; BORDER-LEFT: 0px solid; PADDING-TOP: 0.25em; BORDER-BOTTOM: 1px solid
+}
+.twikiAttachments TH A:link {
+	TEXT-DECORATION: none
+}
+.twikiAttachments TH A:visited {
+	TEXT-DECORATION: none
+}
+.twikiAttachments TH IMG {
+	DISPLAY: none
+}
+.twikiAttachments TH A:link IMG {
+	DISPLAY: none
+}
+.twikiAttachments TH A:visited IMG {
+	DISPLAY: none
+}
+.twikiAttachments TD {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 3px; VERTICAL-ALIGN: top; PADDING-TOP: 3px; HEIGHT: 1.4em; TEXT-ALIGN: left
+}
+TABLE.twikiFormTable TD {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; PADDING-BOTTOM: 3px; VERTICAL-ALIGN: top; PADDING-TOP: 3px; HEIGHT: 1.4em; TEXT-ALIGN: left
+}
+.twikiAttachments TD {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 1px; BORDER-RIGHT-WIDTH: 0px
+}
+.twikiAttachments TH.twikiFirstCol {
+	WIDTH: 26px; TEXT-ALIGN: center
+}
+.twikiAttachments TD.twikiFirstCol {
+	WIDTH: 26px; TEXT-ALIGN: center
+}
+.twikiAttachments CAPTION {
+	DISPLAY: none
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow A:link {
+	TEXT-DECORATION: none
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow A:visited {
+	TEXT-DECORATION: none
+}
+.twikiFormSteps {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; BORDER-LEFT: 0px solid; PADDING-TOP: 0.25em; BORDER-BOTTOM: 1px solid; TEXT-ALIGN: left
+}
+.twikiFormStep {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 20px; BORDER-TOP: 0px solid; PADDING-LEFT: 20px; PADDING-BOTTOM: 1em; BORDER-LEFT: 0px solid; LINE-HEIGHT: 140%; PADDING-TOP: 1em; BORDER-BOTTOM: 1px solid
+}
+.twikiFormStep H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 115%; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiFormStep H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 115%; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiFormStep H3 {
+	FONT-WEIGHT: bold
+}
+.twikiFormStep H4 {
+	FONT-WEIGHT: normal
+}
+.twikiFormStep P {
+	MARGIN: 0.3em 0px
+}
+.twikiToc {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0.6em; MARGIN: 1em 0px; PADDING-TOP: 0.3em
+}
+.twikiToc UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.twikiToc LI {
+	BACKGROUND-POSITION: 0px 0.5em; PADDING-LEFT: 1em; MARGIN-LEFT: 1em; BACKGROUND-REPEAT: no-repeat
+}
+.twikiToc .twikiTocTitle {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bold; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.twikiSmall {
+	FONT-SIZE: 86%; LINE-HEIGHT: 110%
+}
+.twikiSmallish {
+	FONT-SIZE: 94%
+}
+.twikiNew {
+	
+}
+.twikiSummary {
+	FONT-SIZE: 86%; LINE-HEIGHT: 110%
+}
+.twikiEmulatedLink {
+	TEXT-DECORATION: underline
+}
+.twikiPageForm TABLE {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+.twikiPageForm TABLE {
+	MARGIN: 0px 0px 2em; WIDTH: 100%
+}
+.twikiPageForm TH {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 1em; PADDING-LEFT: 1em; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0.15em; PADDING-TOP: 0.15em; BORDER-RIGHT-WIDTH: 0px
+}
+.twikiPageForm TD {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 1em; PADDING-LEFT: 1em; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0.15em; PADDING-TOP: 0.15em; BORDER-RIGHT-WIDTH: 0px
+}
+.twikiPageForm TD {
+	
+}
+.twikiPageForm TD.first {
+	PADDING-TOP: 1em
+}
+.twikiBroadcastMessage {
+	PADDING-RIGHT: 0.5em; PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0.25em; MARGIN: 0px 0px 1em; PADDING-TOP: 0.25em
+}
+.twikiHelp {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 1em; BORDER-TOP: 1px solid; PADDING-LEFT: 1em; PADDING-BOTTOM: 1em; MARGIN: 0px 0px 1em; BORDER-LEFT: 0px solid; PADDING-TOP: 1em; BORDER-BOTTOM: 1px solid
+}
+.twikiHelp UL {
+	MARGIN: 0px
+}
+.twikiHelp LI {
+	MARGIN: 0px
+}
+.twikiHelp UL {
+	PADDING-LEFT: 2em
+}
+.twikiAccessKey {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; TEXT-DECORATION: none
+}
+A:hover .twikiAccessKey {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; TEXT-DECORATION: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiWebIndent {
+	MARGIN: 0px 0px 0px 1em
+}
+A.twikiLinkInHeaderRight {
+	DISPLAY: block; FLOAT: right; MARGIN: 0px 0px 0px 5px
+}
+.twikiLinkLabel {
+	
+}
+.patternTopic {
+	MARGIN: 1em 0px 2em
+}
+#patternLeftBarContents {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 94%; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0px
+}
+#patternLeftBarContents A IMG {
+	MARGIN: 1px 0px 0px
+}
+#patternLeftBarContents A:link {
+	TEXT-DECORATION: none
+}
+#patternLeftBarContents A:visited {
+	TEXT-DECORATION: none
+}
+#patternLeftBarContents UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0.5em 0px 1em; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+#patternLeftBarContents LI {
+	MARGIN: 0px 1.1em 0px 0px; OVERFLOW: hidden; WIDTH: 100%
+}
+#patternLeftBarContents H2 {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BACKGROUND-COLOR: transparent; BORDER-BOTTOM-STYLE: none
+}
+#patternLeftBarContents .patternWebIndicator {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; PADDING-BOTTOM: 0.55em; MARGIN: 0px -1em; LINE-HEIGHT: 1.4em; PADDING-TOP: 0.55em; TEXT-ALIGN: center
+}
+#patternLeftBarContents .patternWebIndicator A:link {
+	TEXT-DECORATION: none
+}
+#patternLeftBarContents .patternWebIndicator A:visited {
+	TEXT-DECORATION: none
+}
+#patternLeftBarContents .patternLeftBarPersonal {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 1em; BORDER-TOP: 0px solid; PADDING-LEFT: 1em; PADDING-BOTTOM: 0.55em; MARGIN: 0px -1em; BORDER-LEFT: 0px solid; WIDTH: 100%; PADDING-TOP: 0.55em; BORDER-BOTTOM: 1px solid
+}
+#patternLeftBarContents .patternLeftBarPersonal UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+#patternLeftBarContents .patternLeftBarPersonal LI {
+	PADDING-LEFT: 1em; BACKGROUND-REPEAT: no-repeat
+}
+#patternLeftBarContents .patternLeftBarPersonal A:hover {
+	TEXT-DECORATION: none
+}
+.patternTop {
+	FONT-SIZE: 94%
+}
+.patternToolBar {
+	PADDING-RIGHT: 0.5em; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0.4em 0px 0px; PADDING-TOP: 0px; HEIGHT: 1%
+}
+.patternToolBarButtons {
+	FLOAT: right
+}
+.patternToolBarButtons .twikiSeparator {
+	DISPLAY: none
+}
+.patternToolBar .patternButton {
+	FLOAT: left
+}
+.patternToolBar .patternButton S {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.45em; BORDER-TOP: 1px solid; DISPLAY: block; PADDING-LEFT: 0.45em; PADDING-BOTTOM: 0.15em; MARGIN: 0px 0px -1px 4px; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.patternToolBar .patternButton STRIKE {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.45em; BORDER-TOP: 1px solid; DISPLAY: block; PADDING-LEFT: 0.45em; PADDING-BOTTOM: 0.15em; MARGIN: 0px 0px -1px 4px; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.patternToolBar .patternButton A:link {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.45em; BORDER-TOP: 1px solid; DISPLAY: block; PADDING-LEFT: 0.45em; PADDING-BOTTOM: 0.15em; MARGIN: 0px 0px -1px 4px; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.patternToolBar .patternButton A:visited {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.45em; BORDER-TOP: 1px solid; DISPLAY: block; PADDING-LEFT: 0.45em; PADDING-BOTTOM: 0.15em; MARGIN: 0px 0px -1px 4px; BORDER-LEFT: 1px solid; PADDING-TOP: 0.15em; BORDER-BOTTOM: 1px solid
+}
+.patternToolBar .patternButton A:link {
+	TEXT-DECORATION: none
+}
+.patternToolBar .patternButton A:visited {
+	TEXT-DECORATION: none
+}
+.patternToolBar .patternButton S {
+	TEXT-DECORATION: none
+}
+.patternToolBar .patternButton STRIKE {
+	TEXT-DECORATION: none
+}
+.patternToolBar .patternButton A:hover {
+	TEXT-DECORATION: none
+}
+.patternToolBarBottom {
+	CLEAR: both; BORDER-RIGHT: 0px solid; BORDER-TOP: 1px solid; Z-INDEX: 2; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid; POSITION: relative
+}
+.patternMetaMenu INPUT {
+	FONT-SIZE: 0.86em; MARGIN: 0px; WIDTH: 8em
+}
+.patternMetaMenu SELECT {
+	FONT-SIZE: 0.86em; MARGIN: 0px; WIDTH: 8em
+}
+.patternMetaMenu SELECT OPTION {
+	FONT-SIZE: 0.86em; MARGIN: 0px; WIDTH: 8em
+}
+.patternMetaMenu SELECT OPTION {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 1px
+}
+.patternMetaMenu UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.patternMetaMenu UL LI {
+	PADDING-RIGHT: 0.1em; DISPLAY: inline; PADDING-LEFT: 0.1em; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+.patternHomePath {
+	FONT-SIZE: 94%; MARGIN: 0.3em 0px
+}
+.patternHomePath A:link {
+	TEXT-DECORATION: none
+}
+.patternHomePath A:visited {
+	TEXT-DECORATION: none
+}
+.patternRevInfo {
+	FONT-SIZE: 94%; MARGIN: 0px 0px 0px 0.15em
+}
+.patternTopicActions {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+.patternTopicAction {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 20px; BORDER-TOP: 1px solid; PADDING-LEFT: 20px; PADDING-BOTTOM: 0.4em; BORDER-LEFT: 0px solid; LINE-HEIGHT: 1.5em; PADDING-TOP: 0.4em; BORDER-BOTTOM: 0px solid
+}
+.patternViewPage .patternTopicAction {
+	FONT-SIZE: 94%
+}
+.patternActionButtons A:link {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 2px; PADDING-TOP: 1px
+}
+.patternActionButtons A:visited {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; PADDING-BOTTOM: 2px; PADDING-TOP: 1px
+}
+.patternTopicAction .patternActionButtons A:link {
+	TEXT-DECORATION: none
+}
+.patternTopicAction .patternActionButtons A:visited {
+	TEXT-DECORATION: none
+}
+.patternTopicAction .patternSaveOptions {
+	MARGIN-BOTTOM: 0.5em
+}
+.patternTopicAction .patternSaveOptions .patternSaveOptionsContents {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0.2em; PADDING-TOP: 0.2em
+}
+.patternMoved {
+	FONT-SIZE: 94%; MARGIN: 1em 0px
+}
+.patternMoved I {
+	FONT-STYLE: normal
+}
+.patternMoved EM {
+	FONT-STYLE: normal
+}
+TABLE#twikiSearchTable {
+	BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-WIDTH: 0px
+}
+TABLE#twikiSearchTable TH {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 0.5em; BORDER-TOP: 0px solid; PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0.5em; BORDER-LEFT: 0px solid; PADDING-TOP: 0.5em; BORDER-BOTTOM: 1px solid
+}
+TABLE#twikiSearchTable TD {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 0.5em; BORDER-TOP: 0px solid; PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0.5em; BORDER-LEFT: 0px solid; PADDING-TOP: 0.5em; BORDER-BOTTOM: 1px solid
+}
+TABLE#twikiSearchTable TH {
+	WIDTH: 20%; TEXT-ALIGN: right
+}
+TABLE#twikiSearchTable TD {
+	WIDTH: 80%
+}
+TABLE#twikiSearchTable TD.first {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; PADDING-BOTTOM: 1em; PADDING-TOP: 1em
+}
+.patternSearchResults {
+	MARGIN: 0px 0px 1em
+}
+.patternSearchResults BLOCKQUOTE {
+	MARGIN: 1em 0px 1em 5em
+}
+H3.patternSearchResultsHeader {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; DISPLAY: block; FONT-WEIGHT: bold; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; HEIGHT: 1%
+}
+H4.patternSearchResultsHeader {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; DISPLAY: block; FONT-WEIGHT: bold; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid; HEIGHT: 1%
+}
+.patternSearchResults H3 {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; FONT-WEIGHT: bold; FONT-SIZE: 115%; PADDING-BOTTOM: 0.5em; MARGIN: 0px; PADDING-TOP: 0.5em
+}
+H4.patternSearchResultsHeader {
+	FONT-WEIGHT: normal; FONT-SIZE: 100%; PADDING-BOTTOM: 0.3em; PADDING-TOP: 0.3em
+}
+.patternSearchResult .twikiTopRow {
+	PADDING-TOP: 0.2em
+}
+.patternSearchResult .twikiBottomRow {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; PADDING-BOTTOM: 0.25em; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 1px solid
+}
+.patternSearchResult .twikiAlert {
+	FONT-WEIGHT: bold
+}
+.patternSearchResult .twikiSummary .twikiAlert {
+	FONT-WEIGHT: normal
+}
+.patternSearchResult .twikiNew {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: 1px solid; PADDING-LEFT: 1px; FONT-WEIGHT: bold; FONT-SIZE: 85%; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: 1px solid
+}
+.patternSearchResults .twikiHelp {
+	PADDING-RIGHT: 5px; DISPLAY: block; PADDING-LEFT: 5px; PADDING-BOTTOM: 0.1em; MARGIN: 1em -5px 0.35em; WIDTH: auto; PADDING-TOP: 0.1em
+}
+.patternSearchResult .twikiSRAuthor {
+	WIDTH: 15%; TEXT-ALIGN: left
+}
+.patternSearchResult .twikiSRRev {
+	WIDTH: 30%; TEXT-ALIGN: left
+}
+.patternSearchResultCount {
+	MARGIN: 1em 0px 3em
+}
+.patternSearched {
+	
+}
+.patternSaveHelp {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0.5em; LINE-HEIGHT: 1.5em; PADDING-TOP: 0.5em
+}
+.patternBookView {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: 0px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; MARGIN: 0.5em 0px 1.5em -5px; BORDER-LEFT: 2px solid; PADDING-TOP: 0px; BORDER-BOTTOM: 2px solid
+}
+.patternBookView .twikiTopRow {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 0.15em; MARGIN: 1em -5px 0.15em; PADDING-TOP: 0.25em
+}
+.patternBookView .twikiBottomRow {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 100%; PADDING-BOTTOM: 1em; WIDTH: auto; BORDER-TOP-STYLE: none; PADDING-TOP: 1em; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.patternNoViewPage #patternMainContents {
+	PADDING-TOP: 1.5em
+}
+TABLE.patternDiffOptions {
+	MARGIN: 0.5em 0px; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+TABLE.patternDiffOptions TD {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; TEXT-ALIGN: center; BORDER-BOTTOM-STYLE: none
+}
+TABLE.patternDiffOptions IMG {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: 1px solid; PADDING-LEFT: 10px; PADDING-BOTTOM: 0px; BORDER-LEFT: 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: 1px solid
+}
+TABLE.patternDiffOptions INPUT {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.patternEditPage .twikiForm H1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 120%
+}
+.patternEditPage .twikiForm H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 120%
+}
+.patternEditPage .twikiForm H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 120%
+}
+.twikiEditboxStyleMono {
+	FONT-FAMILY: "Courier New", courier, monaco, monospace
+}
+.twikiEditboxStyleProportional {
+	FONT-FAMILY: "Lucida Grande", verdana, arial, sans-serif
+}
+.twikiChangeFormButtonHolder {
+	FLOAT: right; MARGIN: 0.5em 0px
+}
+.twikiChangeFormButton .twikiButton {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; TEXT-DECORATION: underline; BORDER-BOTTOM-STYLE: none
+}
+.twikiChangeFormButtonHolder .twikiButton {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; TEXT-DECORATION: underline; BORDER-BOTTOM-STYLE: none
+}
+.patternFormHolder {
+	WIDTH: 100%
+}
+.patternSigLine {
+	PADDING-RIGHT: 0.5em; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0.25em 0px 0.5em; PADDING-TOP: 0px
+}
+.patternEditPage .patternTopicActions {
+	MARGIN: 1.5em 0px 0px
+}
+.patternPreviewArea {
+	BORDER-RIGHT: 1px solid; PADDING-RIGHT: 0.5em; BORDER-TOP: 1px solid; PADDING-LEFT: 0.5em; PADDING-BOTTOM: 0.5em; MARGIN: 0px -0.5em 2em; BORDER-LEFT: 1px solid; PADDING-TOP: 0.5em; BORDER-BOTTOM: 1px solid
+}
+.patternAttachPage .twikiAttachments TABLE {
+	WIDTH: auto
+}
+.patternAttachPage .patternTopicAction {
+	MARGIN-TOP: -1px
+}
+.patternAttachPage .twikiAttachments {
+	MARGIN-TOP: 0px
+}
+.patternAttachForm {
+	MARGIN: 0px 0px 3.5em
+}
+.patternMoveAttachment {
+	MARGIN: 0.5em 0px 0px; TEXT-ALIGN: right
+}
+.patternDiff {
+	BORDER-RIGHT: 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: 0px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 0px; MARGIN: 0.5em 0px 1.5em -5px; BORDER-LEFT: 2px solid; PADDING-TOP: 0px; BORDER-BOTTOM: 2px solid
+}
+.patternDiffPage .patternRevInfo UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 2em 0px 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.patternDiffPage .twikiDiffTable {
+	MARGIN: 2em 0px
+}
+.patternDiffPage .twikiDiffTable TH {
+	PADDING-RIGHT: 0.2em; PADDING-LEFT: 0.3em; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+.patternDiffPage .twikiDiffTable TD {
+	PADDING-RIGHT: 0.2em; PADDING-LEFT: 0.3em; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+TR.twikiDiffDebug TD {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid
+}
+.patternDiffPage TD.twikiDiffDebugLeft {
+	BORDER-BOTTOM-STYLE: none
+}
+.twikiDiffLineNumberHeader {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0.3em; PADDING-TOP: 0.3em
+}

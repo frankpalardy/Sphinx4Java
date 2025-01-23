@@ -1,0 +1,720 @@
+#patternTopBar {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ccc
+}
+#patternMain {
+	
+}
+#patternOuter {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ccc
+}
+#patternLeftBar {
+	
+}
+#patternLeftBarContents {
+	
+}
+#patternWrapper {
+	BACKGROUND-COLOR: #f6fafd
+}
+#patternBottomBar {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ccc
+}
+#patternBottomBarContents {
+	COLOR: #8e9195
+}
+#patternBottomBarContents A:link {
+	COLOR: #8e9195
+}
+#patternBottomBarContents A:visited {
+	COLOR: #8e9195
+}
+HTML BODY {
+	COLOR: #000; BACKGROUND-COLOR: #fff
+}
+BODY {
+	BACKGROUND-COLOR: transparent
+}
+P {
+	BACKGROUND-COLOR: transparent
+}
+LI {
+	BACKGROUND-COLOR: transparent
+}
+UL {
+	BACKGROUND-COLOR: transparent
+}
+OL {
+	BACKGROUND-COLOR: transparent
+}
+DL {
+	BACKGROUND-COLOR: transparent
+}
+DT {
+	BACKGROUND-COLOR: transparent
+}
+DD {
+	BACKGROUND-COLOR: transparent
+}
+ACRONYM {
+	BACKGROUND-COLOR: transparent
+}
+H1 {
+	BACKGROUND-COLOR: transparent
+}
+H2 {
+	BACKGROUND-COLOR: transparent
+}
+H3 {
+	BACKGROUND-COLOR: transparent
+}
+H4 {
+	BACKGROUND-COLOR: transparent
+}
+H5 {
+	BACKGROUND-COLOR: transparent
+}
+H6 {
+	BACKGROUND-COLOR: transparent
+}
+HR {
+	COLOR: #ccc; BACKGROUND-COLOR: #ccc
+}
+PRE {
+	COLOR: #7a4707
+}
+CODE {
+	COLOR: #7a4707
+}
+TT {
+	COLOR: #7a4707
+}
+H1 {
+	COLOR: #a00
+}
+H2 {
+	COLOR: #a00
+}
+H3 {
+	COLOR: #a00
+}
+H4 {
+	COLOR: #a00
+}
+H5 {
+	COLOR: #a00
+}
+H6 {
+	COLOR: #a00
+}
+H1 A:link {
+	COLOR: #a00
+}
+H1 A:visited {
+	COLOR: #a00
+}
+H1 A:hover {
+	COLOR: #fbf7e8
+}
+H2 {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fdfaf1; BORDER-RIGHT-COLOR: #e2dcc8
+}
+H3 {
+	BORDER-LEFT-COLOR: #e9e4d2; BORDER-BOTTOM-COLOR: #e9e4d2; BORDER-TOP-COLOR: #e9e4d2; BORDER-RIGHT-COLOR: #e9e4d2
+}
+H4 {
+	BORDER-LEFT-COLOR: #e9e4d2; BORDER-BOTTOM-COLOR: #e9e4d2; BORDER-TOP-COLOR: #e9e4d2; BORDER-RIGHT-COLOR: #e9e4d2
+}
+H5 {
+	BORDER-LEFT-COLOR: #e9e4d2; BORDER-BOTTOM-COLOR: #e9e4d2; BORDER-TOP-COLOR: #e9e4d2; BORDER-RIGHT-COLOR: #e9e4d2
+}
+H6 {
+	BORDER-LEFT-COLOR: #e9e4d2; BORDER-BOTTOM-COLOR: #e9e4d2; BORDER-TOP-COLOR: #e9e4d2; BORDER-RIGHT-COLOR: #e9e4d2
+}
+.twikiNewLink FONT {
+	
+}
+.twikiNewLink A:link SUP {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; COLOR: #666; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiNewLink A:visited SUP {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; COLOR: #666; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiNewLink A:hover SUP {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; COLOR: #fbf7e8; BORDER-TOP-COLOR: #d6000f; BACKGROUND-COLOR: #d6000f; BORDER-RIGHT-COLOR: #d6000f
+}
+.twikiNewLink {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+:link:unknown {
+	COLOR: #06c; BACKGROUND-COLOR: transparent
+}
+:visited:unknown {
+	COLOR: #06c; BACKGROUND-COLOR: transparent
+}
+:link {
+	COLOR: #06c; BACKGROUND-COLOR: transparent
+}
+:visited {
+	COLOR: #06c; BACKGROUND-COLOR: transparent
+}
+:active {
+	COLOR: #06c; BACKGROUND-COLOR: transparent
+}
+:active {
+	COLOR: #06c; BACKGROUND-COLOR: transparent
+}
+:hover {
+	COLOR: #fbf7e8; BACKGROUND-COLOR: #d6000f
+}
+:hover {
+	COLOR: #fbf7e8; BACKGROUND-COLOR: #d6000f
+}
+:hover IMG {
+	BACKGROUND: #fff
+}
+:hover IMG {
+	BACKGROUND: #fff
+}
+.patternTopic A:visited {
+	COLOR: #666
+}
+.patternTopic A:hover {
+	COLOR: #fbf7e8
+}
+TEXTAREA {
+	BORDER-LEFT-COLOR: #aaa; BORDER-BOTTOM-COLOR: #aaa; BORDER-TOP-COLOR: #aaa; BORDER-RIGHT-COLOR: #aaa
+}
+INPUT {
+	BORDER-LEFT-COLOR: #aaa; BORDER-BOTTOM-COLOR: #aaa; BORDER-TOP-COLOR: #aaa; BORDER-RIGHT-COLOR: #aaa
+}
+SELECT {
+	BORDER-LEFT-COLOR: #aaa; BORDER-BOTTOM-COLOR: #aaa; BORDER-TOP-COLOR: #aaa; BORDER-RIGHT-COLOR: #aaa
+}
+.twikiSubmit {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #aaa; COLOR: #333; BORDER-TOP-COLOR: #ddd; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #aaa
+}
+.twikiButton {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #aaa; COLOR: #333; BORDER-TOP-COLOR: #ddd; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #aaa
+}
+.twikiSubmit:active {
+	BORDER-LEFT-COLOR: #999; BORDER-BOTTOM-COLOR: #ccc; COLOR: #000; BORDER-TOP-COLOR: #999; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiButton:active {
+	BORDER-LEFT-COLOR: #999; BORDER-BOTTOM-COLOR: #ccc; COLOR: #000; BORDER-TOP-COLOR: #999; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiSubmitDisabled {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; COLOR: #ccc; BORDER-TOP-COLOR: #ddd; BACKGROUND-COLOR: #f5f5f5; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiSubmitDisabled:active {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; COLOR: #ccc; BORDER-TOP-COLOR: #ddd; BACKGROUND-COLOR: #f5f5f5; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiInputField {
+	BORDER-LEFT-COLOR: #aaa; BORDER-BOTTOM-COLOR: #ddd; COLOR: #000; BORDER-TOP-COLOR: #aaa; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiSelect {
+	BORDER-LEFT-COLOR: #aaa; BORDER-BOTTOM-COLOR: #ddd; COLOR: #000; BORDER-TOP-COLOR: #aaa; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiInputFieldDisabled {
+	COLOR: #666
+}
+.twikiTable {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiTable TD {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiTable TH {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiTable TH A:link {
+	COLOR: #06c
+}
+.twikiTable TH A:visited {
+	COLOR: #06c
+}
+.twikiTable TH A FONT {
+	COLOR: #06c
+}
+.twikiTable TH A:hover {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; COLOR: #d6000f; BORDER-TOP-COLOR: #d6000f; BACKGROUND-COLOR: transparent; BORDER-RIGHT-COLOR: #d6000f
+}
+.twikiTable TH A:hover FONT {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; COLOR: #d6000f; BORDER-TOP-COLOR: #d6000f; BACKGROUND-COLOR: transparent; BORDER-RIGHT-COLOR: #d6000f
+}
+.patternTopic TH.twikiSortedAscendingCol {
+	BACKGROUND-COLOR: #ccc
+}
+.patternTopic TH.twikiSortedDescendingCol {
+	BACKGROUND-COLOR: #ccc
+}
+TH.twikiSortedAscendingCol A:link {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedAscendingCol A:link FONT {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedAscendingCol A:visited {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedAscendingCol A:visited FONT {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedDescendingCol A:link {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedDescendingCol A:link FONT {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedDescendingCol A:visited {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedDescendingCol A:visited FONT {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+TH.twikiSortedAscendingCol A:hover {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; BORDER-TOP-COLOR: #d6000f; BORDER-RIGHT-COLOR: #d6000f
+}
+TH.twikiSortedAscendingCol A:hover FONT {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; BORDER-TOP-COLOR: #d6000f; BORDER-RIGHT-COLOR: #d6000f
+}
+TH.twikiSortedDescendingCol A:hover {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; BORDER-TOP-COLOR: #d6000f; BORDER-RIGHT-COLOR: #d6000f
+}
+TH.twikiSortedDescendingCol A:hover FONT {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; BORDER-TOP-COLOR: #d6000f; BORDER-RIGHT-COLOR: #d6000f
+}
+.twistyPlaceholder {
+	COLOR: #8e9195
+}
+A.twistyTrigger:hover {
+	COLOR: #fbf7e8
+}
+.tipsOfTheDay {
+	BACKGROUND-COLOR: #ecf4fb
+}
+.patternTopic .tipsOfTheDayHeader {
+	COLOR: #333
+}
+#patternLeftBar .tipsOfTheDay A:link {
+	COLOR: #a00
+}
+#patternLeftBar .tipsOfTheDay A:visited {
+	COLOR: #a00
+}
+#patternLeftBar .tipsOfTheDay A:hover {
+	COLOR: #fbf7e8
+}
+.revComment .patternTopicAction {
+	BACKGROUND-COLOR: #fdfbf4
+}
+.twikiGrayText {
+	COLOR: #8e9195
+}
+.twikiGrayText A:link {
+	COLOR: #8e9195
+}
+.twikiGrayText A:visited {
+	COLOR: #8e9195
+}
+.twikiGrayText A:hover {
+	COLOR: #fbf7e8
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow {
+	COLOR: #666
+}
+TABLE.twikiFormTable TD.twikiFormTableRow {
+	COLOR: #666
+}
+.twikiEditForm {
+	COLOR: #000
+}
+.twikiEditForm .twikiFormTable TH {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiEditForm .twikiFormTable TD {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiEditForm .twikiFormTable TD {
+	BACKGROUND-COLOR: #f6f8fc
+}
+.twikiEditForm .twikiFormTable TH {
+	BACKGROUND-COLOR: #ecf4fb
+}
+.patternContent .twikiAttachments {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fefbf3; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternContent .twikiForm {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fefbf3; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.twikiAttachments TABLE {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ccc
+}
+TABLE.twikiFormTable {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiAttachments TABLE {
+	BACKGROUND-COLOR: #fff
+}
+.twikiAttachments TD {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiAttachments TH {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BORDER-RIGHT-COLOR: #ccc
+}
+.twikiAttachments TH {
+	BACKGROUND-COLOR: #fff
+}
+.twikiAttachments TD {
+	BACKGROUND-COLOR: #fff
+}
+.twikiAttachments TH A:link {
+	COLOR: #06c
+}
+.twikiAttachments TH A:visited {
+	COLOR: #06c
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow A:link {
+	COLOR: #06c
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow A:visited {
+	COLOR: #06c
+}
+.twikiAttachments TH FONT {
+	COLOR: #06c
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow FONT {
+	COLOR: #06c
+}
+.twikiAttachments TH A:hover {
+	BORDER-LEFT-COLOR: #06c; BORDER-BOTTOM-COLOR: #06c; BORDER-TOP-COLOR: #06c; BACKGROUND-COLOR: transparent; BORDER-RIGHT-COLOR: #06c
+}
+TABLE.twikiFormTable TH.twikiFormTableHRow A:hover {
+	BORDER-LEFT-COLOR: #06c; BORDER-BOTTOM-COLOR: #06c; BORDER-TOP-COLOR: #06c; BACKGROUND-COLOR: transparent; BORDER-RIGHT-COLOR: #06c
+}
+.twikiAttachments TH.twikiSortedAscendingCol {
+	BACKGROUND-COLOR: #efefef
+}
+.twikiAttachments TH.twikiSortedDescendingCol {
+	BACKGROUND-COLOR: #efefef
+}
+.twikiFormSteps {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #f6fafd; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.twikiFormStep {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.twikiFormStep H3 {
+	BACKGROUND-COLOR: transparent
+}
+.twikiFormStep H4 {
+	BACKGROUND-COLOR: transparent
+}
+.twikiToc .twikiTocTitle {
+	COLOR: #666
+}
+.twikiBroadcastMessage {
+	BACKGROUND-COLOR: yellow
+}
+.twikiBroadcastMessage B {
+	COLOR: #f00
+}
+.twikiBroadcastMessage STRONG {
+	COLOR: #f00
+}
+.twikiAlert {
+	COLOR: #f00
+}
+.twikiAlert CODE {
+	COLOR: #f00
+}
+.twikiEmulatedLink {
+	COLOR: #06c
+}
+.twikiPageForm TABLE {
+	BORDER-LEFT-COLOR: #ddd; BACKGROUND: #fff; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.twikiPageForm HR {
+	BORDER-LEFT-COLOR: #efefef; BORDER-BOTTOM-COLOR: #efefef; COLOR: #efefef; BORDER-TOP-COLOR: #efefef; BACKGROUND-COLOR: #efefef; BORDER-RIGHT-COLOR: #efefef
+}
+.twikiHelp {
+	BORDER-LEFT-COLOR: #d5e6f3; BORDER-BOTTOM-COLOR: #d5e6f3; BORDER-TOP-COLOR: #d5e6f3; BACKGROUND-COLOR: #ecf4fb; BORDER-RIGHT-COLOR: #d5e6f3
+}
+.twikiAccessKey {
+	BORDER-LEFT-COLOR: #8e9195; BORDER-BOTTOM-COLOR: #8e9195; BORDER-TOP-COLOR: #8e9195; BORDER-RIGHT-COLOR: #8e9195
+}
+A:link .twikiAccessKey {
+	
+}
+A:visited .twikiAccessKey {
+	
+}
+A:hover .twikiAccessKey {
+	
+}
+#patternPage {
+	BACKGROUND-COLOR: #fff
+}
+#patternLeftBarContents {
+	COLOR: #666
+}
+#patternLeftBarContents .patternWebIndicator {
+	COLOR: #000
+}
+#patternLeftBarContents .patternWebIndicator A:link {
+	COLOR: #000
+}
+#patternLeftBarContents .patternWebIndicator A:visited {
+	COLOR: #000
+}
+#patternLeftBarContents .patternWebIndicator A:hover {
+	COLOR: #fbf7e8
+}
+#patternLeftBarContents HR {
+	COLOR: #e2dcc8; BACKGROUND-COLOR: #e2dcc8
+}
+#patternLeftBarContents A:link {
+	COLOR: #7a4707
+}
+#patternLeftBarContents A:visited {
+	COLOR: #7a4707
+}
+#patternLeftBarContents A:hover {
+	COLOR: #fbf7e8
+}
+#patternLeftBarContents B {
+	COLOR: #333
+}
+#patternLeftBarContents STRONG {
+	COLOR: #333
+}
+#patternLeftBarContents .patternChangeLanguage {
+	COLOR: #8e9195
+}
+#patternLeftBarContents .patternLeftBarPersonal {
+	BORDER-LEFT-COLOR: #d9eaf6; BORDER-BOTTOM-COLOR: #d9eaf6; BORDER-TOP-COLOR: #d9eaf6; BORDER-RIGHT-COLOR: #d9eaf6
+}
+#patternLeftBarContents .patternLeftBarPersonal A:link {
+	COLOR: #06c
+}
+#patternLeftBarContents .patternLeftBarPersonal A:visited {
+	COLOR: #06c
+}
+#patternLeftBarContents .patternLeftBarPersonal A:hover {
+	COLOR: #fbf7e8; BACKGROUND-COLOR: #d6000f
+}
+.patternSeparator {
+	FONT-FAMILY: monospace
+}
+.patternTopicActions {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternTopicAction {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; COLOR: #666; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fbf7e8; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternTopicAction .twikiSeparator {
+	COLOR: #aaa
+}
+.patternActionButtons A:link {
+	COLOR: #d6000f
+}
+.patternActionButtons A:visited {
+	COLOR: #d6000f
+}
+.patternActionButtons A:hover {
+	COLOR: #fbf7e8
+}
+.patternTopicAction .twikiAccessKey {
+	BORDER-LEFT-COLOR: #c75305; BORDER-BOTTOM-COLOR: #c75305; BORDER-TOP-COLOR: #c75305; BORDER-RIGHT-COLOR: #c75305
+}
+.patternTopicAction LABEL {
+	COLOR: #000
+}
+.patternHelpCol {
+	COLOR: #8e9195
+}
+.patternFormFieldDefaultColor {
+	COLOR: #8e9195
+}
+.patternToolBar .patternButton S {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternToolBar .patternButton STRIKE {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternToolBar .patternButton A:link {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternToolBar .patternButton A:visited {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternToolBar .patternButton A:link {
+	COLOR: #666
+}
+.patternToolBar .patternButton A:visited {
+	COLOR: #666
+}
+.patternToolBar .patternButton S {
+	BORDER-LEFT-COLOR: #e0e0e0; BORDER-BOTTOM-COLOR: #e0e0e0; COLOR: #ccc; BORDER-TOP-COLOR: #e0e0e0; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #e0e0e0
+}
+.patternToolBar .patternButton STRIKE {
+	BORDER-LEFT-COLOR: #e0e0e0; BORDER-BOTTOM-COLOR: #e0e0e0; COLOR: #ccc; BORDER-TOP-COLOR: #e0e0e0; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #e0e0e0
+}
+.patternToolBar .patternButton A:hover {
+	BORDER-LEFT-COLOR: #d6000f; BORDER-BOTTOM-COLOR: #d6000f; COLOR: #fbf7e8; BORDER-TOP-COLOR: #d6000f; BACKGROUND-COLOR: #d6000f; BORDER-RIGHT-COLOR: #d6000f
+}
+.patternToolBar .patternButton IMG {
+	BACKGROUND-COLOR: transparent
+}
+.patternToolBarBottom {
+	BORDER-LEFT-COLOR: #e2dcc8; BORDER-BOTTOM-COLOR: #e2dcc8; BORDER-TOP-COLOR: #e2dcc8; BORDER-RIGHT-COLOR: #e2dcc8
+}
+.patternToolBar A:link .twikiAccessKey {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+.patternToolBar A:visited .twikiAccessKey {
+	BORDER-LEFT-COLOR: #666; BORDER-BOTTOM-COLOR: #666; BORDER-TOP-COLOR: #666; BORDER-RIGHT-COLOR: #666
+}
+.patternToolBar A:hover .twikiAccessKey {
+	BACKGROUND-COLOR: transparent
+}
+.patternRevInfo {
+	COLOR: #8e9195
+}
+.patternRevInfo A:link {
+	COLOR: #8e9195
+}
+.patternRevInfo A:visited {
+	COLOR: #8e9195
+}
+.patternRevInfo A:hover {
+	COLOR: #fbf7e8
+}
+.patternMoved {
+	COLOR: #8e9195
+}
+.patternMoved A:link {
+	COLOR: #8e9195
+}
+.patternMoved A:visited {
+	COLOR: #8e9195
+}
+.patternMoved A:hover {
+	COLOR: #fbf7e8
+}
+.patternSaveHelp {
+	BACKGROUND-COLOR: #fff
+}
+TABLE#twikiSearchTable TH {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ddd
+}
+TABLE#twikiSearchTable TD {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #ddd
+}
+TABLE#twikiSearchTable TH {
+	COLOR: #8e9195
+}
+TABLE#twikiSearchTable TD.first {
+	BACKGROUND-COLOR: #efefef
+}
+H3.patternSearchResultsHeader {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BACKGROUND-COLOR: #fefbf3; BORDER-RIGHT-COLOR: #ccc
+}
+H4.patternSearchResultsHeader {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BACKGROUND-COLOR: #fefbf3; BORDER-RIGHT-COLOR: #ccc
+}
+H4.patternSearchResultsHeader {
+	COLOR: #000
+}
+.patternNoViewPage H4.patternSearchResultsHeader {
+	COLOR: #a00
+}
+.patternSearchResult .twikiBottomRow {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.patternSearchResult .twikiAlert {
+	COLOR: #f00
+}
+.patternSearchResult .twikiSummary .twikiAlert {
+	COLOR: #900
+}
+.patternSearchResult .twikiNew {
+	BORDER-LEFT-COLOR: #049804; BORDER-BOTTOM-COLOR: #049804; COLOR: #049804; BORDER-TOP-COLOR: #049804; BACKGROUND-COLOR: #ecfadc; BORDER-RIGHT-COLOR: #049804
+}
+.patternViewPage .patternSearchResultsBegin {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.patternBookView .twikiTopRow {
+	COLOR: #666; BACKGROUND-COLOR: transparent
+}
+.patternBookView .twikiBottomRow {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.patternBookView .patternSearchResultCount {
+	COLOR: #8e9195
+}
+TABLE.patternDiffOptions IMG {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BORDER-RIGHT-COLOR: #ccc
+}
+.patternEditPage TEXTAREA#topic {
+	BACKGROUND-COLOR: #fff
+}
+.twikiChangeFormButton .twikiButton {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #06c
+}
+.twikiChangeFormButtonHolder .twikiButton {
+	BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: #06c
+}
+.patternSig INPUT {
+	COLOR: #8e9195; BACKGROUND-COLOR: #fff
+}
+.patternPreviewArea {
+	BORDER-LEFT-COLOR: #f00; BORDER-BOTTOM-COLOR: #f00; BORDER-TOP-COLOR: #f00; BACKGROUND-COLOR: #fff; BORDER-RIGHT-COLOR: #f00
+}
+.patternDiff {
+	BORDER-LEFT-COLOR: #ccc; BORDER-BOTTOM-COLOR: #ccc; BORDER-TOP-COLOR: #ccc; BORDER-RIGHT-COLOR: #ccc
+}
+.patternDiff H4.patternSearchResultsHeader {
+	BACKGROUND-COLOR: #ccc
+}
+TR.twikiDiffDebug TD {
+	BORDER-LEFT-COLOR: #ddd; BORDER-BOTTOM-COLOR: #ddd; BORDER-TOP-COLOR: #ddd; BORDER-RIGHT-COLOR: #ddd
+}
+.patternDiffPage .twikiDiffTable TH {
+	BACKGROUND-COLOR: #eee
+}
+TR.twikiDiffDebug .twikiDiffChangedText {
+	BACKGROUND: #99ff99
+}
+TR.twikiDiffDebug .twikiDiffChangedText {
+	BACKGROUND: #99ff99
+}
+TR.twikiDiffDebug .twikiDiffDeletedMarker {
+	BACKGROUND-COLOR: #f99
+}
+TR.twikiDiffDebug .twikiDiffDeletedText {
+	BACKGROUND-COLOR: #f99
+}
+TR.twikiDiffDebug .twikiDiffAddedMarker {
+	BACKGROUND-COLOR: #ccf
+}
+TR.twikiDiffDebug .twikiDiffAddedText {
+	BACKGROUND-COLOR: #ccf
+}
+TR.twikiDiffDebug .twikiDiffUnchangedText {
+	COLOR: #8e9195
+}
+.twikiDiffChangedHeader {
+	BACKGROUND-COLOR: #ccc
+}
+.twikiDiffDeletedHeader {
+	BACKGROUND-COLOR: #ccc
+}
+.twikiDiffAddedHeader {
+	BACKGROUND-COLOR: #ccc
+}
+.twikiDiffUnchangedTextContents {
+	
+}
+.twikiDiffLineNumberHeader {
+	BACKGROUND-COLOR: #eee
+}

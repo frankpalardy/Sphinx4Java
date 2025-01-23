@@ -1,0 +1,3231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html -->
+<HTML><HEAD><TITLE>SphinxTrain Documentation</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<STYLE type=text/css>PRE {
+	PADDING-RIGHT: 2mm; PADDING-LEFT: 2mm; FONT-SIZE: medium; BACKGROUND: #f0f8ff; PADDING-BOTTOM: 2mm; COLOR: teal; BORDER-TOP-STYLE: ridge; PADDING-TOP: 2mm; BORDER-RIGHT-STYLE: ridge; BORDER-LEFT-STYLE: ridge; BORDER-BOTTOM-STYLE: ridge
+}
+CODE {
+	FONT-SIZE: medium; COLOR: teal
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2873" name=GENERATOR></HEAD>
+<BODY><A name=top>INDEX</A> 
+<P>(This is under construction.) <!======================================================================>
+<OL>
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#0"><FONT 
+  color=red>Before you train</FONT></A> 
+  <UL>
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#00">The 
+    general-procedure chart</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#01">Modeling 
+    context-dependent phones with untied states: some memory requirements</A> 
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#02">Data 
+    preparation</A> 
+    <UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#02a">When you 
+      have a very small closed vocabulary</A> </LI></UL>
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#03">The 
+    set of base and higher order feature vectors</A> 
+    <UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#031">Feature 
+      streams</A> </LI></UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#04">Force-alignment</A> 
+    </LI></UL><!======================================================================>
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#2"><FONT 
+  color=red>Training continuous models</FONT></A> 
+  <UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#20">Creating 
+    the CI model definition file</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#21">Creating 
+    the HMM topology file</A> 
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#22">Flat 
+    initialization of CI model parameters</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#23">Training CI 
+    models</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#24">Creating 
+    the CD untied model definition file</A> 
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#25">Flat 
+    initialization of CD untied model parameters</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#26">Training CD 
+    untied models</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#27">Building 
+    decision trees for parameter sharing</A> 
+    <UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#28">Generating 
+      the linguistic questions</A> </LI></UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#29">Pruning the 
+    decision trees</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#30">Creating 
+    the CD tied model definition file</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#31">Initializing 
+    and training cd tied gaussian mixture models </A></LI></UL><!=======================================================================>
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3"><FONT 
+  color=red>Training semi-continuous models</FONT></A> 
+  <UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3b">Vector 
+    quantization</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3d">Creating 
+    the CI model definition file</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3e">Creating 
+    the HMM topology file</A> 
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3c">Flat 
+    initialization of CI model parameters</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3f">Training CI 
+    models</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3g">Creating 
+    the CD untied model definition file</A> 
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3h">Flat 
+    initialization of CD untied model parameters</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3i">Training CD 
+    untied models</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3j">Building 
+    decision trees for parameter sharing</A> 
+    <UL>
+      <LI><A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3k">Generating 
+      the linguistic questions</A> </LI></UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3l">Pruning the 
+    decision trees</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3m">Creating 
+    the CD tied model definition file</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3n">Initializing 
+    and training cd tied models </A>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3a">Deleted 
+    interpolation</A> </LI></UL>
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#4">SPHINX2 
+  data and model formats</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#4b">SPHINX3 data 
+  and model formats</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#5">Training 
+  multilingual models</A> 
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#6">The 
+  training lexicon</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#7">Converting 
+  SPHINX3 format models to SPHINX2 format</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#8">Updating or 
+  adapting existing model sets</A> 
+  <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#9">Using 
+  the SPHINX-III decoder with semi-continuous and continuous models</A> </LI></OL>
+<HR>
+<!=========================================================================>This 
+part of the manual describes the procedure(s) for training acoustic models using 
+the Sphinx3 trainer. General training procedures are described first, and 
+followed by more detailed descriptions of the programs and scripts used, and the 
+analysis of their logs and other outputs. 
+<P><A name=0></A><A name=00></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>BEFORE YOU TRAIN</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>THE GENERAL-PROCEDURE CHART</TD></TR></TBODY></TABLE><!-------------------------------------------------------------------------><PRE>                         Training chart for the
+                         sphinx2  trainer
+                        =========================
+                                OBSOLETE
+               (The sphinx2 trainer is no longer used in CMU)
+
+
+
+
+                         Training chart for the
+                         sphinx3  trainer
+                        =========================
+                             type of model
+                                   |
+                    ----------------------------------
+                    |                                |
+               CONTINUOUS                      SEMI-CONTINUOUS
+                    |                                |
+                    |                         vector-qunatization
+                    |                                |
+                    ----------------------------------
+                                   |...make ci mdef
+                                   |...flat_initialize CI models
+                             training CI models
+                                   |...make cd untied mdef
+                                   |...initialize
+                                   |
+                             training CD untied models
+                                   |
+                                   |
+                                   |
+                             decision tree building
+                                   |...prune trees
+                                   |...tie states
+                                   |...make cd tied mdef
+                             training CD tied models
+                                   |
+                                   |
+recursive            ----------------------------------
+gaussian splitting.. |                                |
+                 continuous models              semi-continuous models
+                     |                                |
+                     |                                | 
+                -----------                           |
+                |         |                    deleted interpolation
+          decode with   ADAPT                         |
+          sphinx3         |                           |---ADAPT
+          decoder &lt;-------                            |     |
+                                                ----------------
+                          make cd tied mdef ... | .............|
+                          with decode dict and  |           convert to
+                          pruned trees          |           sphinx2
+                                         decode with           |
+                                         sphinx3               |
+                                         decoder               |     
+                                                               |
+                                                            decode with
+                                                            sphinx2
+                                                            decoder
+                                                  (currently opensource
+                                                   and restricted to
+                                                   working with sampling
+                                                   rates 8khz and 16khz.
+                                                   Once the s3 trainer is
+                                                   released, this will have
+                                                   to change to allow
+                                                   people who train with
+                                                   different sampling rates
+                                                   to use this decoder)
+
+</PRE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#top">back to 
+index</A> 
+<HR>
+<A name=01></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>BEFORE YOU TRAIN</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>MODELING CONTEXT-DEPENDENT PHONES WITH UNTIED STATES: SOME MEMORY 
+      REQUIREMENTS</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>Modeling Context-dependent phones (ex. triphones) with untied states requires 
+the largest amount of hardware resources. Take a moment to check if you have 
+enough. The resources required depend on the type of model you are going to 
+train, the dimensionality and configuration of your feature vectors, and the 
+number of states in the HMMs. 
+<P><B><U>Semi-continuous models</U></B> 
+<P>To train 5-state/HMM models for 10,000 triphones: <PRE>5 states/triphone                    = 50,000 states
+For a 4-stream feature-set, each     = 1024 floating point numbers/state
+state has a total of 4*256 mixture   
+weights
+                                     = 205Mb buffer for 50,000 states
+</PRE>Corresponding to each of the four feature streams, there are 256 means and 
+256 variances in the codebook. ALL these, and ALL the mixture weights and 
+transition matrices are loaded in into the RAM, and during training an 
+additional buffer of equal size is allocated to store intermediate results. 
+These are later written out into the hard disk when the calculations for the 
+current training iteration are complete. Note that there are as many transition 
+matrices as you have phones (40-50 for the English language, depending on your 
+dictionary) All this amounts to allocating well over 400 Mb of RAM. 
+<P>This is a bottleneck for machines with smaller memory. No matter how large 
+your training corpus is, you can actually train only about 10,000 triphones at 
+the cd-untied stage if you have ~400 Mb of RAM (A 100 hour broadcast news corpus 
+typically has 40,000 triphones). You could train more if your machine is capable 
+of handling the memory demands effectively (this could be done, for example, by 
+having a large amount of swap space). If you are training on multiple machines, 
+*each* will require this much memory. In addition, at the end of each iteration, 
+you have to transmit all buffers to a single machine that performs the norm. 
+Networking issues need to be considered here. 
+<P>The cd-untied models are used to build trees. The number of triphones you 
+train at this stage directly affects the quality of the trees, which would have 
+to be built using fewer triphones than are actually present in the training set 
+if you do not have enough memory. 
+<P><B><U>Continuous models</U></B> 
+<P>For 10,000 triphones: <PRE>5 states/triphone         = 50,000 states
+39 means (assuming a
+39-component feature
+vector) and 39
+variances per state       = 79 floating points per state
+                          = 15.8Mb buffer for 50,000 states
+</PRE>Thus we can train 12 times as many triphones as we can when we have 
+semicontinuous models for the same amount of memory. Since we can use more 
+triphones to train (and hence more information) the decision trees are better, 
+and eventually result in better recognition performance. 
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#top">back to 
+index</A> 
+<HR>
+<A name=02></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>BEFORE YOU TRAIN</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>DATA PREPARATION</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>You will need the following files to begin training: 
+<OL>
+  <LI>A set of <B>feature files</B> computed from the audio training data, one 
+  each for every recording you have in the training corpus. Each recording can 
+  be transformed into a sequence of feature vectors using a front-end executable 
+  provided with the SPHIN-III training package. Each front-end executable 
+  provided performs a different analysis of the speech signals and computes a 
+  different type of feature. 
+  <P></P>
+  <LI>A <B>control file</B> containing the list of feature-set filenames with 
+  full paths to them. An example of the entries in this file: <PRE>dir/subdir1/utt1
+dir/subdir1/utt2
+dir/subdir2/utt3
+</PRE>Note that the extensions are not given. They will be provided separately 
+  to the trainer. It is a good idea to give unique names to all feature files, 
+  even if including the full paths seems to make each entry in the control file 
+  unique. You will find later that this provides a lot of flexibility for doing 
+  many things. 
+  <P></P>
+  <LI>A <B>transcript file</B> in which the transcripts corresponding to the 
+  feature files are listed in exactly the same order as the feature filenames in 
+  the control file. 
+  <P></P>
+  <LI>A <B>main dictionary</B> which has all acoustic events and words in the 
+  transcripts mapped onto the acoustic units you want to train. Redundancy in 
+  the form of extra words is permitted. The dictionary must have all alternate 
+  pronunciations marked with paranthesized serial numbers starting from (2) for 
+  the second pronunciation. The marker (1) is omitted. Here's an example: <PRE>             
+DIRECTING            D AY R EH K T I ng
+DIRECTING(2)         D ER EH K T I ng
+DIRECTING(3)         D I R EH K T I ng
+</PRE>
+  <P></P>
+  <LI>A <B>filler dictionary</B>, which usually lists the non-speech events as 
+  "words" and maps them to user_defined phones. This dictionary must at least 
+  have the entries <PRE>&lt;s&gt;     SIL
+&lt;sil&gt;   SIL
+&lt;/s&gt;    SIL  
+</PRE>The entries stand for <PRE>&lt;s&gt;     : begining-utterance silence
+&lt;sil&gt;   : within-utterance silence
+&lt;/s&gt;    : end-utterance silence
+</PRE>Note that the words &lt;s&gt;, &lt;/s&gt; and &lt;sil&gt; are treated as 
+  special words and are required to be present in the filler dictionary. At 
+  least one of these must be mapped on to a phone called "SIL". The phone SIL is 
+  treated in a special manner and is required to be present. The sphinx expects 
+  you to name the acoustic events corresponding to your general background 
+  condition as SIL. For clean speech these events may actually be silences, but 
+  for noisy speech these may be the most general kind of background noise that 
+  prevails in the database. Other noises can then be modelled by phones defined 
+  by the user. 
+  <P>During training SIL replaces every phone flanked by "+" as the context for 
+  adjacent phones. The phones flanked by "+" are only modeled as CI phones and 
+  are not used as contexts for triphones. If you do not want this to happen you 
+  may map your fillers to phones that are not flanked by "+". 
+  <P></P>
+  <LI>A <B>phonelist</B>, which is a list of all acoustic units that you want to 
+  train models for. The SPHINX does not permit you to have units other than 
+  those in your dictionaries. All units in your two dictionaries must be listed 
+  here. In other words, your phonelist must have exactly the same units used in 
+  your dictionaries, no more and no less. Each phone must be listed on a 
+  separate line in the file, begining from the left, with no extra spaces after 
+  the phone. an example: <PRE>AA
+AE
+OW
+B
+CH
+</PRE></LI></OL>Here's a quick checklist to verify your data preparation before 
+you train: 
+<OL>
+  <LI>Are all the transcript words in the dictionary/filler dictionary? 
+  <LI>Make sure that the size of transcript matches the .ctl file. 
+  <LI>Check the boundaries defined in the .ctl file to make sure they exist ie, 
+  you have all the frames that are listed in the control file 
+  <LI>Verify the phonelist against the dictionary and fillerdict </LI></OL>
+<P><A name=02a></A><B><U>When you have a very small closed vocabulary (50-60 
+words)</U></B> 
+<P>If you have only about 50-60 words in your vocabulary, and if your entire 
+test data vocabulary is covered by the training data, then you are probably 
+better off training word models rather than phone models. To do this, simply 
+define the phoneset as your set of words themselves and have a dictionary that 
+maps each word to itself and train. Also, use a lesser number of fillers, and if 
+you do need to train phone models make sure that each of your tied states has 
+enough counts (at least 5 or 10 instances of each). 
+<P>
+<HR>
+<A name=03></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>BEFORE YOU TRAIN</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>THE SET OF BASE AND HIGHER ORDER FEATURE VECTORS</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>The set of feature vectors you have computed using the Sphinx front-end 
+executable is called the set of <B>base</B> feature vectors. This set of base 
+features can be extended to include what are called <B>higher order</B> 
+features. Some common extensions are 
+<OL type=a>
+  <LI>The set of difference vectors, where the component-wise difference between 
+  *some* succeeding and preceding vector(s), used to get an estimate of the 
+  slope or trend at the current time instant, are the "extension" of the current 
+  vector. These are called "delta" features. A more appropriate name would be 
+  the "trend" features. 
+  <LI>The set of difference vectors of difference vectors. The component-wise 
+  difference between the succeeding and preceding "delta" vectors are the 
+  "extension" of the current vector. These are called "double delta" features 
+  <LI>The set of difference vectors, where the component-wise difference between 
+  the n^th succeeding and n^th preceding vector are the "extension" of the 
+  current vector. These are called "long-term delta" features, differing from 
+  the "delta" features in just that they capture trends over a longer window of 
+  time. 
+  <LI>The vector composed of the first elements of the current vector and the 
+  first elements of some of the above "extension" vectors. This is called the 
+  "power" feature, and its dimensionality is less than or equal to the total 
+  number of feature types you consider. </LI></OL>
+<P><A name=031></A><!-------------------------------------------------------------------------><B><U>Feature 
+streams</U></B> <!------------------------------------------------------------------------->
+<P>In semi-continuous models, it is a usual practice to keep the identities of 
+the base vectors and their "extension" vectors separate. Each such set is called 
+a "feature stream". You must specify how many feature streams you want to use in 
+your semi-continuous models and how you want them arranged. The feature-set 
+options currently supported by the Sphinx are: 
+<P>c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/ : read this as cepstra/second to 
+last component,<BR>deltacepstra/second to last component,<BR>cepstra/first 
+component deltacepstra/first component doubledeltacepstra/first component, 
+<BR>doubledeltacepstra/second to last component 
+<P>This is a 4-stream feature vector used mostly in semi-continuous models. 
+There is no particular advantage to this arrangement - any permutation would 
+give you the same models, with parameters written in different orders. 
+<P>Here's something that's not obvious from the notation used for the 4-stream 
+feature set: the dimensionality of the 4-stream feature vector is 
+12cepstra+24deltas+3powerterms+12doubledeltas 
+<P>the deltas are computed as the difference between the cepstra two frames 
+removed on either side of the current frame (12 of these), followed by the 
+difference between the cepstra four frames removed on either side of the current 
+frame (12 of these). The power stream uses the first component of the 
+two-frames-removed deltas, computed using C<SUB>0</SUB>. 
+<P>(more to come....) 
+<HR>
+<A name=2></A><A name=20></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE CI MODEL DEFINITION FILE</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>The first step is to prepare a <B>model definition</B> file for the context 
+independent (CI) phones. The function of a model definition file is to define or 
+provide a unique numerical identity to every state of every HMM that you are 
+going to train, and to provide an order which will be followed in writing out 
+the model parameters in the model parameter files. During the training, the 
+states are referenced only by these numbers. The model definition file thus 
+partly specifies your <B>model architecture</B> and is thus usually stored in a 
+directory named "model_architecture". You are of course free to store it where 
+you please, unless you are running the training scripts provided with the 
+SPHINX-III package. 
+<P>To generate this <B>CI model definition file</B>, use the executable <B><FONT 
+color=green>mk_mdef_gen</FONT></B> with the following flag settings: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-phonelstfn </TD>
+    <TD>phonelist </TD></TR>
+  <TR>
+    <TD vAlign=top>-moddeffn </TD>
+    <TD>name of the CI model definition file that you want to create. Full 
+      path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-n_state_pm </TD>
+    <TD>number of states per HMM in the models that you want to train. If you 
+      want to train 3 state HMMs, write "3" here, without the double 
+  quotes</TD></TR></TBODY></TABLE>
+<P>Pipe the standard output into a log file <B>ci_mdef.log</B> (say). If you 
+have listed only three phones in your phonelist, and specify that you want to 
+build three state HMMs for each of these phones, then your model-definition file 
+will look like this: <PRE>                    
+# Generated by <PATH_TO_BINARY>/mk_mdef_gen on Thu Aug 10 14:57:15 2000
+0.3
+3 n_base
+0 n_tri
+12 n_state_map
+9 n_tied_state
+9 n_tied_ci_state
+3 n_tied_tmat
+#
+# Columns definitions
+#base lft  rt p attrib   tmat  ...state id's ...
+SIL    -   -  - filler    0    0       1      2     N
+A      -   -  -    n/a    1    3       4      5     N
+B      -   -  -    n/a    2    6       7      8     N
+
+The # lines are simply comments. The rest of the variables mean the following:
+
+  n_base      : no. of phones (also called "base" phones) that you have
+  n_tri       : no. of triphones (we will explain this later)
+  n_state_map : Total no. of HMM states (emitting and non-emitting)
+                The Sphinx appends an extra terminal non-emitting state
+                to every HMM, hence for 3 phones, each specified by
+                the user to be modeled by a 3-state HMM, this number
+                will be 3phones*4states = 12
+  n_tied_state: no. of states of all phones after state-sharing is done. 
+                We do not share states at this stage. Hence this number is the
+                same as the total number of emitting states, 3*3=9
+n_tied_ci_state:no. of states for your "base" phones after state-sharing
+                is done. At this stage, the number of "base" phones is
+                the same as the number of "all" phones  that you are modeling.
+                This number is thus again the total number of emitting
+                states, 3*3=9
+ n_tied_tmat   :The HMM for each CI phone has a transition probability matrix 
+                 associated it. This is the total number of transition 
+                 matrices for the given set of models. In this case, this 
+                 number is 3.
+
+Columns definitions: The following columns are defined:
+       base  : name of each phone
+       lft   : left-context of the phone (- if none)
+       rt    : right-context of the phone (- if none)
+       p     : position of a triphone (not required at this stage)
+       attrib: attribute of phone. In the phone list, if the phone is "SIL", 
+	       or if the phone is enclosed by "+", as in "+BANG+", the sphinx 
+	       understands these phones to be non-speech events. These are 
+	       also called "filler" phones, and the attribute "filler" is 
+	       assigned to each such phone. The base phones have no special 
+	       attributes, and hence are labelled as "n/a", standing for 
+	       "no attribute"   
+      tmat   : the id of the transition matrix associated with the phone
+ state id's  : the ids of the HMM states associated with any phone. This list
+               is terminated by an "N" which stands for a non-emitting
+               state. No id is assigned to it. However, it exists, and is
+               listed.
+</PRE><A name=21></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE HMM TOPOLOGY FILE</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>The HMM topology file consists of a matrix with boolean entries, each entry 
+indiactes whether a specific transition from state=row_number to 
+state=column_number is permitted in the HMMs or not. For example a 3-state HMM 
+with no skips permitted beteen states would have a topology file with the 
+following entries: <PRE>4
+1.0     1.0     0.0     0.0
+0.0     1.0     1.0     0.0
+0.0     0.0     1.0     1.0 
+</PRE>The number 4 is total the number of sates in an HMMs. The SPHINX 
+automatically appends a fourth non-emitting terminating state to the 3 state 
+HMM. The first entry of 1.0 means that a transition from state 1 to state 1 
+(itself) is permitted. Accordingly, the transition matrix estimated for any 
+phone would have a "transition-probability" in place of this boolean entry. 
+Where the entry is 0.0, the corresponding transition probability will not be 
+estimated (will be 0). 
+<P>You can either write out the topology file manually, or use the script script 
+make_topology.pl provided with the SPHINX package to do this. The script needs 
+the following arguments: <PRE>        states_per_hmm : this is merely an integer specifying the
+                         number of states per hmm
+        skipstate      : "yes" or "no" depending on whether you
+                         want the HMMs to have skipped state transitions
+                         or not.
+</PRE>
+<P>Note that the topology file is common for all HMMs and is a single file 
+containing the topology definition matrix. This file also defines your model 
+architecture and is usually placed in the model_architecture directory. This is 
+however optional, but recommended. If you are running scripts from the SPHINX 
+training package, you will find the file created in the model_architecture 
+directory. 
+<P><A name=22></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>FLAT INITIALIZATION OF CI MODEL PARAMETERS</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>CI models consist of 4 parameter files : 
+<UL>
+  <LI><B>mixture_weights</B>: the weights given to every Gaussian in the 
+  Gaussian mixture corresponding to a state 
+  <LI><B>transition_matrices</B>: the matrix of state transition probabilities 
+  <LI><B>means</B>: means of all Gaussians 
+  <LI><B>variances</B>: variances of all Gaussians </LI></UL>
+<P>To begin training the CI models, each of these files must have some initial 
+entries, ie, they must be "initialized". The mixture_weights and 
+transition_matrices are initialized using the executable <B><FONT 
+color=green>mk_flat</FONT></B>. It needs the following arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-moddeffn </TD>
+    <TD>CI model definition file </TD></TR>
+  <TR>
+    <TD>-topo </TD>
+    <TD>HMM topology file </TD></TR>
+  <TR>
+    <TD>-mixwfn </TD>
+    <TD>file in which you want to write the initialized mixture weights </TD></TR>
+  <TR>
+    <TD>-tmatfn </TD>
+    <TD>file in which you want to write the initialized transition matrices 
+  </TD></TR>
+  <TR>
+    <TD>-nstream </TD>
+    <TD>number of independent feature streams, for continuous models this 
+      number should be set to "1", without the double quotes </TD></TR>
+  <TR>
+    <TD>-ndensity </TD>
+    <TD>number of Gaussians modeling each state. For CI models, this number 
+      should be set to "1" </TD></TR></TBODY></TABLE>
+<P>To initialize the means and variances, global values of these parameters are 
+first estimated and then copied into appropriate positions in the parameter 
+files. The global mean is computed using all the vectors you have in your 
+feature files. This is usually a very large number, so the job is divided into 
+many parts. At this stage you tell the Sphinx how many parts you want it to 
+divide this operation into (depending on the computing facilities you have) and 
+the Sphinx "accumulates" or gathers up the vectors for each part separately and 
+writes it into an intermediate buffer on your machine. The executable <B><FONT 
+color=green>init_gau</FONT></B> is used for this purpose. It needs the following 
+arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-accumdir </TD>
+    <TD>directory in which you want to write the intermediate buffers </TD></TR>
+  <TR>
+    <TD>-ctlfn </TD>
+    <TD>control file </TD></TR>
+  <TR>
+    <TD>-part </TD>
+    <TD>part number </TD></TR>
+  <TR>
+    <TD>-npart </TD>
+    <TD>total number of parts </TD></TR>
+  <TR>
+    <TD>-cepdir </TD>
+    <TD>path to feature files - this will be appended before all paths given 
+      in the control file </TD></TR>
+  <TR>
+    <TD>-cepext </TD>
+    <TD>filename extension of feature files, eg. "mfc" for files called 
+      a/b/c.mfc. Double quotes are not needed </TD></TR>
+  <TR>
+    <TD>-feat </TD>
+    <TD>type of feature </TD></TR>
+  <TR>
+    <TD>-ceplen </TD>
+    <TD>dimensionality of base feature vectors </TD></TR>
+  <TR>
+    <TD>-agc </TD>
+    <TD>automatic gain control factor(max/none) </TD></TR>
+  <TR>
+    <TD>-cmn </TD>
+    <TD>cepstral mean normalization(yes/no) </TD></TR>
+  <TR>
+    <TD>-varnorm </TD>
+    <TD>variance normalization(yes/no) </TD></TR></TBODY></TABLE>
+<P>Once the buffers are written, the contents of the buffers are "normalized" or 
+used to compute a global mean value for the feature vectors. This is done using 
+the executable <B><FONT color=green>norm</FONT></B> with the following flag 
+settings: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-accumdir </TD>
+    <TD>buffer directory </TD></TR>
+  <TR>
+    <TD>-meanfn </TD>
+    <TD>file in which you want to write the global mean </TD></TR>
+  <TR>
+    <TD>-feat </TD>
+    <TD>type of feature </TD></TR>
+  <TR>
+    <TD>-ceplen </TD>
+    <TD>dimensionality of base feature vector </TD></TR></TBODY></TABLE>
+<P>The next step is to "accumulate" the vectors for computing a global variance 
+value. The executable <B><FONT color=green>init_gau</FONT></B>, when called a 
+second time around, takes the value of the global mean and collects a set of 
+(vector-globalmean)<SUP>2</SUP> values for the entire data set. This time 
+around, this executable needs the following arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-accumdir </TD>
+    <TD>directory in which you want to write the intermediate buffers </TD></TR>
+  <TR>
+    <TD>-meanfn </TD>
+    <TD>globalmean file </TD></TR>
+  <TR>
+    <TD>-ctlfn </TD>
+    <TD>control file </TD></TR>
+  <TR>
+    <TD>-part </TD>
+    <TD>part number </TD></TR>
+  <TR>
+    <TD>-npart </TD>
+    <TD>total number of parts </TD></TR>
+  <TR>
+    <TD>-cepdir </TD>
+    <TD>path to feature files - this will be appended before all paths given 
+      in the control file </TD></TR>
+  <TR>
+    <TD>-cepext </TD>
+    <TD>filename extension of feature files, eg. "mfc" for files called 
+      a/b/c.mfc. Double quotes are not needed </TD></TR>
+  <TR>
+    <TD>-feat </TD>
+    <TD>type of feature </TD></TR>
+  <TR>
+    <TD>-ceplen </TD>
+    <TD>dimensionality of base feature vectors </TD></TR>
+  <TR>
+    <TD>-agc </TD>
+    <TD>automatic gain control factor(max/none) </TD></TR>
+  <TR>
+    <TD>-cmn </TD>
+    <TD>cepstral mean normalization(yes/no) </TD></TR>
+  <TR>
+    <TD>-varnorm </TD>
+    <TD>variance normalization(yes/no) </TD></TR></TBODY></TABLE>
+<P>Again, once the buffers are written, the contents of the buffers are 
+"normalized" or used to compute a global variance value for the feature vectors. 
+This is again done using the executable <B><FONT color=green>norm</FONT></B> 
+with the following flag settings: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-accumdir </TD>
+    <TD>buffer directory </TD></TR>
+  <TR>
+    <TD>-varfn </TD>
+    <TD>file in which you want to write the global variance </TD></TR>
+  <TR>
+    <TD>-feat </TD>
+    <TD>type of feature </TD></TR>
+  <TR>
+    <TD>-ceplen </TD>
+    <TD>dimensionality of base feature vector </TD></TR></TBODY></TABLE>
+<P>Once the global mean and global variance are computed, they have to be copied 
+into the means and variances of every state of each of the HMMs. The global mean 
+is written into appropriate state positions in a <B>means</B> file while the 
+global variance is written into appropriate state positions in a 
+<B>variances</B> file. If you are using the scripts provided with the SPHINX 
+package, you will find these files with "flatinitial" as part of its name in the 
+model_parameters directory. 
+<P>The flat <B>means</B> and <B>variances</B> file can be created using the 
+executable <B><FONT color=green>cp_parm</FONT></B>. In order to be able to use 
+this executable you will have to create a <B>copyoperations map</B> file which 
+is a two-column file, with the left column id-ing the state *to* which the 
+global value has to be copied, and the right column id-ing the state *from* 
+which it has to be copied. If there are "nphones" CI phones and each state has 
+"nEstate_per_hmm" EMITTING states, there will be ntotal_Estates = nphones * 
+nEstate_per_hmm lines in the copyoperations map file; the state id-s (on the 
+left column) run from 0 thru (ntotal_Estates - 1). Here is an example for a 
+3-state hmm (nEstate_per_hmm = 3) for two phones (nphones = 2) (ntotal_Estates = 
+6; so, state ids would vary from 0-5): <PRE>0   0
+1   0
+2   0
+3   0
+4   0
+5   0
+</PRE><B><FONT color=green>cp_parm</FONT></B> requires the following arguments. 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-cpopsfn </TD>
+    <TD>copyoperations map file </TD></TR>
+  <TR>
+    <TD>-igaufn </TD>
+    <TD>input global mean (or variance) file </TD></TR>
+  <TR>
+    <TD>-ncbout </TD>
+    <TD>number of phones times the number of states per HMM (ie, total number 
+      of states) </TD></TR>
+  <TR>
+    <TD>-ogaufn </TD>
+    <TD>output initialized means (or variances) file </TD></TR></TBODY></TABLE>
+<P><B><FONT color=green>cp_parm</FONT></B> has to be run twice, once for copying 
+the means, and once for copying the variances. This completes the initialization 
+process for CI training. 
+<HR>
+
+<P><A name=23></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>TRAINING CONTEXT INDEPENDENT MODELS</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>Once the flat initialization is done, you are ready to begin training the 
+acoustic models for the base or "context-independent" or CI phones. This step is 
+called CI-training. In CI-training, the flat-initialized models are re-estimated 
+through the forward-backward re-estimation algorithm called the Baum-Welch 
+algorithm. This is an iterative re-estimation process, so you have to run many 
+"passes" of the Baum-Welch re-estimation over your training data. Each of these 
+passes, or iterations, results in a slightly better set of models for the CI 
+phones. However, since the objective function maximized in each of theses passes 
+is the likelihood, too many iterations would ultimately result in models which 
+fit very closely to the training data. you might not want this to happen for 
+many reasons. Typically, 5-8 iterations of Baum-Welch are sufficient for getting 
+good estimates of the CI models. You can automatically determine the number of 
+iterations that you need by looking at the total likelihood of the training data 
+at the end of the first iteration and deciding on a "convergence ratio" of 
+likelihoods. This is simply the ratio of the total likelihood in the current 
+iteration to that of the previous iteration. As the models get more and more 
+fitted to the training data in each iteration, the training data likelihoods 
+typically increase monotonically. The convergence ratio is therefore a small 
+positive number. The convergence ratio becomes smaller and smaller as the 
+iterations progress, since each time the current models are a little less 
+different from the previous ones. Convergence ratios are data and task specific, 
+but typical values at which you may stop the Baum-Welch iterations for your CI 
+training may range from 0.1-0.001. When the models are variance-normalized, the 
+convergence ratios are much smaller. 
+<P>The executable used to run a Buam-Welch iteration is called "bw", and takes 
+the following example arguments for training continuous CI models: 
+<TABLE border=1 noshade ,>
+  <TBODY>
+  <TR>
+    <TD align=middle>FLAG </TD>
+    <TD align=middle>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-moddeffn</TD>
+    <TD>model definition file for CI phones </TD></TR>
+  <TR>
+    <TD vAlign=top>-ts2cbfn </TD>
+    <TD>this flag should be set to ".cont." if you are training continuous 
+      models, and to ".semi." if you are <A 
+      href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#3f">training 
+      semi-continuous models</A>, without the double quotes </TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>name of the file in which the mixture-weights from the previous 
+      iteration are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-mwfloor </TD>
+    <TD>Floor value for the mixture weights. Any number below the floor value 
+      is set to the floor value.</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatfn </TD>
+    <TD>name of the file in which the transition matrices from the previous 
+      iteration are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>name of the file in which the means from the previous iteration are 
+      stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>name of the file in which the variances fromt he previous iteration 
+      are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-dictfn </TD>
+    <TD>Dictionary </TD></TR>
+  <TR>
+    <TD vAlign=top>-fdictfn </TD>
+    <TD>Filler dictionary</TD></TR>
+  <TR>
+    <TD vAlign=top>-ctlfn </TD>
+    <TD>control file </TD></TR>
+  <TR>
+    <TD vAlign=top>-part </TD>
+    <TD>You can split the training into N equal parts by setting a flag. If 
+      there are M utterances in your control file, then this will enable you to 
+      run the training separately on each (M/N)<SUP>th</SUP> part. This flag may 
+      be set to specify which of these parts you want to currently train on. As 
+      an example, if your total number of parts is 3, this flag can take one of 
+      the values 1,2 or 3</TD></TR>
+  <TR>
+    <TD vAlign=top>-npart </TD>
+    <TD>number of parts in which you have split the training </TD></TR>
+  <TR>
+    <TD vAlign=top>-cepdir </TD>
+    <TD>directory where your feature files are stored</TD></TR>
+  <TR>
+    <TD vAlign=top>-cepext </TD>
+    <TD>the extension that comes after the name listed in the control file. 
+      For example, you may have a file called a/b/c.d and may have listed a/b/c 
+      in your control file. Then this flag must be given the argument "d", 
+      without the double quotes or the dot before it </TD></TR>
+  <TR>
+    <TD vAlign=top>-lsnfn </TD>
+    <TD>name of the transcript file </TD></TR>
+  <TR>
+    <TD vAlign=top>-accumdir </TD>
+    <TD>Intermediate results from each part of your training will be written 
+      in this directory. If you have T means to estimate, then the size of the 
+      mean buffer from the current part of your training will be T*4 bytes 
+      (say). There will likewise be a variance buffer, a buffer for mixture 
+      weights, and a buffer for transition matrices</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfloor </TD>
+    <TD>minimum variance value allowed </TD></TR>
+  <TR>
+    <TD vAlign=top>-topn </TD>
+    <TD>no. of gaussians to consider for computing the likelihood of each 
+      state. For example, if you have 8 gaussians/state models and topn is 4, 
+      then the 4 most likely gaussian are used. </TD></TR>
+  <TR>
+    <TD vAlign=top>-abeam </TD>
+    <TD>forward beamwidth</TD></TR>
+  <TR>
+    <TD vAlign=top>-bbeam </TD>
+    <TD>backward beamwidth</TD></TR>
+  <TR>
+    <TD vAlign=top>-agc </TD>
+    <TD>automatic gain control</TD></TR>
+  <TR>
+    <TD vAlign=top>-cmn </TD>
+    <TD>cepstral mean normalization</TD></TR>
+  <TR>
+    <TD vAlign=top>-varnorm </TD>
+    <TD>variance normalization</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanreest </TD>
+    <TD>mean re-estimation</TD></TR>
+  <TR>
+    <TD vAlign=top>-varreest </TD>
+    <TD>variance re-estimation</TD></TR>
+  <TR>
+    <TD vAlign=top>-2passvar </TD>
+    <TD>Setting this flag to "yes" lets bw use the previous means in the 
+      estimation of the variance. The current variance is then estimated as E[(x 
+      - prev_mean)<SUP>2</SUP>]. If this flag is set to "no" the current 
+      estimate of the means are used to estimate variances. This requires the 
+      estimation of variance as E[x<SUP>2</SUP>] - (E[x])<SUP>2</SUP>, an 
+      unstable estimator that sometimes results in negative estimates of the 
+      variance due to arithmetic imprecision</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatreest </TD>
+    <TD>re-estimate transition matrices or not</TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration</TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>length of basic feature vector</TD></TR></TBODY></TABLE>
+<P>If you have run the training in many parts, or even if you have run the 
+training in one part, the executable for Baum-Welch described above generates 
+only intermediate buffer(s). The final model parameters, namely the means, 
+variances, mixture-weights and transition matrices, have to be estimated using 
+the values stored in these buffers. This is done by the executable called 
+"norm", which takes the following arguments: 
+<TABLE border=1 noshade ,>
+  <TBODY>
+  <TR>
+    <TD align=middle>FLAG </TD>
+    <TD align=middle>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-accumdir </TD>
+    <TD>Intermediate buffer directory</TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration</TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>name of the file in which you want to write the mixture weights. Full 
+      path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatfn </TD>
+    <TD>name of the file in which you want to write the transition matrices. 
+      Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>name of the file in which you want to write the means. Full path must 
+      be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>name of the file in which you want to write the variances. Full path 
+      must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>length of basic feature vector</TD></TR></TBODY></TABLE>If you have not 
+re-estimated any of the model parameters in the bw step, then the corresponding 
+flag must be omitted from the argument given to the norm executable. The 
+executable will otherwise try to read a non-existent buffer from the buffer 
+directory and will not go through. Thus if you have set -meanreest to be "no" in 
+the argument for bw, then the flag -meanfn must not be given in the argument for 
+norm. This is useful mostly during adaptation. 
+<P>Iterations of baum-welch and norm finally result CI models. The iterations 
+can be stopped once the likelihood on the training data converges. The model 
+parameters computed by norm in the final iteration are now used to initialize 
+the models for context-dependent phones (triphones) with untied states. This is 
+the next major step of the training process. We refer to the process of training 
+triphones HMMs with untied states as the "CD untied training". 
+<HR>
+
+<P><A name=24></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE CD UNTIED MODEL DEFINITION FILE</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>The next step is the CD-untied training, in which HMMs are trained for all 
+context-dependent phones (usually triphones) that are seen in the training 
+corpus. For the CD-untied training, we first need to to generate a model 
+definition file for all the triphones occuring in the training set. This is done 
+in several steps: 
+<UL>First, a list of all triphones possible in the vocabulary is generated 
+  from the dictionary. To get this complete list of triphones from the 
+  dictionary, it is first necessary to write the list of phones in the following 
+  format: <PRE>phone1 0 0 0 0
+phone2 0 0 0 0
+phone3 0 0 0 0
+phone4 0 0 0 0
+...
+</PRE>The phonelist used for the CI training must be used to generate this, 
+  and the order in which the phones are listed must be the same. 
+  <P>Next, a temporary dictionary is generated, which has all words except the 
+  filler words (words enclosed in ++()++ ). The entry <PRE>SIL    SIL
+</PRE>must be added to this temporary dictionary, and the dictionary must be 
+  sorted in alphabetical order. The program "quick_count" provided with the 
+  SPHINX-III package can now be used to generate the list of all possible 
+  triphones from the temporary dictionary. It takes the following arguments: 
+  <P>
+  <TABLE border=1>
+    <TBODY>
+    <TR>
+      <TD>FLAG </TD>
+      <TD>DESCRIPTION </TD></TR>
+    <TR>
+      <TD vAlign=top>-q </TD>
+      <TD>mandatory flag to tell quick_count to consider all word pairs while 
+        constructing triphone list </TD></TR>
+    <TR>
+      <TD>-p </TD>
+      <TD>formatted phonelist </TD></TR>
+    <TR>
+      <TD>-b </TD>
+      <TD>temporary dictionary </TD></TR>
+    <TR>
+      <TD>-o </TD>
+      <TD>output triphone list </TD></TR></TBODY></TABLE>
+  <P>Here is a typical output from quick_count <PRE>AA(AA,AA)s              1
+AA(AA,AE)b              1
+AA(AA,AO)1              1
+AA(AA,AW)e              1
+</PRE>
+  <P>The "1" in AA(AA,AO)1 indicates that this is a word-internal triphone. This 
+  is a carry over from Sphinx-II. The output from quick_count has to be now 
+  written into the following format: <PRE>AA AA AA s
+AA AA AE b
+AA AA AO i
+AA AA AW e
+</PRE>This can be done by simply replacing "(", ",", and ")" in the output of 
+  quick_count by a space and printing only the first four columns. While doing 
+  so, all instances of " 1" must be replaced by " i". To the top of the 
+  resulting file the list of CI phones must be appened in the following format <PRE>AA - - -
+AE - - -
+AO - - -
+AW - - -
+..
+..                                                         
+AA AA AA s
+AA AA AE b
+AA AA AO i
+AA AA AW e
+</PRE><BR><EM>For example, if the output of the quick_count is stored in a 
+  file named "quick_count.out", the following perl command will generate the 
+  phone list in the desired form. perl -nae '$F[0] =~ s/\(|\)|\,/ /g; $F[0] =~ 
+  s/1/i/g; print $F[0]; if ($F[0] =~ /\s+$/){print "i"}; print "\n"' 
+  quick_count.out</EM> 
+  <P>The above list of triphones (and phones) is converted to the model 
+  definition file that lists all possible triphones from the dictionary. The 
+  program used from this is "mk_mdef_gen" with the following arguments 
+  <TABLE border=1>
+    <TBODY>
+    <TR>
+      <TD>FLAG </TD>
+      <TD>DESCRIPTION </TD></TR>
+    <TR>
+      <TD>-moddeffn </TD>
+      <TD>model definition file with all possible 
+        triphones(alltriphones_mdef)to be written</TD></TR>
+    <TR>
+      <TD>-phonelstfn </TD>
+      <TD>list of all triphones </TD></TR>
+    <TR>
+      <TD>-n_state_pm </TD></TR>number of states per HMM 
+  </TD></TR></TBODY></TABLE>In the next step we find the number of times each of 
+  the triphones listed in the alltriphones_mdef occured in the training corpus 
+  To do this we call the program "param_cnt" which takes the following 
+  arguments: 
+  <TABLE border=1>
+    <TBODY>
+    <TR>
+      <TD>FLAG </TD>
+      <TD>DESCRIPTION </TD></TR>
+    <TR>
+      <TD>-moddeffn </TD>
+      <TD>model definition file with all possible 
+      triphones(alltriphones_mdef)</TD></TR>
+    <TR>
+      <TD>-ts2cbfn </TD>
+      <TD>takes the value ".cont." if you are building continuous models</TD></TR>
+    <TR>
+      <TD>-ctlfn </TD>
+      <TD>control file corresponding to your training transcripts</TD></TR>
+    <TR>
+      <TD>-lsnfn </TD>
+      <TD>transcript file for training </TD></TR>
+    <TR>
+      <TD>-dictfn </TD>
+      <TD>training dictionary </TD></TR>
+    <TR>
+      <TD>-fdictfn </TD>
+      <TD>filler dictionary </TD></TR>
+    <TR>
+      <TD>-paramtype </TD>
+      <TD>write "phone" here, without the double quotes</TD></TR>
+    <TR>
+      <TD>-segdir </TD>
+      <TD>/dev/null </TD></TR></TBODY></TABLE>
+  <P>param_cnt writes out the counts for each of the triphones onto stdout. All 
+  other messages are sent to stderr. The stdout therefore has to be directed 
+  into a file. If you are using csh or tcsh it would be done in the following 
+  manner: <PRE>(param_cnt [arguments] &gt; triphone_count_file) &gt;&amp;! LOG
+</PRE>Here's an example of the output of this program <PRE>+GARBAGE+ - - - 98
++LAUGH+ - - - 29
+SIL - - - 31694
+AA - - - 0
+AE - - - 0
+...
+AA AA AA s 1
+AA AA AE s 0
+AA AA AO s 4
+</PRE>The final number in each row shows the number of times that particular 
+  triphone (or filler phone) has occured in the training corpus. Not that if all 
+  possible triphones of a CI phone are listed in the all_triphones.mdef the CI 
+  phone itself will have 0 counts since all instances of it would have been 
+  mapped to a triphone. 
+  <P>This list of counted triphones is used to shortlist the triphones that have 
+  occured a minimum number (threshold) of times. The shortlisted triphones 
+  appear in the same format as the file from which they have been selected. The 
+  shortlisted triphone list has the same format as the triphone list used to 
+  generate the all_triphones.mdef. The formatted list of CI phones has to be 
+  included in this as before. So, in the earlier example, if a threshold of 4 
+  were used, we would obtain the shortlisted triphone list as <PRE>AA - - -
+AE - - -
+AO - - -
+AW - - -
+..
+..                                 
+AA AA AO s
+..
+</PRE>The threshold is adjusted such that the total number of triphones above 
+  the threshold is less that the maximum number of triphones that the system can 
+  train (or that you wish to train). It is good to train as many triphones as 
+  possible. The maximum number of triphones may however be dependent on the 
+  memory available on your machine. The logistics related to this are described 
+  in the beginning of this manual. 
+  <P>Note that thresholding is usually done so to reduce the number of 
+  triphones, in order that the resulting models will be small enough to fit in 
+  the computer's memory. If this is not a problem, then the threshold can be set 
+  to a smaller number. If the triphone occurs too few times, however, (ie, if 
+  the threshold is too small), there will not be enough data to train the HMM 
+  state distributions properly. This would lead to poorly estimated CD untied 
+  models, which in turn may affect the decision trees which are to be built 
+  using these models in the next major step of the training. 
+  <P>A model definition file is now created to include only these shortlisted 
+  triphones. This is the final model definition file to be used for the CD 
+  untied training. The reduced triphone list is then to the model definition 
+  file using mk_mdef_gen with the following arguments: 
+  <TABLE border=1>
+    <TBODY>
+    <TR>
+      <TD>FLAG </TD>
+      <TD>DESCRIPTION </TD></TR>
+    <TR>
+      <TD>-moddeffn </TD>
+      <TD>model definition file for CD untied training</TD></TR>
+    <TR>
+      <TD>-phonelstfn </TD>
+      <TD>list of shortlisted triphones </TD></TR>
+    <TR>
+      <TD>-n_state_pm </TD></TR>number of states per HMM 
+  </TD></TR></TBODY></TABLE></P></UL>
+<P>Finally, therefore, a model definition file which lists all CI phones and 
+seen triphones is constructed. This file, like the CI model-definition file, 
+assigns unique id's to each HMM state and serves as a reference file for 
+handling and identifying the CD-untied model parameters. Here is an example of 
+the CD-untied model-definition file: If you have listed five phones in your 
+phones.list file, 
+<P>SIL B AE T 
+<P>and specify that you want to build three state HMMs for each of these phones, 
+and if you have one utterance listed in your transcript file: 
+<P>&lt;s&gt; BAT A TAB &lt;/s&gt; for which your dictionary and fillerdict 
+entries are: <PRE>Fillerdict:
+&lt;s&gt;   SIL
+&lt;/s&gt;  SIL
+</PRE><PRE>Dictionary:
+A      AX 
+BAT    B AE T
+TAB    T AE B
+</PRE>
+<P>then your CD-untied model-definition file will look like this: <PRE># Generated by <PATH_TO_BINARY>/mk_mdef_gen on Thu Aug 10 14:57:15 2000
+0.3
+5 n_base
+7 n_tri
+48 n_state_map
+36 n_tied_state
+15 n_tied_ci_state
+5 n_tied_tmat                                                                  
+#
+# Columns definitions
+#base lft  rt p attrib   tmat  ...state id's ...
+SIL     -   -  - filler    0    0       1      2     N
+AE      -   -  -    n/a    1    3       4      5     N
+AX      -   -  -    n/a    2    6       7      8     N
+B       -   -  -    n/a    3    9       10     11    N
+T       -   -  -    n/a    4    12      13     14    N
+AE      B   T  i    n/a    1    15      16     17    N
+AE      T   B  i    n/a    1    18      19     20    N
+AX      T   T  s    n/a    2    21      22     23    N
+B       SIL AE b    n/a    3    24      25     26    N
+B       AE  SIL e   n/a    3    27      28     29    N
+T       AE  AX e    n/a    4    30      31     32    N
+T       AX  AE b    n/a    4    33      34     35    N
+
+The # lines are simply comments. The rest of the variables mean the following:
+
+  n_base      : no. of CI phones (also called "base" phones), 5 here
+  n_tri       : no. of triphones , 7 in this case
+  n_state_map : Total no. of HMM states (emitting and non-emitting)
+                The Sphinx appends an extra terminal non-emitting state
+                to every HMM, hence for 5+7 phones, each specified by
+                the user to be modeled by a 3-state HMM, this number
+                will be 12phones*4states = 48
+  n_tied_state: no. of states of all phones after state-sharing is done.
+                We do not share states at this stage. Hence this number is the
+                same as the total number of emitting states, 12*3=36
+n_tied_ci_state:no. of states for your CI phones after state-sharing     
+                is done. The CI states are not shared, now or later.
+                This number is thus again the total number of emitting CI
+                states, 5*3=15
+ n_tied_tmat   : The total number of transition matrices is always the same
+                 as the total number of CI phones being modeled. All triphones
+                 for a given phone share the same transition matrix. This
+                 number is thus 5.
+
+Columns definitions: The following columns are defined:
+       base  : name of each phone
+       lft   : left-context of the phone (- if none)
+       rt    : right-context of the phone (- if none)
+       p     : position of a triphone. Four position markers are supported:
+               b = word begining triphone
+               e = word ending triphone
+               i = word internal triphone
+               s = single word triphone 
+       attrib: attribute of phone. In the phone list, if the phone is "SIL",
+               or if the phone is enclosed by "+", as in "+BANG+", these
+              phones are interpreted as non-speech events. These are
+               also called "filler" phones, and the attribute "filler" is
+               assigned to each such phone. The base phones and the
+               triphones have no special attributes, and hence are 
+               labelled as "n/a", standing for "no attribute"
+      tmat   : the id of the transition matrix associated with the phone      
+ state id's  : the ids of the HMM states associated with any phone. This list
+               is terminated by an "N" which stands for a non-emitting
+               state. No id is assigned to it. However, it exists, and is
+               listed.
+</PRE>
+<HR>
+
+<P><A name=25></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>FLAT INITIALIZATION OF CD UNTIED MODEL PARAMETERS</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>In the next step in CD untied training, after the CD untied model definition 
+file has been constructed, the model parameters are first intialized. During 
+this process, the model parameter files corresponding to the CD untied 
+model-definition file are generated. Four files are generated: means, variances, 
+transition matrices and mixture weights. In each of these files, the values are 
+first copied from the corresponding CI model parameter file. Each state of a 
+particular CI phone contributes to the same state of the same CI phone in the Cd 
+-untied model parameter file, and also to the same state of the *all* the 
+triphones of the same CI phone in the CD-untied model parameter file. The 
+CD-untied model definition file is of course used as a reference for this 
+mapping. This process, as usual, is called "initialization". 
+<P>Initialization for the CD-untied training is done by the executable called 
+"init_mixw". It need the following arguments: 
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>-src_moddeffn </TD>
+    <TD>source (CI) model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_ts2cbfn </TD>
+    <TD>.cont. </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_mixwfn </TD>
+    <TD>source (CI) mixture-weight file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_meanfn </TD>
+    <TD>source (CI) means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_varfn </TD>
+    <TD>source (CI) variances file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_tmatfn </TD>
+    <TD>source (CI) transition-matrices file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_moddeffn </TD>
+    <TD>destination (CD untied) model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_ts2cbfn </TD>
+    <TD>.cont. </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_mixwfn </TD>
+    <TD>destination (CD untied) mixtrue weights file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_meanfn </TD>
+    <TD>destination (Cd untied) means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_varfn </TD>
+    <TD>destination (CD untied) variances file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_tmatfn </TD>
+    <TD>destination (Cd untied) transition matrices file </TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration </TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>dimensionality of base feature vector </TD></TR></TBODY></TABLE>
+<HR>
+
+<P><A name=26></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>TRAINING CD UNTIED MODELS</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>Once the initialization for CD-untied training is done, the next step is to 
+actually train the CD untied models. To do this, as in the CI training, the 
+Baum-Welch forward-backward algorithm is iteratively used. Each iteration 
+consists of generating bw buffers by running the bw executable on the training 
+corpus (this can be divided into many parts as explained in the CI training), 
+follwed by running the norm executable to compute the final parameters at the 
+end of the iteration. The arguments required by the bw executable at this stage 
+are as follows. 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD align=middle>FLAG </TD>
+    <TD align=middle>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-moddeffn</TD>
+    <TD>CD-untied model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-ts2cbfn </TD>
+    <TD>this flag should be set to ".cont." if you are training continuous 
+      models, and to ".semi." if you are training semi-continuous models, 
+      without the double quotes </TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>name of the file in which the mixture-weights from the previous 
+      iteration are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-mwfloor </TD>
+    <TD>Floor value for the mixture weights. Any number below the floor value 
+      is set to the floor value.</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatfn </TD>
+    <TD>name of the file in which the transition matrices from the previous 
+      iteration are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>name of the file in which the means from the previous iteration are 
+      stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>name of the file in which the variances fromt he previous iteration 
+      are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-dictfn </TD>
+    <TD>Dictionary </TD></TR>
+  <TR>
+    <TD vAlign=top>-fdictfn </TD>
+    <TD>Filler dictionary</TD></TR>
+  <TR>
+    <TD vAlign=top>-ctlfn </TD>
+    <TD>control file </TD></TR>
+  <TR>
+    <TD vAlign=top>-part </TD>
+    <TD>You can split the training into N equal parts by setting a flag. If 
+      there are M utterances in your control file, then this will enable you to 
+      run the training separately on each (M/N)<SUP>th</SUP> part. This flag may 
+      be set to specify which of these parts you want to currently train on. As 
+      an example, if your total number of parts is 3, this flag can take one of 
+      the values 1,2 or 3</TD></TR>
+  <TR>
+    <TD vAlign=top>-npart </TD>
+    <TD>number of parts in which you have split the training </TD></TR>
+  <TR>
+    <TD vAlign=top>-cepdir </TD>
+    <TD>directory where your feature files are stored</TD></TR>
+  <TR>
+    <TD vAlign=top>-cepext </TD>
+    <TD>the extension that comes after the name listed in the control file. 
+      For example, you may have a file called a/b/c.d and may have listed a/b/c 
+      in your control file. Then this flag must be given the argument "d", 
+      without the double quotes or the dot before it </TD></TR>
+  <TR>
+    <TD vAlign=top>-lsnfn </TD>
+    <TD>name of the transcript file </TD></TR>
+  <TR>
+    <TD vAlign=top>-accumdir </TD>
+    <TD>Intermediate results from each part of your training will be written 
+      in this directory. If you have T means to estimate, then the size of the 
+      mean buffer from the current part of your training will be T*4 bytes 
+      (say). There will likewise be a variance buffer, a buffer for mixture 
+      weights, and a buffer for transition matrices</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfloor </TD>
+    <TD>minimum variance value allowed </TD></TR>
+  <TR>
+    <TD vAlign=top>-topn </TD>
+    <TD>no. of gaussians to consider for likelihood computation</TD></TR>
+  <TR>
+    <TD vAlign=top>-abeam </TD>
+    <TD>forward beamwidth</TD></TR>
+  <TR>
+    <TD vAlign=top>-bbeam </TD>
+    <TD>backward beamwidth</TD></TR>
+  <TR>
+    <TD vAlign=top>-agc </TD>
+    <TD>automatic gain control</TD></TR>
+  <TR>
+    <TD vAlign=top>-cmn </TD>
+    <TD>cepstral mean normalization</TD></TR>
+  <TR>
+    <TD vAlign=top>-varnorm </TD>
+    <TD>variance normalization</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanreest </TD>
+    <TD>mean re-estimation</TD></TR>
+  <TR>
+    <TD vAlign=top>-varreest </TD>
+    <TD>variance re-estimation</TD></TR>
+  <TR>
+    <TD vAlign=top>-2passvar </TD>
+    <TD>Setting this flag to "yes" lets bw use the previous means in the 
+      estimation of the variance. The current variance is then estimated as E[(x 
+      - prev_mean)<SUP>2</SUP>]. If this flag is set to "no" the current 
+      estimate of the means are used to estimate variances. This requires the 
+      estimation of variance as E[x<SUP>2</SUP>] - (E[x])<SUP>2</SUP>, an 
+      unstable estimator that sometimes results in negative estimates of the 
+      variance due to arithmetic imprecision</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatreest </TD>
+    <TD>re-estimate transition matrices or not</TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration</TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>length of basic feature vector</TD></TR></TBODY></TABLE>
+<P>
+<LI>The Baum-Welch step should be followed by the nomalization step. The 
+executable "norm" must be used for this. The arguments required by the norm 
+executable are the same as that for CI training, and are listed below: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD align=middle>FLAG </TD>
+    <TD align=middle>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-accumdir </TD>
+    <TD>Intermediate buffer directory</TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration</TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>name of the file in which you want to write the mixture weights. Full 
+      path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatfn </TD>
+    <TD>name of the file in which you want to write the transition matrices. 
+      Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>name of the file in which you want to write the means. Full path must 
+      be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>name of the file in which you want to write the variances. Full path 
+      must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>length of basic feature vector</TD></TR></TBODY></TABLE>
+<P>The iterations of Baum-Welch and norm must be run till the likelihoods 
+converge (ie, the convergence ratio reaches a small threshold value). Typically 
+this happens in 6-10 iterations. 
+<HR>
+
+<P><A name=27></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>BUILDING DECISION TREES FOR PARAMETER SHARING</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>Once the CD-untied models are computed, the next major step in training 
+continuous models is decision tree building. Decision trees are used to decide 
+which of the HMM states of all the triphones (seen and unseen) are similar to 
+each other, so that data from all these states are collected together and used 
+to train one global state, which is called a "senone". Many groups of similar 
+states are formed, and the number of "senones" that are finally to be trained 
+can be user defined. A senone is also called a tied-state and is obviously 
+shared across the triphones which contributed to it. The technical details of 
+decision tree building and state tying are explained in the technical section of 
+this manual. It is sufficient to understand here that for state tying, we 
+require to build decision trees. 
+<P><A name=28></A><U><B>Generating the linguistic questions</B></U> 
+<P>The decision trees require the CD-untied models and a set of predefined 
+phonetic classes (or classes of the acoustic units you are modeling) which share 
+some common property. These classes or questions are used to partition the data 
+at any given node of a tree. Each question results in one partion, and the 
+question that results in the "best" partition (maximum increase in likelihood 
+due to the partition) is chosen to partition the data at that node. All 
+linguistic questions are written in a single file called the "linguistic 
+questions" file. One decision tree is built for each state of each phone. 
+<P>For example, if you want to build a decision tree for the contexts (D B P AE 
+M IY AX OY) for any phone, then you could ask the question: does the context 
+belong to the class vowels? If you have defined the class vowels to have the 
+phones AE AX IY OY EY AA EH (in other words, if one of your linguistic questions 
+has the name "VOWELS" and has the elements AE AX IY OY EY AA EH corresponding to 
+that name), then the decision tree would branch as follows: <PRE>                     D B P AE M IY AX OY
+                              |
+                             
+       question: does this context belong to the class VOWELS ?
+                              /\
+                             /  \
+                            /    \
+                         yes      no
+                         /         \
+                        /           \
+                     AE IY AX OY     D B P M
+                        |             |
+                      question     question
+                       /\             /\
+                      /  \           /  \
+                      
+</PRE>Here is an example of a "linguistic-questions" file: <PRE>ASPSEG      HH
+SIL         SIL
+VOWELS      AE AX IY OY EY AA EH
+ALVSTP      D T N
+DENTAL      DH TH
+LABSTP      B P M
+LIQUID      L R
+</PRE>The column on the left specifies the name gives to the class. This name is 
+user defined. The classes consist of a single phone or a cluster of phones 
+whaich share some common acoustic property. If your acoustic units are not 
+completely phonetically motivated, or if you are training models for a language 
+whose phonetic structure you are not completely sure about, then the executable 
+classed "make_quests" provided with the SPHINX-III package can be used to 
+generate the linguistic questions. It uses the CI models to make the questions, 
+and needs the following arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-moddeffn </TD>
+    <TD>CI model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>CI means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>CI variances file </TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>CI mixture weights file </TD></TR>
+  <TR>
+    <TD vAlign=top>-npermute </TD>
+    <TD>A bottom-up top-down clustering algorithm is used to group the phones 
+      into classes. Phones are clustered using bottom-up clustering until 
+      npermute classes are obtained. The npermute classes are exhaustively 
+      partitioned into two classes and evaluated to identify the optimal 
+      partitioning of the entire phone set into two groups. An identical 
+      procedure is performed recursively on each of these groups to generate an 
+      entire tree. npermute is typically between 8 and 12. Smaller values of 
+      npermute result in suboptimal clustering. Larger values become 
+      computationally prohibitive. </TD></TR>
+  <TR>
+    <TD vAlign=top>-niter </TD>
+    <TD>The bottom-up top-down clustering can be iterated to give more optimal 
+      clusters. niter sets the number of iterations to run. niter is typiclly 
+      set to 1 or 2. The clustering saturates after 2 iterations. </TD></TR>
+  <TR>
+    <TD vAlign=top>-qstperstt </TD>
+    <TD>The algoritm clusters state distributions belonging to each state of 
+      the CI phone HMMs to generate questions. Thus all 1st states are clustered 
+      to generate one subset of questions, all 2nd states are clustered for the 
+      second subset, and so on. qstperstt determines how many questions are to 
+      be generated by clustering any state. Typically this is set to a number 
+      between 20 and 25. </TD></TR>
+  <TR>
+    <TD vAlign=top>-tempfn </TD>
+    <TD></TD></TR>
+  <TR>
+    <TD vAlign=top>-questfn </TD>
+    <TD>output lingustic questions file </TD></TR></TBODY></TABLE>
+<P>Once the linguistic questions have been generated, decision trees must be 
+built for each state of each CI phone present in your phonelist. Decision trees 
+are however not built for filler phones written as +()+ in your phonelist. They 
+are also not built for the SIL phone. In order to build decision trees, the 
+executable "bldtree" must be used. It takes the following arguments: 
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-treefn </TD>
+    <TD>full path to the directory in which you want the decision trees to be 
+      written </TD></TR>
+  <TR>
+    <TD vAlign=top>-moddeffn </TD>
+    <TD>CD-untied model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>Cd-untied mixture weights file </TD></TR>
+  <TR>
+    <TD vAlign=top>-ts2cbfn </TD>
+    <TD>.cont. </TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>CD-untied means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>CD-untied variances file </TD></TR>
+  <TR>
+    <TD vAlign=top>-mwfloor </TD>
+    <TD>Floor value of the mixture weights. Values below this are reset to 
+      this value. A typical value is 1e-8 </TD></TR>
+  <TR>
+    <TD vAlign=top>-psetfn </TD>
+    <TD>linguistic questions file </TD></TR>
+  <TR>
+    <TD vAlign=top>-phone </TD>
+    <TD>CI phone for which you want to build the decision tree </TD></TR>
+  <TR>
+    <TD vAlign=top>-state </TD>
+    <TD>The HMM state for which you want to build the decision tree. For a 
+      three state HMM, this value can be 0,1 or 2. For a 5 state HMM, this value 
+      can be 0,1,2,3 or 4, and so on </TD></TR>
+  <TR>
+    <TD vAlign=top>-stwt </TD>
+    <TD>This flag needs a string of numbers equal to the number of HMM-states, 
+      for example, if you were using 5-state HMMs, then the flag could be given 
+      as "-stwt 1.0 0.3 0.1 0.01 0.001". Each of these numbers specify the 
+      weights to be given to state distributions during tree building, beginning 
+      with the *current* state. The second number specifies the weight to be 
+      given to the states *immediately adjacent* to the current state (if there 
+      are any), the third number specifies the weight to be given to adjacent 
+      states *one removed* from the immediately adjacent one (if there are any), 
+      and so on. A typical set of values for 5 state HMMs is "1.0 0.3 0.1 0.01 
+      0.001" </TD></TR>
+  <TR>
+    <TD vAlign=top>-ssplitmin </TD>
+    <TD>Complex questions are built for the decision tree by first building 
+      "pre-trees" using the linguistic questions in the question file. The 
+      minimum number of bifurcations in this tree is given by ssplitmin. This 
+      should not be lesser than 1. This value is typically set to 1. </TD></TR>
+  <TR>
+    <TD vAlign=top>-ssplitmax </TD>
+    <TD>The maximum number of bifurcations in the simple tree before it is 
+      used to build complex questions. This number is typically set to 7. Larger 
+      values would be more computationally intensive. This number should not be 
+      smaller than the value given for ssplitmin</TD></TR>
+  <TR>
+    <TD vAlign=top>-ssplitthr </TD>
+    <TD>Minimum increase in likelihood to be considered for a bifurcation in 
+      the simple tree. Typically set to a very small number greater than or 
+      equal to 0 </TD></TR>
+  <TR>
+    <TD vAlign=top>-csplitmin </TD>
+    <TD>The minimum number of bifurcations in the decision tree. This should 
+      not be less than 1 </TD></TR>
+  <TR>
+    <TD vAlign=top>-csplitmax </TD>
+    <TD>The maximum number of bifurcations in the decision tree. This should 
+      be as large as computationlly feasible. This is typically set to 2000 
+  </TD></TR>
+  <TR>
+    <TD vAlign=top>-csplitthr </TD>
+    <TD>Minimum increase in likelihood to be considered for a bifurcation in 
+      the decision tree. Typically set to a very small number greater than or 
+      equal to 0. </TD></TR>
+  <TR>
+    <TD vAlign=top>-cntthresh </TD>
+    <TD>Minimum number of observations in a state for it to be considered in 
+      the decision tree building process. </TD></TR></TBODY></TABLE>If, for example, 
+you have a phonelist which contains the following phones <PRE>+NOISE+
+SIL
+AA
+AX
+B
+</PRE>and you are training 3 state HMMs, then you must build 9 decision trees, 
+one each for each state of the phones AA, AX and B. 
+<HR>
+
+<P><A name=29></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>PRUNING THE DECISION TREES</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>Once the decision trees are built, they must be pruned to have as many leaves 
+as the number of tied states (senones) that you want to train. Remember that the 
+number of tied states does not include the CI states, which are never tied. In 
+the pruning process, the bifurcations in the decision trees which resulted in 
+the minimum increase in likelihood are progressively removed and replaced by the 
+parent node. The selection of the branches to be pruned out is done across the 
+entire collection of decision trees globally. The executable to be used for 
+decision tree pruning is called "prunetree" and requires the following 
+arguments: 
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vlign="top">FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vlign="top">-itreedir </TD>
+    <TD>directory in which the full decision trees are stored </TD></TR>
+  <TR>
+    <TD vlign="top">-nseno </TD>
+    <TD>number of senones that you want to train </TD></TR>
+  <TR>
+    <TD vlign="top">-otreedir </TD>
+    <TD>directory to store the pruned decision trees </TD></TR>
+  <TR>
+    <TD vlign="top">-moddeffn </TD>
+    <TD>CD-untied model definition file </TD></TR>
+  <TR>
+    <TD vlign="top">-psetfn </TD>
+    <TD>lingistic questions file </TD></TR>
+  <TR>
+    <TD vlign="top">-minocc </TD>
+    <TD>minimum number of observations in the given tied state. If there are 
+      fewer observations, the branches corresponding to the tied state get 
+      pruned out by default. This value should never be 0, otherwise you will 
+      end up having senones with no data to train (which are seen 0 times in the 
+      training set) </TD></TR></TBODY></TABLE>
+<HR>
+
+<P><A name=30></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE CD TIED MODEL DEFINITION FILE</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>Once the trees are pruned, a new model definition file must be created which 
+<UL start="a">
+  <LI>contains all the triphones which are seen during training 
+  <LI>has the states corresponding to these triphones identified with senones 
+  from the pruned trees </LI></UL>In order to do this, the model definition file 
+which contains all possible triphones from the current training dictionary can 
+be used [alltriphones model definition file]. This was built during the process 
+of building the CD-untied model definition file. Remember that the CD-untied 
+model definition file contained only a selected number of triphones, with 
+various thresholds used for selection. That file, therefore, cannot be used to 
+build the CD-tied model definition file, except in the exceptional case where 
+you are sure that the CD-untied model definition file includes *all* triphones 
+seen during training. The executable that must be used to tie states is called 
+"tiesate" and needs the following arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-imoddeffn </TD>
+    <TD>alltriphones model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-omoddeffn </TD>
+    <TD>CD-tied model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-treedir </TD>
+    <TD>pruned tree directory </TD></TR>
+  <TR>
+    <TD vAlign=top>-psetfn </TD>
+    <TD>linguistic questions file </TD></TR></TBODY></TABLE>
+<P>Here is an example of a CD-tied model definition file, based on the earlier 
+example given for the CD-untied model definition file. The alltriphones model 
+definition file: <PRE># Generated by [path]/mk_mdef_gen on Sun Nov 26 12:42:05 2000
+# triphone: (null)
+# seno map: (null)
+#
+0.3
+5 n_base
+34 n_tri
+156 n_state_map
+117 n_tied_state
+15 n_tied_ci_state
+5 n_tied_tmat
+#
+# Columns definitions
+#base lft  rt p attrib tmat      ... state id's ...
+  SIL   -   - - filler    0    0    1    2    N
+   AE   -   - -    n/a    1    3    4    5    N
+   AX   -   - -    n/a    2    6    7    8    N
+    B   -   - -    n/a    3    9   10   11    N
+    T   -   - -    n/a    4   12   13   14    N
+   AE   B   T i    n/a    1   15   16   17    N
+   AE   T   B i    n/a    1   18   19   20    N
+   AX  AX  AX s    n/a    2   21   22   23    N
+   AX  AX   B s    n/a    2   24   25   26    N
+   AX  AX SIL s    n/a    2   27   28   29    N
+   AX  AX   T s    n/a    2   30   31   32    N
+   AX   B  AX s    n/a    2   33   34   35    N
+   AX   B   B s    n/a    2   36   37   38    N
+   AX   B SIL s    n/a    2   39   40   41    N
+   AX   B   T s    n/a    2   42   43   44    N
+   AX SIL  AX s    n/a    2   45   46   47    N
+   AX SIL   B s    n/a    2   48   49   50    N
+   AX SIL SIL s    n/a    2   51   52   53    N
+   AX SIL   T s    n/a    2   54   55   56    N
+   AX   T  AX s    n/a    2   57   58   59    N
+   AX   T   B s    n/a    2   60   61   62    N
+   AX   T SIL s    n/a    2   63   64   65    N
+   AX   T   T s    n/a    2   66   67   68    N
+    B  AE  AX e    n/a    3   69   70   71    N
+    B  AE   B e    n/a    3   72   73   74    N
+    B  AE SIL e    n/a    3   75   76   77    N
+    B  AE   T e    n/a    3   78   79   80    N
+    B  AX  AE b    n/a    3   81   82   83    N
+    B   B  AE b    n/a    3   84   85   86    N
+    B SIL  AE b    n/a    3   87   88   89    N
+    B   T  AE b    n/a    3   90   91   92    N
+    T  AE  AX e    n/a    4   93   94   95    N
+    T  AE   B e    n/a    4   96   97   98    N
+    T  AE SIL e    n/a    4   99  100  101    N
+    T  AE   T e    n/a    4  102  103  104    N
+    T  AX  AE b    n/a    4  105  106  107    N
+    T   B  AE b    n/a    4  108  109  110    N
+    T SIL  AE b    n/a    4  111  112  113    N
+    T   T  AE b    n/a    4  114  115  116    N
+</PRE>is used as the base to give the following CD-tied model definition file 
+with 39 tied states (senones): <PRE># Generated by [path]/mk_mdef_gen on Sun Nov 26 12:42:05 2000
+# triphone: (null)
+# seno map: (null)
+#
+0.3
+5 n_base
+34 n_tri
+156 n_state_map
+54 n_tied_state
+15 n_tied_ci_state
+5 n_tied_tmat
+#
+# Columns definitions
+#base lft  rt p attrib tmat      ... state id's ...
+  SIL   -   - - filler    0    0    1    2    N
+   AE   -   - -    n/a    1    3    4    5    N
+   AX   -   - -    n/a    2    6    7    8    N
+    B   -   - -    n/a    3    9   10   11    N
+    T   -   - -    n/a    4   12   13   14    N
+   AE   B   T i    n/a    1   15   16   17    N
+   AE   T   B i    n/a    1   18   16   19    N
+   AX  AX  AX s    n/a    2   20   21   22    N
+   AX  AX   B s    n/a    2   23   21   22    N
+   AX  AX SIL s    n/a    2   24   21   22    N
+   AX  AX   T s    n/a    2   25   21   22    N
+   AX   B  AX s    n/a    2   26   21   27    N
+   AX   B   B s    n/a    2   23   21   27    N
+   AX   B SIL s    n/a    2   24   21   27    N
+   AX   B   T s    n/a    2   25   21   27    N
+   AX SIL  AX s    n/a    2   26   21   28    N
+   AX SIL   B s    n/a    2   23   21   28    N
+   AX SIL SIL s    n/a    2   24   21   28    N
+   AX SIL   T s    n/a    2   25   21   28    N
+   AX   T  AX s    n/a    2   26   21   29    N
+   AX   T   B s    n/a    2   23   21   29    N
+   AX   T SIL s    n/a    2   24   21   29    N
+   AX   T   T s    n/a    2   25   21   29    N
+    B  AE  AX e    n/a    3   30   31   32    N
+    B  AE   B e    n/a    3   33   31   32    N
+    B  AE SIL e    n/a    3   34   31   32    N
+    B  AE   T e    n/a    3   35   31   32    N
+    B  AX  AE b    n/a    3   36   37   38    N
+    B   B  AE b    n/a    3   36   37   39    N
+    B SIL  AE b    n/a    3   36   37   40    N
+    B   T  AE b    n/a    3   36   37   41    N
+    T  AE  AX e    n/a    4   42   43   44    N
+    T  AE   B e    n/a    4   45   43   44    N
+    T  AE SIL e    n/a    4   46   43   44    N
+    T  AE   T e    n/a    4   47   43   44    N
+    T  AX  AE b    n/a    4   48   49   50    N
+    T   B  AE b    n/a    4   48   49   51    N
+    T SIL  AE b    n/a    4   48   49   52    N
+    T   T  AE b    n/a    4   48   49   53    N
+</PRE>
+<HR>
+
+<P><A name=31></A><!------------------------------------------------------------------------->
+<CENTER>
+<H4><FONT color=red>TRAINING CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>INITIALIZING AND TRAINING CD TIED GAUSSIAN MIXTURE MODELS 
+  </TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->
+<P>The next step is to train the CD-tied models. In the case of continuous 
+models, the HMM states can be modeled by either a single Gaussian distribution, 
+or a mixture of Gaussian distributions. The number of Gaussians in a 
+mixture-distribution must preferably be even, and a power of two (for example, 
+2,4,8,16, 32,..). To model the HMM states by a mixture of 8 Gaussians (say), we 
+first have to train 1 Gaussian per state models. Each Gaussian distribution is 
+then split into two by perturbing its mean slightly, and the resulting two 
+distributions are used to intialize the training for 2 Gaussian per state 
+models. These are further perturbed to initialize for 4 Gaussains per state 
+models and a further split is done to initalize for the 8 Gaussians per state 
+models. So the CD-tied training for models with 2<SUP>N</SUP> Gaussians per 
+state is done in N+1 steps. Each of these N+1 steps consists of 
+<P>
+<OL>
+  <LI>initialization 
+  <LI>iterations of Baum-Welch followed by norm 
+  <LI>Gaussian splitting (not done in the N+1<SUP>th</SUP> stage of CD-tied 
+  training) </LI></OL>
+<P>The training begins with the initialization of the 1 Gaussian per state 
+models. During initialization, the model parameters from the CI model parameter 
+files are copied into appropriate positions in the CD tied model parameter 
+files. Four model parameter files are created, one each for the means, 
+variances, transition matrices and mixture weights. During initialization, each 
+state of a particular CI phone contributes to the same state of the same CI 
+phone in the CD-tied model parameter file, and also to the same state of the 
+*all* the triphones of the same CI phone in the CD-tied model parameter file. 
+The CD-tied model definition file is used as a reference for this mapping. 
+<P>Initialization for the 1 gaussian per state models is done by the executable 
+called <B><FONT color=green>init_mixw</FONT></B>. It requires the following 
+arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>-src_moddeffn </TD>
+    <TD>source (CI) model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_ts2cbfn </TD>
+    <TD>.cont. </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_mixwfn </TD>
+    <TD>source (CI) mixture-weight file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_meanfn </TD>
+    <TD>source (CI) means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_varfn </TD>
+    <TD>source (CI) variances file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_tmatfn </TD>
+    <TD>source (CI) transition-matrices file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_moddeffn </TD>
+    <TD>destination (CD tied) model def inition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_ts2cbfn </TD>
+    <TD>.cont. </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_mixwfn </TD>
+    <TD>destination (CD tied 1 Gau/state) mixture weights file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_meanfn </TD>
+    <TD>destination (CD tied 1 Gau/state) means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_varfn </TD>
+    <TD>destination (CD tied 1 Gau/state) variances file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_tmatfn </TD>
+    <TD>destination (CD tied 1 Gau/state) transition matrices file </TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration </TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>dimensionality of base feature vector 
+    <TD></TD></TR></TBODY></TABLE>
+<P>
+<P>The executables used for baum-welch, norm and Gaussaian splitting are 
+<B><FONT color=green>bw</FONT></B>, <B><FONT color=green>norm</FONT></B> and 
+<B><FONT color=green>inc_comp</FONT></B> 
+<P>The arguments needed by <B><FONT color=green>bw</FONT></B> are 
+<P>
+<TABLE border=1 noshade ,>
+  <TBODY>
+  <TR>
+    <TD align=middle>FLAG </TD>
+    <TD align=middle>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-moddeffn</TD>
+    <TD>CD tied model definition file</TD></TR>
+  <TR>
+    <TD vAlign=top>-ts2cbfn </TD>
+    <TD>this flag should be set to ".cont." if you are training continuous 
+      models, and to ".semi." if you are training semi-continuous models, 
+      without the double quotes </TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>name of the file in which the mixture-weights from the previous 
+      iteration are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-mwfloor </TD>
+    <TD>Floor value for the mixture weights. Any number below the floor value 
+      is set to the floor value.</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatfn </TD>
+    <TD>name of the file in which the transition matrices from the previous 
+      iteration are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-tpfloor </TD>
+    <TD>Floor value for the transition probabilities. Any number below the 
+      floor value is set to the floor value.</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>name of the file in which the means from the previous iteration are 
+      stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>name of the file in which the variances fromt he previous iteration 
+      are stored. Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-dictfn </TD>
+    <TD>Dictionary </TD></TR>
+  <TR>
+    <TD vAlign=top>-fdictfn </TD>
+    <TD>Filler dictionary</TD></TR>
+  <TR>
+    <TD vAlign=top>-ctlfn </TD>
+    <TD>control file </TD></TR>
+  <TR>
+    <TD vAlign=top>-part </TD>
+    <TD>You can split the training into N equal parts by setting a flag. If 
+      there are M utterances in your control file, then this will enable you to 
+      run the training separately on each (M/N)<SUP>th</SUP> part. This flag may 
+      be set to specify which of these parts you want to currently train on. As 
+      an example, if your total number of parts is 3, this flag can take one of 
+      the values 1,2 or 3</TD></TR>
+  <TR>
+    <TD vAlign=top>-npart </TD>
+    <TD>number of parts in which you have split the training </TD></TR>
+  <TR>
+    <TD vAlign=top>-cepdir </TD>
+    <TD>directory where your feature files are stored</TD></TR>
+  <TR>
+    <TD vAlign=top>-cepext </TD>
+    <TD>the extension that comes after the name listed in the control file. 
+      For example, you may have a file called a/b/c.d and may have listed a/b/c 
+      in your control file. Then this flag must be given the argument "d", 
+      without the double quotes or the dot before it </TD></TR>
+  <TR>
+    <TD vAlign=top>-lsnfn </TD>
+    <TD>name of the transcript file </TD></TR>
+  <TR>
+    <TD vAlign=top>-accumdir </TD>
+    <TD>Intermediate results from each part of your training will be written 
+      in this directory. If you have T means to estimate, then the size of the 
+      mean buffer from the current part of your training will be T*4 bytes 
+      (say). There will likewise be a variance buffer, a buffer for mixture 
+      weights, and a buffer for transition matrices</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfloor </TD>
+    <TD>minimum variance value allowed </TD></TR>
+  <TR>
+    <TD vAlign=top>-topn </TD>
+    <TD>no. of gaussians to consider for likelihood computation</TD></TR>
+  <TR>
+    <TD vAlign=top>-abeam </TD>
+    <TD>forward beamwidth</TD></TR>
+  <TR>
+    <TD vAlign=top>-bbeam </TD>
+    <TD>backward beamwidth</TD></TR>
+  <TR>
+    <TD vAlign=top>-agc </TD>
+    <TD>automatic gain control</TD></TR>
+  <TR>
+    <TD vAlign=top>-cmn </TD>
+    <TD>cepstral mean normalization</TD></TR>
+  <TR>
+    <TD vAlign=top>-varnorm </TD>
+    <TD>variance normalization</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanreest </TD>
+    <TD>mean re-estimation</TD></TR>
+  <TR>
+    <TD vAlign=top>-varreest </TD>
+    <TD>variance re-estimation</TD></TR>
+  <TR>
+    <TD vAlign=top>-2passvar </TD>
+    <TD>Setting this flag to "yes" lets bw use the previous means in the 
+      estimation of the variance. The current variance is then estimated as E[(x 
+      - prev_mean)<SUP>2</SUP>]. If this flag is set to "no" the current 
+      estimate of the means are used to estimate variances. This requires the 
+      estimation of variance as E[x<SUP>2</SUP>] - (E[x])<SUP>2</SUP>, an 
+      unstable estimator that sometimes results in negative estimates of the 
+      variance due to arithmetic imprecision</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatreest </TD>
+    <TD>re-estimate transition matrices or not</TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration</TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>length of basic feature vector</TD></TR></TBODY></TABLE>
+<P>The arguments needed by <B><FONT color=green>norm</FONT></B> are: 
+<P>
+<TABLE border=1 noshade ,>
+  <TBODY>
+  <TR>
+    <TD align=middle>FLAG </TD>
+    <TD align=middle>DESCRIPTION </TD></TR>
+  <TR>
+    <TD vAlign=top>-accumdir </TD>
+    <TD>Intermediate buffer directory</TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration</TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>name of the file in which you want to write the mixture weights. Full 
+      path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-tmatfn </TD>
+    <TD>name of the file in which you want to write the transition matrices. 
+      Full path must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-meanfn </TD>
+    <TD>name of the file in which you want to write the means. Full path must 
+      be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-varfn </TD>
+    <TD>name of the file in which you want to write the variances. Full path 
+      must be provided</TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>length of basic feature vector</TD></TR></TBODY></TABLE>
+<P>The arguments needed by <B><FONT color=green>inc_comp</FONT></B> are: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-ninc </TD>
+    <TD>how many gaussians (per state) to split currently. You need not always 
+      split to double the number of Gaussians. you can specify other numbers 
+      here, so long as they are less than the number of Gaussians you currently 
+      have.This is a positive integer like "2", given without the double quotes 
+    </TD></TR>
+  <TR>
+    <TD>-ceplen </TD>
+    <TD>length of the base feature vector </TD></TR>
+  <TR>
+    <TD>-dcountfn </TD>
+    <TD>input mixture weights file </TD></TR>
+  <TR>
+    <TD>-inmixwfn </TD>
+    <TD>input mixture weights file </TD></TR>
+  <TR>
+    <TD>-outmixwfn </TD>
+    <TD>output mixture weights file </TD></TR>
+  <TR>
+    <TD>-inmeanfn </TD>
+    <TD>input means file </TD></TR>
+  <TR>
+    <TD>-outmeanfn </TD>
+    <TD>ouput means file </TD></TR>
+  <TR>
+    <TD>-invarfn </TD>
+    <TD>input variances file </TD></TR>
+  <TR>
+    <TD>-outvarfn </TD>
+    <TD>output variances file </TD></TR>
+  <TR>
+    <TD>-feat </TD>
+    <TD>type of feature </TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#top">Back to 
+index</A> 
+<HR>
+<A name=3></A><A name=3b></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>VECTOR QUANTIZATION</TD></TR></TBODY></TABLE>
+<P>This is done in two steps. In the first step, the feature vectors are 
+accumulated for quantizing the vector space. Not all feature vectors are used. 
+Rather, a sampling of the vectors available is done by the executable "agg_seg". 
+This executable simply "aggregates" the vectors into a buffer. The following 
+flag settings must be used with this executable: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-segdmpdirs </TD>
+    <TD>directory in which you want to put the aggregate buffer </TD></TR>
+  <TR>
+    <TD>-segdmpfn </TD>
+    <TD>name of the buffer (file) </TD></TR>
+  <TR>
+    <TD>-segtype </TD>
+    <TD>all </TD></TR>
+  <TR>
+    <TD>-ctlfn </TD>
+    <TD>control file </TD></TR>
+  <TR>
+    <TD>-cepdir </TD>
+    <TD>path to feature files </TD></TR>
+  <TR>
+    <TD>-cepext </TD>
+    <TD>feature vector filename extension </TD></TR>
+  <TR>
+    <TD>-ceplen </TD>
+    <TD>dimensionality of the base feature vector </TD></TR>
+  <TR>
+    <TD>-agc </TD>
+    <TD>automatic gain control factor(max/none) </TD></TR>
+  <TR>
+    <TD>-cmn </TD>
+    <TD>cepstral mean normalization(yes/no) </TD></TR>
+  <TR>
+    <TD>-feat </TD>
+    <TD>type of feature. As mentioned earlier, the 4-stream feature vector is 
+      usually given as an option here. When you specify the 4-stream feature, 
+      this program will compute and aggregate vectors corresponding to all 
+      streams separately.</TD></TR>
+  <TR>
+    <TD>-stride </TD>
+    <TD>how many samples to ignore during sampling of vectors (pick every 
+      stride'th sample)</TD></TR></TBODY></TABLE>
+<P>In the second step of vector quantization, an Expectation-Maximization (EM) 
+algorithm is applied to segregate each aggregated stream of vectors into a 
+codebook of N Gaussians. Usually N is some power of 2, the commonly used number 
+is N=256. The number 256 can in principle be varied, but this option is not 
+provided in the SPHINX-II decoder. So if you intend to use the SPHINX-II 
+decoder, but are training models with SPHINX-III trainer, you must use N=256. It 
+has been observed that the quality of the models built with 256 codeword 
+codebooks is sufficient for good recognition. Increasing the number of codewords 
+may cause data-insufficiency problems. In many instances, the choice to train 
+semi-continuous models (rather than continuous ones) arises from insufficiency 
+of training data. When this is indeed the case, increasing the number of 
+codebooks might aggravate the estimation problems that might arise due to data 
+insufficiency. Consider this fact seriously before you decide to increase N. 
+<P>In SPHINX-III, the EM-step is done through a k-means algorithm carried out by 
+the executable <B><FONT color=green>kmeans_init</FONT></B>. This executable is 
+usually used with the following flag settings: <PRE>    -grandvar   yes
+    -gthobj     single
+    -stride     1
+    -ntrial     1
+    -minratio   0.001
+    -ndensity   256
+    -meanfn     full_path_to_codebookmeans.file
+    -varfn      full_path_to_codebookvariances.file
+    -reest      no
+    -segdmpdirs directory_in_which_you_want_to_put_aggregate.file
+    -segdmpfn   aggregate.file
+    -ceplen     dimensionality_of_feature_vector
+    -feat       type_of_feature
+    -agc        automatic_gain_control_factor(max/none)
+    -cmn        cepstral_mean_normalization(yes/no)
+</PRE>Once the vector quantization is done, you have to flat-initialize your 
+acoustic models to prepare for the first real step in training. The following 
+steps explain the flat-initialization process: 
+<P><A name=3d></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE CI MODEL DEFINITION FILE</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#20">This 
+procedure is the same as described for continuous models</A>. <A name=3e></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE HMM TOPOLOGY FILE</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#21">This 
+procedure is the same as described for continuous models</A>. <A name=3c></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>FLAT INITIALIZATION OF CI MODEL PARAMETERS</TD></TR></TBODY></TABLE>
+<P>In flat-initialization, all mixture weights are set to be equal for all 
+states, and all state transition probabilities are set to be equal. Unlike in 
+continuous models, the means and variances of the codebook Gaussians are not 
+given global values, since they are already estimated from the data in the 
+vector quantization step. To flat-initialize the mixture weights, each component 
+of each mixture-weight distribution of each feature stream is set to be a number 
+equal to 1/N, where N is the codebook size. The mixture_weights and 
+transition_matrices are initialized using the executable <B><FONT 
+color=green>mk_flat</FONT></B>. It needs the following arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD>FLAG </TD>
+    <TD>DESCRIPTION </TD></TR>
+  <TR>
+    <TD>-moddeffn </TD>
+    <TD>CI model definition file </TD></TR>
+  <TR>
+    <TD>-topo </TD>
+    <TD>HMM topology file. </TD></TR>
+  <TR>
+    <TD>-mixwfn </TD>
+    <TD>file in which you want to write the initialized mixture weights </TD></TR>
+  <TR>
+    <TD>-tmatfn </TD>
+    <TD>file in which you want to write the initialized transition matrices 
+  </TD></TR>
+  <TR>
+    <TD>-nstream </TD>
+    <TD>number of independent feature streams, for continuous models this 
+      number should be set to "1", without the double quotes </TD></TR>
+  <TR>
+    <TD>-ndensity </TD>
+    <TD>codebook size. This number is usually set to "256", without the double 
+      quotes</TD></TR></TBODY></TABLE>
+<P><A name=3f></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>TRAINING CI MODELS</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#23">This 
+procedure is the same as described for continuous models</A>, except 
+<P>
+<OL>
+  <LI>For the executable <B><FONT color=green>bw</FONT></B>, the flags 
+  -tst2cbfn, -topn and -feat must be set to the values 
+  <P>
+  <TABLE border=1>
+    <TBODY>
+    <TR>
+      <TD>FLAG </TD>
+      <TD>VALUE </TD></TR>
+    <TR>
+      <TD>-tst2cbfn </TD>
+      <TD>.semi. </TD></TR>
+    <TR>
+      <TD>-topn </TD>
+      <TD>This value should be lower than or equal to the codebook size. It 
+        decides how many components of each mixture weight distribution are used 
+        to estimate likelihoods during the baum-welch passes. Itaffects the 
+        speed of training. A higher value results in slower iterations </TD></TR>
+    <TR>
+      <TD>-feat </TD>
+      <TD>The specific feature type you are using to train the semi-continuous 
+        models </TD></TR></TBODY></TABLE>
+  <P></P>
+  <LI>For the executable <B><FONT color=green>norm</FONT></B>, the flag -feat 
+  must be set to the value 
+  <P>
+  <TABLE border=1>
+    <TBODY>
+    <TR>
+      <TD>FLAG </TD>
+      <TD>VALUE </TD></TR>
+    <TR>
+      <TD>-feat </TD>
+      <TD>The specific feature type you are using to train the semi-continuous 
+        models </TD></TR></TBODY></TABLE></P></LI></OL>
+<P>Also, it is important to remember here that the re-estimated means and 
+variances now correspond to <EM>codebook</EM> means and variances. In 
+semi-continuous models, the codebooks are also re-estimated during training. The 
+vector quantization step is therefore only an <EM>initialization</EM> step for 
+the codebooks. This fact will affect the way we do model adaptation for the 
+semi-continuous case. 
+<P><A name=3g></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE CD UNTIED MODEL DEFINITION FILE</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#24">This 
+procedure is the same as described for continuous models</A>. <A name=3h></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>FLAT INITIALIZATION OF CD UNTIED MODEL PARAMETERS</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#25">This 
+procedure is the same as described for continuous models</A>. <A name=3i></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>TRAINING CD UNTIED MODELS</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#26">This 
+procedure is the same as described for continuous models</A>. <A name=3j></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>BUILDING DECISION TREES FOR PARAMETER SHARING</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#27">This 
+procedure is the same as described for continuous models</A>. <A name=3k></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>GENERATING THE LINGUISTIC QUESTIONS</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#28">This 
+procedure is the same as described for continuous models</A>. <A name=3l></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>PRUNING THE DECISION TREES</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#29">This 
+procedure is the same as described for continuous models</A>. <A name=3m></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>CREATING THE CD TIED MODEL DEFINITION FILE</TD></TR></TBODY></TABLE>
+<P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#30">This 
+procedure is the same as described for continuous models</A>. <A name=3n></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>INITIALIZING AND TRAINING CD TIED MODELS</TD></TR></TBODY></TABLE>
+<P>During initialization, the model parameters from the CI model parameter files 
+are copied into appropriate positions in the CD tied model parameter files. Four 
+model parameter files are created, one each for the means, variances, transition 
+matrices and mixture weights. During initialization, each state of a particular 
+CI phone contributes to the same state of the same CI phone in the CD-tied model 
+parameter file, and also to the same state of the *all* the triphones of the 
+same CI phone in the CD-tied model parameter file. The CD-tied model definition 
+file is used as a reference for this mapping. 
+<P>Initialization for the CD-tied training is done by the executable called 
+<B><FONT color=green>init_mixw</FONT></B>. It requires the following arguments: 
+<P>
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>-src_moddeffn </TD>
+    <TD>source (CI) model definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_ts2cbfn </TD>
+    <TD>.semi. </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_mixwfn </TD>
+    <TD>source (CI) mixture-weight file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_meanfn </TD>
+    <TD>source (CI) means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_varfn </TD>
+    <TD>source (CI) variances file </TD></TR>
+  <TR>
+    <TD vAlign=top>-src_tmatfn </TD>
+    <TD>source (CI) transition-matrices file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_moddeffn </TD>
+    <TD>destination (CD tied) model def inition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_ts2cbfn </TD>
+    <TD>.semi. </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_mixwfn </TD>
+    <TD>destination (CD tied) mixture wei ghts file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_meanfn </TD>
+    <TD>destination (CD tied) means file </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_varfn </TD>
+    <TD>destination (CD tied) variances fi le </TD></TR>
+  <TR>
+    <TD vAlign=top>-dest_tmatfn </TD>
+    <TD>destination (CD tied) transition matrices file </TD></TR>
+  <TR>
+    <TD vAlign=top>-feat </TD>
+    <TD>feature configuration </TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>dimensionality of base feature vector </ td></TD></TR></TBODY></TABLE>
+<P>@@ <A name=3a></A>
+<CENTER>
+<H4><FONT color=red>TRAINING SEMI-CONTINUOUS MODELS</FONT></H4></CENTER>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>DELETED INTERPOLATION</TD></TR></TBODY></TABLE>
+<P>Deleted interpolation is the final step in creating semi-continuous models. 
+The output of deleted interpolation are semi-continuous models in sphinx-3 
+format. These have to be further converted to sphinx-2 format, if you want to 
+use the SPHINX-II decoder. 
+<P>Deleted interpolation is an iterative process to interpolate between CD and 
+CI mixture-weights to reduce the effects of overfitting. The data are divided 
+into two sets, and the data from one set are used to estimate the optimal 
+interpolation factor between CI and CD models trained from the other set. Then 
+the two data sets are switched and this procedure is repeated using the last 
+estimated interpolation factor as an initialization for the current step. The 
+switching is continued until the interpolation factor converges. 
+<P>To do this, we need *two* balanced data sets. Instead of the actual data, 
+however, we use the Bauim-Welch buffers, since the related math is convenient. 
+we therefore need an *even* number of buffers that can be grouped into two sets. 
+DI cannot be performed if you train using only one buffer. At least in the final 
+iteration of the training, you must perform the training in (at least) two 
+parts. You could also do this serially as one final iteration of training AFTER 
+BW has converegd, on a non-lsf setup. 
+<P>Note here that the norm executable used at the end of every Baum-Welch 
+iteration also computes models from the buffers, but it does not require an even 
+number of buffers. BW returns numerator terms and denominator terms for the 
+final estimation, and norm performs the actual division. The number of buffers 
+is not important, but you would need to run norm at the end of EVERY iteration 
+of BW, even if you did the training in only one part. When you have multiple 
+parts norm sums up the numerator terms from the various buffers, and the 
+denominator terms, and then does the division. 
+<P>The executable "delint" provided with the SPHINX-III package does the deleted 
+interpolation. It takes the following arguments: 
+<TABLE border=1>
+  <TBODY>
+  <TR>
+    <TD vAlign=top>FLAG</TD>
+    <TD>DESCRIPTION</TD></TR>
+  <TR>
+    <TD vAlign=top>-accumdirs </TD>
+    <TD>directory which holds the baum-welch buffers </TD></TR>
+  <TR>
+    <TD vAlign=top>-moddeffn </TD>
+    <TD>CD-tied model-definition file </TD></TR>
+  <TR>
+    <TD vAlign=top>-mixwfn </TD>
+    <TD>CD-tied mixture weights files </TD></TR>
+  <TR>
+    <TD vAlign=top>-cilambda </TD>
+    <TD>initial interpolation factor between the CI models and the Cd models. 
+      It is the weight given given to the CI models initially. The values range 
+      from 0 to 1. This is typically set to 0.9 </TD></TR>
+  <TR>
+    <TD vAlign=top>-ceplen </TD>
+    <TD>dimentionality of base feature vector </TD></TR>
+  <TR>
+    <TD vAlign=top>-maxiter </TD>
+    <TD>the number of iterations of deleted-interpolation that you want to 
+      run. DI can be slow to converge, so this number is typically between 
+      1000-4000 </TD></TR></TBODY></TABLE>
+<OL></OL>(more to come...) <EM>After the decision trees are built using 
+semi-continuous models, it is possible to train continuous models. 
+ci-semicontinuous models need to be trained for initializing the semicontinuous 
+untied models. ci-continuous models need to be trained for initializing the 
+continuous tied state models. the feature set can be changed after the decision 
+tree building stage. </EM><A 
+href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#top">Back to 
+index</A> 
+<HR>
+<A name=4></A>
+<TABLE width="100%" bgColor=#ffffff>
+  <TBODY>
+  <TR>
+    <TD>SPHINX2 data and model formats</TD></TR></TBODY></TABLE>
+<OL>
+  <LI>Feature set: This is a binary file with all the elements in each of the 
+  vectors stored sequentially. The header is a 4 byte integer which tells us how 
+  many floating point numbers there are in the file. This is followed by the 
+  actual cepstral values (usually 13 cepstral values per frame, with 10ms skip 
+  between adjacent frames. Framesize is usually fixed and is usually 25ms). <PRE>              &lt;4_byte_integer header&gt;
+              vec 1 element 1
+              vec 1 element 2
+		.
+		.
+	      vec 1 element 13
+              vec 2 element 1
+	      vec 2 element 2
+               .
+               .
+	      vec 2 element 13
+</PRE>
+  <LI>Sphinx2 semi-continuous HMM (SCHMM) formats: <BR>The sphinx II SCHMM 
+  format is rather complicated. It has the following main components (each of 
+  which has sub-components): 
+  <UL>
+    <LI>A set of codebooks 
+    <LI>A "sendump" file that stores state (senone) distributions 
+    <LI>A "phone" and a "map" file which map senones on to states of a triphone 
+    <LI>A set of ".chmm" files that store transition matrices </LI></UL>
+  <OL>
+    <P>
+    <LI>Codebooks: There are 8 codebook files. The sphinx-2 uses a four stream 
+    feature set: 
+    <UL>
+      <LI>cepstral feature: [c1-c12], (12 components) 
+      <LI>delta feature: 
+      [delta_c1-delta_c12,longterm_delta_c1-longterm_delta_c12],(24 components) 
+      <LI>power feature: [c0,delta_c0,doubledelta_c0], (3 components) 
+      <LI>doubledelta feature: [doubledelta_c-doubledelta_c12] (12 components) 
+      </LI></UL>The 8 codebooks files store the means and variances of all the 
+    gaussians for each of these 4 features. The 8 codebooks are, 
+    <UL>
+      <LI>cep.256.vec [this is the file of means for the cepstral feature] 
+      <LI>cep.256.var [this is the file of variacnes for the cepstral feature] 
+      <LI>d2cep.256.vec [this is the file of means for the delta cepstral 
+      feature] 
+      <LI>d2cep.256.var [this is the file of variances for the delta cepstral 
+      feature] 
+      <LI>p3cep.256.vec [this is the file of means for the power feature] 
+      <LI>p3cep.256.var [this is the file of variances for the power feature] 
+      <LI>xcep.256.vec [this is the file of means for the double delta feature] 
+      <LI>xcep.256.var [this is the file of variances for the double delta 
+      feature] </LI></UL>All files are binary and have the following format: [4 
+    byte int][4 byte float][4 byte float][4 byte float]...... The 4 byte integer 
+    header stores the number of floating point values to follow in the file. For 
+    the cep.256.var, cep.256.vec, xcep.256.var and xcep.256.vec this value 
+    should be 3328. For d2cep.* it should be 6400, and for p3cep.* it should be 
+    768. The floating point numbers are the components of the mean vectors (or 
+    variance vectors) laid end to end. So cep.256.[vec,var] have 256 mean (or 
+    variance) vectors, each 13 dimensions long, d2cep.256.[vec,var] have 256 
+    mean/var vectors, each 25 dimensions long, p3cep.256.[vec,var] have 256 
+    vectors, each of dimension 3, xcep.256.[vec,var] have 256 vectors of length 
+    13 each. 
+    <P>The 0th component of the cep,d2cep and xcep distributions are not used in 
+    likelihood computation and are part of the format for purely historical 
+    reasons. 
+    <P></P>
+    <LI>The "sendump" file: The "sendump" file stores the mixture weights of the 
+    states associated with each phone. (this file has a little ascii header, 
+    which might help you a little). Except for the header, this is a binary 
+    file. The mixture weights have all been transformed to 8 bit integer by the 
+    following operation intmixw = (-log(float mixw) &gt;&gt; shift) The log base 
+    is 1.0003. The "shift" is the number of bits the smallest mixture weight has 
+    to be shifted right to fit in 8 bits. The sendump file stores, <PRE>for each feature (4 features in all)
+   for each codeword (256 in all)
+     for each ci-phone (including noise phones)
+       for each tied state associated with ci phone,
+         probability of codeword in tied state
+       end
+       for each CI state associated with ci phone, ( 5 states )
+         probability of codeword in CI state
+       end
+     end
+   end
+ end
+</PRE>The sendump file has the following storage format (all data, except 
+    for the header string are binary): <PRE>Length of header as 4 byte int (including terminating '\0')
+ HEADER string (including terminating '\0')
+ 0 (as 4 byte int, indicates end of header strings).
+ 256 (codebooksize, 4 byte int)
+ Num senones (Total number of tied states, 4 byte int)
+ [lut[0],    (4 byte integer, lut[i] = -(i"&lt;&lt;"shift))
+ prob_of_codeword[0]_of_feat[0]_1st_CD_sen_of_1st_ciphone (unsigned char)
+ prob_of_codeword[0]_of_feat[0]_2nd_CD_sen_of_1st_ciphone (unsigned char)
+ ..
+ prob_of_codeword[0]_of_feat[0]_1st_CI_sen_of_1st_ciphone (unsigned char)
+ prob_of_codeword[0]_of_feat[0]_2nd_CI_sen_of_1st_ciphone (unsigned char)
+ ..
+ prob_of_codeword[0]_of_feat[0]_1st_CD_sen_of_2nd_ciphone (unsigned char)
+ prob_of_codeword[0]_of_feat[0]_2nd_CD_sen_of_2nd_ciphone (unsigned char)
+ ..
+ prob_of_codeword[0]_of_feat[0]_1st_CI_sen_of_2st_ciphone (unsigned char)
+ prob_of_codeword[0]_of_feat[0]_2nd_CI_sen_of_2st_ciphone (unsigned char)
+ ..
+ ]
+ [lut[1],    (4 byte integer)
+ prob_of_codeword[1]_of_feat[0]_1st_CD_sen_of_1st_ciphone (unsigned char)
+ prob_of_codeword[1]_of_feat[0]_2nd_CD_sen_of_1st_ciphone (unsigned char)
+ ..
+ prob_of_codeword[1]_of_feat[0]_1st_CD_sen_of_2nd_ciphone (unsigned char)
+ prob_of_codeword[1]_of_feat[0]_2nd_CD_sen_of_2nd_ciphone (unsigned char)
+ ..
+ ]
+ ... 256 times ..
+ Above repeats for each of the 4 features
+</PRE>
+    <P></P>
+    <LI>PHONE file: The phone file stores a list of phones and triphones used by 
+    the decoder. This is an ascii file It has 2 sections. The first section 
+    lists the CI phones in the models and consists of lines of the format <PRE>AA      0       0       8       8
+</PRE>"AA" is the CI phone, the first "0" indicates that it is a CI phone, 
+    the first 8 is the index of the CI phone, and the last 8 is the line number 
+    in the file. The second 0 is there for historical reasons. 
+    <P>The second section lists TRIPHONES and consists of lines of the format <PRE>A(B,C)P -1 0 num num2
+</PRE>"A" stands for the central phone, "B" for the left context, and "C" 
+    for the right context phone. The "P" stands for the position of the triphone 
+    and can take 4 values "s","b","i", and "e", standing for single word, word 
+    beginning, word internal, and word ending triphone. The -1 indicates that it 
+    is a triphone and not a CI phone. num is the index of the CI phone "A", and 
+    num2 is the position of the triphone (or ciphone) in the list, essentially 
+    the number of the line in the file (beginning with 0). 
+    <P></P>
+    <LI>map file: The "map" file stores a mapping table to show which senones 
+    each state of each triphone are mapped to. This is also an ascii file with 
+    lines of the form <PRE> AA(AA,AA)s&lt;0&gt;       4
+ AA(AA,AA)s&lt;1&gt;      27
+ AA(AA,AA)s&lt;2&gt;      69
+ AA(AA,AA)s&lt;3&gt;      78
+ AA(AA,AA)s&lt;4&gt;     100
+</PRE>The first line indicates that the 0th state of the triphone "AA" in 
+    the context of "AA" and "AA" is modelled by th 4th senone associated with 
+    the CI phone AA. Note that the numbering is specific to the CI phone. So the 
+    4th senone of "AX" would also be numbered 4 (but this should not cause 
+    confusion) 
+    <P></P>
+    <LI>chmm FILES: There is one *.chmm file per ci phone. Each stores the 
+    transition matrix associated with that partiular ci phone in following 
+    binary format. (Note all triphones associated with a ci phone share its 
+    transition matrix) (all numbers are 4 byte integers): 
+    <UL>
+      <LI>-10 (a header to indicate this is a tmat file) 
+      <LI>256 (no of codewords) 
+      <LI>5 (no of emitting states) 
+      <LI>6 (total no. of states, including non-emitting state) 
+      <LI>1 (no. of initial states. In fbs8 a state sequence can only begin with 
+      state[0]. So there is only 1 possible initial state) 
+      <LI>0 (list of initial states. Here there is only one, namely state 0) 
+      <LI>1 (no. of terminal states. There is only one non-emitting terminal 
+      state) 
+      <LI>5 (id of terminal state. This is 5 for a 5 state HMM) 
+      <LI>14 (total no. of non-zero transitions allowed by topology) <PRE> [0 0 (int)log(tmat[0][0]) 0]   (source, dest, transition prob, source id)
+ [0 1 (int)log(tmat[0][1]) 0]
+ [1 1 (int)log(tmat[1][1]) 1]
+ [1 2 (int)log(tmat[1][2]) 1]
+ [2 2 (int)log(tmat[2][2]) 2]
+ [2 3 (int)log(tmat[2][3]) 2]
+ [3 3 (int)log(tmat[3][3]) 3]
+ [3 4 (int)log(tmat[3][4]) 3]
+ [4 4 (int)log(tmat[4][4]) 4]
+ [4 5 (int)log(tmat[4][5]) 4]
+ [0 2 (int)log(tmat[0][2]) 0]
+ [1 3 (int)log(tmat[1][3]) 1]
+ [2 4 (int)log(tmat[2][4]) 2]
+ [3 5 (int)log(tmat[3][5]) 3]
+</PRE>There are thus 65 integers in all, and so each *.chmm file should be 
+      65*4 = 260 bytes in size. </LI></UL></LI></OL>(more to come...) 
+  <P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#top">Back 
+  to index</A> 
+  <HR>
+  <A name=4b></A>
+  <TABLE width="100%" bgColor=#ffffff>
+    <TBODY>
+    <TR>
+      <TD>SPHINX3 data and model formats</TD></TR></TBODY></TABLE>
+  <OL>
+    <P>All senone-ids in the model files are with reference to the corresponding 
+    model-definition file for the model-set. 
+    <P><B><U>The means file</B></U> 
+    <P>The ascii means file for 8 Gaussians/state 3-state HMMs looks like this: <PRE>param 602 1 8
+mgau 0
+feat 0
+
+density 0 6.957e-01 -8.067e-01 -6.660e-01 3.402e-01 -2.786e-03 -1.655e-01
+2.2 56e-02 9.964e-02 -1.237e-01 -1.829e-01 -3.777e-02 1.532e-03 -9.610e-01
+-3.883e-0 1 5.229e-01 2.634e-01 -3.090e-01 4.427e-02 2.638e-01 -4.245e-02
+-1.914e-01 -5.52 1e-02 8.603e-02 3.466e-03 5.120e+00 1.625e+00 -1.103e+00
+1.611e-01 5.263e-01 2.4 79e-01 -4.823e-01 -1.146e-01 2.710e-01 -1.997e-05
+-3.078e-01 4.220e-02 2.294e-01
+ 1.023e-02 -9.163e-02
+
+density 1 5.216e-01 -5.267e-01 -7.818e-01 2.534e-01 6.536e-02 -1.335e-01
+-1.3 22e-01 1.195e-01 5.900e-02 -2.095e-01 -1.349e-01 -8.872e-02 -4.965e-01
+-2.829e-0 1 5.302e-01 2.054e-01 -2.669e-01 -2.415e-01 2.915e-01 1.406e-01
+-1.572e-01 -1.50 1e-01 2.426e-02 1.074e-01 5.301e+00 7.020e-01 -8.537e-01
+1.448e-01 3.256e-01 2.7 09e-01 -3.955e-01 -1.649e-01 1.899e-01 1.983e-01
+-2.093e-01 -2.231e-01 1.825e-01
+ 1.667e-01 -2.787e-02
+
+density 2 5.844e-01 -8.953e-01 -4.268e-01 4.602e-01 -9.874e-02 -1.040e-01
+-3.  739e-02 1.566e-01 -2.034e-01 -8.387e-02 -3.551e-02 4.647e-03
+-6.439e-01 -8.252e- 02 4.776e-01 2.905e-02 -4.012e-01 1.112e-01 2.325e-01
+-1.245e-01 -1.147e-01 3.39 0e-02 1.048e-01 -7.266e-02 4.546e+00 8.103e-01
+-4.168e-01 6.453e-02 3.621e-01 1.  821e-02 -4.503e-01 7.951e-02 2.659e-01
+-1.085e-02 -3.121e-01 1.395e-01 1.340e-01
+ -5.995e-02 -7.188e-02   
+
+.....
+
+.....
+
+density 7 6.504e-01 -3.921e-01 -9.316e-01 1.085e-01 9.951e-02 7.447e-02
+-2.42 3e-01 -8.710e-03 7.210e-02 -7.585e-02 -9.116e-02 -1.630e-01
+-3.008e-01 -3.175e-0 1 1.687e-01 3.389e-01 -3.703e-02 -2.052e-01 -3.263e-03
+1.517e-01 8.243e-02 -1.40 6e-01 -1.070e-01 4.236e-02 5.143e+00 5.469e-01
+-2.331e-01 1.896e-02 8.561e-02 1.  785e-01 -1.197e-01 -1.326e-01 -6.467e-02
+1.787e-01 5.523e-02 -1.403e-01 -7.172e- 02 6.666e-02 1.146e-01
+
+mgau 1
+feat 0
+
+density 0 3.315e-01 -5.500e-01 -2.675e-01 1.672e-01 -1.785e-01 -1.421e-01
+9.0 70e-02 1.192e-01 -1.153e-01 -1.702e-01 -3.114e-02 -9.050e-02 -1.247e-01
+3.489e-0 1 7.102e-01 -2.001e-01 -1.191e-01 -6.647e-02 2.222e-01 -1.866e-01
+-1.067e-01 1.0 52e-01 7.092e-02 -8.763e-03 5.029e+00 -1.354e+00 -2.135e+00
+2.901e-01 5.646e-01 1.525e-01 -1.901e-01 4.672e-01 -3.508e-02 -2.176e-01
+-2.031e-01 1.378e-01 1.029e -01 -4.655e-02 -2.512e-02
+
+density 1 4.595e-01 -8.823e-01 -4.397e-01 4.221e-01 -2.269e-03 -6.014e-02
+-7.  198e-02 9.702e-02 -1.705e-01 -6.178e-02 -4.066e-02 9.789e-03
+-3.188e-01 -8.284e- 02 2.702e-01 6.192e-02 -2.077e-01 2.683e-02 1.220e-01
+-4.606e-02 -1.107e-01 1.16 9e-02 8.191e-02 -2.150e-02 4.214e+00 2.322e-01
+-4.732e-02 1.834e-02 8.372e-02 -7 .559e-03 -1.111e-01 -3.453e-03 5.487e-02
+2.355e-02 -8.777e-02 4.309e-02 3.460e-0 2 -1.521e-02 -3.808e-02
+</PRE>This is what it means, reading left to right, top to bottom: 
+    <P>Parameters for 602 tied-states (or senones), 1 feature stream, 8 
+    Gaussians per state. 
+    <P>Means for senone no. 0, feature-stream no. 0. Gaussian density no. 0, 
+    followed by its 39-dimensional mean vector. (Note that each senone is a 
+    mixture of 8 gaussians, and each feature vector consists of 13 cepstra, 13 
+    delta cepstra and 13 double delta cepstra) <PRE>Gaussian density no. 1, followed by its 39-dimensional mean vector.
+Gaussian density no. 2, followed by its 39-dimensional mean vector.
+.....
+.....
+Gaussian density no. 7, followed by its 39-dimensional mean vector.
+
+Means for senone no. 1, feature-stream no. 0.
+Gaussian density no. 0, followed by its 39-dimensional mean vector.
+Gaussian density no. 1, followed by its 39-dimensional mean vector.
+</PRE>- and so on - 
+    <P><B><U>The variances file</B></U> <PRE>param 602 1 8
+mgau 0
+feat 0
+
+density 0 1.402e-01 5.048e-02 3.830e-02 4.165e-02 2.749e-02 2.846e-02
+2.007e- 02 1.408e-02 1.234e-02 1.168e-02 1.215e-02 8.772e-03 8.868e-02
+6.098e-02 4.579e- 02 4.383e-02 3.646e-02 3.460e-02 3.127e-02 2.336e-02
+2.258e-02 2.015e-02 1.359e- 02 1.367e-02 1.626e+00 4.946e-01 3.432e-01
+7.133e-02 6.372e-02 4.693e-02 6.938e- 02 3.608e-02 3.147e-02 4.044e-02
+2.396e-02 2.788e-02 1.934e-02 2.164e-02 1.547e- 02
+
+density 1 9.619e-02 4.452e-02 6.489e-02 2.388e-02 2.337e-02 1.831e-02
+1.569e- 02 1.559e-02 1.082e-02 1.008e-02 6.238e-03 4.387e-03 5.294e-02
+4.085e-02 3.499e- 02 2.327e-02 2.085e-02 1.766e-02 1.781e-02 1.315e-02
+1.367e-02 9.409e-03 7.189e- 03 4.893e-03 1.880e+00 3.342e-01 3.835e-01
+5.274e-02 4.430e-02 2.514e-02 2.516e- 02 2.863e-02 1.982e-02 1.966e-02
+1.742e-02 9.935e-03 1.154e-02 8.361e-03 8.059e- 03
+
+density 2 1.107e-01 5.627e-02 2.887e-02 2.359e-02 2.083e-02 2.143e-02
+1.528e- 02 1.264e-02 1.223e-02 9.553e-03 9.660e-03 9.241e-03 3.391e-02
+2.344e-02 2.220e- 02 1.873e-02 1.436e-02 1.458e-02 1.362e-02 1.350e-02
+1.191e-02 1.036e-02 8.290e- 03 5.788e-03 1.226e+00 1.287e-01 1.037e-01
+3.079e-02 2.692e-02 1.870e-02 2.873e- 02 1.639e-02 1.594e-02 1.453e-02
+1.043e-02 1.137e-02 1.086e-02 8.870e-03 9.182e- 03
+</PRE>- and so on - The format is exactly as for the means file. 
+    <P><B><U>The mixture_weights file</B></U> 
+    <P>The ascii mixure_weights file for 8 Gaussians/state 3-state HMMs looks 
+    like this: <PRE>mixw 602 1 8
+
+mixw [0 0] 7.434275e+03
+8.697e+02 9.126e+02 7.792e+02 1.149e+03 9.221e+02 9.643e+02 1.037e+03 8.002e+02
+
+mixw [1 0] 8.172642e+03
+8.931e+02 9.570e+02 1.185e+03 1.012e+03 1.185e+03 9.535e+02 7.618e+02 1.225e+03
+</PRE>This is what it means, reading left to right, top to bottom: 
+    <P>Mixtrue weights for 602 tied-states (or senones), 1 feature stream, 8 
+    Gaussians per state (Each mixture weight is a vector with 8 components) 
+    <P>Mixture weights for senone no. 0, feature-stream no. 0, number of times 
+    this senone occured in the training corpus (instead of writing normalized 
+    values, this number is directly recorded since it is useful in other places 
+    during training [interpolation, adaptation, tree building etc]). When 
+    normalized (for example, by the decoder during decoding), the mixture 
+    weights above would read as: <PRE></PRE>mixw 602 1 8 mixw [0 0] 7.434275e+03 1.170e-01 1.228e-01 
+    1.048e-01 1.546e-01 1.240e-01 1.297e-01 1.395e-01 1.076e-01 mixw [1 0] 
+    8.172642e+03 1.093e-01 1.171e-01 1.450e-01 1.238e-01 1.450e-01 1.167e-01 
+    9.321e-02 1.499e-01 <PRE></PRE>
+    <P><B><U>The transition_matrices file</B></U> 
+    <P>The ascii file looks like this: <PRE>tmat 34 4
+tmat [0]
+ 6.577e-01 3.423e-01
+          6.886e-01 3.114e-01
+                   7.391e-01 2.609e-01
+tmat [1]
+ 8.344e-01 1.656e-01
+          7.550e-01 2.450e-01
+                   6.564e-01 3.436e-01
+tmat [2]
+ 8.259e-01 1.741e-01
+          7.598e-01 2.402e-01
+                   7.107e-01 2.893e-01
+tmat [3]
+ 4.112e-01 5.888e-01
+          4.371e-01 5.629e-01
+                   5.623e-01 4.377e-01    
+</PRE>- and so on - This is what it means, reading left to right, top to 
+    bottom: 
+    <P>Transition matrices for 34 HMMs, each with four states (3 emitting states 
+    + 1 non-emitting state) 
+    <P>Transition matrix for HMM no. 0 (NOTE THAT THIS IS THE HMM NUMBER, AND 
+    NOT THE SENONE NUMBER), matrix. <PRE>Transition matrix for HMM no 1, matrix.
+Transition matrix for HMM no 2, matrix.
+Transition matrix for HMM no 3, matrix.
+</PRE>- and so on - 
+    <P><B><U>Explanation of the feature-vector components:</B></U> 
+    <P>The 13 dimensional cepstra, 13 dimensional delta cepstra and 13 
+    dimensional double-delta cepstra are arranged, in all model files, in the 
+    following order: 1s_12c_12d_3p_12dd (you can denote this by s3_1x39 in the 
+    decoder flags). The format string means: 1 feature-stream, 12 cepstra, 12 
+    deltacepstra, 3 power and 12 doubledeltacepstra. The power part is composed 
+    of the 0th component of the cepstral vector, 0th component of the d-cepstral 
+    vector and 0th component of the dd-cepstral vector. 
+    <P>In the quantized models, you will see the string 
+    24,0-11/25,12-23/26,27-38 In this string, the slashes are delimiters. The 
+    numbers represent various components occuring in each of the 3 codebooks. In 
+    the above string, for instance, the first codebook is composed of the 24th 
+    component of the feature vector (s3_1x39) followed by components 0-11. The 
+    second codeword has components 25, followed by components 12-23, and the 
+    third codeword is composed of components 26 and 27-28. This basically 
+    accounts for the odd order in s3_1x39. By constructing the codewords in this 
+    manner, we ensure that the first codeword is composed entirely of cepstral 
+    terms, the second codeword of delta cepstral terms and the third codeword of 
+    double delta terms. 
+    <P>s3_1x39 is a historical order. It can be disposed of in any new code that 
+    you write. Writing the feature vector components in different orders has no 
+    effect on recognition, provided training and test feature formats are the 
+    same. 
+    <P><A name=5></A>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>TRAINING MULTILINGUAL MODELS</TD></TR></TBODY></TABLE>Once you have 
+    acoustic data and the corresponding transcriptions for any language, and a 
+    lexicon which translates words used in the transcription into sub-word units 
+    (or just maps them into some reasonable-looking acoustic units), you can use 
+    the SPHINX to train acoustic models for that language. You do not need 
+    anything else. 
+    <P>The linguistic questions that are needed for building the decision trees 
+    are automatically designed by the SPHINX. Given the acoustic units you 
+    choose to model, the SPHINX can automatically determine the best 
+    combinations of these units to compose the questions. The hybrid algorithm 
+    that the SPHINX uses clusters state distributions of context-independent 
+    phones to obtain questions for triphonetic contexts. This is very useful if 
+    you want to train models for languages whose phonetic structure you do not 
+    know well enough to design your own phone classes (or if a phonetician is 
+    not available to help you do it). An even greater advantage comes from the 
+    fact that the algorithm can be effectively used in situations where the 
+    subword units are not phonetically motivated. Hence you can comfortably use 
+    any set of acoustic units that look reasonable to you for the task. 
+    <P>If you are completely lost about the acoustic units but have enough 
+    training data for all (or most) words used in the transcripts, then build 
+    word models instead of subword models. You do not have to build decision 
+    trees. Word models are usually context-independent models, so you only have 
+    to follow through the CI training. Word models do have some limitations, 
+    which are currently discussed in the non-technical version of this manual. 
+    <P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#top">Back 
+    to index</A> 
+    <HR>
+    <A name=6></A>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>THE TRAINING LEXICON</TD></TR></TBODY></TABLE>Inconsistencies in the 
+    training lexicon can result in bad acoustic models. Inconsistencies stem 
+    from the usage of a phoneset with phones that are confusible in the pattern 
+    space of our recognizer. To get an idea about the confusibility of the 
+    phones that you are using, look at the per-frame log likelihoods of the 
+    utterances during training. A greater number of phones in the lexicon should 
+    ordinarily result in higher log likelihoods. If you have a baseline to 
+    compare with, and this is *not* the case, then it means that the phoneset is 
+    more diffuse over the pattern space (more compact, if you observe the 
+    opposite for a smaller phone set), and the corresponding distributions are 
+    wider (sharper in the other case). Generally, as the number of applicable 
+    distributions decreases over a given utterance, the variances tend to become 
+    larger and larger. The distributions flatten out since the areas under the 
+    distributions are individually conserved (to unity) and so the overall per 
+    frame likelihoods are expected to be lower. 
+    <P>The solution is to fix the phoneset, and to redo the lexicon in terms of 
+    a phoneset of smaller size covering the acoustic space in a more compact 
+    manner. One way to do this is to collapse the lexicon into syllables and 
+    longer units and to expand it again using a changed and smaller phoneset. 
+    The best way to do this is still a research problem, but if you are a native 
+    speaker of the language and have a good ear for sounds, your intuition will 
+    probably work. The SPHINX will, of course, be able to train models for any 
+    new phoneset you come up with. 
+    <P><A href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html#top">Back 
+    to index</A> 
+    <HR>
+    <A name=7></A>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>CONVERTING SPHINX3 FORMAT MODELS TO SPHINX2 
+    FORMAT</TD></TR></TBODY></TABLE>To convert the 5 state/HMM, 4 feature stream 
+    semi-continuous models trained using the Sphinx3 trainer into the Sphinx2 
+    format (compatible with the Sphinx2 decoder), programs in the following 
+    directories must be compiled and used: <PRE>-----------------------------------------------------------------------
+program directory       corresponding    function 
+                        executable       of executable
+-----------------------------------------------------------------------
+mk_s2cb                 mk_s2cb          makes s2 codebooks 
+mk_s2hmm                mk_s2hmm         makes s2 mixture weights
+mk_s2phone              mdef2phonemap    makes phone and map files
+mk_s2seno               makesendmp       makes senone dmp files
+-----------------------------------------------------------------------
+
+
+Variables needed:
+-----------------
+s2dir  : sphinx_2_format directory
+s3dir  : sphinx_3_format directory
+s3mixw : s3dir/mixture_weights
+s3mean : s3dir/means
+s3var  : s3dir/variances
+s3tmat : s3dir/transition_matrices
+s3mdef : s3dir/mdef_file (MAKE SURE that this mdef file
+                          includes all the phones/triphones needed for
+                          the decode. It should ideally be made from
+                          the decode dictionary, if the decode vocabulary
+                          is fixed)
+
+
+Usage:
+------
+mk_s2cb 
+        -meanfn   s3mean
+        -varfn    s3var
+        -cbdir    s2dir
+        -varfloor 0.00001
+
+mk_s2hmm
+        -moddeffn s3mdef 
+        -mixwfn   s3mixw 
+        -tmatfn   s3tmat 
+        -hmmdir   s2dir
+
+makesendmp
+s2_4x $s3mdef .semi. $s3mixw 0.0000001 $s2dir/sendump
+(the order is important)
+cleanup: s2dir/*.ccode s2dir/*.d2code s2dir/*.p3code s2dir/*.xcode
+
+mdef2phonemap
+grep -v "^#" s3mdef | mdef2phonemap s2dir/phone s2dir/map
+</PRE>make sure that the mdef file used in the programs above includes all 
+    the triphones needed. The programs (especially the makesendmp program) will 
+    not work if any tied state is missing from the mdef file. This can happen if 
+    you ignore the dictionary provided with the models and try to make a 
+    triphone list using another dictionary. Even though you may have the same 
+    phones, there may be enough triphones missing to leave out some leaves in 
+    the pruned trees altogether (since they cannot be associated with any of the 
+    new triphones states). To avoid this, use the dictionary provided. You may 
+    extend it by including new words. 
+    <HR>
+    <A name=8></A>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>UPDATING OR ADAPTING EXISTING MODELS SETS</TD></TR></TBODY></TABLE>In 
+    general one is better off training speaker specific models if sufficient 
+    data (at least 8-10 hours) are available. If you have less data for a 
+    speaker or a domain, then the better option is to adapt any existing models 
+    you have to the data. Exactly how you adapt would depend on the kind of 
+    acoustic models you're using. If you're using semi-continuous models, 
+    adaptation could be performed by interpolating speaker specific models with 
+    speaker-independent models. For continuous HMMs you would have to use MLLR, 
+    or one of its variants. To adapt or update existing semicontinuous models, 
+    follow these steps: 
+    <P>
+    <OL>
+      <LI>Compute features for the new training data. The features must be 
+      computed in the same manner as your old training features. In fact, the 
+      feature computation in the two cases must be identical as far as possible. 
+
+      <LI>Prepare transcripts and dictionary for the new data. The dictionary 
+      must have the same phoneset as was used for training the models. The 
+      transcripts must also be prepared in the same manner. If you have new 
+      filler phones then the fillerdict must map them to the old filler phones. 
+      <LI>The new training transcript and the corresponding ctl file can include 
+      the old training data IF all you are doing is using additional data from 
+      the SAME domain that you might have recently acquired. If you are adapting 
+      to a slightly different domain or slightly different acoustic conditions, 
+      then use only the new data. 
+      <LI>Starting with the existing deleted-interpolated models, and using the 
+      same tied mdef file used for training the base models and the same 
+      training parameters like the difference features, number of streams etc., 
+      run through one or two passes of Baum-Welch. However, this must be done 
+      without re-estimating the means and variances. Only the mixture-weights 
+      must be re-estimated. If you are running the norm after the Baum-Welch, 
+      then make sure that the norm executable is set to normalize only the 
+      mixture weights. 
+      <LI>Once the mixture weights are re-estimated, the new mixture weights 
+      must be interpolated with the ones you started with. The executable 
+      "mixw_interp" provided with the SPHINX package may be used for this. You 
+      can experiment with various mixing weights to select the optimal one. This 
+      is of course the simplest update/adaptation technique. There are more 
+      sophisticated techniques which will be explained here later. </LI></OL>
+    <P>
+    <P><B>The <FONT color=green>mixw_interp</FONT> executable</B>: 
+    <P>This is used in model adaptation for interpolating between two mixture 
+    weight files. It requires the following flags: 
+    <TABLE border=1>
+      <TBODY>
+      <TR vAlign=top>
+        <TD>FLAG</TD>
+        <TD>DESCRIPTION</TD></TR>
+      <TR vAlign=top>
+        <TD>-SImixwfn</TD>
+        <TD>The original Speaker-Independent mixture weights file</TD></TR>
+      <TR vAlign=top>
+        <TD>-SDmixwfn</TD>
+        <TD>The Speaker Dependent mixture weight file that you have after the 
+          bw iterations for adaptation </TD></TR>
+      <TR vAlign=top>
+        <TD>-tokencntfn</TD>
+        <TD>The token count file</TD< tr> 
+      <TR vAlign=top>
+        <TD>-outmixwfn</TD>
+        <TD>The output interpolated mixture weight parameter file name</TD></TR>
+      <TR vAlign=top>
+        <TD>-SIlambda</TD>
+        <TD>Weight given to SI mixing weights</TD></TR></TBODY></TABLE>
+    <HR>
+    <A name=9></A>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>USING THE SPHINX-III DECODER WITH SEMI-CONTINUOUS AND CONTINUOUS 
+          MODELS</TD></TR></TBODY></TABLE>There are two flags which are specific to 
+    the type of model being used, the rest of the flags are independent of model 
+    type. The flags you need to change to switch from continuous models to 
+    semi-continuous ones are: 
+    <P>
+    <UL>
+      <LI>the -senmgaufn flag would change from ".cont." to ".semi." 
+      <LI>the -feat flag would change from the feature you are using with 
+      continuous models to the feature you are using with the semicontinuous 
+      models (usually it is s3_1x39 for continuous models and s2_4x for 
+      semi-continuous models) </LI></UL>
+    <P>Some of the other decoder flags and their usual settings are as follows: <PRE>        -logbase 1.0001 \
+        -bestpath     0 \
+        -mdeffn $mdef \
+        -senmgaufn .cont. \
+        -meanfn $ACMODDIR/means \
+        -varfn $ACMODDIR/variances \
+        -mixwfn $ACMODDIR/mixture_weights \
+        -tmatfn $ACMODDIR/transition_matrices \
+        -langwt  10.5  \
+        -feat s3_1x39 \
+        -topn 32 \
+        -beam 1e-80 \
+        -nwbeam 1e-40 \
+        -dictfn $dictfn \
+        -fdictfn $fdictfn \
+        -fillpenfn $fillpenfn \
+        -lmfn $lmfile \
+        -inspen 0.2 \
+        -ctlfn $ctlfn \
+        -ctloffset $ctloffset \
+        -ctlcount  $ctlcount \                      
+        -cepdir $cepdir \
+        -bptblsize 400000 \
+        -matchsegfn $matchfile \
+       -outlatdir $outlatdir \
+        -agc none \
+        -varnorm yes \         
+</PRE>
+    <P><A name=04></A><!------------------------------------------------------------------------->
+    <CENTER>
+    <H4><FONT color=red>BEFORE YOU TRAIN</FONT></H4></CENTER>
+    <TABLE width="100%" bgColor=#ffffff>
+      <TBODY>
+      <TR>
+        <TD>FORCE-ALIGNMENT</TD></TR></TBODY></TABLE><!------------------------------------------------------------------------->Multiple 
+    pronunciations are not automatically considered in the SPHINX. You have to 
+    mark the right pronunciations in the transcripts and insert the interword 
+    silences. For this 
+    <P>a) remove the non-silence fillers from your filler dictionary and put 
+    them in your regular dictionary 
+    <P>b) Remove *all* silence markers (&lt;s&gt;, &lt;sil&gt; and &lt;/s&gt;) 
+    from your training transcripts 
+    <P>For faligning with semi-continuous models, use the binary s3align 
+    provided with the trainer package with the following flag settings. For 
+    faligning with continuous models, change the settings of the flags 
+    -senmgaufn (.cont.), -topn (no. of Gaussians in the Gaussian mixture 
+    modeling each HMM state), -feat (the correct feature set): <PRE>        -outsentfn      <FALIGNED filename transcripts>
+        -insentfn       <TRANSCRIPT filename> 
+        -ctlfn          <CTL file trascript to corresponding>
+        -ctloffset      0
+        -ctlcount       <NO. file ctl in entries of>
+        -cepdir         <FEATURE directory files>
+        -dictfn         <DICTIONARY>
+        -fdictfn        &lt; filler dictionary&gt;
+        -mdeffn         <MDEF file name>
+        -senmgaufn      .semi.
+        -meanfn         <MODEL directory means>
+        -varfn          <MODEL directory variances>
+        -mixwfn         <MODEL directory mixture_weights>
+        -tmatfn         <MODEL directory transition_matrices>
+        -topn           4 
+        -feat           s2_4x
+        -beam           1e-90
+        -agc            <MAX none or>
+        -cmn            <NONE or current>
+        -logfn          <LOGFILE name>
+
+
+
+</PRE>
+    <P><EM>last modified: 22 Nov. 2000 </EM></P></OL></LI></OL></LI></BODY></HTML>

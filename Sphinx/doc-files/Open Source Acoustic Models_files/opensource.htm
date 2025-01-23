@@ -1,0 +1,1000 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://www.speech.cs.cmu.edu/sphinxman/opensource.html -->
+<HTML><HEAD><TITLE>Open Source Acoustic Models</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<STYLE type=text/css>PRE {
+	PADDING-RIGHT: 2mm; PADDING-LEFT: 2mm; FONT-SIZE: medium; BACKGROUND: #f0f8ff; PADDING-BOTTOM: 2mm; COLOR: teal; BORDER-TOP-STYLE: ridge; PADDING-TOP: 2mm; BORDER-RIGHT-STYLE: ridge; BORDER-LEFT-STYLE: ridge; BORDER-BOTTOM-STYLE: ridge
+}
+CODE {
+	FONT-SIZE: medium; COLOR: teal
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY><A name=top></A>INDEX (this document is under construction...) 
+<HR noShade>
+
+<SCRIPT>
+//<a href="../TID.software.tar.gz">software for TID</a>
+</SCRIPT>
+
+<P>
+<OL>
+  <LI><B><A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#1">Acoustic 
+  models for 16khz sampled normal bandwidth speech</A></B> 
+  <UL><I>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#1">Download 
+    models and LM</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#1a">Things to 
+    check for if the models do not work for you</A> 
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#1ax">CMU 
+    internal: restructuring the opensource models to include newer triphones</A> 
+
+    <LI><A href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#1ay">CMU 
+    internal: adapting the opensource models to your task domain</A> 
+</LI></UL></I>
+  <LI><B><A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#2">Acoustic 
+  models for 8khz sampled telephone bandwidth speech</A></B> 
+  <UL><I><A 
+    href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#2a">Things to 
+    check for if the models do not work for you</A></UL></I>
+  <LI><B><A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/opensource.html#3">Deciding which 
+  decoder to use with your models and setting the decoder parameters</A></B> 
+  </B></LI></OL>
+<HR>
+<A name=1></A>
+<CENTER><FONT color=red size=+1>ACOUSTIC MODELS FOR 16KHZ SAMPLED NORMAL 
+BANDWIDTH SPEECH</FONT></CENTER><A 
+href="http://cmusphinx.org/models/hmm/bnmodels.tar.gz">bnmodels.tar.gz</A><BR>These 
+models are for the sphinx2 semicontinuous decoder. You can use <A 
+href="http://cmusphinx.org/models/lm/cmudict.0.7.raw.gz">CMUdict</A> with these 
+models, just make sure that the phones it uses are the .chmm labelled phone 
+model files in the model directory. The dictionary is very generic. To make it 
+suitable for any specialized task, you will have to remove words and 
+pronunciations which are not likely to occur within that task. The smaller the 
+dictionary, the faster and better the recognition, if it still covers all the 
+words likely to be encountered in the task.<BR>With these models and dictionary, 
+you can use the <A 
+href="http://cmusphinx.org/models/lm/bn.bigram.arpa">bn.bigram.arpa.gz</A> 
+ARPA-format bigram language model. This has 57138 unigrams and about 10 million 
+bigrams. It can be turned into a unigram lm by deleting the bigram entries, 
+keeping the \end\ marker, the \2-grams marker, one bigram, and setting the 
+2-gram count to 1 in the begining of the lm. This was initially a trigram lm, 
+but was too large to put up on the web from this site. 14 million trigrams were 
+deleted to give this bigram LM. You can get better recognition with trigram lms, 
+but if you are only begining to set up your system, work with this bigram lm, or 
+better still, a unigram lm. Lms can be easily switched later by altering a 
+single flag entry in the decoder arguments.<BR>
+<P><B><U>Training data</U></B> 
+<P>Source: Hub4-1998 data provided by LDC. <BR>Amount of data actually used: 
+36.67 hours 
+<P><B><U>Feature set used</U></B> 
+<P>Mel frequency cepstra computed using the front-end provided with the 
+opensource. The following specs were used to compute the cepstra: 
+<UL>
+  <LI>premphasis factor : 0.970 
+  <LI>sampling rate : 16000.000 Hz 
+  <LI>frame rate : 100.000 frames/sec 
+  <LI>Hamming window length : 0.0256 sec 
+  <LI>size of FFT : 512 samples 
+  <LI>number of Mel filters : 40 
+  <LI>lower edge of filter bank : 133.33334 Hz 
+  <LI>upper edge of filter bank : 6855.49756 Hz 
+  <LI>number of MFCC coefficients/frame : 13 
+  <LI>dither not added </LI></UL>
+<P><B><U>Model architecture</U></B> 
+<UL>
+  <LI>HMM type: semi-continuous, with four 256-component mixture-weights per 
+  state (four codebooks with 256 codewords each; each codeword represents a 
+  Gaussian density function) 
+  <LI>Total number of phones: 51<BR>+BREATH+, +COUGH+, +LAUGH+, +SMACK+, +UH+, 
+  +UHUM+, +UM+, SIL, AA, AE, AH, AO, AW, AX, AXR, AY, B, CH, D, DH, DX, EH, ER, 
+  EY, F, G, HH, IH, IX, IY, JH, K, M, N, NG, OW, OY, P, R, S, SH, T, TH, UH, UW, 
+  V, W, Y, Z, ZH 
+  <LI>Number of filler phones: 8<BR>+BREATH+, +COUGH+, +LAUGH+, +SMACK+, +UH+, 
+  +UHUM+, +UM+, SIL 
+  <LI>Total number of triphonetic tied states: 6000 
+  <LI>Total number of triphones: 125665<BR>The complete list of triphones and 
+  the manner in which states were tied can be seen in this <A 
+  href="http://www.speech.cs.cmu.edu/sphinxman/hub4alltriphones.mdef">model 
+  definition file </A>
+  <LI>Model topology used: 5-state Bakis topology HMM with non-emitting last 
+  state <PRE>Number of states per model followed by the transition matrix template:
+6
+1.0	1.0	1.0	0.0	0.0	0.0	
+0.0	1.0	1.0	1.0	0.0	0.0	
+0.0	0.0	1.0	1.0	1.0	0.0	
+0.0	0.0	0.0	1.0	1.0	1.0	
+0.0	0.0	0.0	0.0	1.0	1.0	
+The last state has no outgoing arcs unless embedded in a sentence hmm structure
+</PRE>
+  <P></P></LI></UL><B><U>Recognition feature set</U></B> 
+<P>c/1..L-1/,d/1..L-1/,c/0/d/0/dd/0/,dd/1..L-1/ 
+<P>Click <A 
+href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html/#03">here </A>for 
+an explanation of this feature 
+<P><B><U>CMU internal</U></B> 
+<P>Here are the locations of some training files: 
+<UL>
+  <LI>Transcript file (force-aligned): 
+  /net/alf32/usr6/hub4opensource/1998.transcripts.faligned 
+  <LI>Control file (for force-aligned transcripts): 
+  /net/alf32/usr6/hub4opensource/1998.ctl.faligned 
+  <LI>Training dictionary: /net/alf32/usr6/hub4opensource/train.dict 
+  <LI>Training filler dictionary: 
+  /net/alf32/usr6/hub4opensource/train.filler.dict 
+  <LI>Training phonelist: /net/alf32/usr6/hub4opensource/train.phonelist 
+  <LI>Linguistic questions used for decision trees: 
+  /net/alf32/usr6/hub4opensource/linguistic_questions 
+  <LI>Decision trees (unpruned): 
+  /net/alf32/usr6/hub4opensource/trees/newfe_hub97.unpruned 
+  <LI>
+  <LI>Decision trees (pruned): 
+  /net/alf32/usr6/hub4opensource/trees/newfe_hub97.6000 
+  <LI>sphinx3 model parameters: 
+  /net/alf32/usr6/hub4opensource/model_parameters/newfe_hub97.cd_semi_6000/means, 
+  variances, mixture_weights, transition_matrices 
+  <LI>sphinx2 models: /alf32/usr6/hub4opensource/opensrc_hub4/sphinx_2_format 
+  </LI></UL>
+<P><B><U>Model format</U></B> 
+<P>The models provided are in the <A 
+href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html/#4">SPHINX-II 
+format</A>. These were trained using the SPHINX-III trainer and converted into 
+the SPHINX-II format using a <A 
+href="http://www.speech.cs.cmu.edu/sphinxman/scriptman1.html/#7">format 
+conversion toolkit </A>which will be provided soon.. 
+<P><B><U>Performance for benchmarking</U></B> 
+<P>Test set yet to be decided 
+<P>
+<HR>
+<A name=1a></A>
+<CENTER><FONT color=#483d8b size=+1>ACOUSTIC MODELS FOR 16KHZ SAMPLED NORMAL 
+BANDWIDTH SPEECH</FONT></CENTER><B><U>Things to check for if the models do not 
+work for you</U></B> 
+<P><A name=1ax></A><B><U>CMU internal: restructuring the opensource models to 
+include newer triphones</U></B> 
+<P>The model set provided for 16KHz normal bandwidth includes models for 51 
+context-independent phones and 125665 triphones. This is the set of all 
+triphones that could possibly be generated from the dictionary provided for 
+recognition alongwith the models. However, no dictionary can claim to have all 
+possible words in the language listed in it. New words will always be 
+encountered and the pronuniciations of these words may include triphones which 
+were never seen in the dictionary provided. New triphones may also be generated 
+when you compound the words present in the recognition dictionary and treat each 
+compounded word as a regular word. For example, the word <PRE>THAT  DH AE T
+</PRE>
+<P></P>in the dictionary may give rise to many word begining triphones with DH 
+as the central phone, and many word ending triphones with the central phone T, 
+and the word-internal triphone AE(DH,T). The word 
+<P><PRE>DOES  D AX Z
+</PRE>similarly results in word beginning triphones for D, word ending triphones 
+for Z and the word-internal triphone AX(D,Z). When you compound these two words 
+to get the compounded word 
+<P><PRE>THAT_DOES  DH AE T D AX Z
+</PRE>it includes, amongst other triphones, four word-internal triphones (rather 
+than two). While most of the triphones that can be generated from this word 
+might already have been seen in the recognition dictionary, the new 
+word-internal triphones D(T,AX) or T(AE,D) may not have been seen. As a 
+consequence there may be no models for these two triphones in the given set of 
+models. That is likely because the sequence of phones AE T D or T D AX is 
+extremely rare within any word in the English language. 
+<P>Thus, if you are compounding words or introducing new ones with rather rare 
+phone sequences present in the pronunciations, you must generate or construct 
+models for them before recognition. This is where "tied states" or senones come 
+in handy. Senones can be viewed as independent model components, or model 
+building blocks. A model for a triphone consists of a sequence of senones. Which 
+sequence is right for a given triphone is decided on the basis of what are 
+called "pruned" decision trees. Each leaf of a pruned decision tree represents a 
+bunch of contexts (which are again phones) and is labeled by a number, called 
+the "tied state id" or the "senone id". Each leaf is a tied state or a senone. 
+There is one pruned decision tree for each state of each PHONE (not triphone). 
+Since the phone alongwith its contexts forms the triphone for which you want to 
+compose a model, you only have to look for the leaf which includes that context 
+and select the leaf-id (or senone-id) to represent the corresponding state of 
+the triphone's HMM. The process is a little more involved than this description, 
+but at a very crude level this is the idea. 
+<P>This "senone selection" is done by the executable "tiestate" provided with 
+the SPHINX package, once you specify to it the triphone that you need models 
+for, and the pruned trees to select the senones from. The usage of this 
+executable is explained <A 
+href="http://www.cs.cmu.edu/~rsingh/sphinxman/scriptman1.html#29">here</A>. 
+<P>Here is what you do when you think that you have new triphones (the list of 
+triphones already provided with the models is given in the section describing 
+the model architecture), and want to update your models: 
+<OL>
+  <LI>First, check to see if the new triphones are indeed absent from the 
+  recognition dictionary provided. This is very simple to do. Just look if the 
+  new phone sequences are present in the dictionary or not. If not, then 
+  <LI>Take the recognition dictionary which has been provided with the models 
+  and include the new words and pronunciations in it. This is your new 
+  recognition dictionary. 
+  <LI>Create a <A 
+  href="http://www.cs.cmu.edu/~rsingh/sphinxman/scriptman1.html#20">model 
+  definition file</A> which now lists all possible triphones present in this 
+  dictionary. Use the script 01.listalltriphones.csh to generate this file. 
+  Click <A 
+  href="http://www.cs.cmu.edu/~rsingh/sphinxman/scriptman1.html#30">here</A> to 
+  read more about a tied state model definition file. This will create a file 
+  called alltriphones.mdef 
+  <LI>Use the script 02.tiestate.csh to create models for the triphones listed 
+  in alltriphones.mdef using the pruned decision trees corresponding to the 
+  current model set. This will create a file called newtriphones.6000.mdef 
+  <LI>Edit the script 03.cvt.csh to <A 
+  href="http://www.cs.cmu.edu/~rsingh/sphinxman/scriptman1.html#7">convert the 
+  Sphinx-III format models to SPHINX-II format</A> using the file 
+  newtriphones.6000.mdef. The right paths are currently entered in the script, 
+  but if you move the setup elsewhere, you will have to edit the script to give 
+  introduce the correct pathnames for the SPHINX-III model parameters. These 
+  paths are listed under "CMU internal" in the description provided above for 
+  these models. 
+  <LI>cvt.csh will create a new directory called "newmodels_sphinx2_format, 
+  which you can use for recognition, alongwith the new dictionary. </LI></OL>The 
+scripts are all in the directory 
+/net/alf32/usr6/hub4opensource/restructure_s2models/ 
+<P><A name=1ay></A><B><U>CMU internal: adapting the opensource models to your 
+task domain</U></B> 
+<P>General instructions for adapting existing models to your task domain using 
+within-domain data are <A 
+href="http://www.cs.cmu.edu/~rsingh/sphinxman/scriptman1.html#8">here</A>. Prior 
+to using your within-domain data for adaptation, you must force-align this data 
+using the original unadapted models. The force-aligned transcripts must then be 
+used for adaptation. Here are the locations of some specific files needed for 
+adaptation: 
+<OL>
+  <LI>the following script can be used for force-aligning your adaptation data: 
+  /net/alf32/usr6/hub4opensource/adapt_s2models/bin/falign.csh 
+  <LI>the location of the baum_welch executable and the required flags are 
+  described in 
+  /net/alf32/usr6/hub4opensource/adapt_s2models/bin/baum_welch.readme 
+  <LI>the location of the norm executable and the required flags are described 
+  in /net/alf32/usr6/hub4opensource/adapt_s2models/bin/norm.readme 
+  <LI>the location of the mixw_interp executable and the required flags are 
+  described in 
+  /net/alf32/usr6/hub4opensource/adapt_s2models/bin/mixw_interp.readme 
+  <LI>After the adaptated models are written, they must be converted to 
+  SPHINX-II format. The script 03.cvt.csh in 
+  /net/alf32/usr6/hub4opensource/restructure_s2models/ may be used for this. The 
+  model_definition file used for adaptation must also be used during conversion. 
+
+  <UL></UL>
+  <HR>
+  <A name=2></A>
+  <CENTER><FONT color=red size=+1>ACOUSTIC MODELS FOR 8KHZ SAMPLED TELEPHONE 
+  BANDWIDTH SPEECH</FONT></CENTER><B><U>Training data</U></B> 
+  <P><B><U>Training data</U></B> 
+  <P>Source: Communicator data collected at CMU <BR>Amount of data actually 
+  used: 
+  <P><B><U>Feature set used</U></B> 
+  <P>Mel frequency cepstra computed using the front-end provided with the 
+  opensource. The following specs were used to compute the cepstra: 
+  <UL>
+    <LI>premphasis factor : 0.970 
+    <LI>sampling rate : 8000.000 Hz 
+    <LI>frame rate : 100.000 frames/sec 
+    <LI>Hamming window length : 0.0256 sec 
+    <LI>size of FFT : 256 samples 
+    <LI>number of Mel filters : 31 
+    <LI>lower edge of filter bank : 200.0 Hz 
+    <LI>upper edge of filter bank : 3500.0 Hz 
+    <LI>number of MFCC coefficients/frame : 13 
+    <LI>dither not added </LI></UL>
+  <P>
+  <HR>
+  <A name=3></A>
+  <CENTER><FONT color=#483d8b size=+1>DECIDING WHICH DECODER TO USE WITH YOUR 
+  MODELS AND SETTING THE DECODER PARAMETERS</FONT></CENTER>
+  <P>If you are about to train acoustic models to go with a decoder that you 
+  have already decided you will use, or if you are about to use existing 
+  acoustic models and want to choose the most compatible decoder, you have to 
+  know a little about the strengths and limitations of each decoder. The SPHINX 
+  comes with three decoders: 
+  <UL>
+    <LI>Sphinx 2.0 : This can only decode with 5 state/hmm, 4 feature stream 
+    semi-continuous models in sphinx 2.0 format. Within CMU, there are two 
+    versions of this decoder - an old version which, in the live mode, computes 
+    cepstra using and old cepstra-computation code. The cepstra-computation code 
+    is obsolete, but has to be used if you are using this old decoder. The newer 
+    version uses the new fron-end code provided with the SPHINX opensource 
+    version and currently used for all tasks within CMU. The difference betweent 
+    he old and new front-end computation codes is that the old version used a 
+    log-linear function to warp the frequencies in the process of cepstrum 
+    computation. The new one uses a proper mel-function. The Sphinx 2.0 decoder 
+    decodes at realtime speeds. 
+    <P></P>
+    <LI>Sphinx 3.0: This can decode with semi-continuous and continuous models 
+    using all supported feature vector configurations and HMM topologies. The 
+    decodes are slow and depending on your models and data, can range from 10-60 
+    times real time. 
+    <P></P>
+    <LI>Sphinx 3.2: This can decode only 3 state and 5 state continuous models. 
+    This uses two sets of models for each decode, a set of continuous models in 
+    the conventional Sphinx 3.0 format and another set of models which are 
+    quantized versions of the first set. This is also called the "Sphinx3 
+    fastdecoder". Depending on your models, data, and size of LM, this runs 
+    between 2-8 times real time. </LI></UL><U><B>Flag settings</U></B> The flag 
+  settings vary depending on which decoder you are using, and what settings were 
+  involved in the computation of training features for your models. 
+  <P>Here are complete listings of flags that are accepted by these three 
+  decoders. The lines in green are the flags that a user would be typically 
+  expected to specify, depending on the type of data encountered during 
+  recognition and the specifications that come with the acoustic models being 
+  used. Standard values for these flags are indicated, and you can optimize 
+  around these values. The lines in red, however, must only be used if you are 
+  familiar with what is going on in the decoder at an algorithmic level. They 
+  are mostly active for research and debugging. In a standard task, don't 
+  mention these flags and don't worry about them. 
+  <P><B><U>Flag settings for the Sphinx 2.0 decoder</U></B> (I still have to 
+  color the lines... this is not complete) 
+  <P>
+  <TABLE>
+    <TBODY>
+    <TR align=top>
+      <TD>FLAG</TD>
+      <TD>XXXX</TD>
+      <TD>TYPE OF SETTING</TD>
+      <TD>DESCRIPTION</TD>
+      <TD>DEFAULT VALUE</TD>
+      <TD>TYPICAL SETTING</TD>
+      <TD>EXPLANATION</TD></TR>
+    <TR align=top>
+      <TD>-force</TD>
+      <TD>Force</TD>
+      <TD>STRING </TD>
+      <TD>Force</TD></TR>
+    <TR align=top>
+      <TD>-argfile</TD>
+      <TD>ArgFile</TD>
+      <TD>STRING </TD>
+      <TD>Cmd line argument file</TD></TR>
+    <TR align=top>
+      <TD>-allphone</TD>
+      <TD>AllPhoneMode</TD>
+      <TD>BOOL </TD>
+      <TD>All Phone Mode</TD></TR>
+    <TR align=top>
+      <TD>-forceRec</TD>
+      <TD>ForceRec</TD>
+      <TD>BOOL </TD>
+      <TD>ForceRec</TD></TR>
+    <TR align=top>
+      <TD>-agcbeta</TD>
+      <TD>AgcBeta</TD>
+      <TD>BOOL </TD>
+      <TD>Use beta based AGC</TD></TR>
+    <TR align=top>
+      <TD>-agcmax</TD>
+      <TD>AgcMax</TD>
+      <TD>BOOL </TD>
+      <TD>Use max based AGC</TD>
+      <TD>Find the maximum c0 value in the current utterance and subtract it 
+        from the c0 of all frames, thereby forcing the max c0 to zero always. 
+        <BR>Problem: Normalization is based on the maximum value. The maximum 
+        value is a *single* point. Any statistic that is based on a single point 
+        is not robust. The max value may be an outlier, for instance. Also, we 
+        are always anchoring the max value to 0. Visualize two gaussians: one 
+        narrow and one wide. If we align them to that, the value at which the 
+        distributions have some constant value other than the value at the mean 
+        (this is the typical scenario - the max value obtained from a narrow 
+        distribution will be closer to the mean than one obtained from a broad 
+        distribution), the two means will not align. As a result any 
+        distribution computed from the union of the two distributions will be 
+        smeared with respect to both distributions. If we had simply aligned the 
+        means of the two distributions instead, this wouldnt happen. When we 
+        perform CMN we set the means of all utterances to 0, thereby aligning 
+        the means of all utterances. </TD></TR>
+    <TR align=top>
+      <TD>-agcemax</TD>
+      <TD>AgcEMax</TD>
+      <TD>BOOL </TD>
+      <TD>Use another max based AGC</TD>
+      <TD>Estimate max c0 as the average of the max c0 of the past (upto) 10 
+        utterances and subtract it from the c0 of all frames. Needed when doing 
+        live decodes since we dont have the entire utterance to find the max c0 
+        from. <BR>Problem: Same as for agcmax. </TD></TR>
+    <TR align=top>
+      <TD>-agcnoise</TD>
+      <TD>AgcNoise</TD>
+      <TD>BOOL </TD>
+      <TD>Use Noise based AGC</TD></TR>
+    <TR align=top>
+      <TD>-agcthresh</TD>
+      <TD>AgcThreshold</TD>
+      <TD>FLOAT </TD>
+      <TD>Threshold for Noise based AGC</TD></TR>
+    <TR align=top>
+      <TD>-normmean</TD>
+      <TD>NormalizeMean</TD>
+      <TD>BOOL </TD>
+      <TD>Normalize the feature means to 0.0</TD></TR>
+    <TR align=top>
+      <TD>-nmprior</TD>
+      <TD>NormalizeMeanPrior</TD>
+      <TD>BOOL </TD>
+      <TD>Normalize feature means with prior mean</TD></TR>
+    <TR align=top>
+      <TD>-compress</TD>
+      <TD>CompressBackground</TD>
+      <TD>BOOL </TD>
+      <TD>Compress excess background frames</TD>
+      <TD>Find a 100 point histogram of c0. Find the position where this 
+        peaks. Find the bin position some N bins away from the peak towards the 
+        min-energy bin (I found the number "5" for N in the code, but that seems 
+        wrong as this would be too close to the peak). This bin position is 
+        taken as a threshold. All frames with c0 below this threshold are simply 
+        deleted from the utterance thereby shrinking the utterance length. 
+        <BR>Problem: This is based on a heuristically computed threshold. The 
+        heuristic will not always work. First, this is assuming that the shape 
+        of the historgram of the test data will be similar to the shape of the 
+        histogram of the data that the heurisitic (the number N that is the 
+        shift from the peak of the histogram) was developed on. This may not be 
+        the case. The test data may have a broader distribution. In this case we 
+        would end up deleting speech. On the other hand, if the test data has 
+        lots of silence, we will find a peak in the histogram at the typical 
+        silence c[0]. If we shift to the left of this peak to find a threshold, 
+        the peak c[0] will lie above this threshold, thereby ensuring that most 
+        of the silence frames remain anyway, making the compress operation 
+        pointless. A better thing wouldve been to find a bimodal distribution, 
+        fold over the extremum point across the first peak, an use that for a 
+        threshold (like we did for SPINE). The way it is currently implemented 
+        may help at times, but it probably hurts more frequently than it helps. 
+      </TD></TR>
+    <TR align=top>
+      <TD>-compressprior</TD>
+      <TD>CompressPrior</TD>
+      <TD>BOOL </TD>
+      <TD>Compress excess background frames based on prior utt</TD>
+      <TD>For live decodes the histogram is found from *previous* utterances 
+        and the threshold based on this histogram of previous utterances. Delete 
+        all cepstra with c0 below this threshold. <BR>Problem: Same as for 
+        compress </TD></TR>
+    <TR align=top>
+      <TD>-dcep80msweight</TD>
+      <TD>Dcep80msWeight</TD>
+      <TD>DOUBLE </TD>
+      <TD>Weight for dcep80ms</TD></TR>
+    <TR align=top>
+      <TD>-live</TD>
+      <TD>LiveData</TD>
+      <TD>BOOL </TD>
+      <TD>Get input from A/D hardware</TD></TR>
+    <TR align=top>
+      <TD>-blockingad</TD>
+      <TD>A/D blocks on read</TD>
+      <TD>BOOL </TD>
+      <TD>A/D blocks on read</TD></TR>
+    <TR align=top>
+      <TD>-ctlfn</TD>
+      <TD>CtlFileName</TD>
+      <TD>STRING </TD>
+      <TD>Control file name</TD></TR>
+    <TR align=top>
+      <TD>-ctloffset</TD>
+      <TD>CtlLineOffset</TD>
+      <TD>INT </TD>
+      <TD>Number of Lines to skip in ctl file</TD></TR>
+    <TR align=top>
+      <TD>-ctlcount</TD>
+      <TD>CtlCount</TD>
+      <TD>INT </TD>
+      <TD>Number of lines to process in ctl file</TD></TR>
+    <TR align=top>
+      <TD>-ctlincr</TD>
+      <TD>CtlLineIncr</TD>
+      <TD>INT </TD>
+      <TD>Do every nth line in the ctl file</TD></TR>
+    <TR align=top>
+      <TD>-compallsen</TD>
+      <TD>ComputeAllSenones</TD>
+      <TD>BOOL </TD>
+      <TD>Compute all senone scores every frame</TD></TR>
+    <TR align=top>
+      <TD>-topsenfrm</TD>
+      <TD>TopSenonesFrames</TD>
+      <TD>INT </TD>
+      <TD>#frames top senones for predicting phones</TD></TR>
+    <TR align=top>
+      <TD>-topsenthresh</TD>
+      <TD>TopSenonesThresh</TD>
+      <TD>INT </TD>
+      <TD>Top senones threshold for predicting phones</TD></TR>
+    <TR align=top>
+      <TD>-wsj1Sent</TD>
+      <TD>wsj1Sent</TD>
+      <TD>BOOL </TD>
+      <TD>Sent_Dir using wsj1 format</TD></TR>
+    <TR align=top>
+      <TD>-reportpron</TD>
+      <TD>ReportAltPron</TD>
+      <TD>BOOL </TD>
+      <TD>Report actual pronunciation in match file</TD></TR>
+    <TR align=top>
+      <TD>-matchfn</TD>
+      <TD>MatchFileName</TD>
+      <TD>STRING </TD>
+      <TD>Recognition output file name</TD></TR>
+    <TR align=top>
+      <TD>-matchsegfn</TD>
+      <TD>MatchSegFileName</TD>
+      <TD>STRING </TD>
+      <TD>Recognition output with segmentation</TD></TR>
+    <TR align=top>
+      <TD>-phoneconf</TD>
+      <TD>PhoneConfidence</TD>
+      <TD>INT </TD>
+      <TD>Phone confidence</TD></TR>
+    <TR align=top>
+      <TD>-pscr2lat</TD>
+      <TD>PhoneLat</TD>
+      <TD>BOOL </TD>
+      <TD>Phone lattice based on best senone scores</TD></TR>
+    <TR align=top>
+      <TD>-logfn</TD>
+      <TD>LogFileName</TD>
+      <TD>STRING </TD>
+      <TD>Recognition ouput file name</TD></TR>
+    <TR align=top>
+      <TD>-correctfn</TD>
+      <TD>CorrectFileName</TD>
+      <TD>STRING </TD>
+      <TD>Reference ouput file name</TD></TR>
+    <TR align=top>
+      <TD>-utt</TD>
+      <TD>Utterance</TD>
+      <TD>STRING </TD>
+      <TD>Utterance name</TD></TR>
+    <TR align=top>
+      <TD>-datadir</TD>
+      <TD>DataDirectory</TD>
+      <TD>STRING </TD>
+      <TD>Data directory</TD></TR>
+    <TR align=top>
+      <TD>-cepdir</TD>
+      <TD>DataDirectory</TD>
+      <TD>STRING </TD>
+      <TD>Data directory</TD></TR>
+    <TR align=top>
+      <TD>-vqdir</TD>
+      <TD>DataDirectory</TD>
+      <TD>STRING </TD>
+      <TD>Data directory</TD></TR>
+    <TR align=top>
+      <TD>-segdir</TD>
+      <TD>SegDataDirectory</TD>
+      <TD>STRING </TD>
+      <TD>Data directory</TD></TR>
+    <TR align=top>
+      <TD>-sentdir</TD>
+      <TD>SentDir</TD>
+      <TD>STRING </TD>
+      <TD>Sentence directory</TD></TR>
+    <TR align=top>
+      <TD>-sentext</TD>
+      <TD>SentExt</TD>
+      <TD>STRING </TD>
+      <TD>Sentence File Extension</TD></TR>
+    <TR align=top>
+      <TD>-lmnamedir</TD>
+      <TD>LMNamesDir</TD>
+      <TD>STRING </TD>
+      <TD>Directory for LM-name file for each utt</TD></TR>
+    <TR align=top>
+      <TD>-lmnameext</TD>
+      <TD>LMNamesExt</TD>
+      <TD>STRING </TD>
+      <TD>Filename extension for LM-name files</TD></TR>
+    <TR align=top>
+      <TD>-startworddir</TD>
+      <TD>StartWordDir</TD>
+      <TD>STRING </TD>
+      <TD>Startword directory</TD></TR>
+    <TR align=top>
+      <TD>-startwordext</TD>
+      <TD>StartWordExt</TD>
+      <TD>STRING </TD>
+      <TD>StartWord File Extension</TD></TR>
+    <TR align=top>
+      <TD>-nbestdir</TD>
+      <TD>NbestDir</TD>
+      <TD>STRING </TD>
+      <TD>N-best Hypotheses Directory</TD></TR>
+    <TR align=top>
+      <TD>-nbest</TD>
+      <TD>NbestCount</TD>
+      <TD>INT </TD>
+      <TD>No. N-best Hypotheses</TD></TR>
+    <TR align=top>
+      <TD>-nbestext</TD>
+      <TD>NbestExt</TD>
+      <TD>STRING </TD>
+      <TD>N-best Hypothesis File Extension</TD></TR>
+    <TR align=top>
+      <TD>-cepext</TD>
+      <TD>CepExt</TD>
+      <TD>STRING </TD>
+      <TD>Cepstrum File Extension</TD></TR>
+    <TR align=top>
+      <TD>-cext</TD>
+      <TD>CCodeExt</TD>
+      <TD>STRING </TD>
+      <TD>CCode File Extension</TD></TR>
+    <TR align=top>
+      <TD>-dext</TD>
+      <TD>DCodeExt</TD>
+      <TD>STRING </TD>
+      <TD>DCode File Extension</TD></TR>
+    <TR align=top>
+      <TD>-pext</TD>
+      <TD>PCodeExt</TD>
+      <TD>STRING </TD>
+      <TD>PCode File Extension</TD></TR>
+    <TR align=top>
+      <TD>-xext</TD>
+      <TD>XCodeExt</TD>
+      <TD>STRING </TD>
+      <TD>XCode File Extension (4 codebook only)</TD></TR>
+    <TR align=top>
+      <TD>-beam</TD>
+      <TD>BeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>Beam Width</TD></TR>
+    <TR align=top>
+      <TD>-nwbeam</TD>
+      <TD>NewWordBeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>New Word Beam Width</TD></TR>
+    <TR align=top>
+      <TD>-fwdflatbeam</TD>
+      <TD>FwdFlatBeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>FwdFlat Beam Width</TD></TR>
+    <TR align=top>
+      <TD>-fwdflatnwbeam</TD>
+      <TD>FwdFlatNewWordBeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>FwdFlat New Word Beam Width</TD></TR>
+    <TR align=top>
+      <TD>-lponlybw</TD>
+      <TD>LastPhoneAloneBeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>Beam Width for Last Phones Only</TD></TR>
+    <TR align=top>
+      <TD>-lponlybeam</TD>
+      <TD>LastPhoneAloneBeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>Beam Width for Last Phones Only</TD></TR>
+    <TR align=top>
+      <TD>-npbeam</TD>
+      <TD>NewPhoneBeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>New Phone Beam Width</TD></TR>
+    <TR align=top>
+      <TD>-lpbeam</TD>
+      <TD>LastPhoneBeamWidth</TD>
+      <TD>FLOAT </TD>
+      <TD>Last Phone Beam Width</TD></TR>
+    <TR align=top>
+      <TD>-phnpen</TD>
+      <TD>PhoneInsertionPenalty</TD>
+      <TD>FLOAT </TD>
+      <TD>Penalty for each phone used</TD></TR>
+    <TR align=top>
+      <TD>-inspen</TD>
+      <TD>InsertionPenalty</TD>
+      <TD>FLOAT </TD>
+      <TD>Penalty for word transitions</TD></TR>
+    <TR align=top>
+      <TD>-nwpen</TD>
+      <TD>NewWordPenalty</TD>
+      <TD>FLOAT </TD>
+      <TD>Penalty for new word transitions</TD></TR>
+    <TR align=top>
+      <TD>-silpen</TD>
+      <TD>SilenceWordPenalty</TD>
+      <TD>FLOAT </TD>
+      <TD>Penalty for silence word transitions</TD></TR>
+    <TR align=top>
+      <TD>-fillpen</TD>
+      <TD>FillerWordPenalty</TD>
+      <TD>FLOAT </TD>
+      <TD>Penalty for filler word transitions</TD></TR>
+    <TR align=top>
+      <TD>-langwt</TD>
+      <TD>LanguageWeight</TD>
+      <TD>FLOAT </TD>
+      <TD>Weighting on Language Probabilities</TD></TR>
+    <TR align=top>
+      <TD>-rescorelw</TD>
+      <TD>RescoreLanguageWeight</TD>
+      <TD>FLOAT </TD>
+      <TD>LM prob weight for rescoring pass</TD></TR>
+    <TR align=top>
+      <TD>-fwdflatlw</TD>
+      <TD>FwdFlatLanguageWeight</TD>
+      <TD>FLOAT </TD>
+      <TD>FwdFlat Weighting on Language Probabilities</TD></TR>
+    <TR align=top>
+      <TD>-fwdtree</TD>
+      <TD>FwdTree</TD>
+      <TD>BOOL </TD>
+      <TD>Fwd tree search (1st pass)</TD></TR>
+    <TR align=top>
+      <TD>-fwdflat</TD>
+      <TD>FwdFlat</TD>
+      <TD>BOOL </TD>
+      <TD>Flat fwd search over fwdtree lattice</TD></TR>
+    <TR align=top>
+      <TD>-forwardonly</TD>
+      <TD>ForwardOnly</TD>
+      <TD>BOOL </TD>
+      <TD>Run only the forward pass</TD></TR>
+    <TR align=top>
+      <TD>-bestpath</TD>
+      <TD>Bestpath</TD>
+      <TD>BOOL </TD>
+      <TD>Shortest path search over lattice</TD></TR>
+    <TR align=top>
+      <TD>-fwd3g</TD>
+      <TD>TrigramInFwdPass</TD>
+      <TD>BOOL </TD>
+      <TD>Use trigram (if available) in forward pass</TD></TR>
+    <TR align=top>
+      <TD>-cbdir</TD>
+      <TD>CodeBookDirectory</TD>
+      <TD>STRING </TD>
+      <TD>Code book directory</TD></TR>
+    <TR align=top>
+      <TD>-ccbfn</TD>
+      <TD>CCodeBookFileName</TD>
+      <TD>STRING </TD>
+      <TD>CCode Book File Name</TD></TR>
+    <TR align=top>
+      <TD>-dcbfn</TD>
+      <TD>DCodeBookFileName</TD>
+      <TD>STRING </TD>
+      <TD>DCode Book File Name</TD></TR>
+    <TR align=top>
+      <TD>-pcbfn</TD>
+      <TD>PCodeBookFileName</TD>
+      <TD>STRING </TD>
+      <TD>PCode Book File Name</TD></TR>
+    <TR align=top>
+      <TD>-xcbfn</TD>
+      <TD>XCodeBookFileName</TD>
+      <TD>STRING </TD>
+      <TD>XCode Book File Name</TD></TR>
+    <TR align=top>
+      <TD>-use20msdp</TD>
+      <TD>Use20msDiffPow</TD>
+      <TD>BOOL </TD>
+      <TD>Use 20 ms diff power instead of c0</TD></TR>
+    <TR align=top>
+      <TD>-cepfloor</TD>
+      <TD>CepFloor</TD>
+      <TD>FLOAT </TD>
+      <TD>Floor of Cepstrum Variance</TD></TR>
+    <TR align=top>
+      <TD>-dcepfloor</TD>
+      <TD>DCepFloor</TD>
+      <TD>FLOAT </TD>
+      <TD>Floor of Delta Cepstrum Variance</TD></TR>
+    <TR align=top>
+      <TD>-xcepfloor</TD>
+      <TD>XCepFloor</TD>
+      <TD>FLOAT </TD>
+      <TD>Floor of XCepstrum Variance</TD></TR>
+    <TR align=top>
+      <TD>-top</TD>
+      <TD>TopNCodeWords</TD>
+      <TD>INT </TD>
+      <TD>Number of code words to use</TD></TR>
+    <TR align=top>
+      <TD>-skipalt</TD>
+      <TD>SkipAltFrames</TD>
+      <TD>INT </TD>
+      <TD>Skip alternate frames in exiting phones</TD></TR>
+    <TR align=top>
+      <TD>-matchscore</TD>
+      <TD>WriteScoreInMatchFile</TD>
+      <TD>BOOL </TD>
+      <TD>write score in the match file</TD></TR>
+    <TR align=top>
+      <TD>-latsize</TD>
+      <TD>LatticeSizes</TD>
+      <TD>INT </TD>
+      <TD>BP and FP Tables Sizes</TD></TR>
+    <TR align=top>
+      <TD>-lmcachelines</TD>
+      <TD>LMCacheNumLines</TD>
+      <TD>INT </TD>
+      <TD>No. lines in LM cache</TD></TR>
+    <TR align=top>
+      <TD>-ilmugwt</TD>
+      <TD>ILMUGCacheWeight</TD>
+      <TD>INT </TD>
+      <TD>Weight(%) for ILM UG cache prob</TD></TR>
+    <TR align=top>
+      <TD>-ilmbgwt</TD>
+      <TD>ILMBGCacheWeight</TD>
+      <TD>INT </TD>
+      <TD>Weight(%) for ILM BG cache prob</TD></TR>
+    <TR align=top>
+      <TD>-dumplatdir</TD>
+      <TD>DumpLattice</TD>
+      <TD>STRING </TD>
+      <TD>Dump Lattice</TD></TR>
+    <TR align=top>
+      <TD>-samp</TD>
+      <TD>SamplingRate</TD>
+      <TD>INT </TD>
+      <TD>Sampling rate</TD></TR>
+    <TR align=top>
+      <TD>-adcin</TD>
+      <TD>UseADCInput</TD>
+      <TD>BOOL </TD>
+      <TD>Use raw ADC input</TD></TR>
+    <TR align=top>
+      <TD>-adcext</TD>
+      <TD>ADCFileExt</TD>
+      <TD>STRING </TD>
+      <TD>ADC file extension</TD></TR>
+    <TR align=top>
+      <TD>-adcendian</TD>
+      <TD>ADCByteOrder</TD>
+      <TD>INT </TD>
+      <TD>ADC file byte order (0=BIG/1=LITTLE)</TD></TR>
+    <TR align=top>
+      <TD>-adchdr</TD>
+      <TD>ADCHdrSize</TD>
+      <TD>INT </TD>
+      <TD>ADC file header size</TD></TR>
+    <TR align=top>
+      <TD>-rawlogdir</TD>
+      <TD>RawLogDir</TD>
+      <TD>STRING </TD>
+      <TD>Log directory for raw output files)</TD></TR>
+    <TR align=top>
+      <TD>-mfclogdir</TD>
+      <TD>MFCLogDir</TD>
+      <TD>STRING </TD>
+      <TD>Log directory for MFC output files)</TD></TR>
+    <TR align=top>
+      <TD>-tactlfn</TD>
+      <TD>TimeAlignCtlFile</TD>
+      <TD>STRING </TD>
+      <TD>Time align control file</TD></TR>
+    <TR align=top>
+      <TD>-taword</TD>
+      <TD>TimeAlignWord</TD>
+      <TD>BOOL </TD>
+      <TD>Time Align Phone</TD></TR>
+    <TR align=top>
+      <TD>-taphone</TD>
+      <TD>TimeAlignPhone</TD>
+      <TD>BOOL </TD>
+      <TD>Time Align Phone</TD></TR>
+    <TR align=top>
+      <TD>-tastate</TD>
+      <TD>TimeAlignState</TD>
+      <TD>BOOL </TD>
+      <TD>Time Align State</TD></TR>
+    <TR align=top>
+      <TD>-segext</TD>
+      <TD>SegFileExt</TD>
+      <TD>STRING </TD>
+      <TD>Seg file extension</TD></TR>
+    <TR align=top>
+      <TD>-scoreext</TD>
+      <TD>ScoreFileExt</TD>
+      <TD>STRING </TD>
+      <TD>Seg file extension</TD></TR>
+    <TR align=top>
+      <TD>-osentfn</TD>
+      <TD>OutSentFile</TD>
+      <TD>STRING </TD>
+      <TD>output sentence file name</TD></TR>
+    <TR align=top>
+      <TD>-backtrace</TD>
+      <TD>PrintBackTrace</TD>
+      <TD>BOOL </TD>
+      <TD>Print Back Trace</TD></TR>
+    <TR align=top>
+      <TD>-cdcn</TD>
+      <TD>CDCNinitFile</TD>
+      <TD>STRING </TD>
+      <TD>CDCN Initialization File</TD></TR></TBODY></TABLE>
+  <HR noShade>
+  <B><U>Acoustic models, lms and dictionaries for the diplomat english/croatian 
+  translation system</U></B> 
+  <P>
+  <TABLE border=1><FONT color=#ed0000 size=+1 top?>
+    <TBODY>
+    <TR>
+      <TD>LANGUAGE</TD>
+      <TD>ACOUSTIC MODELS</TD>
+      <TD>LM</TD>
+      <TD>DICTIONARY FOR LM</TD></TR>
+    <TR vAlign=top>
+      <TD>ENGLISH</TD>
+      <TD><A 
+        href="http://www.speech.cs.cmu.edu/tongues/tongues_english.tar.gz"><FONT 
+        color=#ff0066>tongues_english.tar.gz</FONT></A></TD>
+      <TD><A 
+        href="http://www.speech.cs.cmu.edu/tongues/tongues_english.10dec00.lmtext+trainingtext+demotext.lm.zip">tongues_english.10dec00.lmtext+trainingtext+demotext.lm</A></TD>
+      <TD><A 
+        href="http://www.speech.cs.cmu.edu/tongues/tongues_english.10dec00.decode.dict.zip">tongues_english.10dec00.decode.dict</A></TD>
+    <TR vAlign=top>
+      <TD>CROATIAN</TD>
+      <TD><A 
+        href="http://www.speech.cs.cmu.edu/tongues/tongues_croatian.tar.gz"><FONT 
+        color=#ff0066>tongues_croatian.tar.gz</FONT></A></FONT></TD>
+      <TD><A 
+        href="http://www.speech.cs.cmu.edu/tongues/tongues_croatian.11dec00.lmtext+trainingtext+demotext.lm.zip">tongues_croatian.11dec00.lmtext+trainingtext+demotext.lm</A></TD>
+      <TD><A 
+        href="http://www.speech.cs.cmu.edu/tongues/tongues_croatian.11dec00.dictionary.zip">tongues_croatian.11dec00.dictionary</A><BR><A 
+        href="http://www.speech.cs.cmu.edu/tongues/tongues_croatian.11dec00.words_missing_in_dict.zip">tongues_croatian.11dec00.words_missing_in_dict</A></TD>
+    <TR></FONT></TR></TBODY></TABLE>
+  <P><B>LM texts</B> 
+  <P>
+  <UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/tongues/lmtext+trainingtext+demotext.10dec">text 
+    used for training the English lm</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/tongues/croatian_lmtext+trainingtext+alantext">text 
+    used for training the Croatian lm</A> </LI></UL>The decode dictionaries are 
+  also within the model directories. They are called DECODE.DICT and 
+  DECODE.NOISEDICT. Both must be used during recognition. Remember that ONLY the 
+  words that are in the dictionary AND the LM are recognizable. If you have 
+  words in your vocabulary that you want to recognize, and don't have examples 
+  of their usage in the LM text, then include them simply as unigrams in the LM. 
+  The LM vocabulary must not exceed 64,000 words. The dictionary is flexible. 
+  You can shorten it or add new words to it. Do not change the phoneset, though. 
+
+  <P>The acoustic models are meant to recognize 16khz sampled speech. Make sure 
+  that your signals being recorded are not clipped and do not have a "tabletop" 
+  appearance. If they do, you have a gain control problem. 
+  <P>No agc has been used during training. Hence no agc must be used for 
+  decoding. The agc flag must be set to false. 
+  <P>Here are some tentative flag settings for the decoder to be used with these 
+  models. First try only these (leave out ALL other flags; don't mention them). 
+  If these settings slow down the decode (and the decodes look ok), try reducing 
+  -topn (do not go below 2. This flag affects recognition hugely. 1 can be very 
+  fast, very bad. 2 can be a little slower, reasonable. 4 gives you good 
+  decodes). You can of course optimize around these settings if you have the 
+  time: <PRE> -live TRUE                      -topsenfrm 4  
+ -topsenthresh -50000            -nmprior TRUE
+ -fwdflat FALSE                  -bestpath TRUE  
+ -top 4                          -fillpen 1e-10
+ -nwpen 0.01                     -silpen 0.005  
+ -inspen 0.65                    -langwt 7.5  
+ -ugwt 0.5                       -beam 2e-6  
+ -npbeam 2e-6                    -nwbeam 5e-4  
+ -lpbeam 2e-5                    -lponlybeam 5e-4
+ -rescorelw 9.5                  -hmmdir  tongues_english  
+ -hmmdirlist tongues_english     -cbdir   tongues_english  
+ -lmfn      english\English.arpabo
+ -kbdumpdir tongues_english      -dictfn  tongues_english\DECODE.DICT
+ -phnfn     tongues_english\phone  -ndictfn   tongues_english\DECODE.NOISEDICT
+ -mapfn      tongues_english\map  -sendumpfn  tongues_english\sendump
+ -normmean TRUE                   -8bsen TRUE  
+ -matchfn c:\anything.match  
+ -logfn c:\anything.log (omit this flag if you don't want to write a log)
+</PRE>
+  <P>The specifications for the croatian models are the same as those for the 
+  English models. There is no decode noisedict for these models. The same 
+  settings (barring the actual modeldirectory names and output filenames) should 
+  work for croatian. There is ONE difference: the -ndictfn flag must be omitted 
+  for the croatian models. Add the missing words to the croatian dictionary 
+  before using it to decode. a list of missing words is given. An <A 
+  href="http://www.speech.cs.cmu.edu/tongues/all/ALL.tar.gz">ALL.tar.gz</A> tar 
+  file for these lms and dicts is available, to preserve the ISO characters. 
+  <P><A 
+  href="http://www.speech.cs.cmu.edu/tongues/sphinx2opensrc.tar">sphinx2opensrc.tar</A> 
+
+  <HR noShade>
+  </LI></OL></BODY></HTML>

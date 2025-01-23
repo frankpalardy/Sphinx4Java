@@ -1,0 +1,58 @@
+
+C:\Documents and Settings\Frank\workspace\tutorial\an4>perl scripts_pl/02.ci_sch
+mm/slave_convg.pl
+MODULE: 02 Training Context Independent models
+    Cleaning up directories: accumulator...logs...models...
+    Flat initialize
+    Baum welch starting for iteration: 1 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 1         Current Overall Likelihood Per Frame = -50.4550579071436
+    Baum welch starting for iteration: 2 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 2         Current Overall Likelihood Per Frame = -4.85052151906718
+    Baum welch starting for iteration: 3 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 3         Current Overall Likelihood Per Frame = -2.0756518002854
+    Baum welch starting for iteration: 4 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 4         Current Overall Likelihood Per Frame = -0.355063977735906
+    Baum welch starting for iteration: 5 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 5         Current Overall Likelihood Per Frame = 0.0677811590889381
+    Baum welch starting for iteration: 6 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 6         Current Overall Likelihood Per Frame = 0.215339007103381
+    Baum welch starting for iteration: 7 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 7         Current Overall Likelihood Per Frame = 0.279551052104603
+    Baum welch starting for iteration: 8 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 8         Current Overall Likelihood Per Frame = 0.303685480246923
+    Baum welch starting for iteration: 9 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70%
+ 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 9         Current Overall Likelihood Per Frame = 0.317839066232527
+    Baum welch starting for iteration: 10 (1 of 1) 0% 10% 20% 30% 40% 50% 60% 70
+% 80% 90% 100%
+                This step had 0 ERROR messages and 2 WARNING messages.
+                Please check the log file for details.    Normalization for iter
+ation: 10         Current Overall Likelihood Per Frame = 0.327505499010572
+
+C:\Documents and Settings\Frank\workspace\tutorial\an4>

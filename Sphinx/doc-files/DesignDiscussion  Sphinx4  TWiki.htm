@@ -1,0 +1,874 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0075)http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion -->
+<HTML lang=en-us xml:lang="en-us" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>DesignDiscussion < Sphinx4 < TWiki</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-15"><LINK 
+href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" type=image/x-icon 
+rel=icon><LINK href="/sphinx/twiki/pub/Sphinx4/WebPreferences/favicon.ico" 
+type=image/x-icon rel="shortcut icon"><LINK title="RSS Feed" 
+href="/sphinx/twiki/bin/view/Sphinx4/WebRss" type=application/rss+xml 
+rel=alternate><!--/closing tag 'solves' IE selection bug-->
+<SCRIPT src="DesignDiscussion  Sphinx4  TWiki_files/twiki.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT src="DesignDiscussion  Sphinx4  TWiki_files/pattern.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+//<![CDATA[
+	function launchWindow(inWeb, inTopic) {
+		return launchTheWindow("/sphinx/twiki/bin/view/", inWeb, inTopic, "", "viewplain" );
+	}
+//]]>
+</SCRIPT>
+
+<SCRIPT src="DesignDiscussion  Sphinx4  TWiki_files/twist.js" 
+type=text/javascript></SCRIPT>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/TwistyContrib/twist.css );
+</STYLE>
+
+<STYLE type=text/css media=all>#patternTopBar {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderCenter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderLeft {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternClearHeaderRight {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternTopBarContentsOuter {
+	OVERFLOW: hidden; HEIGHT: 64px
+}
+#patternOuter {
+	MARGIN-LEFT: 12em
+}
+#patternLeftBar {
+	MARGIN-LEFT: -12em; WIDTH: 12em
+}
+</STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/layout.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/style.css );
+@import url( /sphinx/twiki/pub/TWiki/PatternSkin/colors.css );
+</STYLE>
+<!--[if IE]>
+<STYLE type=text/css>PRE {
+	OVERFLOW-Y: hidden; OVERFLOW-X: auto; ; PADDING-BOTTOM: expression(this.scrollWidth > this.offsetWidth ? 16 : 0)
+}
+#patternLeftBarContents LI {
+	TEXT-OVERFLOW: ellipsis
+}
+</STYLE>
+<![endif]--><!--[if lte IE 6]>
+<STYLE type=text/css>#patternLeftBar {
+	POSITION: relative
+}
+</STYLE>
+<![endif]-->
+<STYLE type=text/css media=all>.twikiInputField {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_input.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiInputFieldDisabled {
+	BACKGROUND-IMAGE: none; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.twikiButton {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_button.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternToolBarButtons .patternButton A {
+	
+}
+.twikiSubmit {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/background_submit.gif); BACKGROUND-REPEAT: repeat-x
+}
+.twikiSubmitDisabled {
+	BACKGROUND-IMAGE: none
+}
+.twikiToc LI {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-down.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternLeftBar .patternWebIndicator {
+	BACKGROUND-COLOR: #99ff99
+}
+.patternBookView .twikiTopRow {
+	BACKGROUND-COLOR: #99ff99
+}
+#patternTopBar {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/TWiki_header.gif); BACKGROUND-REPEAT: no-repeat
+}
+#patternTopBar {
+	BACKGROUND-COLOR: #ffffff
+}
+.patternBookView {
+	BORDER-LEFT-COLOR: #99ff99; BORDER-BOTTOM-COLOR: #99ff99; BORDER-TOP-COLOR: #99ff99; BORDER-RIGHT-COLOR: #99ff99
+}
+#twikiLogin {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .tipsOfTheDayContents {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_blue.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternOuter {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/gradient_yellow.gif); BACKGROUND-REPEAT: repeat-x
+}
+.patternPrintPage #patternOuter {
+	BACKGROUND: #fff
+}
+.twikiPageForm TABLE {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/form_gradient.gif); BACKGROUND-REPEAT: repeat-x
+}
+#patternLeftBarContents .patternLeftBarPersonal LI {
+	BACKGROUND-POSITION: 0px 0.5em; BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PatternSkin/bullet-blue.gif); BACKGROUND-REPEAT: no-repeat
+}
+.patternPreviewPage #patternMain {
+	BACKGROUND-IMAGE: url(/sphinx/twiki/pub/TWiki/PreviewBackground/preview2bg.gif)
+}
+</STYLE>
+
+<STYLE type=text/css media=all></STYLE>
+
+<STYLE type=text/css media=all>@import url( /sphinx/twiki/pub/TWiki/PatternSkin/print.css );
+</STYLE>
+
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY class=patternViewPage><A name=PageTop></A>
+<DIV id=patternScreen>
+<DIV id=patternPageShadow>
+<DIV id=patternPage>
+<DIV id=patternWrapper>
+<DIV id=patternOuter>
+<DIV id=patternFloatWrap>
+<DIV id=patternMain>
+<DIV id=patternClearHeaderCenter></DIV>
+<DIV id=patternMainContents>
+<DIV class=patternTop>
+<DIV class=patternToolBar>
+<DIV class=patternToolBarButtons><SPAN class=patternButton><A 
+title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/DesignDiscussion?t=1152936643" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=patternButton><A title="Attach an image or document to this topic" 
+accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A></SPAN><SPAN 
+class=patternButton><A title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A></SPAN> </DIV></DIV><!-- /patternToolBar-->
+<DIV class=patternToolBarBottom></DIV></DIV><!-- /patternTop-->
+<DIV class=patternHomePath><SPAN class=twikiRight><SPAN class=patternRevInfo>r12 
+- 17 Apr 2003 - 15:48:30 - <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/EvandroGouvea">EvandroGouvea</A></SPAN></SPAN><SPAN 
+class=patternHomePathTitle>You are here: </SPAN><A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome">TWiki</A><SPAN 
+class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+style="BACKGROUND-COLOR: #99ff99" height=13 alt="" 
+src="DesignDiscussion  Sphinx4  TWiki_files/web-bg-small.gif" width=13 border=0> 
+Sphinx4 Web</A> <SPAN class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN> <A 
+class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/Sphinx4Trainer">Sphinx4Trainer</A><SPAN 
+class=twikiSeparator>&nbsp;&gt;&nbsp;</SPAN><SPAN 
+title=Sphinx4.DesignDiscussion>DesignDiscussion</SPAN><BR 
+class=twikiClear></DIV><!-- /patternHomePath-->
+<DIV class=twikiBeforeText></DIV>
+<DIV class=patternContent>
+<DIV class=patternTopic>This page is devoted to fine-level format, algorithmic 
+and procedural details for the trainer. Discussions on 27 Feb 2003 covered much 
+of CI training, including the case of training with multiple asynchronous 
+features, for which we have come up with a nice algorithm. 
+<P>
+<DIV class=twikiToc>
+<UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#General_design_principles">General 
+  design principles</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Control_File_format">Control 
+  File format</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Dictionary_formats">Dictionary 
+  formats</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Training_with_multiple_unit_type">Training 
+  with multiple unit types</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Training_with_multiple_features">Training 
+  with multiple features.</A> 
+  <UL>
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Time_synchronous_features">Time-synchronous 
+    features</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Time_asynchronous_features">Time-asynchronous 
+    features</A> 
+    <LI><A 
+    href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Generic_design_to_handle_both_ti">Generic 
+    design to handle both time-synchronous and time-asynchronous features</A> 
+    </LI></UL>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Handling_forced_alignments">Handling 
+  forced alignments</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Additional_notes">Additional 
+  notes</A> 
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#Outline_of_sentenceHMM_construct">Outline 
+  of sentenceHMM construction procedure</A> </LI></UL></DIV>
+<P>
+<H2><A name=General_design_principles></A>General design principles </H2>
+<P>
+<UL>
+  <LI>Avoid having too many separate input files. In a trainer, all inputs must 
+  be matched and synchronized at some level. If there are too many inputs, the 
+  possibility of error increases. Our experience with earlier trainers prompts 
+  us to put this requirement at the top of our general guidelines list. 
+  <LI>It must be possible to perform the entire training with one command, if 
+  the user desires so. Otherwise, it must also be possible for an 
+  <EM>expert</EM> user to intervene at various stages of training and control 
+  the training at fine levels. 
+  <LI>For default "one-command" operation, the system must intelligently select 
+  appropriate values for parameters that may be data dependent (e.g. number of 
+  tied states, number of Gaussians/state, thresholds, etc.), given the data size 
+  and other top level configuration parameters, transcripts, dictionaries, etc. 
+  <UL>
+    <LI>The selection may be done through functions of these, if we can think of 
+    any. If not whenever we write code and have to include some default numbers, 
+    we must introduce several default values to select from if that is feasible. 
+    </LI></UL>
+  <LI>The trainer can run off raw data as well as features. The default will be 
+  to run off raw data. </LI></UL>
+<P>
+<H2><A name=Control_File_format></A>Control File format </H2>
+<P>The <EM>control</EM> file for the Sphinx4 will be a single XML file that 
+contains all file identifier and transcript entries required for training. A 
+proposed format may look like the following: <PRE>&lt;controlfile&gt;
+  &lt;dict_default&gt;
+    &lt;dict_unittype=1&gt;id_of the dictionary 1&lt;/dict_stream&gt;
+    &lt;dict_unittype=1&gt;id_of the dictionary 2&lt;/dict_stream&gt;
+  &lt;/dict_default&gt;
+  &lt;utterance&gt;
+    &lt;utt_id=34234&gt;   (COMMENT: the utt_id could be a path
+                      to a file that in combination with
+                      a &lt;cep dir&gt; read from the big
+                      config file uniquely identifies
+                      the utterance)
+    &lt;exact=yes&gt;      (COMMENT: If exact is "yes", assume that the
+                      transcript is already forced-aligned. Otherwise
+                      the trainer must incoporate skippable silence
+                      and consider alternate pronunciations when
+                      building the sentenceHMM)
+    &lt;unittype=1
+        dict=XXX     (COMMENT: if you want to override default dictionary)
+        trans = &lt;s&gt; &lt;sil&gt; SHE &lt;sil&gt; HAD(2) YOUR DARK &lt;sil&gt; SUIT &lt;/s&gt;
+        ...          (COMMENT: Any other fields we may choose to add)
+    &gt;
+    &lt;unittype=2
+        trans = &lt;s&gt; &lt;sil&gt; SHE &lt;sil&gt; HAD(2) YOUR DARK &lt;sil&gt; SUIT &lt;/s&gt;
+         ...
+    &gt;
+  &lt;/utterance&gt;
+.... MORE UTTERANCES...
+&lt;/controlfile&gt;
+</PRE>
+<P>COMMENT: The "unittype" identifier refers to the type of sub-word unit. 
+Different sub-word units will require different dictionaries. The dictionary 
+used for any transcript will be the default dictionary for its unittype, unless 
+an override dictionary has been specified. 
+<P>Some restrictions: 
+<UL>
+  <LI>The "file-id" must be unique. No two files can have the same id. If 
+  multiple files have the same name, the paths to the file must be included in 
+  the id to make them unique. Given the file-id, one must be able to locate the 
+  file (speech or feature file) uniquely in a corpus. 
+  <LI>If multiple parallel "unittypes" are to be used for an utterance, (i.e. we 
+  want to train multiple types of units, such as syllables and phones, 
+  parallely), exact must always be "yes". Otherwise, proper sentenceHMM 
+  construction becomes very difficult. </LI></UL>
+<P>
+<H2><A name=Dictionary_formats></A>Dictionary formats </H2>We will try to 
+conform to VXML format, if any exists. If not, we will define our own XML format 
+for the dictionary. 
+<P>If we define our own format we will use the following guidelines: 
+<UL>
+  <LI>Word pronunciations will be in BNF format used for CFGs. Multiple BNF 
+  pronunciations will be permitted. This covers all possibile ways of writing 
+  pronunciations, including exhaustive listing (such as in the CMUdict). 
+  <LI>Word pronunication probabilities will be permitted, both at the individual 
+  pronunciation level, and within the BNF. Thus we can have two completely 
+  different pronunciations with probabilities, and within one of these, we might 
+  have minor phonetic variations within them. </LI></UL>e.g you might have QUININE 
+0.4 K W AY N AY N, QUININE(2) 0.6 K W IH N {0.7 IY | 0.3 IH} N. 
+<UL>
+  <LI>Fillers can be marked as either "iscontext = yes" or "iscontext = no", 
+  depending on whether we want to use them as acoustic contexts or not in 
+  forming context dependent units for training. If they are not to be used as 
+  context, the corresponding context in the sentenceHMM will be SILENCE, as in 
+  the sphinx3 trainer. </LI></UL>
+<P>
+<P>
+<H2><A name=Training_with_multiple_unit_type></A>Training with multiple unit 
+types </H2>The trainer should be able to take care of parallel unit types, for 
+example, phonemes and syllables, tied at word boundaries. A simple way to 
+visualize this is by creating a product HMM combining all possible states in the 
+word and states in the syllable. Say, the word has 3 states and the syllable 2, 
+this gives you 6 possible combo states. We can create a trellis of the product 
+and Baum-Welch just works there. 
+<P>The restriction we apply is that the transcripts for all unit types must be 
+force aligned, so that the unit sequence for the sentence is unique for any 
+single unit type. Otherwise, the sentenceHMM for any single unit type becomes a 
+network. Tying the networks for two features at word boundaries becomes very 
+difficult when context dependencies are considered. Since this will be a problem 
+for CD training, and we want our current design to be easily extendable to CD 
+training, we will avoid the complication by requiring forced aligned trancripts 
+even for CI training. 
+<P>If no forced aligned transcripts are available, you are better off training 
+separately for these units. One may forced align with the individually trained 
+models and perform joint training for further optimizing the models, if that 
+seems necessary. 
+<P>
+<H2><A name=Training_with_multiple_features></A><A 
+name=Training_with_multiple_features_></A>Training with multiple features. 
+</H2>The trainer can train models for multiple feature types simultaneously. For 
+example, one might simultaneously train an HMM for PLP and MFC models. Some 
+natural questions arise: 
+<UL>
+  <LI>How does one distinguish between separate HMMs for multiple parallel 
+  feature streams, and a single HMM for a multi-stream feature. If we trained 
+  Sphinx-2 type models with separate distributions for cepstra, delta cepstra 
+  and double delta cepstra, would we treat that as three separate HMMs tied at 
+  state level, or a single HMM with a multi-stream feature? 
+  <LI>How to integrate multiple HMMs, each with a multi-stream feature? </LI></UL>
+<P>We have not definitively addressed these questions yet. However, our design 
+should permit the most generic training, where we have multiple HMMs, each 
+representing a different multi-stream feature. 
+<P>Feature streams can be time synchronous, or time asynchronous. For example, 
+we may want to train models simultaneously for MFC and PLP, both of which are 
+computed at 100 frames/second. On the other hand, we may also want to train 
+models simultaneously for speech and images, where the speech is parameterized 
+at 100 cepstral vectors/second and the images arrive at 15 frames/second. The 
+trellis structures for the two cases would be very different: 
+<P>
+<H3><A name=Time_synchronous_features></A>Time-synchronous features </H3>
+<CENTER><BR><IMG src="DesignDiscussion  Sphinx4  TWiki_files/producthmm.gif"> 
+</CENTER>
+<P>The figure shows the effect of tying the HMMs for two different feature 
+streams for a unit. The unit could be either a sub-word unit or a word. Feature1 
+models the unit with a 3-state HMM. The state ids in the figure are "a", "b" and 
+"c". Feature2 models the unit with a 2-state HMM. The state ids are "1" and "2". 
+The two HMMs are tied at the ends of the unit. This implies that when the data 
+for feature1 represents the unit, we constrain the data for feature2 to 
+represent the unit as well. At each time instant, a pair of vectors are 
+retrieved, one for feature1 and another for feature2. The vector for feature1 
+could come from any of the three states, a, b or c. The vector for feature2 
+could belong to any of the two states, 1 or 2. Hence, there are 6 possible state 
+pair combinations, (1a, 1b, 1c, 2a, 2b, 2c) that could have generated the pair 
+of vectors. Each of these represents a compound state. A state (wx) can 
+transition to state (yz) only if w can transition to y, and x can transition to 
+z. If the HMMs for the two features have the same number of states, the HMMs 
+could have been tied at state level as well. In this case, the combined HMM for 
+this example would have only 3 states. In general, however, if the unit HMMs for 
+features f1, f2, f2.. fK, are tied at the unit level, the combined HMM will have 
+s1*s2*..sK states, where si is the no. of states in the HMM for the i-th feature 
+fi. 
+<P>The trellis used to train the HMMs for the two features jointly would be 
+derived from the combined HMM, and would be as follows for the two-feature 
+example above: 
+<CENTER><BR><IMG height=294 
+src="DesignDiscussion  Sphinx4  TWiki_files/producthmmtrellis.gif" width=712> 
+</CENTER>The transition probabilities on the combined HMM (and therefore the 
+combined trellis) are products of the transition probabilities in the HMMs for 
+the individual features. e.g., T(1a -&gt; 2b) = T(1-&gt;2) * T(a-&gt;b). The 
+state scores for any state in the trellis derived from the combined HMM is the 
+product of the state probabilities of the individual states that compose it. For 
+instance, at some time t, if feature1=f1 and feature2 = f2, the state 
+probability of state 1a would be Pa(f1) * P1(f2) (where Pa() is the state output 
+probability function of state a, P1() is the state output probability function 
+of state 1). 
+<P>Baum Welch can be performed as usual. 
+<P>All states of the form 1* will contribute to the sufficient statistics of the 
+state output distribution for state 1. All states of the form *a will contribute 
+to state a. Similar logic will hold for the estimation of the transition 
+probabilities as well. 
+<H3><A name=Time_asynchronous_features></A>Time-asynchronous features </H3>
+<P>When the two feature streams are asynchronous, the trellis becomes much more 
+complicated. The figure below shows the tied HMMs for two features, where the 
+data for feature1 (blue colored states) arrives at twice the framerate of 
+feature2 (orange states). 
+<CENTER><BR><IMG src="DesignDiscussion  Sphinx4  TWiki_files/AsyncHMM.gif"> 
+</CENTER>The figure below shows the trellis that is derived from the above HMM. 
+<CENTER><BR><IMG 
+src="DesignDiscussion  Sphinx4  TWiki_files/AsyncHMMTrellis.gif"> </CENTER>The 
+HMM on the vertical axis (to the left) has two kinds of arcs. The blue arcs 
+represent transitions that can occur at instants when data vectors from feature1 
+are available. In the example, since vectors from feature1 arrive at each time 
+instant, these arcs are always active. The pink arcs show transitions that can 
+occur only when vectors for feature2 are available. This is because the HMM can 
+transit from states of type 1* to states of type 2* only when data from feature2 
+arrive. The little dots below the time axis in the figure indicate the type of 
+feature vector given at different instants. 
+<P>The figure is clearly not a conventional HMM trellis. It is even debatable 
+whether the combined HMM is an "HMM" in the strictest sense of the word, since 
+there are multiple hidden Markov chains underlying the process. The markov 
+chains switch, and the markov chain applicable at any time depends on the data 
+vectors given at that instant. At any instant, the state output probabilities of 
+a combined state is the product of the state output probabilities computed from 
+all of its component states for which feature vectors are available. For 
+instance, at time 2, the state output probability of state 1a is simply Pa(f1), 
+whereas at time 3, it is Pa(f1)*P1(f2), where f1 is a feature1 vector, and f2 is 
+a feature2 vector. 
+<P>
+<H3><A name=Generic_design_to_handle_both_ti></A>Generic design to handle both 
+time-synchronous and time-asynchronous features </H3>
+<P>The simplest way to manage multiple time-asynchronous inputs is the 
+following: 
+<OL>
+  <LI>Determine the least common multiple, <EM>L</EM>, of the framerates of all 
+  incoming features. 
+  <LI>Attempt to retrieve data <EM>L</EM> times a second. Note that this does 
+  not imply real-time processing. It merely means that we after processing all 
+  data for a given time instant <EM>T</EM>, we then look for available data 
+  vectors with the time stamp <EM>T</EM> + <EM>1/L</EM>. 
+  <LI>At each instant, compose the transition matrix as the convolution of the 
+  transition matrices of all individual features. However, use identity matrices 
+  in lieu of the transition matrices for features that were not available at 
+  that instant. 
+  <LI>Transit according to the composed transition matrix. </LI></OL>
+<P>Observe that this algorithm composes transition matrices dynamically. This is 
+a distinctly different approach to that taken in the sentenceHMM used by the 
+decoder. 
+<P>
+<H2><A name=Handling_forced_alignments></A>Handling forced alignments </H2>When 
+forced-algined transcripts are available, the HMM for a sentence is easily 
+constructed from it. For instance, if the utterance "THE DOG" has the faligned 
+transcript "&lt;s&gt; &lt;sil&gt; THE(2) &lt;sil&gt; DOG &lt;/s&gt;", the 
+sentenceHMM would simply be: 
+<CENTER><BR><IMG 
+src="DesignDiscussion  Sphinx4  TWiki_files/falignedsentence.gif"> 
+</CENTER>However, it may not always be possible to provide forced aligned 
+transcripts. While one solution would be treat raw transcripts as 
+forced-aligned, train a simple model, forced align with it, and use those 
+transcripts, a better option would be to simply include all possible alignments 
+and pronunciations as alternatives, when constructing the sentenceHMM itself. 
+For the example of "THE DOG", when we have two possible pronunciations for THE 
+and only one for DOG, the un-forced-aligned sentenceHMM would be: 
+<CENTER><BR><IMG 
+src="DesignDiscussion  Sphinx4  TWiki_files/unfalignedsentence.gif"> </CENTER>
+<P>Forced aligned transcripts are always much simpler to handle than unaligned 
+transcripts, since the corresponding HMM is linear. For the unaligned 
+transcripts, the treatment of context dependencies can become very difficult, 
+especially for contexts greater than triphones, due to the presence of the self 
+loop across the silence. To simplify, we will treat any number of passes through 
+the silence as a single instance of silence, for the purposes of acoustic 
+context (i.e., the pentaphone used for "TH" in both the following phoneme 
+sequences, "AE N D &lt;sil&gt; TH AX &lt;sil&gt;" and "AE N D &lt;sil&gt; 
+&lt;sil&gt; TH AX &lt;sil&gt;", will be TH((D,&lt;sil&gt;),(AX,&lt;sil&gt;))". 
+<P>Context dependencies become far more difficult to handle in unaligned 
+sentenceHMMs when merging sentenceHMMs from two models that use two different 
+unit types. Hence, when the multiple models to be trained separately refer to 
+more than one dictionary, we will expect the transcripts for each of the models 
+to be faligned. 
+<P>Some points about silence contexts: 
+<UL>
+  <LI>There are additional problems with longer contexts than triphones. This is 
+  best illustrated with the following example. Consider the two phoneme 
+  sequences "AX &lt;sil(5ms)&gt; DH EH N", and "AX &lt;sil(10sec)&gt; DH EH N". 
+  The number within the parantheses beside the "sil" indicates the length of the 
+  silence in each case. The two phoneme sequences differ only in the length of 
+  the silence. The pentaphone for DH in both cases has the left context "AX 
+  &lt;sil&gt;". However, it is clear that "AX" has absolutely no effect on the 
+  pronunciation of "DH" in the second case, where the intervening silence is 10 
+  seconds long. In fact, considering "AX" to be part of the left context in 
+  these situations would be wrong, and including data from this instance of the 
+  pentaphone when training the model for the pentaphone would actually affect 
+  the model adversely. Attempting to distinguish between short and long silences 
+  for purposes of context is not a good solution. We propose the following 
+  simple solution: contexts are terminated at silences. Hence, here we would not 
+  train a <EM>pentaphone</EM> for DH. Instead, we'd only permit the following 
+  context dependent phone: "DH ((&lt;sil&gt;),(EH,N))". This is not a 
+  pentaphone, since the left context is only a single phone. 
+  <LI>In reality, intervocalic silences are acoustic events that can indeed be 
+  part of contexts. Consider the compound word "New_York". One may pronounce it 
+  with no pause between New and York, or one might say it with a pause. 
+  Nevertheless, the W in New has an effect on the Y in York. Such intervocalic 
+  pauses are quite frequent. We could represent such intervocalic pauses by a 
+  new &lt;ivpause&gt; phone, which is different from &lt;sil&gt;. 
+  &lt;ivpause&gt; could either be part of word pronunciations in the dictionary, 
+  or explicitly marked in transcripts, where needed. Such pauses can be parts of 
+  longer contexts. </LI></UL>
+<H2><A name=Additional_notes></A>Additional notes </H2>Garbage Model: If 
+multiple units, or multiple features are being trained simultaneously, either a 
+garbage model is trained for each of them, or for none of them. We cannot train 
+garbage models selectively for only some features or unit types. 
+<P>Cache Directory: A cache directory could optionally be provided. If the 
+trainer works from raw files, it can write out the features in the cache 
+directory, if it is given. In later iterations, the trainer will look for the 
+feature file in the cache directory, and recreate it from the raw speech data 
+only if the feature file is not in cache, or if a cache directory has not been 
+specified. 
+<P>
+<H2><A name=Outline_of_sentenceHMM_construct></A>Outline of sentenceHMM 
+construction procedure </H2>
+<OL>
+  <LI>Get transcripts from transcript file 
+  <LI>If unfaligned transcript, convert to sentence HMM graph as above. 
+  <LI>For each available unitHMMBuilder: 
+  <OL>
+    <LI>Poll unitHMMbuilder for dictionary id 
+    <LI>Identify transcript with corresponding dictionary id. If no transcript 
+    has the correct dictionary id, the unitHMMbuilder cannot be used for that 
+    utterance. 
+    <LI>For all words in transcript, obtain all phoneme pronunciations from 
+    unitHMMbuilder 
+    <LI>Construct a phoneme level graph 
+    <LI>Determine largest context from unit HMM builder 
+    <LI>For each phoneme in phoneme level graph, for each possible context (in 
+    the case of unaligned transcripts), pass phoneme, along with the maximum 
+    possible context, to the unitHMMbuilder. <EM>e.g.</EM>, if the 
+    context-dependent model with the largest context is a pentaphone, pass the 
+    phoneme, two preceding phones and two succeeding phones to the 
+    unitHMMbuilder. The unitHMMbuilder will return the acoustic model for the 
+    unit with the closest context to the one requested. <EM>e.g.</EM>, if the 
+    sentenceHMMBulder requests a model for "DH((N,D),(EH,N))", but the 
+    unitHMMbuilder has models only the triphone "DH(D,EH)" (due to data 
+    insufficiency, or any other reason), it will return the model for the 
+    triphone. 
+    <LI>If the sentenceHMMbuilder asks for the pentaphone "DH((N,D),(EH,N))" and 
+    obtains the triphone "DH(D,EH)" instead, it will, in future, not ask for 
+    larger contexts than triphones for "DH(D,EH)". However, it may still ask for 
+    pentaphones for "DH((AE,V),(EH,M))" (for example), since they may be 
+    available for this newer context. 
+    <LI>The sentenceHMMbuilder will expand the phoneme (or sub-word unit) level 
+    graph to a full sentenceHMM with context-dependent models. </LI></OL>
+  <LI>Once the sentenceHMMs for all the individual unitHMMbuilders are 
+  constructed, they will be tied at the appropriate level (which may be 
+  specified by the user). </LI></OL>
+<P>
+<P>
+<P>-- <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/RitaSingh">RitaSingh</A> 
+- 28 Feb 2003</P></DIV><!-- /patternTopic-->
+<DIV class=twikiAfterText></DIV>
+<DIV class=twikiAttachments><SPAN class=twistyMakeOpaque id=attachmentsshow><A 
+class=twistyTrigger 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#"><IMG 
+height=16 alt=toggleopen 
+src="DesignDiscussion  Sphinx4  TWiki_files/toggleopen.gif" width=16 align=top 
+border=0><SPAN class=twikiLinkLabel id=attachmentsshowlink>Show 
+attachments</SPAN></A></SPAN><SPAN class="twistyHidden twistyMakeOpaque" 
+id=attachmentshide><A class=twistyTrigger 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion#"><IMG 
+height=16 alt=toggleclose 
+src="DesignDiscussion  Sphinx4  TWiki_files/toggleclose.gif" width=16 align=top 
+border=0><SPAN class=twikiLinkLabel id=attachmentshidelink>Hide 
+attachments</SPAN></A></SPAN> 
+<DIV class="twistyMakeHidden twistyRememberSetting" id=attachmentstoggle>
+<TABLE class=twikiTable id=twikiAttachmentsTable cellSpacing=0 cellPadding=0 
+summary="Topic attachments" border=0>
+  <CAPTION>Topic attachments</CAPTION>
+  <TBODY>
+  <TR>
+    <TH class=twikiFirstCol bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?sortcol=0;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>I</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?sortcol=1;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Attachment</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?sortcol=2;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Action</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?sortcol=3;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Size</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?sortcol=4;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Date</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?sortcol=5;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Who</FONT></A> </TH>
+    <TH bgColor=#dadada><A title="Sort by this column" 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?sortcol=6;table=1;up=0#sorted_table" 
+      rel=nofollow><FONT color=#000000>Comment</FONT></A> </TH></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="DesignDiscussion  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/DesignDiscussion?rev=1.1;filename=producthmm.gif">producthmm.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion?filename=producthmm.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>4.5&nbsp;K </TD>
+    <TD bgColor=#ffffff>01 Mar 2003 - 00:49 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/RitaSingh">RitaSingh</A> 
+    </TD>
+    <TD bgColor=#ffffff>&nbsp; </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="DesignDiscussion  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/DesignDiscussion?rev=1.1;filename=AsyncHMM.gif">AsyncHMM.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion?filename=AsyncHMM.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>2.8&nbsp;K </TD>
+    <TD bgColor=#ffffff>01 Mar 2003 - 15:51 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/RitaSingh">RitaSingh</A> 
+    </TD>
+    <TD bgColor=#ffffff>&nbsp; </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="DesignDiscussion  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/DesignDiscussion?rev=1.1;filename=AsyncHMMTrellis.gif">AsyncHMMTrellis.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion?filename=AsyncHMMTrellis.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>11.2&nbsp;K </TD>
+    <TD bgColor=#ffffff>01 Mar 2003 - 15:51 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/RitaSingh">RitaSingh</A> 
+    </TD>
+    <TD bgColor=#ffffff>&nbsp; </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="DesignDiscussion  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/DesignDiscussion?rev=1.2;filename=producthmmtrellis.gif">producthmmtrellis.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion?filename=producthmmtrellis.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>8.9&nbsp;K </TD>
+    <TD bgColor=#ffffff>01 Mar 2003 - 16:19 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/RitaSingh">RitaSingh</A> 
+    </TD>
+    <TD bgColor=#ffffff>&nbsp; </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="DesignDiscussion  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/DesignDiscussion?rev=1.1;filename=falignedsentence.gif">falignedsentence.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion?filename=falignedsentence.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>1.9&nbsp;K </TD>
+    <TD bgColor=#ffffff>01 Mar 2003 - 22:56 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/RitaSingh">RitaSingh</A> 
+    </TD>
+    <TD bgColor=#ffffff>&nbsp; </TD></TR>
+  <TR>
+    <TD class=twikiFirstCol bgColor=#ffffff><IMG height=16 alt=gif 
+      src="DesignDiscussion  Sphinx4  TWiki_files/gif.gif" width=16 align=top 
+      border=0><SPAN class=twikiHidden>gif</SPAN> </TD>
+    <TD bgColor=#ffffff><A 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/viewfile/Sphinx4/DesignDiscussion?rev=1.1;filename=unfalignedsentence.gif">unfalignedsentence.gif</A> 
+    </TD>
+    <TD bgColor=#ffffff><A 
+      title="change, update, previous revisions, move, delete..." 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion?filename=unfalignedsentence.gif&amp;revInfo=1" 
+      rel=nofollow>manage</A> </TD>
+    <TD align=right bgColor=#ffffff>3.2&nbsp;K </TD>
+    <TD bgColor=#ffffff>01 Mar 2003 - 22:57 </TD>
+    <TD bgColor=#ffffff><A class=twikiLink 
+      href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/RitaSingh">RitaSingh</A> 
+    </TD>
+    <TD bgColor=#ffffff>&nbsp; </TD></TR></TBODY></TABLE></DIV></DIV>
+<SCRIPT type=text/javascript>
+//<![CDATA[
+	var table = document.getElementById("twikiAttachmentsTable");
+	if (table) {
+		var count = table.getElementsByTagName("tr").length - 1;
+		var countStr = "(" + count + ")";
+		var showlink = document.getElementById('attachmentsshowlink');
+		if (showlink != undefined) showlink.firstChild.data += " " + countStr;
+		var hidelink = document.getElementById('attachmentshidelink');
+		if (hidelink != undefined) hidelink.firstChild.data += " " + countStr;
+	}
+//]]>
+</SCRIPT>
+</DIV><!-- /patternContent--><A name=topic-actions></A>
+<DIV class=patternTopicActions>
+<DIV class=patternTopicAction><SPAN class=patternActionButtons><SPAN 
+class=patternButton><A title="Edit this topic text" accessKey=E 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/edit/Sphinx4/DesignDiscussion?t=1152936643" 
+rel=nofollow><SPAN class=twikiAccessKey>E</SPAN>dit</A></SPAN><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Attach an image or document to this topic" accessKey=A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/attach/Sphinx4/DesignDiscussion" 
+rel=nofollow><SPAN class=twikiAccessKey>A</SPAN>ttach</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Printable version of this topic" accessKey=P 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?template=viewprint" 
+rel=nofollow><SPAN class=twikiAccessKey>P</SPAN>rintable</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="View raw text without formatting" accessKey=r 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?raw=on" 
+rel=nofollow><SPAN class=twikiAccessKey>R</SPAN>aw View</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN>Backlinks: <A 
+title="Search the Sphinx4 Web for topics that link to here" accessKey=b 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/DesignDiscussion?template=backlinksweb">We<SPAN 
+class=twikiAccessKey>b</SPAN></A>, <A 
+title="Search all webs for topics that link to here" accessKey=L 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/DesignDiscussion?template=backlinksallwebs">A<SPAN 
+class=twikiAccessKey>l</SPAN>l Webs</A><SPAN 
+class=twikiSeparator>&nbsp;|&nbsp;</SPAN><SPAN class=patternRevision><A 
+title="View total topic history" accessKey=H 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/DesignDiscussion?type=history" 
+rel=nofollow><SPAN class=twikiAccessKey>H</SPAN>istory</A>: r12&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/DesignDiscussion?rev1=12;rev2=11" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?rev=11" 
+rel=nofollow>r11</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/DesignDiscussion?rev1=11;rev2=10" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?rev=10" 
+rel=nofollow>r10</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/DesignDiscussion?rev1=10;rev2=9" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?rev=9" 
+rel=nofollow>r9</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/rdiff/Sphinx4/DesignDiscussion?rev1=9;rev2=8" 
+rel=nofollow>&lt;</A>&nbsp;<A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion?rev=8" 
+rel=nofollow>r8</A></SPAN><SPAN class=twikiSeparator>&nbsp;|&nbsp;</SPAN><A 
+title="Delete or rename this topic; set parent topic; view and compare revisions" 
+accessKey=M 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/oops/Sphinx4/DesignDiscussion?template=oopsmore&amp;param1=12&amp;param2=12" 
+rel=nofollow><SPAN class=twikiAccessKey>M</SPAN>ore topic 
+actions</A></SPAN></DIV></DIV><!--/patternTopicActions-->
+<DIV class=patternMoved></DIV><!-- /patternMoved--></DIV><!-- /patternMainContents--></DIV><!-- /patternMain-->
+<DIV id=patternLeftBar>
+<DIV id=patternClearHeaderLeft></DIV>
+<DIV id=patternLeftBarContents>
+<DIV class=patternWebIndicator><B><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome">Sphinx4</A></B></DIV>
+<DIV class=patternLeftBarPersonal><A 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/logon/Sphinx4/DesignDiscussion"><IMG 
+height=16 alt=key src="DesignDiscussion  Sphinx4  TWiki_files/key.gif" width=16 
+align=top border=0> Log In</A> or <A class=twikiLink 
+href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/TWikiRegistration">Register</A> 
+
+<DIV class=patternLeftBarPersonalContent></DIV></DIV>
+<P>
+<UL>
+  <LI><B><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  height=16 alt=home src="DesignDiscussion  Sphinx4  TWiki_files/home.gif" 
+  width=16 align=top border=0> Sphinx4 Web</A></B> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicCreator?parent=DesignDiscussion" 
+  target=_top><IMG height=16 alt=newtopic 
+  src="DesignDiscussion  Sphinx4  TWiki_files/newtopic.gif" width=16 align=top 
+  border=0> Create New Topic</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebTopicList"><IMG 
+  height=16 alt=index src="DesignDiscussion  Sphinx4  TWiki_files/index.gif" 
+  width=16 align=top border=0> Index</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebSearch"><IMG 
+  height=16 alt=searchtopic 
+  src="DesignDiscussion  Sphinx4  TWiki_files/searchtopic.gif" width=16 
+  align=top border=0> Search</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebChanges"><IMG 
+  height=16 alt=changes src="DesignDiscussion  Sphinx4  TWiki_files/changes.gif" 
+  width=16 align=top border=0> Changes</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebNotify"><IMG 
+  height=16 alt=notify src="DesignDiscussion  Sphinx4  TWiki_files/notify.gif" 
+  width=16 align=top border=0> Notifications</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebStatistics"><IMG 
+  height=16 alt=statistics 
+  src="DesignDiscussion  Sphinx4  TWiki_files/statistics.gif" width=16 align=top 
+  border=0> Statistics</A> </LI>
+  <LI><A class=twikiLink 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebPreferences"><IMG 
+  height=16 alt=wrench src="DesignDiscussion  Sphinx4  TWiki_files/wrench.gif" 
+  width=16 align=top border=0> Preferences</A> </LI></UL>
+<P>
+<HR>
+
+<UL>
+  <LI><STRONG>Webs</STRONG> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Main/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffefa6" height=16 alt="" 
+  src="DesignDiscussion  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Main</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sandbox/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #b9daff" height=16 alt="" 
+  src="DesignDiscussion  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sandbox</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffcc99" height=16 alt="" 
+  src="DesignDiscussion  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/Sphinx4/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #99ff99" height=16 alt="" 
+  src="DesignDiscussion  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;Sphinx4</A> </LI>
+  <LI><A 
+  href="http://www.speech.cs.cmu.edu/sphinx/twiki/bin/view/TWiki/WebHome"><IMG 
+  style="BACKGROUND-COLOR: #ffd8aa" height=16 alt="" 
+  src="DesignDiscussion  Sphinx4  TWiki_files/web-bg.gif" width=16 
+  border=0>&nbsp;TWiki</A> </LI></UL></DIV><!-- /patternLeftBarContents--></DIV><!-- /patternLeftBar--></DIV><!-- /patternFloatWrap-->
+<DIV class=clear>&nbsp;</DIV></DIV><!-- /patternOuter--></DIV><!-- /patternWrapper-->
+<DIV id=patternTopBar>
+<DIV id=patternTopBarContents>
+<TABLE style="MARGIN-TOP: 11px; WIDTH: 100%" cellSpacing=0 cellPadding=0 
+border=0>
+  <TBODY>
+  <TR>
+    <TD vAlign=center><A href="http://twiki.org/"><IMG alt="Powered by TWiki" 
+      src="DesignDiscussion  Sphinx4  TWiki_files/T-logo-140x40-t.gif" 
+      border=0></A></TD>
+    <TD class=patternMetaMenu vAlign=top align=right>
+      <UL>
+        <LI>
+        <FORM name=jumpForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/DesignDiscussion><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" id=jumpFormField 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Jump name=topic></FORM>
+        <LI>
+        <FORM name=quickSearchForm 
+        action=/sphinx/twiki/bin/view/Sphinx4/WebSearch><INPUT 
+        class="twikiInputField patternFormFieldDefaultColor" 
+        onblur=setDefaultText(this); onfocus=clearDefaultandCSS(this); size=14 
+        value=Search name=search></FORM>
+        <LI></LI></UL></TD></TR></TBODY></TABLE></DIV></DIV><!-- /patternTopBar-->
+<DIV id=patternBottomBar>
+<DIV id=patternBottomBarContents><SPAN class=twikiRight><A 
+href="http://twiki.org/"><IMG 
+title="This site is powered by the TWiki collaboration platform" height=15 
+alt="This site is powered by the TWiki collaboration platform" 
+src="DesignDiscussion  Sphinx4  TWiki_files/T-logo-80x15.gif" width=80 
+border=0></A></SPAN>Copyright © by the contributing authors. All material on 
+this collaboration platform is the property of the contributing authors. 
+<BR>Ideas, requests, problems regarding TWiki? <A 
+href="mailto:egouvea@cs.cmu.edu?subject=TWiki Feedback on Sphinx4.DesignDiscussion">Send 
+feedback</A> </DIV><!-- /patternBottomBarContents--></DIV><!-- /patternBottomBar--></DIV><!-- /patternPage--></DIV><!-- /patternPageShadow--></DIV><!-- /patternScreen--></BODY></HTML>

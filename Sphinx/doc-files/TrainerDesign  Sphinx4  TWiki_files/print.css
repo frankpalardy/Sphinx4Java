@@ -1,0 +1,125 @@
+
+@media Print    
+{
+#patternScreen {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; TOP: 0px
+}
+#patternPageShadow {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; TOP: 0px
+}
+#patternPage {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; TOP: 0px
+}
+#patternScreen {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+BODY HTML {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+#patternMain {
+	PADDING-BOTTOM: 1em; WIDTH: 100%
+}
+#patternOuter {
+	MARGIN-LEFT: 0px
+}
+#patternLeftBar {
+	DISPLAY: none; MARGIN-LEFT: 0em; WIDTH: 0em
+}
+#patternWrapper {
+	HEIGHT: 1%
+}
+#patternTopBar {
+	DISPLAY: none
+}
+#patternClearHeaderCenter {
+	DISPLAY: none
+}
+#patternClearHeaderLeft {
+	DISPLAY: none
+}
+#patternClearHeaderRight {
+	DISPLAY: none
+}
+#patternTopBarContentsOuter {
+	DISPLAY: none
+}
+.patternTopicAction {
+	DISPLAY: none
+}
+.patternToolBar {
+	DISPLAY: none
+}
+.patternToolBarBottom {
+	DISPLAY: none
+}
+.patternHomePath IMG {
+	DISPLAY: none
+}
+.patternHomePathTitle {
+	DISPLAY: none
+}
+#patternMainContents {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#patternBottomBar {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+#attachmentsshow {
+	DISPLAY: none
+}
+#attachmentshide {
+	DISPLAY: none
+}
+.commentPlugin {
+	DISPLAY: none
+}
+BODY {
+	BACKGROUND-COLOR: #fff
+}
+H2 {
+	BACKGROUND-COLOR: transparent
+}
+H3 {
+	BACKGROUND-COLOR: transparent
+}
+H4 {
+	BACKGROUND-COLOR: transparent
+}
+H5 {
+	BACKGROUND-COLOR: transparent
+}
+H6 {
+	BACKGROUND-COLOR: transparent
+}
+.twikiAttachments {
+	BACKGROUND-COLOR: #fff
+}
+.patternContent .twikiAttachments {
+	BACKGROUND-COLOR: #fff
+}
+.twikiForm {
+	BACKGROUND-COLOR: #fff
+}
+.patternContent .twikiForm {
+	BACKGROUND-COLOR: #fff
+}
+.patternRevInfo {
+	COLOR: #666
+}
+.twikiGrayText {
+	COLOR: #666
+}
+.patternRevInfo A:link {
+	COLOR: #666
+}
+.patternRevInfo A:visited .twikiGrayText A:link {
+	COLOR: #666
+}
+.twikiGrayText A:visited {
+	COLOR: #666
+}
+.twikiGrayText A:hover {
+	COLOR: #fbf7e8
+}
+
+}
