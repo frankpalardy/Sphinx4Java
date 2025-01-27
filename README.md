@@ -1,0 +1,1 @@
+This code is from the CMU Sphinx 4 Java project circa 2006. They never completed a trainer in Java, but they had code that was abandoned. I tried to get it working. Must not have gotten back propigation correct. This might be the only remaining code from the trainer available online. 
